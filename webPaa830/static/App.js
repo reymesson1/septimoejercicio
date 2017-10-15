@@ -246,10 +246,13 @@ var ActionsTable = function (_React$Component3) {
 
                 added = obj.item[0].itemDetail;
 
-                //console.log(nextState[0].item[0].itemDetail);
-                console.log(added.length);
+                var total = 0;
 
-                added = added.length;
+                for (var x = 0; x < added.length; x++) {
+                    total += parseInt(added[x].project);
+                }
+
+                added = total;
             }
 
             var today = moment(new Date()).format('DD-MM-YYYY');
@@ -332,12 +335,12 @@ var ActionsTable = function (_React$Component3) {
                                         React.createElement(
                                             'th',
                                             { style: { 'width': '15px', 'font-size': '25px' } },
-                                            'Servicio'
+                                            'Cant.'
                                         ),
                                         React.createElement(
                                             'th',
                                             { style: { 'width': '15px', 'font-size': '25px' } },
-                                            'Articulo'
+                                            'Descripcion'
                                         ),
                                         React.createElement(
                                             'th',
@@ -383,16 +386,52 @@ var ActionsTableBodyFooter = function (_React$Component4) {
         key: 'render',
         value: function render() {
 
-            console.log(this.props.added);
+            var days = moment(new Date()).add(3, 'days').format('dddd');
+            if (days == 'Monday') {
+                days = 'Lunes';
+            } else if (days == 'Tuesday') {
+                days = 'Martes';
+            } else if (days == 'Wednesday') {
+                days = 'Miercoles';
+            } else if (days == 'Thursday') {
+                days = 'Jueves';
+            } else if (days == 'Friday') {
+                days = 'Viernes';
+            } else if (days == 'Saturday') {
+                days = 'Sabado';
+            } else {
+                days = 'Domingo';
+            }
+
+            var today = moment(new Date()).add(3, 'days').format('DD/MM/YYYY');
+            //moment().add(3, 'days').calendar();
 
             var nextState = this.props.masterAPI;
 
             var zoom = 0;
 
+            var items = void 0;
+
+            var piezas = 0;
+
+            var servicio = void 0;
+
             if (nextState[0]) {
 
                 zoom = nextState[0].project;
+                items = nextState[0].item.length;
+                servicio = nextState[0].item[0].development;
+
+                for (var x = 0; x < nextState[0].item.length; x++) {
+
+                    piezas += parseInt(nextState[0].item[x].quantity);
+                }
             }
+
+            var itbis = 18 / 100 * zoom;
+            itbis += 18 / 100 * this.props.added;
+
+            var grandTotal = zoom + this.props.added + itbis;
 
             return React.createElement(
                 'tfoot',
@@ -403,7 +442,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                     React.createElement(
                         'td',
                         null,
-                        '\xA0'
+                        items,
+                        '\xA0\xA0Items'
                     ),
                     React.createElement(
                         'td',
@@ -412,13 +452,14 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                     ),
                     React.createElement(
                         'td',
-                        { style: { 'width': '15px', 'font-size': '20px' } },
-                        'Agregado'
+                        null,
+                        piezas,
+                        '\xA0\xA0Piezas'
                     ),
                     React.createElement(
                         'td',
-                        { style: { 'width': '15px', 'font-size': '20px' } },
-                        this.props.added
+                        null,
+                        '\xA0'
                     )
                 ),
                 React.createElement(
@@ -437,14 +478,230 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
-                        'Total'
+                        'SubTotal:'
                     ),
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
-                        'RD$',
                         zoom,
                         '.00'
+                    )
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        '+\xA0Agregado:'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        this.props.added,
+                        '.00'
+                    )
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        'Desc.:'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        '0.00'
+                    )
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        'Itbis:'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        itbis.toFixed(2)
+                    )
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        'Grand Total:'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        grandTotal.toFixed(2)
+                    )
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        'F/Entrega: '
+                    ),
+                    React.createElement(
+                        'td',
+                        { colSpan: 2 },
+                        days,
+                        '\xA0',
+                        today
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    )
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        'Hora: '
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '06:00 PM'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null)
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        { colSpan: 3 },
+                        servicio
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null)
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { colSpan: 2 },
+                        'Aprobacion Cliente'
+                    ),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null)
+                ),
+                React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        { colSpan: 2 },
+                        'Le Atendio:'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        'Admin'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
                     ),
                     React.createElement('br', null),
                     React.createElement('br', null),
@@ -482,6 +739,7 @@ var ActionsTableBody = function (_React$Component5) {
                         index: index + 1,
                         id: master.id,
                         name: master.firstname,
+                        quantity: master.quantity,
                         item: master.item,
                         development: master.development,
                         project: master.project
@@ -518,7 +776,7 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    this.props.development
+                    this.props.quantity
                 ),
                 React.createElement(
                     'td',
@@ -992,9 +1250,11 @@ var Master = function (_React$Component9) {
 
             var newItem = void 0;
 
+            var newStateDetailAdded = [];
+
             if (project) {
 
-                var newStateDetailAdded = this.state.detailAdded;
+                newStateDetailAdded = this.state.detailAdded;
 
                 if (category == 'colores' || category == 'propiedades') {
 
@@ -1006,6 +1266,8 @@ var Master = function (_React$Component9) {
                     });
                 } else if (category == 'servicio') {
 
+                    project = project * parseInt(event.target.quantity.value);
+
                     newItem = {
 
                         "id": Date.now(),
@@ -1013,6 +1275,7 @@ var Master = function (_React$Component9) {
                         "item": event.target.suggest.value,
                         "itemDetail": this.state.detailAdded,
                         "development": event.target.development.value,
+                        "quantity": event.target.quantity.value,
                         "project": project
                     };
 
@@ -2023,6 +2286,25 @@ var MasterModalField = function (_React$Component16) {
                                 Col,
                                 { md: 4, sm: 6, style: { "width": "31%" } },
                                 React.createElement(AwesompleteInput, { className: 'form-control', list: this.props.detail })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalQuantity' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Cantidad'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(FormControl, { type: 'text', name: 'quantity', placeholder: 'Cantidad', required: true })
                             ),
                             React.createElement(
                                 Col,
@@ -2030,17 +2312,12 @@ var MasterModalField = function (_React$Component16) {
                                 React.createElement(
                                     Button,
                                     { type: 'submit' },
-                                    React.createElement('i', { className: 'fa fa-paperclip', 'aria-hidden': 'true' })
-                                ),
-                                ' ',
-                                React.createElement(
-                                    Button,
-                                    { type: 'submit' },
                                     React.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' })
                                 )
                             )
                         )
-                    )
+                    ),
+                    React.createElement('br', null)
                 )
             );
 
@@ -2093,6 +2370,11 @@ var MasterModalTable = function (_React$Component17) {
                 React.createElement(
                     'th',
                     null,
+                    'Star'
+                ),
+                React.createElement(
+                    'th',
+                    null,
                     'Item'
                 ),
                 React.createElement(
@@ -2119,6 +2401,11 @@ var MasterModalTable = function (_React$Component17) {
                     'th',
                     null,
                     'Nombre'
+                ),
+                React.createElement(
+                    'th',
+                    null,
+                    'Cantidad'
                 ),
                 React.createElement(
                     'th',
@@ -2170,7 +2457,8 @@ var MasterModalTable = function (_React$Component17) {
                                 item: masterdetail.item,
                                 itemDetail: masterdetail.itemDetail,
                                 development: masterdetail.development,
-                                project: masterdetail.project
+                                project: masterdetail.project,
+                                quantity: masterdetail.quantity
                             });
                         })
                     )
@@ -2270,6 +2558,11 @@ var MasterModalTableBody = function (_React$Component20) {
                         'td',
                         null,
                         this.props.firstname
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        this.props.quantity
                     ),
                     React.createElement(
                         'td',
@@ -3032,12 +3325,14 @@ var DetailModalUpdate = function (_React$Component24) {
             var name = void 0;
             var environment = void 0;
             var item = void 0;
+            var category = void 0;
 
             if (nextState[index]) {
 
                 name = nextState[index].name;
                 environment = nextState[index].environment;
                 item = nextState[index].item;
+                category = nextState[index].category;
             }
 
             return React.createElement(
@@ -3074,8 +3369,7 @@ var DetailModalUpdate = function (_React$Component24) {
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { value: this.state.parameter,
-                                    type: 'id', placeholder: 'id', disabled: true })
+                                React.createElement(FormControl, { value: this.state.parameter, type: 'id', placeholder: 'id', disabled: true })
                             )
                         ),
                         React.createElement(
@@ -3089,8 +3383,7 @@ var DetailModalUpdate = function (_React$Component24) {
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'name', value: name,
-                                    type: 'text', placeholder: 'Name', disabled: true })
+                                React.createElement(FormControl, { name: 'name', value: name, type: 'text', placeholder: 'Name', disabled: true })
                             )
                         ),
                         React.createElement(
@@ -3104,8 +3397,7 @@ var DetailModalUpdate = function (_React$Component24) {
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'environment',
-                                    value: environment, type: 'text', placeholder: 'Environment', disabled: true })
+                                React.createElement(FormControl, { name: 'environment', value: environment, type: 'text', placeholder: 'Environment', disabled: true })
                             )
                         ),
                         React.createElement(
@@ -3119,8 +3411,21 @@ var DetailModalUpdate = function (_React$Component24) {
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'item', type: 'text',
-                                    placeholder: item })
+                                React.createElement(FormControl, { name: 'item', type: 'text', placeholder: item })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalCategory' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Category'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'category', type: 'text', value: category, disabled: true })
                             )
                         )
                     ),
@@ -3381,7 +3686,7 @@ var DetailModal = function (_React$Component26) {
                             React.createElement(
                                 Col,
                                 { componentClass: ControlLabel, sm: 2 },
-                                'Cantidad'
+                                'Categoria'
                             ),
                             React.createElement(
                                 Col,
@@ -3391,8 +3696,8 @@ var DetailModal = function (_React$Component26) {
                                     { name: 'category', componentClass: 'select', placeholder: 'select' },
                                     React.createElement(
                                         'option',
-                                        { value: 'servicios' },
-                                        'Servicios'
+                                        { value: 'servicio' },
+                                        'Servicio'
                                     ),
                                     React.createElement(
                                         'option',
@@ -3414,7 +3719,7 @@ var DetailModal = function (_React$Component26) {
                         React.createElement(
                             Button,
                             { type: 'submit', pullRight: true },
-                            'Guarda'
+                            'Guardar'
                         )
                     )
                 )

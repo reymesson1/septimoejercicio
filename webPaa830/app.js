@@ -21,7 +21,7 @@ app.post('/cookies', function(req,res){
 
     var newCookie = req.body;
 
-    if(newCookie.username=='mechy'){
+    if(newCookie.username=='admin'){
         console.log(req.body);
         cookies=true;
     }

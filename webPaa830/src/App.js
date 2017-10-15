@@ -211,10 +211,13 @@ class ActionsTable extends React.Component{
             
             added = obj.item[0].itemDetail;
             
-            //console.log(nextState[0].item[0].itemDetail);
-            console.log(added.length);
+            let total = 0;
             
-            added=added.length;
+            for(var x=0;x<added.length;x++){
+                total+= parseInt(added[x].project)
+            }
+            
+            added=total;
         }
 
         let today = moment(new Date()).format('DD-MM-YYYY');
@@ -257,8 +260,8 @@ class ActionsTable extends React.Component{
                                 <thead>
                                   <tr>
                                     <th style={{'width':'15px','font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
-                                    <th style={{'width':'15px','font-size':'25px'}}>Servicio</th>
-                                    <th style={{'width':'15px','font-size':'25px'}}>Articulo</th>
+                                    <th style={{'width':'15px','font-size':'25px'}}>Cant.</th>
+                                    <th style={{'width':'15px','font-size':'25px'}}>Descripcion</th>
                                     <th style={{'width':'15px','font-size':'25px'}}>Precio</th>
                                   </tr>
                                 </thead>
@@ -291,30 +294,103 @@ class ActionsTableBodyFooter extends React.Component{
 
     render(){
         
-        console.log(this.props.added);
+        let days = moment(new Date()).add(3,'days').format('dddd');
+        if(days=='Monday'){
+           days='Lunes'
+        }else if(days=='Tuesday'){
+           days='Martes'
+        }else if(days=='Wednesday'){
+           days='Miercoles'
+        }else if(days=='Thursday'){
+           days='Jueves'
+        }else if(days=='Friday'){
+           days='Viernes'
+        }else if(days=='Saturday'){
+           days='Sabado'
+        }else{
+           days='Domingo'
+        } 
+        
+        let today = moment(new Date()).add(3,'days').format('DD/MM/YYYY');
+                    //moment().add(3, 'days').calendar();
 
         let nextState = this.props.masterAPI;
 
         let zoom = 0;
+        
+        let items;
+        
+        let piezas = 0;
+        
+        let servicio;
 
         if(nextState[0]){
 
             zoom = nextState[0].project;
+            items = nextState[0].item.length;             
+            servicio = nextState[0].item[0].development;        
+            
+            for(var x=0;x<nextState[0].item.length;x++){
+                
+                piezas+=parseInt(nextState[0].item[x].quantity);
+            }
         }
+        
+                
+        let itbis = ( 18 / 100) * zoom;
+        itbis += ( 18 / 100) * this.props.added;
+        
+        let grandTotal = zoom + this.props.added + itbis;
 
         return(
             <tfoot>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>Agregado</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{this.props.added}</td>                
+                <td>{items}&nbsp;&nbsp;Items</td>
+                <td>&nbsp;</td>                
+                <td>{piezas}&nbsp;&nbsp;Piezas</td>
+                <td>&nbsp;</td>                
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>Total</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>RD${zoom}.00</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>SubTotal:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{zoom}.00</td>                
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>+&nbsp;Agregado:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{this.props.added}.00</td>                
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>Desc.:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>0.00</td>                
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>Itbis:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{itbis.toFixed(2)}</td>                
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>Grand Total:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>                
+            </tr>
+            <tr>
+                <td>F/Entrega: </td>
+                <td colSpan={2}>{days}&nbsp;{today}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>                
+            </tr>
+            <tr>
+                <td>Hora: </td>
+                <td>06:00 PM</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
                 <br/>
                 <br/>
                 <br/>
@@ -322,6 +398,39 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
                 <br/>
             </tr>
+            <tr>
+                <td colSpan={3}>{servicio}</td>                                          
+                <td>&nbsp;</td>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td colSpan={2}>Aprobacion Cliente</td>                                          
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </tr>
+            <tr>
+                <td colSpan={2}>Le Atendio:</td>                                          
+                <td>Admin</td>
+                <td>&nbsp;</td>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </tr>
+
             </tfoot>
         );
     }
@@ -341,6 +450,7 @@ class ActionsTableBody extends React.Component{
                                                 index={index+1}
                                                 id={master.id}
                                                 name={master.firstname}
+                                                quantity={master.quantity}
                                                 item={master.item}
                                                 development={master.development}
                                                 project={master.project}
@@ -353,12 +463,13 @@ class ActionsTableBody extends React.Component{
 
 class ActionsTableBodyDetail extends React.Component{
 
+    
     render(){
 
         return(
             <tr>
                     <td style={{'font-size':'20px'}}>&nbsp;</td>
-                    <td style={{'font-size':'20px'}}>{this.props.development}</td>
+                    <td style={{'font-size':'20px'}}>{this.props.quantity}</td>
                     <td style={{'font-size':'20px'}}>{this.props.item}</td>
                     <td style={{'font-size':'20px'}}>{this.props.project}.00</td>
             </tr>
@@ -656,10 +767,11 @@ class Master extends React.Component{
 
         let newItem;
         
+        let newStateDetailAdded = [];           
+        
         if(project){
             
-            let newStateDetailAdded = this.state.detailAdded;
-            
+            newStateDetailAdded = this.state.detailAdded;
             
             if(category=='colores'||category=='propiedades'){
                 
@@ -671,6 +783,9 @@ class Master extends React.Component{
                 });
             }else if(category=='servicio'){
                        
+                
+                project=project*parseInt(event.target.quantity.value)
+                
                 newItem = {
 
                     "id": Date.now(),
@@ -678,6 +793,7 @@ class Master extends React.Component{
                     "item":event.target.suggest.value,
                     "itemDetail": this.state.detailAdded, 
                     "development":event.target.development.value,
+                    "quantity":event.target.quantity.value,
                     "project":project,
                 }
 
@@ -757,8 +873,7 @@ class Master extends React.Component{
 
         let ModalButtonES = (
 
-                <Button onClick={this.open.bind(this)}>Agregar
-Factura</Button>
+                <Button onClick={this.open.bind(this)}>Agregar Factura</Button>
 
 
         );
@@ -1355,13 +1470,24 @@ class MasterModalField extends React.Component{
                               </Col>
                               <Col md={4} sm={6} style={{"width":"31%"}}>
                                 <AwesompleteInput className="form-control" list={this.props.detail} />
+                              </Col>                              
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <FormGroup controlId="formHorizontalQuantity">
+                              <Col componentClass={ControlLabel} md={1} sm={2}>
+                                Cantidad
+                              </Col>
+                              <Col md={4} sm={6}>
+                                <FormControl type="text" name="quantity" placeholder="Cantidad" required />
                               </Col>
                               <Col md={2}>
-                                    <Button type="submit"><i className="fa fa-paperclip" aria-hidden="true"></i></Button>{' '}
                                     <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
                               </Col>
                             </FormGroup>
                         </Row>
+                        <br/>                                   
                      </Form>
                   </Row>
         );
@@ -1393,6 +1519,7 @@ class MasterModalTable extends React.Component{
               <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>Star</th>
                 <th>Item</th>
                 <th>Development</th>
                 <th>Project</th>
@@ -1404,6 +1531,7 @@ class MasterModalTable extends React.Component{
               <tr>
                 <th>#</th>
                 <th>Nombre</th>
+                <th>Cantidad</th>
                 <th>Articulo</th>
                 <th>Tipo de Servicio</th>
                 <th>Precio</th>
@@ -1438,6 +1566,7 @@ class MasterModalTable extends React.Component{
                                                             itemDetail={masterdetail.itemDetail}
                                                             development={masterdetail.development}
                                                             project={masterdetail.project}
+                                                            quantity={masterdetail.quantity}
                                               />
                         )}
                     </tbody>
@@ -1485,6 +1614,7 @@ class MasterModalTableBody extends React.Component{
                 <tr>
                     <td>{this.props.index}</td>
                     <td>{this.props.firstname}</td>
+                    <td>{this.props.quantity}</td>
                     <td>
                         <table>
                             <tr>
@@ -2008,12 +2138,14 @@ class DetailModalUpdate extends React.Component{
         let name;
         let environment;
         let item;
+        let category;
 
         if(nextState[index]){
 
             name = nextState[index].name
             environment = nextState[index].environment
             item = nextState[index].item
+            category = nextState[index].category
         }
 
         return(
@@ -2030,8 +2162,7 @@ class DetailModalUpdate extends React.Component{
                             ID
                           </Col>
                           <Col sm={10}>
-                            <FormControl value={this.state.parameter}
-type="id" placeholder="id" disabled />
+                            <FormControl value={this.state.parameter} type="id" placeholder="id" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalName">
@@ -2039,8 +2170,7 @@ type="id" placeholder="id" disabled />
                             Name
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="name" value={name}
-type="text" placeholder="Name" disabled />
+                            <FormControl name="name" value={name} type="text" placeholder="Name" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalEnvironment">
@@ -2048,8 +2178,7 @@ type="text" placeholder="Name" disabled />
                             Environment
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="environment"
-value={environment} type="text" placeholder="Environment" disabled />
+                            <FormControl name="environment" value={environment} type="text" placeholder="Environment" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalItem">
@@ -2057,8 +2186,15 @@ value={environment} type="text" placeholder="Environment" disabled />
                             Item
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="item" type="text"
-placeholder={item} />
+                            <FormControl name="item" type="text" placeholder={item} />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup controlId="formHorizontalCategory">
+                          <Col componentClass={ControlLabel} sm={2}>
+                            Category
+                          </Col>
+                          <Col sm={10}>
+                            <FormControl name="category" type="text" value={category} disabled />
                           </Col>
                         </FormGroup>
                 </Modal.Body>
@@ -2193,11 +2329,11 @@ class DetailModal extends React.Component{
                                             </FormGroup>
                                             <FormGroup controlId="formHorizontalItem">
                                               <Col componentClass={ControlLabel} sm={2}>
-                                                Cantidad
+                                                Categoria
                                               </Col>
                                               <Col sm={10}>
                                               <FormControl name="category" componentClass="select" placeholder="select">
-                                                <option value="servicios">Servicios</option>
+                                                <option value="servicio">Servicio</option>
                                                 <option value="colores">Colores</option>
                                                 <option value="propiedades">Propiedades</option>                                                
                                               </FormControl>
@@ -2205,7 +2341,7 @@ class DetailModal extends React.Component{
                                             </FormGroup>
                                   </Modal.Body>
                                   <Modal.Footer>
-                                        <Button type="submit" pullRight>Guarda</Button>
+                                        <Button type="submit" pullRight>Guardar</Button>
                                   </Modal.Footer>
                               </Form>
                             </Modal>
