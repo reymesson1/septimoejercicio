@@ -195,15 +195,26 @@ class ActionsTable extends React.Component{
 
     render(){
         
+        
         let nextState = this.props.masterAPI;
         
         let obj = nextState[0];
         
+        
         let name;
+        
+        let added;
         
         if(obj){
             
-            name = obj.name.toUpperCase();            
+            name = obj.name.toUpperCase();
+            
+            added = obj.item[0].itemDetail;
+            
+            //console.log(nextState[0].item[0].itemDetail);
+            console.log(added.length);
+            
+            added=added.length;
         }
 
         let today = moment(new Date()).format('DD-MM-YYYY');
@@ -259,12 +270,13 @@ class ActionsTable extends React.Component{
                                                                  item={master.item}
                                                           />
                                     )}
-                                <tfoot>
+                                
                                     <ActionsTableBodyFooter
                                                  parameter ={this.props.parameter}
                                                  masterAPI ={this.props.masterAPI}
+                                                 added={added}
                                     />
-                                </tfoot>
+                                
 
                               </Table>
                         </Col>
@@ -278,6 +290,8 @@ class ActionsTable extends React.Component{
 class ActionsTableBodyFooter extends React.Component{
 
     render(){
+        
+        console.log(this.props.added);
 
         let nextState = this.props.masterAPI;
 
@@ -289,6 +303,13 @@ class ActionsTableBodyFooter extends React.Component{
         }
 
         return(
+            <tfoot>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>Agregado</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{this.props.added}</td>                
+            </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -301,6 +322,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
                 <br/>
             </tr>
+            </tfoot>
         );
     }
 
@@ -1681,42 +1703,6 @@ this.onDeleted.bind(this),
                     />
                 </Row>
             </Grid>
-        );
-    }
-}
-
-class DetailPagination extends React.Component{
-
-    constructor(){
-
-        super();
-        this.state = {
-            activePage: 1
-        }
-    }
-
-    handleSelect(eventKey) {
-        this.setState({
-          activePage: eventKey
-        });
-    }
-
-    render(){
-
-        return(
-
-            <   Pagination
-                prev
-                next
-                first
-                last
-                ellipsis
-                boundaryLinks
-                items={5}
-                maxButtons={5}
-                activePage={this.state.activePage}
-                onSelect={this.handleSelect.bind(this)}
-            />
         );
     }
 }

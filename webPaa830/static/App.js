@@ -238,9 +238,18 @@ var ActionsTable = function (_React$Component3) {
 
             var name = void 0;
 
+            var added = void 0;
+
             if (obj) {
 
                 name = obj.name.toUpperCase();
+
+                added = obj.item[0].itemDetail;
+
+                //console.log(nextState[0].item[0].itemDetail);
+                console.log(added.length);
+
+                added = added.length;
             }
 
             var today = moment(new Date()).format('DD-MM-YYYY');
@@ -345,14 +354,11 @@ var ActionsTable = function (_React$Component3) {
                                         item: master.item
                                     });
                                 }),
-                                React.createElement(
-                                    'tfoot',
-                                    null,
-                                    React.createElement(ActionsTableBodyFooter, {
-                                        parameter: this.props.parameter,
-                                        masterAPI: this.props.masterAPI
-                                    })
-                                )
+                                React.createElement(ActionsTableBodyFooter, {
+                                    parameter: this.props.parameter,
+                                    masterAPI: this.props.masterAPI,
+                                    added: added
+                                })
                             )
                         )
                     )
@@ -377,6 +383,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
         key: 'render',
         value: function render() {
 
+            console.log(this.props.added);
+
             var nextState = this.props.masterAPI;
 
             var zoom = 0;
@@ -387,36 +395,64 @@ var ActionsTableBodyFooter = function (_React$Component4) {
             }
 
             return React.createElement(
-                'tr',
+                'tfoot',
                 null,
                 React.createElement(
-                    'td',
+                    'tr',
                     null,
-                    '\xA0'
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        'Agregado'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        this.props.added
+                    )
                 ),
                 React.createElement(
-                    'td',
+                    'tr',
                     null,
-                    '\xA0'
-                ),
-                React.createElement(
-                    'td',
-                    { style: { 'width': '15px', 'font-size': '20px' } },
-                    'Total'
-                ),
-                React.createElement(
-                    'td',
-                    { style: { 'width': '15px', 'font-size': '20px' } },
-                    'RD$',
-                    zoom,
-                    '.00'
-                ),
-                React.createElement('br', null),
-                React.createElement('br', null),
-                React.createElement('br', null),
-                React.createElement('br', null),
-                React.createElement('br', null),
-                React.createElement('br', null)
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        null,
+                        '\xA0'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        'Total'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'width': '15px', 'font-size': '20px' } },
+                        'RD$',
+                        zoom,
+                        '.00'
+                    ),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null)
+                )
             );
         }
     }]);
@@ -2507,51 +2543,8 @@ var Detail = function (_React$Component21) {
     return Detail;
 }(React.Component);
 
-var DetailPagination = function (_React$Component22) {
-    _inherits(DetailPagination, _React$Component22);
-
-    function DetailPagination() {
-        _classCallCheck(this, DetailPagination);
-
-        var _this28 = _possibleConstructorReturn(this, (DetailPagination.__proto__ || Object.getPrototypeOf(DetailPagination)).call(this));
-
-        _this28.state = {
-            activePage: 1
-        };
-        return _this28;
-    }
-
-    _createClass(DetailPagination, [{
-        key: 'handleSelect',
-        value: function handleSelect(eventKey) {
-            this.setState({
-                activePage: eventKey
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            return React.createElement(Pagination, {
-                prev: true,
-                next: true,
-                first: true,
-                last: true,
-                ellipsis: true,
-                boundaryLinks: true,
-                items: 5,
-                maxButtons: 5,
-                activePage: this.state.activePage,
-                onSelect: this.handleSelect.bind(this)
-            });
-        }
-    }]);
-
-    return DetailPagination;
-}(React.Component);
-
-var DetailSearch = function (_React$Component23) {
-    _inherits(DetailSearch, _React$Component23);
+var DetailSearch = function (_React$Component22) {
+    _inherits(DetailSearch, _React$Component22);
 
     function DetailSearch() {
         _classCallCheck(this, DetailSearch);
@@ -2643,21 +2636,21 @@ var DetailSearch = function (_React$Component23) {
     return DetailSearch;
 }(React.Component);
 
-var DetailTable = function (_React$Component24) {
-    _inherits(DetailTable, _React$Component24);
+var DetailTable = function (_React$Component23) {
+    _inherits(DetailTable, _React$Component23);
 
     function DetailTable() {
         _classCallCheck(this, DetailTable);
 
-        var _this30 = _possibleConstructorReturn(this, (DetailTable.__proto__ || Object.getPrototypeOf(DetailTable)).call(this));
+        var _this29 = _possibleConstructorReturn(this, (DetailTable.__proto__ || Object.getPrototypeOf(DetailTable)).call(this));
 
-        _this30.state = {
+        _this29.state = {
             todos: [{ id: '123', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }, { id: '454758778052139', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }],
             currentPage: 1,
             todosPerPage: 3
         };
-        _this30.handleClick = _this30.handleClick.bind(_this30);
-        return _this30;
+        _this29.handleClick = _this29.handleClick.bind(_this29);
+        return _this29;
     }
 
     _createClass(DetailTable, [{
@@ -2670,10 +2663,10 @@ var DetailTable = function (_React$Component24) {
     }, {
         key: 'render',
         value: function render() {
-            var _this31 = this;
+            var _this30 = this;
 
             var filteredTable = this.props.detailData.filter(function (detail) {
-                return detail.name.indexOf(_this31.props.filterText) !== -1;
+                return detail.name.indexOf(_this30.props.filterText) !== -1;
             });
 
             var _state2 = this.state,
@@ -2699,7 +2692,7 @@ var DetailTable = function (_React$Component24) {
                     {
                         key: number,
                         id: number,
-                        onClick: _this31.handleClick
+                        onClick: _this30.handleClick
                     },
                     React.createElement(
                         'a',
@@ -2760,7 +2753,7 @@ var DetailTable = function (_React$Component24) {
 
                                 environment: todo.environment,
 
-                                detailCallback: _this31.props.detailCallback
+                                detailCallback: _this30.props.detailCallback
                             });
                         })
                     )
@@ -2863,7 +2856,7 @@ var DetailTable = function (_React$Component24) {
 
                                 environment: todo.environment,
 
-                                detailCallback: _this31.props.detailCallback
+                                detailCallback: _this30.props.detailCallback
                             });
                         })
                     )
@@ -2934,22 +2927,22 @@ var DetailTable = function (_React$Component24) {
     return DetailTable;
 }(React.Component);
 
-var DetailModalUpdate = function (_React$Component25) {
-    _inherits(DetailModalUpdate, _React$Component25);
+var DetailModalUpdate = function (_React$Component24) {
+    _inherits(DetailModalUpdate, _React$Component24);
 
     function DetailModalUpdate() {
         _classCallCheck(this, DetailModalUpdate);
 
-        var _this32 = _possibleConstructorReturn(this, (DetailModalUpdate.__proto__ || Object.getPrototypeOf(DetailModalUpdate)).call(this));
+        var _this31 = _possibleConstructorReturn(this, (DetailModalUpdate.__proto__ || Object.getPrototypeOf(DetailModalUpdate)).call(this));
 
-        _this32.state = {
+        _this31.state = {
 
             parameter: '',
             showModal: true,
             detailData: []
         };
 
-        return _this32;
+        return _this31;
     }
 
     _createClass(DetailModalUpdate, [{
@@ -2975,12 +2968,12 @@ var DetailModalUpdate = function (_React$Component25) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this33 = this;
+            var _this32 = this;
 
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this33.setState({
+                _this32.setState({
 
                     detailData: responseData
                 });
@@ -2996,14 +2989,14 @@ var DetailModalUpdate = function (_React$Component25) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this34 = this;
+            var _this33 = this;
 
             event.preventDefault();
 
             var nextState = this.state.detailData;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this34.state.parameter;
+                return x.id == _this33.state.parameter;
             });
 
             nextState[index].item = event.target.item.value;
@@ -3028,12 +3021,12 @@ var DetailModalUpdate = function (_React$Component25) {
     }, {
         key: 'render',
         value: function render() {
-            var _this35 = this;
+            var _this34 = this;
 
             var nextState = this.state.detailData;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this35.state.parameter;
+                return x.id == _this34.state.parameter;
             });
 
             var name = void 0;
@@ -3148,8 +3141,8 @@ var DetailModalUpdate = function (_React$Component25) {
     return DetailModalUpdate;
 }(React.Component);
 
-var DetailTableBody = function (_React$Component26) {
-    _inherits(DetailTableBody, _React$Component26);
+var DetailTableBody = function (_React$Component25) {
+    _inherits(DetailTableBody, _React$Component25);
 
     function DetailTableBody() {
         _classCallCheck(this, DetailTableBody);
@@ -3209,8 +3202,8 @@ var DetailTableBody = function (_React$Component26) {
     return DetailTableBody;
 }(React.Component);
 
-var DetailModal = function (_React$Component27) {
-    _inherits(DetailModal, _React$Component27);
+var DetailModal = function (_React$Component26) {
+    _inherits(DetailModal, _React$Component26);
 
     function DetailModal() {
         _classCallCheck(this, DetailModal);
@@ -3446,33 +3439,33 @@ var DetailModal = function (_React$Component27) {
     return DetailModal;
 }(React.Component);
 
-var Partials = function (_React$Component28) {
-    _inherits(Partials, _React$Component28);
+var Partials = function (_React$Component27) {
+    _inherits(Partials, _React$Component27);
 
     function Partials() {
         _classCallCheck(this, Partials);
 
-        var _this38 = _possibleConstructorReturn(this, (Partials.__proto__ || Object.getPrototypeOf(Partials)).call(this));
+        var _this37 = _possibleConstructorReturn(this, (Partials.__proto__ || Object.getPrototypeOf(Partials)).call(this));
 
-        _this38.state = {
+        _this37.state = {
 
             masterAPI: [],
             searchData: '2017-10-06',
             total: 0
         };
 
-        return _this38;
+        return _this37;
     }
 
     _createClass(Partials, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this39 = this;
+            var _this38 = this;
 
             fetch(API_URL + '/reporte', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this39.setState({
+                _this38.setState({
 
                     masterAPI: responseData
                 });
@@ -3499,10 +3492,10 @@ var Partials = function (_React$Component28) {
     }, {
         key: 'onRun',
         value: function onRun() {
-            var _this40 = this;
+            var _this39 = this;
 
             var nextState = this.state.masterAPI.filter(function (master) {
-                return master.date == _this40.state.searchData;
+                return master.date == _this39.state.searchData;
             });
 
             var grand = 0;
@@ -3521,7 +3514,7 @@ var Partials = function (_React$Component28) {
     }, {
         key: 'render',
         value: function render() {
-            var _this41 = this;
+            var _this40 = this;
 
             var PartialsEN = React.createElement(
                 'h1',
@@ -3566,7 +3559,7 @@ var Partials = function (_React$Component28) {
                     React.createElement(PartialsTable, {
 
                         masterAPI: this.state.masterAPI.filter(function (master) {
-                            return master.date == _this41.state.searchData;
+                            return master.date == _this40.state.searchData;
                         }),
                         total: this.state.total
                     })
@@ -3587,8 +3580,8 @@ var Partials = function (_React$Component28) {
     return Partials;
 }(React.Component);
 
-var PartialsSearch = function (_React$Component29) {
-    _inherits(PartialsSearch, _React$Component29);
+var PartialsSearch = function (_React$Component28) {
+    _inherits(PartialsSearch, _React$Component28);
 
     function PartialsSearch() {
         _classCallCheck(this, PartialsSearch);
@@ -3625,8 +3618,8 @@ var PartialsSearch = function (_React$Component29) {
     return PartialsSearch;
 }(React.Component);
 
-var PartialsTable = function (_React$Component30) {
-    _inherits(PartialsTable, _React$Component30);
+var PartialsTable = function (_React$Component29) {
+    _inherits(PartialsTable, _React$Component29);
 
     function PartialsTable() {
         _classCallCheck(this, PartialsTable);
@@ -3637,7 +3630,7 @@ var PartialsTable = function (_React$Component30) {
     _createClass(PartialsTable, [{
         key: 'render',
         value: function render() {
-            var _this44 = this;
+            var _this43 = this;
 
             var partialsTableEN = React.createElement(
                 'tr',
@@ -3729,7 +3722,7 @@ var PartialsTable = function (_React$Component30) {
                                     date: master.date,
                                     name: master.name,
                                     project: master.project,
-                                    total: _this44.props.total
+                                    total: _this43.props.total
                                 });
                             })
                         ),
@@ -3776,8 +3769,8 @@ var PartialsTable = function (_React$Component30) {
     return PartialsTable;
 }(React.Component);
 
-var PartialsTableBody = function (_React$Component31) {
-    _inherits(PartialsTableBody, _React$Component31);
+var PartialsTableBody = function (_React$Component30) {
+    _inherits(PartialsTableBody, _React$Component30);
 
     function PartialsTableBody() {
         _classCallCheck(this, PartialsTableBody);
