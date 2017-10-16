@@ -6,6 +6,9 @@ const browserHistory = ReactRouter.browserHistory ;
 
 const Button = ReactBootstrap.Button;
 const Label = ReactBootstrap.Label;
+const ListGroup = ReactBootstrap.ListGroup;
+const ProgressBar = ReactBootstrap.ProgressBar;
+const ListGroupItem = ReactBootstrap.ListGroupItem;
 const Modal = ReactBootstrap.Modal;
 const Nav = ReactBootstrap.Nav;
 const Navbar = ReactBootstrap.Navbar;
@@ -40,6 +43,8 @@ const API_HEADERS = {
 }
 
 const languageActive = false;
+
+let time;
 
 class App extends React.Component{
 
@@ -182,8 +187,8 @@ class Actions extends React.Component{
                 <ActionsTable
                                 parameter={this.state.parameter}
 
-masterAPI={this.state.masterAPI.filter((master)=> master.id
-==this.state.parameter)}
+masterAPI={this.state.masterAPI.filter((master)=>
+master.id==this.state.parameter)}
                 />
                 <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>
             </div>
@@ -195,35 +200,35 @@ class ActionsTable extends React.Component{
 
 
     render(){
-        
-        
+
+
         let nextState = this.props.masterAPI;
-        
+
         let obj = nextState[0];
-        
-        
+
+
         let name;
-        
+
         let added;
-        
+
         if(obj){
-            
+
             name = obj.name.toUpperCase();
-            
+
             added = obj.item[0].itemDetail;
-            
+
             let total = 0;
-            
+
             for(var x=0;x<added.length;x++){
                 total+= parseInt(added[x].project)
             }
-            
+
             added=total;
         }
 
         let today = moment(new Date()).format('DD-MM-YYYY');
-        
-        
+
+
 
         return(
 
@@ -232,9 +237,12 @@ class ActionsTable extends React.Component{
                     <Row>
                         <Col xs={12}>
                             <img src="/logoprint.png"/>
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EL TENDEDERO LAVANDERIA</h5>
+
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EL TENDEDERO
+LAVANDERIA</h5>
                             <h5>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 RNC: 131213367</h5>
                             <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -257,10 +265,11 @@ class ActionsTable extends React.Component{
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            <Table striped bordered condensed hover style={{'position':'relative','width':'55%', 'margin':'0'}}>
+                            <Table striped bordered condensed hover
+style={{'position':'relative','width':'55%', 'margin':'0'}}>
                                 <thead>
                                   <tr>
-                                    <th style={{'width':'15px','font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
+                                    <th style={{'width':'15px','font-size':'25px', 'border-spacing':'030px'}}>#</th>
                                     <th style={{'width':'15px','font-size':'25px'}}>Cant.</th>
                                     <th style={{'width':'15px','font-size':'25px'}}>Descripcion</th>
                                     <th style={{'width':'15px','font-size':'25px'}}>Precio</th>
@@ -274,13 +283,12 @@ class ActionsTable extends React.Component{
                                                                  item={master.item}
                                                           />
                                     )}
-                                
+
                                     <ActionsTableBodyFooter
-                                                 parameter ={this.props.parameter}
-                                                 masterAPI ={this.props.masterAPI}
+                                                 parameter={this.props.parameter}
+                                                 masterAPI={this.props.masterAPI}
                                                  added={added}
-                                    />
-                                
+                                    /> 
 
                               </Table>
                         </Col>
@@ -294,7 +302,7 @@ class ActionsTable extends React.Component{
 class ActionsTableBodyFooter extends React.Component{
 
     render(){
-        
+
         let days = moment(new Date()).add(3,'days').format('dddd');
         if(days=='Monday'){
            days='Lunes'
@@ -310,82 +318,89 @@ class ActionsTableBodyFooter extends React.Component{
            days='Sabado'
         }else{
            days='Domingo'
-        } 
-        
+        }
+
         let today = moment(new Date()).add(3,'days').format('DD/MM/YYYY');
                     //moment().add(3, 'days').calendar();
 
         let nextState = this.props.masterAPI;
 
         let zoom = 0;
-        
+
         let items;
-        
+
         let piezas = 0;
-        
+
         let servicio;
 
         if(nextState[0]){
 
             zoom = nextState[0].project;
-            items = nextState[0].item.length;             
-            servicio = nextState[0].item[0].development;        
-            
+            items = nextState[0].item.length;
+            servicio = nextState[0].item[0].development;
+
             for(var x=0;x<nextState[0].item.length;x++){
-                
+
                 piezas+=parseInt(nextState[0].item[x].quantity);
             }
         }
-        
-                
+
+
         let itbis = ( 18 / 100) * zoom;
         itbis += ( 18 / 100) * this.props.added;
-        
+
         let grandTotal = zoom + this.props.added + itbis;
 
         return(
             <tfoot>
             <tr>
                 <td>{items}&nbsp;&nbsp;Items</td>
-                <td>&nbsp;</td>                
+                <td>&nbsp;</td>
                 <td>{piezas}&nbsp;&nbsp;Piezas</td>
-                <td>&nbsp;</td>                
+                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>SubTotal:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{zoom}.00</td>                
+                <td style={{'width':'15px',
+'font-size':'20px'}}>{zoom}.00</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>+&nbsp;Agregado:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{this.props.added}.00</td>                
+                <td style={{'width':'15px',
+'font-size':'20px'}}>+&nbsp;Agregado:</td>
+                <td style={{'width':'15px',
+'font-size':'20px'}}>{this.props.added}.00</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Desc.:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>0.00</td>                
+                <td style={{'width':'15px',
+'font-size':'20px'}}>0.00</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Itbis:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{itbis.toFixed(2)}</td>                
+                <td style={{'width':'15px',
+'font-size':'20px'}}>{itbis.toFixed(2)}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>Grand Total:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>                
+                <td style={{'width':'15px', 'font-size':'20px'}}>Grand
+Total:</td>
+                <td style={{'width':'15px',
+'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>
             </tr>
             <tr>
                 <td>F/Entrega: </td>
                 <td colSpan={2}>{days}&nbsp;{today}</td>
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>                
+                <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>Hora: </td>
@@ -400,7 +415,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
             </tr>
             <tr>
-                <td colSpan={3}>{servicio}</td>                                          
+                <td colSpan={3}>{servicio}</td>
                 <td>&nbsp;</td>
                 <br/>
                 <br/>
@@ -412,7 +427,7 @@ class ActionsTableBodyFooter extends React.Component{
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td colSpan={2}>Aprobacion Cliente</td>                                          
+                <td colSpan={2}>Aprobacion Cliente</td>
                 <br/>
                 <br/>
                 <br/>
@@ -421,7 +436,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
             </tr>
             <tr>
-                <td colSpan={2}>Le Atendio:</td>                                          
+                <td colSpan={2}>Le Atendio:</td>
                 <td>Admin</td>
                 <td>&nbsp;</td>
                 <br/>
@@ -464,7 +479,7 @@ class ActionsTableBody extends React.Component{
 
 class ActionsTableBodyDetail extends React.Component{
 
-    
+
     render(){
 
         return(
@@ -472,7 +487,8 @@ class ActionsTableBodyDetail extends React.Component{
                     <td style={{'font-size':'20px'}}>&nbsp;</td>
                     <td style={{'font-size':'20px'}}>{this.props.quantity}</td>
                     <td style={{'font-size':'20px'}}>{this.props.item}</td>
-                    <td style={{'font-size':'20px'}}>{this.props.project}.00</td>
+                    <td
+style={{'font-size':'20px'}}>{this.props.project}.00</td>
             </tr>
         );
     }
@@ -490,8 +506,7 @@ class Login extends React.Component{
                         <div className="col-md-4 col-md-offset-4">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Please
-sign in</h3>
+                                    <h3 className="panel-title">Lavanderia El Tendedero</h3>
                                 </div>
                                 <div className="panel-body">
                                     <form
@@ -549,26 +564,21 @@ class Toolbar extends React.Component{
             <Navbar>
                     <div className="navbar-header">
                         <div className="navbar-brand">
-                            <Link to={'/'}
-onClick={this.onClicked.bind(this)}>Info-Solutions SYS</Link>
+                            <Link to={'/'} onClick={this.onClicked.bind(this)}>Info-Solutions SYS</Link>
                         </div>
                     </div>
                     <Nav>
-                      <li><Link to={'/master'}>Facturacion</Link></li>
+                      <li><Link to={'/main'}>Facturacion</Link></li>
+                      <li><Link to={'/master'}>Ordenes</Link></li>
                       <li><Link to={'/detail'}>Inventario</Link></li>
-                      <NavDropdown eventKey={3} title="Reportes"
-id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}><Link
-to="/partials">Cuadre</Link></MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else
-here</MenuItem>
+                      <NavDropdown eventKey={3} title="Reportes" id="basic-nav-dropdown">
+                            <MenuItem eventKey={3.1}><Link to="/partials">Cuadre</Link></MenuItem>
+                            <MenuItem eventKey={3.2}><Link to="/loader">Tracking</Link></MenuItem>
+                            <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}>Separated link</MenuItem>
                       </NavDropdown>
-                      <li
-style={{'float':'right','position':'absolute','left':'80%'}}><Link
-onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
+                      <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
                 </Navbar>
         );
@@ -578,20 +588,17 @@ onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
             <Navbar>
                     <div className="navbar-header">
                         <div className="navbar-brand">
-                            <Link to={'/'}
-onClick={this.onClicked.bind(this)}>React-Bootstrap</Link>
+                            <Link to={'/'} onClick={this.onClicked.bind(this)}>React-Bootstrap</Link>
                         </div>
                     </div>
                     <Nav>
+                      <li><Link to={'/main'}>Main</Link></li>
                       <li><Link to={'/master'}>Master</Link></li>
                       <li><Link to={'/detail'}>Details</Link></li>
-                      <NavDropdown eventKey={3} title="DropDown"
-id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}><Link
-to="/partials">Draw</Link></MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else
-here</MenuItem>
+                      <NavDropdown eventKey={3} title="DropDown" id="basic-nav-dropdown">
+                            <MenuItem eventKey={3.1}><Link to="/partials">Draw</Link></MenuItem>
+                            <MenuItem eventKey={3.2}><Link to="/loader">loaded</Link></MenuItem>
+                            <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}>Separated link</MenuItem>
                       </NavDropdown>
@@ -621,6 +628,372 @@ onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
 
 }
 
+class Main extends React.Component{
+
+    constructor(){
+
+        super();
+        this.state ={
+
+            showModal: false,
+            mainAPI: [],
+            filterText: ''
+        }
+    }
+
+    componentDidMount(){
+
+
+
+          fetch(API_URL+'/main',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  mainAPI: responseData
+              })
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+
+          this.setState({
+
+             parameter: this.props.params.actionid
+          });
+
+    }
+
+    close(){
+
+        this.setState({
+
+            showModal: false
+        })
+    }
+
+    open(){
+
+        this.setState({
+
+            showModal: true
+        })
+    }
+
+    render(){
+
+        return(
+            <div>
+                <Row>
+                    <MainSearch />
+                </Row>
+                <Row>
+                    <div className="pull-right">
+                        <Button onClick={this.open.bind(this)}>Add Main</Button>
+                        <MainModal
+                                    showModal={this.state.showModal}
+                                    mainCallback={{
+                                                    open:this.open.bind(this),
+                                                    close:this.close.bind(this)
+
+                                    }}
+                        />
+                    </div>
+                </Row>
+                <br/>
+                <Row>
+                    <MainTable
+                                filterText={this.state.filterText}
+                                mainAPI={this.state.mainAPI}
+                    />
+                </Row>
+            </div>
+        );
+    }
+}
+
+class MainModal extends React.Component{
+
+    render(){
+
+        return(
+
+            <Modal show={this.props.showModal}
+onHide={this.props.mainCallback.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h4>Text in a modal</h4>
+              </Modal.Body>
+            </Modal>
+        );
+    }
+}
+
+class MainSearch extends React.Component{
+
+    render(){
+
+        return(
+            <Panel header="Main Search">
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalEmail">
+                      <Col componentClass={ControlLabel} sm={2}>
+                        Search:
+                      </Col>
+                      <Col sm={10}>
+                        <FormControl type="text" placeholder="Search" />
+                      </Col>
+                    </FormGroup>
+                </Form>
+            </Panel>
+        );
+    }
+}
+
+class MainTable extends React.Component{
+
+    constructor() {
+        super();
+        this.state = {
+          todos: [{id: '123',date: '2017-10-09',name:
+'sas',item:'test.item',environment: 'dev'},{id:
+'454758778052139',date:'2017-10-09',name: 'sas',item:
+'test.item',environment: 'dev' },],
+          currentPage: 1,
+          todosPerPage: 3
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event) {
+            this.setState({
+              currentPage: Number(event.target.id)
+            });
+    }
+
+    render(){
+
+        let filteredTable = this.props.mainAPI.filter(
+            (main) => main.name.indexOf(this.props.filterText) !== -1
+        )
+
+        const { todos, currentPage, todosPerPage } = this.state;
+
+        // Logic for displaying current todos
+        const indexOfLastTodo = currentPage * todosPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+        const currentTodos =
+filteredTable.slice(indexOfFirstTodo,indexOfLastTodo);
+
+        // Logic for displaying page numbers
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(filteredTable.length /
+todosPerPage); i++) {
+          pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+          return (
+            <li
+              key={number}
+              id={number}
+              onClick={this.handleClick}
+            >
+              <a role="button" href="#" id={number}>{number}</a>
+            </li>
+          );
+        });
+
+        return(
+            <Panel header="Main Table">
+                <Table striped bordered condensed hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Item</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    {currentTodos.map(
+                        (main,index) => <MainTableBody
+                                                        key={main.index}
+                                                        index={index}
+                                                        id={main.id}
+                                                        date={main.date}
+                                                        name={main.name}
+                                                        project={main.project}
+                                                        status={main.status}
+
+mainAPI={this.props.mainAPI}
+                                  />
+                    )}
+                  </Table>
+                  <div className="pull-right">
+                    <ul className="pagination pagination-sm">
+                      <li id="1"><a role="button" href="#">«</a></li>
+                      <li><a role="button" href="#">‹</a></li>
+                      {renderPageNumbers}
+                      <li><a role="button" href="#">›</a></li>
+                      <li><a role="button" href="#">»</a></li>
+                    </ul>
+                  </div>
+            </Panel>
+        );
+    }
+}
+
+class MainTableBody extends React.Component{
+
+    onExchange(data){
+
+
+        fetch(API_URL+'/done', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify({"id":data})
+        })
+
+        let nextState = this.props.mainAPI;
+
+
+
+        browserHistory.push("/main")
+
+    }
+
+    render(){
+
+        return(
+
+            <tbody>
+              <tr>
+                <td>{this.props.id}</td>
+                <td>{this.props.date}</td>
+                <td>{this.props.name}</td>
+                <td>{this.props.project}</td>
+                <td>{this.props.status}</td>
+                <td>
+                    <Link className="btn btn-default"
+to={'/mainactions/'+this.props.id}><i className="fa fa-eye"
+aria-hidden="true"></i></Link>
+                    <Button
+onClick={this.onExchange.bind(this,this.props.id)}><i className="fa
+fa-exchange" aria-hidden="true"></i></Button>
+                </td>
+              </tr>
+            </tbody>
+        );
+    }
+}
+
+class MainActions extends React.Component{
+
+    constructor(){
+
+        super();
+        this.state = {
+
+            parameter: '',
+            masterAPI: []
+        }
+    }
+
+    componentDidMount(){
+
+        fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  masterAPI: responseData
+              })
+        })
+
+        this.setState({
+
+            parameter: this.props.params.mainactionid
+        })
+    }
+
+    render(){
+
+        let filteredTable = this.state.masterAPI.filter(
+            (master) => master.id.indexOf(this.state.parameter) !== -1
+        )
+
+        console.log(filteredTable);
+
+        return(
+            <MainActionsTable
+                                filteredTable={filteredTable}
+            />
+        )
+    }
+}
+
+class MainActionsTable extends React.Component{
+
+    render(){
+
+        return(
+
+            <Table striped bordered condensed hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Project</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.props.filteredTable.map(
+                    (master,index) =>   <MainActionsTableBody
+                                                                key={index}
+                                                                index={index}
+                                                                id={master.id}
+
+name={master.name}
+
+date={master.date}
+
+project={master.project}
+
+status={master.status}
+                                        />
+                )}
+                </tbody>
+              </Table>
+        );
+    }
+}
+
+class MainActionsTableBody extends React.Component{
+
+    render(){
+
+        return(
+
+
+              <tr>
+                <td>{this.props.index+1}</td>
+                <td>{this.props.date}</td>
+                <td>{this.props.name}</td>
+                <td>{this.props.project}</td>
+                <td>{this.props.status}</td>
+              </tr>
+
+        );
+    }
+}
+
 class Master extends React.Component{
 
     constructor() {
@@ -635,7 +1008,8 @@ class Master extends React.Component{
             detail:[],
             detailData:[],
             detailAdded: [],
-            temp: ''
+            temp: '',
+            list: []
         };
     }
 
@@ -657,6 +1031,14 @@ class Master extends React.Component{
               this.setState({
 
                   detailData: responseData
+              })
+          })
+          fetch(API_URL+'/list',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  list: responseData
               })
           })
           .catch((error)=>{
@@ -748,75 +1130,77 @@ class Master extends React.Component{
     onSaveDetail(event){
 
         event.preventDefault();
-        
+
         let nextState = this.state.masterDetail;
-        
+
         let detailTotal = this.state.detailData;
-        
-        let articulo = event.target.suggest.value;
-        
+
+        let itemFirst = event.target.suggest.value;
+
         let project;
-        
+
         let category;
-        
+
         for(var x=0;x<detailTotal.length;x++){
-            if(detailTotal[x].name==articulo){
+            if(detailTotal[x].name==itemFirst){
                 project = detailTotal[x].environment;
                 category = detailTotal[x].category;
-                console.log(detailTotal[x].category);
+
             }
         }
 
         let newItem;
-        
-        let newStateDetailAdded = [];   
-        
+
+        let newStateDetailAdded = [];
+
         let temp;
-        
+
         if(project){
-                        
+
             newStateDetailAdded = this.state.detailAdded;
-            
+
+            //if(category=='shine'||category=='properties'){
             if(category=='colores'||category=='propiedades'){
-                
+
                 let newItemAdded = {
-                    
-                        "name":articulo,
+
+                        "name":itemFirst,
                         "project":project
-                    
+
                 }
-                
-                newStateDetailAdded.push(newItemAdded); 
-                
+
+                newStateDetailAdded.push(newItemAdded);
+
                     this.setState({
 
                         detailAdded: newStateDetailAdded
                     });
             }else if(category=='servicio'){
-                 
+            //}else if(category=='service'){
+
                 this.setState({
-                    
+
                     temp: event.target.suggest.value
                 });
-                                                
+
                 temp = event.target.suggest.value;
-                  
+
                 if(this.state.temp!=event.target.suggest.value){
                     newStateDetailAdded = [];
                     this.setState({
                        detailAdded: []
                    });
                 }
-                
-                
+
+
                 project=project*parseInt(event.target.quantity.value)
-                
+
                 newItem = {
 
                     "id": Date.now(),
                     "firstname":event.target.firstname.value,
                     "item":event.target.suggest.value,
-                    "itemDetail": this.state.detailAdded, 
+                    "itemDetail": this.state.detailAdded,
                     "development":event.target.development.value,
                     "quantity":event.target.quantity.value,
                     "project":project,
@@ -829,21 +1213,21 @@ class Master extends React.Component{
 
                     masterDetail: nextState
                 });
-                
+
             }
         }else{
-            
+
             alert('Por favor, introducir articulo valido!')
         }
 
     }
-    
+
     onSaveDetailAdded(data){
-        
+
         var item = document.getElementById('awesomplete-4vs0fr');
-        
+
         console.log(document.getElementById('awesomplete-4vs0fr'));
-        
+
     }
 
     onDeleteMaster(value){
@@ -887,8 +1271,7 @@ class Master extends React.Component{
 
 
     render(){
-        
-        console.log(this.state.detailAdded);
+
 
         let ModalButtonEN = (
 
@@ -900,7 +1283,7 @@ class Master extends React.Component{
 
         let ModalButtonES = (
 
-                <Button onClick={this.open.bind(this)}>Agregar Factura</Button>
+                <Button onClick={this.open.bind(this)}>Agregar Orden</Button>
 
 
         );
@@ -913,7 +1296,7 @@ class Master extends React.Component{
 
         let MasterTableES = (
 
-            "Listado de Facturas"
+            "Listado de Ordenes"
 
         );
 
@@ -954,15 +1337,20 @@ onhandleuserinput:this.onHandleUserInput.bind(this)
 
 
                                             detailAdded={this.state.detailAdded}
-                                            masterDetail={this.state.masterDetail}
+
+masterDetail={this.state.masterDetail}
                                             detail={this.state.detail}
                                             showModal={this.state.showModal}
+                                            list={this.state.list}
                                             open={this.open}
                                             close={this.close.bind(this)}
                                             masterCallback = {{
-                                                                    onsavedetail:this.onSaveDetail.bind(this),
-                                                                    onsavedetailadded:this.onSaveDetailAdded.bind(this),
-                                                                    onsavemaster:this.onSaveMaster.bind(this)
+
+onsavedetail:this.onSaveDetail.bind(this),
+
+onsavedetailadded:this.onSaveDetailAdded.bind(this),
+
+onsavemaster:this.onSaveMaster.bind(this)
                                             }}
                             />
                         </div>
@@ -1018,7 +1406,7 @@ id="first_name" name="first_name"/>
         let MasterSearchES = (
 
             <div>
-                <Panel header="Busqueda de Factura">
+                <Panel header="Busqueda de Ordenes">
                   <form>
                     <div className="form-group">
                         <div className="col-md-2 col-sm-2">
@@ -1179,6 +1567,28 @@ masterCallback={this.props.masterCallback}
 
 class MasterTableBody extends React.Component{
 
+    /*<Link className="btn btn-default"
+to={'/actions/'+this.props.id}><i className="fa fa-eye"
+aria-hidden="true"></i></Link>{' '}*/
+
+    onExchange(data){
+
+        console.log(data)
+        fetch(API_URL+'/main', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify({"id":data})
+        })
+
+        let nextState = this.props.masterAPI;
+
+        console.log(nextState);
+
+        browserHistory.push("/main")
+
+    }
+
     render(){
 
         return(
@@ -1192,7 +1602,11 @@ class MasterTableBody extends React.Component{
                         <Link className="btn btn-default"
 to={'/actions/'+this.props.id}><i className="fa fa-eye"
 aria-hidden="true"></i></Link>{' '}
-<Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i
+                        <Button
+onClick={this.onExchange.bind(this,this.props.id)}><i className="fa
+fa-exchange" aria-hidden="true"></i></Button>
+                        <Button
+onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i
 className="fa fa-trash" aria-hidden="true"></i></Button>
                     </td>
                   </tr>
@@ -1257,7 +1671,7 @@ class MasterModal extends React.Component{
 
         let MasterModalES = (
 
-            <Modal.Title>Agregar Factura</Modal.Title>
+            <Modal.Title>Agregar Ordenes</Modal.Title>
         );
 
         let MasterModalActive;
@@ -1281,12 +1695,13 @@ class MasterModal extends React.Component{
                   <Modal.Body>
                         <MasterModalField
                                             detail={this.props.detail}
+                                            list={this.props.list}
                                             masterCallback={this.props.masterCallback}
                         />
                         <br/>
                         {this.props.detailAdded.map(
-                            (added) => <MasterModalLabel 
-                                                name={added.name}                                                
+                            (added) => <MasterModalLabel
+                                                name={added.name}
                                         />
                         )}
                         <MasterModalTable
@@ -1306,11 +1721,11 @@ masterCallback={this.props.masterCallback}
 }
 
 class MasterModalLabel extends React.Component{
-    
+
     render(){
-        
+
         return(
-        
+
             <span><Label bsStyle="warning">{this.props.name}</Label>&nbsp;</span>
         );
     }
@@ -1329,7 +1744,7 @@ class AwesompleteInput extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSelectComplete = this.onSelectComplete.bind(this);
 
-    //window.addEventListener("awesomplete-selectcomplete",this.onSelectComplete, false);
+    //window.addEventListener("awesomplete-selectcomplete",this.onSelectComplete,false);
 
     this.state = {
       value: this.props.value || this.props.defaultValue || ''
@@ -1391,6 +1806,81 @@ class AwesompleteInput extends React.Component {
   }
 }
 
+class AwesompleteInputList extends React.Component {
+  // Dont forget to add:
+  // css: https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css
+  // js: https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.1/awesomplete.min.js
+  // Awesomeplete tutorial:
+//https://www.sitepoint.com/javascript-autocomplete-widget-awesomplete/
+  componentWillMount() {
+    if (!Awesomplete)
+      throw(new Error('ERROR: Cannot find awesomplete.'));
+
+    this.onChange = this.onChange.bind(this);
+    this.onSelectComplete = this.onSelectComplete.bind(this);
+
+    //window.addEventListener("awesomplete-selectcomplete",this.onSelectComplete,false);
+
+    this.state = {
+      value: this.props.value || this.props.defaultValue || ''
+    };
+
+    if (this.props.id != null)
+      this._id = this.props.id;
+    else
+      this._id = 'awesompletelist-' + Math.random().toString(36).substring(7);
+  }
+
+  componentDidMount() {
+    var list = this.props.list;
+    if (!list)
+      list = [ 'one', 'two', 'three'];
+
+    var input = document.getElementById(this._id);
+    this._awesomplete = new Awesomplete(
+      input,
+      {
+        minChars: 1,
+        maxItems: 5,
+        autoFirst: true
+      }
+    );
+    this._awesomplete.list = list;
+  }
+
+  onChange(event) {
+    this.setState({ value: event.target.value });
+    if (this.props.onChange)
+      this.props.onChange(event);
+  }
+
+  onSelectComplete(event) {
+    if (event.target.id != this._id)
+      return;
+
+    this.onChange(event);
+
+    if (this.props.onSelectComplete)
+      this.props.onSelectComplete(event);
+  }
+
+  render() {
+    var className = "awesompletelist";
+    var placeholder = this.props.placeholder || '';
+    if (this.props.className)
+      className += ' ' + this.props.className;
+
+    return(<input style={{"width":"181%","color":"black"}}
+             id={this._id}
+             value={this.state.value}
+             onChange={this.onChange}
+             className={className}
+             placeholder={placeholder}
+             name="firstname"
+             />);
+  }
+}
+
 class MasterModalField extends React.Component{
 
     constructor(){
@@ -1408,11 +1898,11 @@ class MasterModalField extends React.Component{
             value: newValue
         });
     }
-    
+
     render(){
-        
+
         let precio = 0;
-        
+
         let MasterModalFieldEN = (
                 <Row>
                     <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
@@ -1422,7 +1912,7 @@ class MasterModalField extends React.Component{
                                 Name
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text" name="firstname" placeholder="Name" required />
+                                <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />
                               </Col>
                             </FormGroup>
                         </Row>
@@ -1433,7 +1923,7 @@ class MasterModalField extends React.Component{
                                 Item
                               </Col>
                               <Col md={4} sm={6}>
-                                <AwesompleteInput  className="form-control" list={this.props.detail} />
+                                <AwesompleteInput className="form-control" list={this.props.detail} />
                               </Col>
                             </FormGroup>
                         </Row>
@@ -1459,7 +1949,7 @@ class MasterModalField extends React.Component{
                                 Project
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text" name="project" placeholder="Project" required />
+                                <FormControl type="number" name="quantity" placeholder="Project" required />
                               </Col>
                               <Col md={2} sm={2} >
                                     <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
@@ -1478,11 +1968,11 @@ class MasterModalField extends React.Component{
                         <Row>
                             <FormGroup controlId="formHorizontalName">
                               <Col componentClass={ControlLabel} md={1} sm={2}>
-                                Cliente
+                                Name
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text" name="firstname" placeholder="Cliente" required />
-                              </Col>                              
+                                <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />
+                              </Col>
                             </FormGroup>
                         </Row>
                         <br/>
@@ -1492,17 +1982,17 @@ class MasterModalField extends React.Component{
                                   <ControlLabel>Tipo de Servicio</ControlLabel>
                                 </Col>
                                 <Col md={4} sm={6}>
-                                  <FormControl componentClass="select" name="development" placeholder="Tipo de Servicio" required >                                    
+                                  <FormControl componentClass="select" name="development" placeholder="Tipo de Servicio" required >
                                     <option value="Lavar y Prensa">Lavar y Prensa</option>
                                     <option value="Solo Lavar">Solo Lavar</option>
                                     <option value="Solo Plancha">Solo Plancha</option>
                                     <option value="Alteracion">Alteracion</option>
                                     <option value="Agregados">Agregados</option>
                                   </FormControl>
-                                </Col>                                
+                                </Col>
                             </FormGroup>
                         </Row>
-                        <br/>                                    
+                        <br/>
                         <Row>
                             <FormGroup controlId="formHorizontalItem">
                               <Col componentClass={ControlLabel} md={1} sm={2}>
@@ -1510,7 +2000,7 @@ class MasterModalField extends React.Component{
                               </Col>
                               <Col md={4} sm={6} style={{"width":"31%"}}>
                                 <AwesompleteInput className="form-control" list={this.props.detail} />
-                              </Col>                              
+                              </Col>
                             </FormGroup>
                         </Row>
                         <br/>
@@ -1520,14 +2010,14 @@ class MasterModalField extends React.Component{
                                 Cantidad
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="text" name="quantity" placeholder="Cantidad" required />
+                                <FormControl type="number" name="quantity" placeholder="Cantidad" required />
                               </Col>
                               <Col md={2}>
                                     <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
                               </Col>
                             </FormGroup>
                         </Row>
-                        <br/>                                   
+                        <br/>
                      </Form>
                   </Row>
         );
@@ -1601,12 +2091,18 @@ class MasterModalTable extends React.Component{
                                                          index={index+1}
                                                          key={index}
                                                          id={masterdetail.id}
-                                                            firstname={masterdetail.firstname}
-                                                            item={masterdetail.item}
-                                                            itemDetail={masterdetail.itemDetail}
-                                                            development={masterdetail.development}
-                                                            project={masterdetail.project}
-                                                            quantity={masterdetail.quantity}
+
+firstname={masterdetail.firstname}
+
+item={masterdetail.item}
+
+itemDetail={masterdetail.itemDetail}
+
+development={masterdetail.development}
+
+project={masterdetail.project}
+
+quantity={masterdetail.quantity}
                                               />
                         )}
                     </tbody>
@@ -1619,11 +2115,12 @@ class MasterModalTable extends React.Component{
 class MasterModalTableBodyAdded extends React.Component{
 
     render(){
-        
+
         return(
-        
+
             <tr>
-              <td><i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i></td>
+              <td><i className="fa fa-arrow-circle-o-right"
+aria-hidden="true"></i></td>
               <td>{this.props.name}</td>
             </tr>
         );
@@ -1633,11 +2130,11 @@ class MasterModalTableBodyAdded extends React.Component{
 class MasterModalTableBodyAddedTotal extends React.Component{
 
     render(){
-        
+
         return(
-        
+
             <tr>
-                <td>{this.props.project}</td>                                
+                <td>{this.props.project}</td>
             </tr>
         );
     }
@@ -1648,7 +2145,7 @@ class MasterModalTableBody extends React.Component{
     render(){
 
         if(true){
-           
+
             return(
 
                 <tr>
@@ -1661,13 +2158,14 @@ class MasterModalTableBody extends React.Component{
                                 <td>{this.props.item}</td>
                             </tr>
                             {this.props.itemDetail.map(
-                             (detail) => <MasterModalTableBodyAdded 
-                                                                    name={detail.name}
-            
+                             (detail) => <MasterModalTableBodyAdded
+
+name={detail.name}
+
                                          />
                              )}
-                            
-                        </table>                            
+
+                        </table>
                     </td>
                     <td>{this.props.development}</td>
                     <td>
@@ -1675,18 +2173,19 @@ class MasterModalTableBody extends React.Component{
                         <table>
                             {this.props.itemDetail.map(
                              (detail) => <MasterModalTableBodyAddedTotal
-                                                                            project={detail.project}
+
+     project={detail.project}
                              />
                              )}
-                            
+
                         </table>
-                    </td>                    
+                    </td>
                 </tr>
 
             );
-            
+
         }else{
-                   
+
             return(
 
                 <tr>
@@ -1759,6 +2258,7 @@ class Detail extends React.Component{
             "item": event.target.item.value,
             "environment": event.target.environment.value,
             "category": event.target.category.value
+            //"category": event.target.host.value
         }
 
         let nextState = this.state.detailData;
@@ -1816,7 +2316,11 @@ class Detail extends React.Component{
     }
 
     render(){
-        
+
+
+
+
+
         let DetailEN = (
 
             <Button onClick={this.open.bind(this)}>Add Detail</Button>
@@ -1842,7 +2346,8 @@ class Detail extends React.Component{
                     <DetailSearch
                                     filterText={this.state.filterText}
                                     detailCallback={{
-                                                onHandleChange:this.onHandleChange.bind(this)
+
+onHandleChange:this.onHandleChange.bind(this)
                                     }}
                     />
                 </Row>
@@ -1967,8 +2472,8 @@ class DetailTable extends React.Component{
         // Logic for displaying current todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-        const currentTodos = filteredTable.slice(indexOfFirstTodo,
-indexOfLastTodo);
+        const currentTodos =
+filteredTable.slice(indexOfFirstTodo,indexOfLastTodo);
 
         // Logic for displaying page numbers
         const pageNumbers = [];
@@ -2146,7 +2651,7 @@ class DetailModalUpdate extends React.Component{
         let nextState = this.state.detailData;
 
         let index = nextState.findIndex(x=> x.id==this.state.parameter);
-        
+
         nextState[index].item = event.target.item.value
 
         this.setState({
@@ -2158,7 +2663,8 @@ class DetailModalUpdate extends React.Component{
 
               method: 'post',
               headers: API_HEADERS,
-              body: JSON.stringify({"index":index,"item":event.target.item.value})
+              body:
+JSON.stringify({"index":index,"item":event.target.item.value})
         })
 
         this.setState({
@@ -2202,7 +2708,8 @@ class DetailModalUpdate extends React.Component{
                             ID
                           </Col>
                           <Col sm={10}>
-                            <FormControl value={this.state.parameter} type="id" placeholder="id" disabled />
+                            <FormControl value={this.state.parameter}
+type="id" placeholder="id" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalName">
@@ -2210,7 +2717,8 @@ class DetailModalUpdate extends React.Component{
                             Name
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="name" value={name} type="text" placeholder="Name" disabled />
+                            <FormControl name="name" value={name}
+type="text" placeholder="Name" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalEnvironment">
@@ -2218,7 +2726,8 @@ class DetailModalUpdate extends React.Component{
                             Environment
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="environment" value={environment} type="text" placeholder="Environment" disabled />
+                            <FormControl name="environment"
+value={environment} type="text" placeholder="Environment" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalItem">
@@ -2226,7 +2735,8 @@ class DetailModalUpdate extends React.Component{
                             Item
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="item" type="text" placeholder={item} />
+                            <FormControl name="item" type="text"
+placeholder={item} />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalCategory">
@@ -2234,7 +2744,8 @@ class DetailModalUpdate extends React.Component{
                             Category
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="category" type="text" value={category} disabled />
+                            <FormControl name="category" type="text"
+value={category} disabled />
                           </Col>
                         </FormGroup>
                 </Modal.Body>
@@ -2279,47 +2790,73 @@ class DetailModal extends React.Component{
         let DetailModalEN = (
 
 
-                            <Modal show={this.props.showModal} onHide={this.props.detailCallback.close}>
+                            <Modal show={this.props.showModal}
+onHide={this.props.detailCallback.close}>
                               <Modal.Header closeButton>
                                 <Modal.Title>Modal heading</Modal.Title>
                               </Modal.Header>
-                              <Form horizontal onSubmit={this.props.detailCallback.onsavedetail.bind(this)}>
+                              <Form horizontal
+onSubmit={this.props.detailCallback.onsavedetail.bind(this)}>
                                   <Modal.Body>
-                                            <FormGroup controlId="formHorizontalid">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalid">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 ID
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="id" placeholder="ID" />
+                                                <FormControl
+type="text" name="id" placeholder="ID" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalname">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalname">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Name
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="name" placeholder="Name" />
+                                                <FormControl
+type="text" name="name" placeholder="Name" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalEnvironment">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalEnvironment">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Environment
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="environment" placeholder="Item" />
+                                                <FormControl
+type="text" name="environment" placeholder="Environment" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalItem">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalItem">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Item
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="item" placeholder="Item" />
+                                                <FormControl
+type="text" name="item" placeholder="Item" />
+                                              </Col>
+                                            </FormGroup>
+                                            <FormGroup
+controlId="formHorizontalHost">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
+                                                Host
+                                              </Col>
+                                              <Col sm={10}>
+                                                <FormControl
+type="text" name="host" placeholder="Host" />
                                               </Col>
                                             </FormGroup>
                                   </Modal.Body>
                                   <Modal.Footer>
-                                        <Button type="submit" pullRight>Save</Button>
+                                        <Button type="submit"
+pullRight>Save</Button>
                                   </Modal.Footer>
                               </Form>
                             </Modal>
@@ -2329,59 +2866,80 @@ class DetailModal extends React.Component{
         let DetailModalES = (
 
 
-                            <Modal show={this.props.showModal} onHide={this.props.detailCallback.close}>
+                            <Modal show={this.props.showModal}
+onHide={this.props.detailCallback.close}>
                               <Modal.Header closeButton>
                                 <Modal.Title>Agregar Articulo</Modal.Title>
                               </Modal.Header>
-                              <Form horizontal onSubmit={this.props.detailCallback.onsavedetail.bind(this)}>
+                              <Form horizontal
+onSubmit={this.props.detailCallback.onsavedetail.bind(this)}>
                                   <Modal.Body>
-                                            <FormGroup controlId="formHorizontalid">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalid">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Codigo
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="id" placeholder="Codigo" />
+                                                <FormControl
+type="text" name="id" placeholder="Codigo" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalname">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalname">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Descripcion
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="name" placeholder="Descripcion" />
+                                                <FormControl
+type="text" name="name" placeholder="Descripcion" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalEnvironment">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalEnvironment">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Precio
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="environment" placeholder="Precio" />
+                                                <FormControl
+type="text" name="environment" placeholder="Precio" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalItem">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalItem">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Cantidad
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl type="text" name="item" placeholder="Cantidad" />
+                                                <FormControl
+type="text" name="item" placeholder="Cantidad" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup controlId="formHorizontalItem">
-                                              <Col componentClass={ControlLabel} sm={2}>
+                                            <FormGroup
+controlId="formHorizontalItem">
+                                              <Col
+componentClass={ControlLabel} sm={2}>
                                                 Categoria
                                               </Col>
                                               <Col sm={10}>
-                                              <FormControl name="category" componentClass="select" placeholder="select">
-                                                <option value="servicio">Servicio</option>
-                                                <option value="colores">Colores</option>
-                                                <option value="propiedades">Propiedades</option>                                                
+                                              <FormControl
+name="category" componentClass="select" placeholder="select">
+                                                <option
+value="servicio">Servicio</option>
+                                                <option
+value="colores">Colores</option>
+                                                <option
+value="propiedades">Propiedades</option>
                                               </FormControl>
                                               </Col>
                                             </FormGroup>
                                   </Modal.Body>
                                   <Modal.Footer>
-                                        <Button type="submit" pullRight>Guardar</Button>
+                                        <Button type="submit"
+pullRight>Guardar</Button>
                                   </Modal.Footer>
                               </Form>
                             </Modal>
@@ -2458,7 +3016,7 @@ class Partials extends React.Component{
 
     onRun(){
 
-                let nextState = this.state.masterAPI.filter((master) => master.date == this.state.searchData)
+                let nextState = this.state.masterAPI.filter((master)=> master.date == this.state.searchData)
 
                 let grand = 0;
 
@@ -2642,7 +3200,7 @@ class PartialsTableBody extends React.Component{
 
     render(){
 
-            console.log(this.props.masterAPI)
+
 
         return(
 
@@ -2657,14 +3215,172 @@ style={{'font-size':'20px'}}>{this.props.name}</td>
     }
 }
 
+class Loader extends React.Component{
+
+    constructor(){
+
+        super();
+        this.state = {
+
+            showModal: false
+        }
+    }
+
+    close() {
+        this.setState({ showModal: false });
+
+        window.clearTimeout(time)
+    }
+
+    open() {
+        this.setState({ showModal: true });
+
+        var search = document.getElementById('loadersearch').value;
+
+        fetch(API_URL+'/loader', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify({"id":search})
+        })
+
+        console.log(search);
+
+        time = window.setTimeout(function(msg) {
+
+            this.close();
+        }.bind(this), 3000);
+
+
+    }
+
+
+    render(){
+
+        return(
+            <div>
+                <Row>
+                    <Panel header="Search Loader">
+                        <LoaderSearch />
+                        <br/>
+                        <Col componentClass={ControlLabel} sm={2}>
+                        </Col>
+                        <Col componentClass={ControlLabel} sm={10}>
+                            <Button onClick={this.open.bind(this)}>Get
+Loader</Button>
+                            <LoaderModal
+                                            showModal={this.state.showModal}
+                                            loaderCallback={{
+
+open:this.open.bind(this),
+
+close:this.close.bind(this)
+                                            }}
+
+                            />
+                        </Col>
+
+                    </Panel>
+                </Row>
+                <Row>
+                    <h4></h4>
+                </Row>
+                <Row>
+                    <LoaderListGroup />
+                </Row>
+            </div>
+        );
+    }
+}
+
+class LoaderSearch extends React.Component{
+
+    render(){
+
+        return(
+
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalEmail">
+                      <Col componentClass={ControlLabel} sm={2}>
+                        Search:
+                      </Col>
+                      <Col sm={10}>
+                        <FormControl id="loadersearch" type="text"
+placeholder="Search:" />
+                      </Col>
+                    </FormGroup>
+                </Form>
+
+        );
+    }
+}
+
+class LoaderListGroup extends React.Component{
+
+    render(){
+
+        return(
+            <Panel header="This Loader">
+                <ListGroup>
+                <ListGroupItem href="#link1">Date created: <Label
+bsStyle="success">12.12.2013</Label></ListGroupItem>
+                <ListGroupItem href="#link2">Last update: <Label
+bsStyle="success">12.12.2013</Label></ListGroupItem>
+                <ListGroupItem href="#link2">Comment: <Label
+bsStyle="success">customers comment goes here</Label></ListGroupItem>
+                <ListGroupItem href="#link2">Comments:
+<span>Coments</span></ListGroupItem>
+              </ListGroup>
+            </Panel>
+        );
+    }
+}
+
+class LoaderModal extends React.Component{
+
+
+
+    render(){
+
+        return(
+
+             <Modal style={{'margin-top':'15%','overflow':'hidden'}}
+show={this.props.showModal}>
+              <Modal.Header>
+                <Modal.Title>Loading...</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                    <ProgressBar active now={99} />
+              </Modal.Body>
+            </Modal>
+        );
+    }
+
+}
+
+class Customer extends React.Component{
+    
+    render(){
+        
+        return(
+        
+            <h1>Customer</h1>
+        );
+    }
+}
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+        <Route path="customer" component={Customer}/>
+        <Route path="loader" component={Loader}/>
         <Route path="partials" component={Partials}/>
         <Route path="updatedetail/:detailid" component={DetailModalUpdate}/>
+        <Route path="mainactions/:mainactionid" component={MainActions}/>
         <Route path="actions/:actionid" component={Actions}/>
         <Route path="detail" component={Detail}/>
         <Route path="master" component={Master}/>
+        <Route path="main" component={Main}/>
     </Route>
   </Router>
 ), document.getElementById('contents'));
