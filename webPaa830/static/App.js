@@ -17,6 +17,7 @@ var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
 
 var Button = ReactBootstrap.Button;
+var Label = ReactBootstrap.Label;
 var Modal = ReactBootstrap.Modal;
 var Nav = ReactBootstrap.Nav;
 var Navbar = ReactBootstrap.Navbar;
@@ -1270,8 +1271,6 @@ var Master = function (_React$Component9) {
 
                     newStateDetailAdded.push(newItemAdded);
 
-                    //console.log(this.state.temp);
-
                     this.setState({
 
                         detailAdded: newStateDetailAdded
@@ -1283,13 +1282,9 @@ var Master = function (_React$Component9) {
                         temp: event.target.suggest.value
                     });
 
-                    console.log(this.state.temp);
-
-                    console.log(this.state.temp + ' ' + event.target.suggest.value);
-
                     temp = event.target.suggest.value;
 
-                    if (temp != event.target.suggest.value) {
+                    if (this.state.temp != event.target.suggest.value) {
                         newStateDetailAdded = [];
                         this.setState({
                             detailAdded: []
@@ -1375,6 +1370,8 @@ var Master = function (_React$Component9) {
         key: 'render',
         value: function render() {
 
+            console.log(this.state.detailAdded);
+
             var ModalButtonEN = React.createElement(
                 Button,
                 { onClick: this.open.bind(this) },
@@ -1433,17 +1430,15 @@ var Master = function (_React$Component9) {
                         ModalButtonActive,
                         React.createElement(MasterModal, {
 
+                            detailAdded: this.state.detailAdded,
                             masterDetail: this.state.masterDetail,
                             detail: this.state.detail,
                             showModal: this.state.showModal,
                             open: this.open,
                             close: this.close.bind(this),
                             masterCallback: {
-
                                 onsavedetail: this.onSaveDetail.bind(this),
-
                                 onsavedetailadded: this.onSaveDetailAdded.bind(this),
-
                                 onsavemaster: this.onSaveMaster.bind(this)
                             }
                         })
@@ -1984,6 +1979,11 @@ var MasterModal = function (_React$Component14) {
                             masterCallback: this.props.masterCallback
                         }),
                         React.createElement('br', null),
+                        this.props.detailAdded.map(function (added) {
+                            return React.createElement(MasterModalLabel, {
+                                name: added.name
+                            });
+                        }),
                         React.createElement(MasterModalTable, {
 
                             masterDetail: this.props.masterDetail,
@@ -2002,8 +2002,37 @@ var MasterModal = function (_React$Component14) {
     return MasterModal;
 }(React.Component);
 
-var AwesompleteInput = function (_React$Component15) {
-    _inherits(AwesompleteInput, _React$Component15);
+var MasterModalLabel = function (_React$Component15) {
+    _inherits(MasterModalLabel, _React$Component15);
+
+    function MasterModalLabel() {
+        _classCallCheck(this, MasterModalLabel);
+
+        return _possibleConstructorReturn(this, (MasterModalLabel.__proto__ || Object.getPrototypeOf(MasterModalLabel)).apply(this, arguments));
+    }
+
+    _createClass(MasterModalLabel, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'span',
+                null,
+                React.createElement(
+                    Label,
+                    { bsStyle: 'warning' },
+                    this.props.name
+                ),
+                '\xA0'
+            );
+        }
+    }]);
+
+    return MasterModalLabel;
+}(React.Component);
+
+var AwesompleteInput = function (_React$Component16) {
+    _inherits(AwesompleteInput, _React$Component16);
 
     function AwesompleteInput() {
         _classCallCheck(this, AwesompleteInput);
@@ -2083,19 +2112,19 @@ var AwesompleteInput = function (_React$Component15) {
     return AwesompleteInput;
 }(React.Component);
 
-var MasterModalField = function (_React$Component16) {
-    _inherits(MasterModalField, _React$Component16);
+var MasterModalField = function (_React$Component17) {
+    _inherits(MasterModalField, _React$Component17);
 
     function MasterModalField() {
         _classCallCheck(this, MasterModalField);
 
-        var _this21 = _possibleConstructorReturn(this, (MasterModalField.__proto__ || Object.getPrototypeOf(MasterModalField)).call(this));
+        var _this22 = _possibleConstructorReturn(this, (MasterModalField.__proto__ || Object.getPrototypeOf(MasterModalField)).call(this));
 
-        _this21.state = {
+        _this22.state = {
 
             value: ''
         };
-        return _this21;
+        return _this22;
     }
 
     _createClass(MasterModalField, [{
@@ -2371,8 +2400,8 @@ var MasterModalField = function (_React$Component16) {
     return MasterModalField;
 }(React.Component);
 
-var MasterModalTable = function (_React$Component17) {
-    _inherits(MasterModalTable, _React$Component17);
+var MasterModalTable = function (_React$Component18) {
+    _inherits(MasterModalTable, _React$Component18);
 
     function MasterModalTable() {
         _classCallCheck(this, MasterModalTable);
@@ -2500,8 +2529,8 @@ var MasterModalTable = function (_React$Component17) {
     return MasterModalTable;
 }(React.Component);
 
-var MasterModalTableBodyAdded = function (_React$Component18) {
-    _inherits(MasterModalTableBodyAdded, _React$Component18);
+var MasterModalTableBodyAdded = function (_React$Component19) {
+    _inherits(MasterModalTableBodyAdded, _React$Component19);
 
     function MasterModalTableBodyAdded() {
         _classCallCheck(this, MasterModalTableBodyAdded);
@@ -2533,8 +2562,8 @@ var MasterModalTableBodyAdded = function (_React$Component18) {
     return MasterModalTableBodyAdded;
 }(React.Component);
 
-var MasterModalTableBodyAddedTotal = function (_React$Component19) {
-    _inherits(MasterModalTableBodyAddedTotal, _React$Component19);
+var MasterModalTableBodyAddedTotal = function (_React$Component20) {
+    _inherits(MasterModalTableBodyAddedTotal, _React$Component20);
 
     function MasterModalTableBodyAddedTotal() {
         _classCallCheck(this, MasterModalTableBodyAddedTotal);
@@ -2561,8 +2590,8 @@ var MasterModalTableBodyAddedTotal = function (_React$Component19) {
     return MasterModalTableBodyAddedTotal;
 }(React.Component);
 
-var MasterModalTableBody = function (_React$Component20) {
-    _inherits(MasterModalTableBody, _React$Component20);
+var MasterModalTableBody = function (_React$Component21) {
+    _inherits(MasterModalTableBody, _React$Component21);
 
     function MasterModalTableBody() {
         _classCallCheck(this, MasterModalTableBody);
@@ -2675,31 +2704,31 @@ var MasterModalTableBody = function (_React$Component20) {
     return MasterModalTableBody;
 }(React.Component);
 
-var Detail = function (_React$Component21) {
-    _inherits(Detail, _React$Component21);
+var Detail = function (_React$Component22) {
+    _inherits(Detail, _React$Component22);
 
     function Detail() {
         _classCallCheck(this, Detail);
 
-        var _this26 = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this));
+        var _this27 = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this));
 
-        _this26.state = {
+        _this27.state = {
             showModal: false,
             filterText: '',
             detailData: []
         };
-        return _this26;
+        return _this27;
     }
 
     _createClass(Detail, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this27 = this;
+            var _this28 = this;
 
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this27.setState({
+                _this28.setState({
 
                     detailData: responseData
                 });
@@ -2866,8 +2895,8 @@ var Detail = function (_React$Component21) {
     return Detail;
 }(React.Component);
 
-var DetailSearch = function (_React$Component22) {
-    _inherits(DetailSearch, _React$Component22);
+var DetailSearch = function (_React$Component23) {
+    _inherits(DetailSearch, _React$Component23);
 
     function DetailSearch() {
         _classCallCheck(this, DetailSearch);
@@ -2959,21 +2988,21 @@ var DetailSearch = function (_React$Component22) {
     return DetailSearch;
 }(React.Component);
 
-var DetailTable = function (_React$Component23) {
-    _inherits(DetailTable, _React$Component23);
+var DetailTable = function (_React$Component24) {
+    _inherits(DetailTable, _React$Component24);
 
     function DetailTable() {
         _classCallCheck(this, DetailTable);
 
-        var _this29 = _possibleConstructorReturn(this, (DetailTable.__proto__ || Object.getPrototypeOf(DetailTable)).call(this));
+        var _this30 = _possibleConstructorReturn(this, (DetailTable.__proto__ || Object.getPrototypeOf(DetailTable)).call(this));
 
-        _this29.state = {
+        _this30.state = {
             todos: [{ id: '123', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }, { id: '454758778052139', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }],
             currentPage: 1,
             todosPerPage: 3
         };
-        _this29.handleClick = _this29.handleClick.bind(_this29);
-        return _this29;
+        _this30.handleClick = _this30.handleClick.bind(_this30);
+        return _this30;
     }
 
     _createClass(DetailTable, [{
@@ -2986,10 +3015,10 @@ var DetailTable = function (_React$Component23) {
     }, {
         key: 'render',
         value: function render() {
-            var _this30 = this;
+            var _this31 = this;
 
             var filteredTable = this.props.detailData.filter(function (detail) {
-                return detail.name.indexOf(_this30.props.filterText) !== -1;
+                return detail.name.indexOf(_this31.props.filterText) !== -1;
             });
 
             var _state2 = this.state,
@@ -3015,7 +3044,7 @@ var DetailTable = function (_React$Component23) {
                     {
                         key: number,
                         id: number,
-                        onClick: _this30.handleClick
+                        onClick: _this31.handleClick
                     },
                     React.createElement(
                         'a',
@@ -3076,7 +3105,7 @@ var DetailTable = function (_React$Component23) {
 
                                 environment: todo.environment,
 
-                                detailCallback: _this30.props.detailCallback
+                                detailCallback: _this31.props.detailCallback
                             });
                         })
                     )
@@ -3179,7 +3208,7 @@ var DetailTable = function (_React$Component23) {
 
                                 environment: todo.environment,
 
-                                detailCallback: _this30.props.detailCallback
+                                detailCallback: _this31.props.detailCallback
                             });
                         })
                     )
@@ -3250,22 +3279,22 @@ var DetailTable = function (_React$Component23) {
     return DetailTable;
 }(React.Component);
 
-var DetailModalUpdate = function (_React$Component24) {
-    _inherits(DetailModalUpdate, _React$Component24);
+var DetailModalUpdate = function (_React$Component25) {
+    _inherits(DetailModalUpdate, _React$Component25);
 
     function DetailModalUpdate() {
         _classCallCheck(this, DetailModalUpdate);
 
-        var _this31 = _possibleConstructorReturn(this, (DetailModalUpdate.__proto__ || Object.getPrototypeOf(DetailModalUpdate)).call(this));
+        var _this32 = _possibleConstructorReturn(this, (DetailModalUpdate.__proto__ || Object.getPrototypeOf(DetailModalUpdate)).call(this));
 
-        _this31.state = {
+        _this32.state = {
 
             parameter: '',
             showModal: true,
             detailData: []
         };
 
-        return _this31;
+        return _this32;
     }
 
     _createClass(DetailModalUpdate, [{
@@ -3291,12 +3320,12 @@ var DetailModalUpdate = function (_React$Component24) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this32 = this;
+            var _this33 = this;
 
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this32.setState({
+                _this33.setState({
 
                     detailData: responseData
                 });
@@ -3312,14 +3341,14 @@ var DetailModalUpdate = function (_React$Component24) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this33 = this;
+            var _this34 = this;
 
             event.preventDefault();
 
             var nextState = this.state.detailData;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this33.state.parameter;
+                return x.id == _this34.state.parameter;
             });
 
             nextState[index].item = event.target.item.value;
@@ -3344,12 +3373,12 @@ var DetailModalUpdate = function (_React$Component24) {
     }, {
         key: 'render',
         value: function render() {
-            var _this34 = this;
+            var _this35 = this;
 
             var nextState = this.state.detailData;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this34.state.parameter;
+                return x.id == _this35.state.parameter;
             });
 
             var name = void 0;
@@ -3476,8 +3505,8 @@ var DetailModalUpdate = function (_React$Component24) {
     return DetailModalUpdate;
 }(React.Component);
 
-var DetailTableBody = function (_React$Component25) {
-    _inherits(DetailTableBody, _React$Component25);
+var DetailTableBody = function (_React$Component26) {
+    _inherits(DetailTableBody, _React$Component26);
 
     function DetailTableBody() {
         _classCallCheck(this, DetailTableBody);
@@ -3537,8 +3566,8 @@ var DetailTableBody = function (_React$Component25) {
     return DetailTableBody;
 }(React.Component);
 
-var DetailModal = function (_React$Component26) {
-    _inherits(DetailModal, _React$Component26);
+var DetailModal = function (_React$Component27) {
+    _inherits(DetailModal, _React$Component27);
 
     function DetailModal() {
         _classCallCheck(this, DetailModal);
@@ -3774,33 +3803,33 @@ var DetailModal = function (_React$Component26) {
     return DetailModal;
 }(React.Component);
 
-var Partials = function (_React$Component27) {
-    _inherits(Partials, _React$Component27);
+var Partials = function (_React$Component28) {
+    _inherits(Partials, _React$Component28);
 
     function Partials() {
         _classCallCheck(this, Partials);
 
-        var _this37 = _possibleConstructorReturn(this, (Partials.__proto__ || Object.getPrototypeOf(Partials)).call(this));
+        var _this38 = _possibleConstructorReturn(this, (Partials.__proto__ || Object.getPrototypeOf(Partials)).call(this));
 
-        _this37.state = {
+        _this38.state = {
 
             masterAPI: [],
             searchData: '2017-10-06',
             total: 0
         };
 
-        return _this37;
+        return _this38;
     }
 
     _createClass(Partials, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this38 = this;
+            var _this39 = this;
 
             fetch(API_URL + '/reporte', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this38.setState({
+                _this39.setState({
 
                     masterAPI: responseData
                 });
@@ -3827,10 +3856,10 @@ var Partials = function (_React$Component27) {
     }, {
         key: 'onRun',
         value: function onRun() {
-            var _this39 = this;
+            var _this40 = this;
 
             var nextState = this.state.masterAPI.filter(function (master) {
-                return master.date == _this39.state.searchData;
+                return master.date == _this40.state.searchData;
             });
 
             var grand = 0;
@@ -3849,7 +3878,7 @@ var Partials = function (_React$Component27) {
     }, {
         key: 'render',
         value: function render() {
-            var _this40 = this;
+            var _this41 = this;
 
             var PartialsEN = React.createElement(
                 'h1',
@@ -3894,7 +3923,7 @@ var Partials = function (_React$Component27) {
                     React.createElement(PartialsTable, {
 
                         masterAPI: this.state.masterAPI.filter(function (master) {
-                            return master.date == _this40.state.searchData;
+                            return master.date == _this41.state.searchData;
                         }),
                         total: this.state.total
                     })
@@ -3915,8 +3944,8 @@ var Partials = function (_React$Component27) {
     return Partials;
 }(React.Component);
 
-var PartialsSearch = function (_React$Component28) {
-    _inherits(PartialsSearch, _React$Component28);
+var PartialsSearch = function (_React$Component29) {
+    _inherits(PartialsSearch, _React$Component29);
 
     function PartialsSearch() {
         _classCallCheck(this, PartialsSearch);
@@ -3953,8 +3982,8 @@ var PartialsSearch = function (_React$Component28) {
     return PartialsSearch;
 }(React.Component);
 
-var PartialsTable = function (_React$Component29) {
-    _inherits(PartialsTable, _React$Component29);
+var PartialsTable = function (_React$Component30) {
+    _inherits(PartialsTable, _React$Component30);
 
     function PartialsTable() {
         _classCallCheck(this, PartialsTable);
@@ -3965,7 +3994,7 @@ var PartialsTable = function (_React$Component29) {
     _createClass(PartialsTable, [{
         key: 'render',
         value: function render() {
-            var _this43 = this;
+            var _this44 = this;
 
             var partialsTableEN = React.createElement(
                 'tr',
@@ -4057,7 +4086,7 @@ var PartialsTable = function (_React$Component29) {
                                     date: master.date,
                                     name: master.name,
                                     project: master.project,
-                                    total: _this43.props.total
+                                    total: _this44.props.total
                                 });
                             })
                         ),
@@ -4104,8 +4133,8 @@ var PartialsTable = function (_React$Component29) {
     return PartialsTable;
 }(React.Component);
 
-var PartialsTableBody = function (_React$Component30) {
-    _inherits(PartialsTableBody, _React$Component30);
+var PartialsTableBody = function (_React$Component31) {
+    _inherits(PartialsTableBody, _React$Component31);
 
     function PartialsTableBody() {
         _classCallCheck(this, PartialsTableBody);

@@ -5,6 +5,7 @@ const Link = ReactRouter.Link;
 const browserHistory = ReactRouter.browserHistory ;
 
 const Button = ReactBootstrap.Button;
+const Label = ReactBootstrap.Label;
 const Modal = ReactBootstrap.Modal;
 const Nav = ReactBootstrap.Nav;
 const Navbar = ReactBootstrap.Navbar;
@@ -787,8 +788,6 @@ class Master extends React.Component{
                 
                 newStateDetailAdded.push(newItemAdded); 
                 
-                    //console.log(this.state.temp);
-                    
                     this.setState({
 
                         detailAdded: newStateDetailAdded
@@ -799,14 +798,10 @@ class Master extends React.Component{
                     
                     temp: event.target.suggest.value
                 });
-                                
-                console.log(this.state.temp);
-                
-                console.log(this.state.temp+ ' ' +event.target.suggest.value);
-                
+                                                
                 temp = event.target.suggest.value;
                   
-                if(temp!=event.target.suggest.value){
+                if(this.state.temp!=event.target.suggest.value){
                     newStateDetailAdded = [];
                     this.setState({
                        detailAdded: []
@@ -892,6 +887,8 @@ class Master extends React.Component{
 
 
     render(){
+        
+        console.log(this.state.detailAdded);
 
         let ModalButtonEN = (
 
@@ -956,19 +953,16 @@ onhandleuserinput:this.onHandleUserInput.bind(this)
                             <MasterModal
 
 
-masterDetail={this.state.masterDetail}
-detail={this.state.detail}
+                                            detailAdded={this.state.detailAdded}
+                                            masterDetail={this.state.masterDetail}
+                                            detail={this.state.detail}
                                             showModal={this.state.showModal}
                                             open={this.open}
                                             close={this.close.bind(this)}
                                             masterCallback = {{
-
-
-onsavedetail:this.onSaveDetail.bind(this),
-                                                              
-onsavedetailadded:this.onSaveDetailAdded.bind(this),
-
-onsavemaster:this.onSaveMaster.bind(this)
+                                                                    onsavedetail:this.onSaveDetail.bind(this),
+                                                                    onsavedetailadded:this.onSaveDetailAdded.bind(this),
+                                                                    onsavemaster:this.onSaveMaster.bind(this)
                                             }}
                             />
                         </div>
@@ -1290,6 +1284,11 @@ class MasterModal extends React.Component{
                                             masterCallback={this.props.masterCallback}
                         />
                         <br/>
+                        {this.props.detailAdded.map(
+                            (added) => <MasterModalLabel 
+                                                name={added.name}                                                
+                                        />
+                        )}
                         <MasterModalTable
 
 masterDetail={this.props.masterDetail }
@@ -1302,6 +1301,17 @@ masterCallback={this.props.masterCallback}
                   </Modal.Body>
                 </Modal>
               </div>
+        );
+    }
+}
+
+class MasterModalLabel extends React.Component{
+    
+    render(){
+        
+        return(
+        
+            <span><Label bsStyle="warning">{this.props.name}</Label>&nbsp;</span>
         );
     }
 }
