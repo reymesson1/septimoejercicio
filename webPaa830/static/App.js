@@ -1114,7 +1114,8 @@ var Master = function (_React$Component9) {
             masterDetail: [],
             detail: [],
             detailData: [],
-            detailAdded: []
+            detailAdded: [],
+            temp: ''
         };
         return _this12;
     }
@@ -1252,19 +1253,48 @@ var Master = function (_React$Component9) {
 
             var newStateDetailAdded = [];
 
+            var temp = void 0;
+
             if (project) {
 
                 newStateDetailAdded = this.state.detailAdded;
 
                 if (category == 'colores' || category == 'propiedades') {
 
-                    newStateDetailAdded.push({ "name": articulo, "project": project });
+                    var newItemAdded = {
+
+                        "name": articulo,
+                        "project": project
+
+                    };
+
+                    newStateDetailAdded.push(newItemAdded);
+
+                    //console.log(this.state.temp);
 
                     this.setState({
 
                         detailAdded: newStateDetailAdded
                     });
                 } else if (category == 'servicio') {
+
+                    this.setState({
+
+                        temp: event.target.suggest.value
+                    });
+
+                    console.log(this.state.temp);
+
+                    console.log(this.state.temp + ' ' + event.target.suggest.value);
+
+                    temp = event.target.suggest.value;
+
+                    if (temp != event.target.suggest.value) {
+                        newStateDetailAdded = [];
+                        this.setState({
+                            detailAdded: []
+                        });
+                    }
 
                     project = project * parseInt(event.target.quantity.value);
 

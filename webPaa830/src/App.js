@@ -633,7 +633,8 @@ class Master extends React.Component{
             masterDetail: [],
             detail:[],
             detailData:[],
-            detailAdded: []
+            detailAdded: [],
+            temp: ''
         };
     }
 
@@ -767,22 +768,51 @@ class Master extends React.Component{
 
         let newItem;
         
-        let newStateDetailAdded = [];           
+        let newStateDetailAdded = [];   
+        
+        let temp;
         
         if(project){
-            
+                        
             newStateDetailAdded = this.state.detailAdded;
             
             if(category=='colores'||category=='propiedades'){
                 
-                newStateDetailAdded.push({"name":articulo,"project":project}); 
+                let newItemAdded = {
+                    
+                        "name":articulo,
+                        "project":project
+                    
+                }
                 
+                newStateDetailAdded.push(newItemAdded); 
+                
+                    //console.log(this.state.temp);
+                    
+                    this.setState({
+
+                        detailAdded: newStateDetailAdded
+                    });
+            }else if(category=='servicio'){
+                 
                 this.setState({
                     
-                    detailAdded: newStateDetailAdded
+                    temp: event.target.suggest.value
                 });
-            }else if(category=='servicio'){
-                       
+                                
+                console.log(this.state.temp);
+                
+                console.log(this.state.temp+ ' ' +event.target.suggest.value);
+                
+                temp = event.target.suggest.value;
+                  
+                if(temp!=event.target.suggest.value){
+                    newStateDetailAdded = [];
+                    this.setState({
+                       detailAdded: []
+                   });
+                }
+                
                 
                 project=project*parseInt(event.target.quantity.value)
                 
