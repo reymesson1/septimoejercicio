@@ -5282,22 +5282,518 @@ var Customer = function (_React$Component45) {
     function Customer() {
         _classCallCheck(this, Customer);
 
-        return _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).apply(this, arguments));
+        var _this63 = _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).call(this));
+
+        _this63.state = {
+
+            showModal: false,
+            customerAPI: []
+        };
+        return _this63;
     }
 
     _createClass(Customer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this64 = this;
+
+            fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this64.setState({
+
+                    customerAPI: responseData
+                });
+            });
+
+            this.setState({
+
+                parameter: this.props.params.mainactionid
+            });
+        }
+    }, {
+        key: 'close',
+        value: function close() {
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'open',
+        value: function open() {
+
+            this.setState({
+
+                showModal: true
+            });
+        }
+    }, {
+        key: 'onSaveCustomer',
+        value: function onSaveCustomer(event) {
+
+            event.preventDefault();
+
+            var newCustomer = {
+
+                "id": Date.now(),
+                "name": event.target.nombre.value,
+                "apellido": event.target.apellido.value,
+                "telefono": event.target.telefono.value,
+                "rnc": event.target.rnc.value,
+                "fechacumpleano": event.target.fechacumpleano.value,
+                "facebook": event.target.facebook.value,
+                "correoelectronico": event.target.correoelectronico.value
+
+            };
+
+            fetch(API_URL + '/customer', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newCustomer)
+            });
+
+            var nextState = this.state.customerAPI;
+
+            nextState.push(newCustomer);
+
+            this.setState({
+
+                customerAPI: nextState
+            });
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             return React.createElement(
-                'h1',
+                'div',
                 null,
-                'Customer'
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(CustomerSearch, null)
+                ),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'pull-right' },
+                        React.createElement(
+                            Button,
+                            { onClick: this.open.bind(this) },
+                            'Agregar Cliente'
+                        ),
+                        React.createElement(CustomerModal, {
+                            showModal: this.state.showModal,
+                            customerCallback: {
+                                open: this.open.bind(this),
+                                close: this.close.bind(this),
+                                onsavecustomer: this.onSaveCustomer.bind(this)
+                            }
+                        })
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(CustomerTable, {
+                        customer: this.state.customerAPI
+                    })
+                )
             );
         }
     }]);
 
     return Customer;
+}(React.Component);
+
+var CustomerTable = function (_React$Component46) {
+    _inherits(CustomerTable, _React$Component46);
+
+    function CustomerTable() {
+        _classCallCheck(this, CustomerTable);
+
+        return _possibleConstructorReturn(this, (CustomerTable.__proto__ || Object.getPrototypeOf(CustomerTable)).apply(this, arguments));
+    }
+
+    _createClass(CustomerTable, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Panel,
+                { header: 'Listado de Cliente' },
+                React.createElement(
+                    Table,
+                    { striped: true, bordered: true, condensed: true, hover: true },
+                    React.createElement(
+                        'thead',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'th',
+                                null,
+                                '#'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Nombre'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Apellido'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Telefono'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'RNC'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Fecha Cumplea\xF1o'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Facebook'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Correo Electrico'
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'tbody',
+                        null,
+                        this.props.customer.map(function (cliente, index) {
+                            return React.createElement(CustomerTablebody, {
+                                key: index,
+                                index: index,
+                                id: cliente.id,
+                                name: cliente.name,
+                                apellido: cliente.apellido,
+                                telefono: cliente.telefono,
+                                rnc: cliente.rnc,
+                                fechacumpleano: cliente.fechacumpleano,
+                                facebook: cliente.facebook,
+                                correoelectronico: cliente.correoelectronico
+                            });
+                        })
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CustomerTable;
+}(React.Component);
+
+var CustomerTablebody = function (_React$Component47) {
+    _inherits(CustomerTablebody, _React$Component47);
+
+    function CustomerTablebody() {
+        _classCallCheck(this, CustomerTablebody);
+
+        return _possibleConstructorReturn(this, (CustomerTablebody.__proto__ || Object.getPrototypeOf(CustomerTablebody)).apply(this, arguments));
+    }
+
+    _createClass(CustomerTablebody, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.id
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.name
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.apellido
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.telefono
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.rnc
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.fechacumpleano
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.facebook
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.correoelectronico
+                )
+            );
+        }
+    }]);
+
+    return CustomerTablebody;
+}(React.Component);
+
+var CustomerSearch = function (_React$Component48) {
+    _inherits(CustomerSearch, _React$Component48);
+
+    function CustomerSearch() {
+        _classCallCheck(this, CustomerSearch);
+
+        return _possibleConstructorReturn(this, (CustomerSearch.__proto__ || Object.getPrototypeOf(CustomerSearch)).apply(this, arguments));
+    }
+
+    _createClass(CustomerSearch, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Panel,
+                { header: 'Busqueda de cliente' },
+                React.createElement(
+                    Form,
+                    { horizontal: true },
+                    React.createElement(
+                        FormGroup,
+                        { controlId: 'formHorizontalEmail' },
+                        React.createElement(
+                            Col,
+                            { componentClass: ControlLabel, sm: 2 },
+                            'Buscar'
+                        ),
+                        React.createElement(
+                            Col,
+                            { sm: 10 },
+                            React.createElement(FormControl, { type: 'text', placeholder: 'Buscar' })
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CustomerSearch;
+}(React.Component);
+
+var CustomerModal = function (_React$Component49) {
+    _inherits(CustomerModal, _React$Component49);
+
+    function CustomerModal() {
+        _classCallCheck(this, CustomerModal);
+
+        return _possibleConstructorReturn(this, (CustomerModal.__proto__ || Object.getPrototypeOf(CustomerModal)).apply(this, arguments));
+    }
+
+    _createClass(CustomerModal, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Modal,
+                { show: this.props.showModal, onHide: this.props.customerCallback.close },
+                React.createElement(
+                    Modal.Header,
+                    { closeButton: true },
+                    React.createElement(
+                        Modal.Title,
+                        null,
+                        'Agregar Cliente'
+                    )
+                ),
+                React.createElement(
+                    Form,
+                    { horizontal: true, onSubmit: this.props.customerCallback.onsavecustomer.bind(this) },
+                    React.createElement(
+                        Modal.Body,
+                        null,
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Nombre'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'nombre', type: 'text', placeholder: 'Nombre' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Apellido'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'apellido', type: 'text', placeholder: 'Apellido' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Telefono'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'telefono', type: 'text', placeholder: 'Telefono' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'RNC'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'rnc', type: 'text', placeholder: 'RNC' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Fecha de Cumplea\xF1os'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'fechacumpleano', type: 'date', placeholder: 'Fecha de Cumplea\xF1os' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Facebook'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'facebook', type: 'text', placeholder: 'Facebook' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Correo Electronico'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'correoelectronico', type: 'text', placeholder: 'Correo Electrico' })
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Modal.Footer,
+                        null,
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(
+                                    Button,
+                                    { type: 'submit' },
+                                    'Guardar'
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CustomerModal;
 }(React.Component);
 
 ReactDOM.render(React.createElement(

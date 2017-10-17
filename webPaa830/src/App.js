@@ -3360,11 +3360,301 @@ show={this.props.showModal}>
 
 class Customer extends React.Component{
     
+    constructor(){
+        
+        super();
+        this.state = {
+            
+            showModal: false,
+            customerAPI: []
+        }
+    }
+    
+    componentDidMount(){
+
+        fetch(API_URL+'/customer',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  customerAPI: responseData
+              })
+        })
+
+        this.setState({
+
+            parameter: this.props.params.mainactionid
+        })
+    }
+
+    
+    close(){
+        
+        this.setState({
+            
+            showModal: false
+        });
+    }
+    
+    open(){
+        
+        this.setState({
+            
+            showModal: true
+        });
+    }
+    
+    onSaveCustomer(event){
+        
+        event.preventDefault();
+
+        let newCustomer = {
+            
+            "id": Date.now(),
+            "name": event.target.nombre.value,
+            "apellido": event.target.apellido.value,
+            "telefono": event.target.telefono.value,
+            "rnc": event.target.rnc.value,
+            "fechacumpleano":event.target.fechacumpleano.value,
+            "facebook":event.target.facebook.value,
+            "correoelectronico":event.target.correoelectronico.value
+            
+            
+        }
+        
+      fetch(API_URL+'/customer', {
+
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify(newCustomer)
+      })
+    
+      let nextState = this.state.customerAPI;
+        
+      nextState.push(newCustomer);
+        
+      this.setState({
+          
+          customerAPI: nextState
+      })
+        
+      this.setState({
+          
+          showModal: false
+      });
+        
+    }
+    
     render(){
         
         return(
         
-            <h1>Customer</h1>
+            <div>
+                <Row>
+                    <CustomerSearch />
+                </Row>
+                <Row>
+                    <div className="pull-right">
+                        <Button onClick={this.open.bind(this)}>Agregar Cliente</Button>
+                        <CustomerModal 
+                                        showModal={this.state.showModal}
+                                        customerCallback={{
+                                                            open:this.open.bind(this),
+                                                            close:this.close.bind(this),
+                                                            onsavecustomer:this.onSaveCustomer.bind(this)
+                                        }}
+                        />
+                    </div>
+                </Row>     
+                <br/>
+                <Row>
+                    <CustomerTable
+                                    customer={this.state.customerAPI}
+                    />
+                </Row>
+            </div>
+        );
+    }
+}
+ 
+class CustomerTable extends React.Component{
+    
+    render(){
+        
+        return(
+        
+            <Panel header="Listado de Cliente">
+                <Table striped bordered condensed hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>RNC</th>
+                    <th>Fecha Cumpleaño</th>
+                    <th>Facebook</th>
+                    <th>Correo Electrico</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.props.customer.map(
+                    (cliente, index) =>  <CustomerTablebody
+                                                    key={index}
+                                                    index={index}
+                                                    id={cliente.id}
+                                                    name={cliente.name}
+                                                    apellido={cliente.apellido}
+                                                    telefono={cliente.telefono}
+                                                    rnc={cliente.rnc}
+                                                    fechacumpleano={cliente.fechacumpleano}
+                                                    facebook={cliente.facebook}
+                                                    correoelectronico={cliente.correoelectronico}
+                              />
+                )}
+                </tbody>
+              </Table>
+            </Panel>
+        );
+    }
+}
+
+class CustomerTablebody extends React.Component{
+    
+    render(){
+        return(
+        
+                  <tr>
+                    <td>{this.props.id}</td>
+                    <td>{this.props.name}</td>
+                    <td>{this.props.apellido}</td>
+                    <td>{this.props.telefono}</td>
+                    <td>{this.props.rnc}</td>
+                    <td>{this.props.fechacumpleano}</td>
+                    <td>{this.props.facebook}</td>
+                    <td>{this.props.correoelectronico}</td>
+                  </tr>
+
+        );
+    }
+}
+
+class CustomerSearch extends React.Component{
+    
+    render(){
+        
+        return(
+        
+            <Panel header="Busqueda de cliente">
+                  <Form horizontal>
+                    <FormGroup controlId="formHorizontalEmail">
+                      <Col componentClass={ControlLabel} sm={2}>
+                        Buscar
+                      </Col>
+                      <Col sm={10}>
+                        <FormControl type="text" placeholder="Buscar" />
+                      </Col>
+                    </FormGroup>
+                  </Form>
+            </Panel>
+        );
+    }
+}
+
+class CustomerModal extends React.Component{
+    
+    render(){
+        
+        return(
+        
+            <Modal show={this.props.showModal} onHide={this.props.customerCallback.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>Agregar Cliente</Modal.Title>
+              </Modal.Header>
+                    <Form horizontal onSubmit={this.props.customerCallback.onsavecustomer.bind(this)}>
+              <Modal.Body>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Nombre
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="nombre" type="text" placeholder="Nombre" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                                  <Col componentClass={ControlLabel} sm={2}>
+                                    Apellido
+                                  </Col>
+                                  <Col sm={9}>
+                                    <FormControl name="apellido" type="text" placeholder="Apellido" />
+                                  </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Telefono
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="telefono" type="text" placeholder="Telefono" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                RNC
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="rnc" type="text" placeholder="RNC" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Fecha de Cumpleaños
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="fechacumpleano" type="date" placeholder="Fecha de Cumpleaños" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Facebook
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="facebook" type="text" placeholder="Facebook" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Correo Electronico
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="correoelectronico" type="text" placeholder="Correo Electrico" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+              </Modal.Body>
+              <Modal.Footer>
+                        <Row>
+                            <Col sm={10}>
+                                <Button type="submit">Guardar</Button>
+                            </Col>
+
+                        </Row>
+              </Modal.Footer>
+                    </Form>
+
+            </Modal>
         );
     }
 }

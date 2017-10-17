@@ -27,7 +27,7 @@ app.post('/cookies', function(req,res){
     }
 });
 
-var list = [
+/*var list = [
 "Isabella",
 "Olivia",
 "Alexis",
@@ -228,11 +228,33 @@ var list = [
 "Matías",
 "Tomás",
 "Jairo"
-]
+]*/
+
+var customer = [];
+var list = [];
 
 app.get('/list',function(req,res){
-
+        
     res.send(list);
+})
+
+
+app.get('/customer',function(req,res){
+    
+    res.send(customer);
+    
+});
+
+app.post('/customer',function(req,res){
+    
+    customer.push(req.body);
+    
+    for(var x=0;x<customer.length;x++){
+        
+        list.push(customer[x].name+' '+customer[x].apellido+' '+customer[x].telefono);
+    }
+    
+    res.send(req.body);
 })
 
 var master = [
