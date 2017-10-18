@@ -251,7 +251,7 @@ app.post('/customer',function(req,res){
     
     for(var x=0;x<customer.length;x++){
         
-        list.push(customer[x].name+' '+customer[x].apellido+' '+customer[x].telefono);
+        list.push(customer[x].name+' '+customer[x].apellido);
     }
     
     res.send(req.body);
@@ -319,7 +319,7 @@ app.get('/master', function(req,res){
             (pending) => pending.status.indexOf('pending') !== -1
     )
 
-    res.send(filteredTable);
+    res.send(master);
 })
 
 app.get('/main', function(req,res){
@@ -431,6 +431,22 @@ app.post('/updatedelivery',function(req,res){
 app.post('/loader',function(req,res){
     console.log(req.body)
     res.send(req.body);
+});
+
+app.post('/payment',function(req,res){
+    
+    var newPago = req.body
+    
+    var index = master.findIndex(x=> x.id==newPago.id);
+    
+    master[index].balance = newPago.balance;
+    master[index].current = newPago.current;
+    master[index].pending = newPago.pending;
+    master[index].tipopago = newPago.tipopago;
+    master[index].status = "Pagado";
+    
+    res.send('end')
+    console.log(newPago);
 })
 
 app.get('/logout',function(req,res){

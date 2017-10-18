@@ -7,6 +7,7 @@ const browserHistory = ReactRouter.browserHistory ;
 const Button = ReactBootstrap.Button;
 const Label = ReactBootstrap.Label;
 const ListGroup = ReactBootstrap.ListGroup;
+const Radio = ReactBootstrap.Radio;
 const ProgressBar = ReactBootstrap.ProgressBar;
 const ListGroupItem = ReactBootstrap.ListGroupItem;
 const Modal = ReactBootstrap.Modal;
@@ -1158,7 +1159,11 @@ class Master extends React.Component{
             "itbis": itbis,            
             "grandTotal": grandTotal,            
             "fechaentrega": days+' '+fechaentrega,            
-            "horaentrega": horaentrega,            
+            "horaentrega": horaentrega,
+            "balance": 0,
+            "pending": 0,
+            "current": 0,
+            "tipopago": "",
             "status":"pending"
         }
         
@@ -1671,6 +1676,7 @@ class MasterTableBody extends React.Component{
                     <td>
                         <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>&nbsp;&nbsp;
                         <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
+                        <Link className="btn btn-default" to={'/payment/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                         <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                     </td>
@@ -3246,8 +3252,8 @@ class PartialsTable extends React.Component{
 'border-spacing':'0 30px'}}>#</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Fecha</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Cliente</th>
-                <th style={{'width':'15px',
-'font-size':'25px'}}>Precio</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>Precio</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>TP</th>
               </tr>
         );
 
@@ -3282,6 +3288,7 @@ style={{'width':'55%'}}>
                                                 name={master.name}
                                                 project={master.project}
                                                 grandTotal={master.grandTotal}
+                                                tipopago={master.tipopago}
                                                 total={this.props.total}
                                     />
             )}
@@ -3318,9 +3325,9 @@ class PartialsTableBody extends React.Component{
               <tr>
                 <td></td>
                 <td style={{'font-size':'20px'}}>{this.props.date}</td>
-                <td
-style={{'font-size':'20px'}}>{this.props.name}</td>
+                <td style={{'font-size':'20px'}}>{this.props.name}</td>
                 <td style={{'font-size':'20px'}}>{this.props.grandTotal}.00</td>
+                <td style={{'font-size':'20px'}}>{this.props.tipopago.toUpperCase().substring(0,1)}</td>
               </tr>
         );
     }
@@ -3865,6 +3872,188 @@ class UpdateDelivery extends React.Component{
     }
 }
 
+class Payment extends React.Component{
+    
+        constructor(){
+        
+        super();
+        this.state = {
+            
+            showModal:true,
+            parameter: 0,
+            masterAPI: [],
+            balance: 0,
+            pendiente: 0,
+            actual: 0
+        }
+    }
+    
+    close(){
+        
+        this.setState({
+            
+            showModal: false
+        });
+    }
+    
+    componentDidMount(){
+
+          fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  masterAPI: responseData
+              })
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+        
+          this.setState({
+              
+              parameter: this.props.params.paymentid
+          });
+
+    }
+    
+    onSubmitted(event){
+        
+        event.preventDefault();
+        
+        let nextState = this.state.masterAPI;
+        
+        let index = nextState.findIndex(x=> x.id==this.state.parameter);
+        
+        let newUpdate = {
+            
+            "index":index,
+            "fechaentrega": event.target.fechaentrega.value
+        }
+    }
+    
+    close(){
+        
+        this.setState({
+            
+            showModal: false
+        });
+    }
+    
+    onChanged(event){
+        
+        console.log(event.target.value);
+        this.setState({
+            pendiente: event.target.value
+        });
+    }
+    
+    onSubmitted(event){
+        
+        event.preventDefault();
+        
+        console.log(event.target.current.value);
+        console.log(event.target.pending.value);
+        console.log(event.target.radioGroup.value);
+        
+        console.log(this.state.parameter);
+        
+        let newPago = {
+            
+            "id": this.state.parameter,
+            "balance": event.target.balance.value,
+            "current": event.target.current.value,
+            "pending": event.target.pending.value,
+            "tipopago": event.target.radioGroup.value
+        }
+        
+        fetch(API_URL+'/payment', {
+
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify(newPago)
+      })
+        
+        
+        this.setState({
+            
+            showModal: false
+        });
+    }
+
+    
+    render(){
+        
+        let nextState = this.state.masterAPI;
+        
+        let index = nextState.findIndex(x=> x.id==this.state.parameter);        
+        
+        let balance = 0;
+        
+        let pendiente = 0;
+        
+        if(nextState[index]){
+        
+            balance = nextState[index].grandTotal
+            pendiente = nextState[index].grandTotal - parseInt(this.state.pendiente)
+        }
+        
+        
+        
+        return(
+        
+            <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Proceso de Pago | Orden No. {this.props.params.paymentid}</Modal.Title>                        
+              </Modal.Header>
+              <Modal.Body>
+                <Form horizontal onSubmit={this.onSubmitted.bind(this)}>
+                    <FormGroup controlId="formHorizontalEmail">
+                      <br/>
+                      <Row>
+                          <Col sm={4}>
+                            <label>Balance</label>
+                            <FormControl name="balance" type="number" value={balance.toFixed(2)} placeholder="Balance" disabled/>
+                          </Col>                    
+                          <Col sm={4}>
+                            <label>Actual</label>
+                            <FormControl name="current" onChange={this.onChanged.bind(this)} type="number" placeholder="Actual" />
+                          </Col>                    
+                          <Col sm={4}>
+                            <label>Pendiente</label>
+                            <FormControl name="pending" value={pendiente.toFixed(2)} type="number" placeholder="Pendiente" disabled/>
+                          </Col>                                          
+                      </Row>
+                      <br/>
+                      <Row>
+                            <Col smOffset={4}>
+                             <FormGroup>
+                                  <Radio value="tarjeta" name="radioGroup" inline>
+                                    <h1><i className="fa fa-cc-visa" aria-hidden="true"></i></h1>
+                                  </Radio>
+                                  {' '}
+                                  <Radio value="efectivo" name="radioGroup" inline>
+                                    <h1><i className="fa fa-money" aria-hidden="true"></i></h1>
+                                  </Radio>
+                                  {' '}
+                                  <Radio value="cheque" name="radioGroup" inline>
+                                    <h1><i className="fa fa-pencil-square-o" aria-hidden="true"></i></h1>
+                                  </Radio>
+                            </FormGroup>
+                            </Col>
+                      </Row>
+                        <Button type="submit">Guardar</Button>
+                    </FormGroup>
+                </Form>
+              </Modal.Body>
+            </Modal>
+
+            
+        );
+    }
+}
+
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -3874,6 +4063,7 @@ ReactDOM.render((
         <Route path="updatedetail/:detailid" component={DetailModalUpdate}/>
         <Route path="mainactions/:mainactionid" component={MainActions}/>
         <Route path="updatedelivery/:deliveryid" component={UpdateDelivery}/>
+        <Route path="payment/:paymentid" component={Payment}/>
         <Route path="actions/:actionid" component={Actions}/>
         <Route path="detail" component={Detail}/>
         <Route path="master" component={Master}/>

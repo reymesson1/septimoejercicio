@@ -19,6 +19,7 @@ var browserHistory = ReactRouter.browserHistory;
 var Button = ReactBootstrap.Button;
 var Label = ReactBootstrap.Label;
 var ListGroup = ReactBootstrap.ListGroup;
+var Radio = ReactBootstrap.Radio;
 var ProgressBar = ReactBootstrap.ProgressBar;
 var ListGroupItem = ReactBootstrap.ListGroupItem;
 var Modal = ReactBootstrap.Modal;
@@ -1932,6 +1933,10 @@ var Master = function (_React$Component17) {
                 "grandTotal": grandTotal,
                 "fechaentrega": days + ' ' + fechaentrega,
                 "horaentrega": horaentrega,
+                "balance": 0,
+                "pending": 0,
+                "current": 0,
+                "tipopago": "",
                 "status": "pending"
             };
 
@@ -2633,6 +2638,12 @@ var MasterTableBody = function (_React$Component20) {
                         Link,
                         { className: 'btn btn-default', to: '/updatedelivery/' + this.props.id },
                         React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
+                    ),
+                    '\xA0\xA0',
+                    React.createElement(
+                        Link,
+                        { className: 'btn btn-default', to: '/payment/' + this.props.id },
+                        React.createElement('i', { className: 'fa fa-dollar', 'aria-hidden': 'true' })
                     ),
                     '\xA0\xA0',
                     React.createElement(
@@ -5025,9 +5036,13 @@ var PartialsTable = function (_React$Component39) {
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px',
-                            'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '25px' } },
                     'Precio'
+                ),
+                React.createElement(
+                    'th',
+                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    'TP'
                 )
             );
 
@@ -5068,6 +5083,7 @@ var PartialsTable = function (_React$Component39) {
                                     name: master.name,
                                     project: master.project,
                                     grandTotal: master.grandTotal,
+                                    tipopago: master.tipopago,
                                     total: _this57.props.total
                                 });
                             })
@@ -5139,8 +5155,7 @@ var PartialsTableBody = function (_React$Component40) {
                 ),
                 React.createElement(
                     'td',
-                    {
-                        style: { 'font-size': '20px' } },
+                    { style: { 'font-size': '20px' } },
                     this.props.name
                 ),
                 React.createElement(
@@ -5148,6 +5163,11 @@ var PartialsTableBody = function (_React$Component40) {
                     { style: { 'font-size': '20px' } },
                     this.props.grandTotal,
                     '.00'
+                ),
+                React.createElement(
+                    'td',
+                    { style: { 'font-size': '20px' } },
+                    this.props.tipopago.toUpperCase().substring(0, 1)
                 )
             );
         }
@@ -6047,6 +6067,261 @@ var UpdateDelivery = function (_React$Component50) {
     return UpdateDelivery;
 }(React.Component);
 
+var Payment = function (_React$Component51) {
+    _inherits(Payment, _React$Component51);
+
+    function Payment() {
+        _classCallCheck(this, Payment);
+
+        var _this72 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
+
+        _this72.state = {
+
+            showModal: true,
+            parameter: 0,
+            masterAPI: [],
+            balance: 0,
+            pendiente: 0,
+            actual: 0
+        };
+        return _this72;
+    }
+
+    _createClass(Payment, [{
+        key: 'close',
+        value: function close() {
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this73 = this;
+
+            fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this73.setState({
+
+                    masterAPI: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+
+            this.setState({
+
+                parameter: this.props.params.paymentid
+            });
+        }
+    }, {
+        key: 'onSubmitted',
+        value: function onSubmitted(event) {
+            var _this74 = this;
+
+            event.preventDefault();
+
+            var nextState = this.state.masterAPI;
+
+            var index = nextState.findIndex(function (x) {
+                return x.id == _this74.state.parameter;
+            });
+
+            var newUpdate = {
+
+                "index": index,
+                "fechaentrega": event.target.fechaentrega.value
+            };
+        }
+    }, {
+        key: 'close',
+        value: function close() {
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'onChanged',
+        value: function onChanged(event) {
+
+            console.log(event.target.value);
+            this.setState({
+                pendiente: event.target.value
+            });
+        }
+    }, {
+        key: 'onSubmitted',
+        value: function onSubmitted(event) {
+
+            event.preventDefault();
+
+            console.log(event.target.current.value);
+            console.log(event.target.pending.value);
+            console.log(event.target.radioGroup.value);
+
+            console.log(this.state.parameter);
+
+            var newPago = {
+
+                "id": this.state.parameter,
+                "balance": event.target.balance.value,
+                "current": event.target.current.value,
+                "pending": event.target.pending.value,
+                "tipopago": event.target.radioGroup.value
+            };
+
+            fetch(API_URL + '/payment', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newPago)
+            });
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this75 = this;
+
+            var nextState = this.state.masterAPI;
+
+            var index = nextState.findIndex(function (x) {
+                return x.id == _this75.state.parameter;
+            });
+
+            var balance = 0;
+
+            var pendiente = 0;
+
+            if (nextState[index]) {
+
+                balance = nextState[index].grandTotal;
+                pendiente = nextState[index].grandTotal - parseInt(this.state.pendiente);
+            }
+
+            return React.createElement(
+                Modal,
+                { show: this.state.showModal, onHide: this.close.bind(this) },
+                React.createElement(
+                    Modal.Header,
+                    { closeButton: true },
+                    React.createElement(
+                        Modal.Title,
+                        null,
+                        'Proceso de Pago | Orden No. ',
+                        this.props.params.paymentid
+                    )
+                ),
+                React.createElement(
+                    Modal.Body,
+                    null,
+                    React.createElement(
+                        Form,
+                        { horizontal: true, onSubmit: this.onSubmitted.bind(this) },
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalEmail' },
+                            React.createElement('br', null),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    Col,
+                                    { sm: 4 },
+                                    React.createElement(
+                                        'label',
+                                        null,
+                                        'Balance'
+                                    ),
+                                    React.createElement(FormControl, { name: 'balance', type: 'number', value: balance.toFixed(2), placeholder: 'Balance', disabled: true })
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 4 },
+                                    React.createElement(
+                                        'label',
+                                        null,
+                                        'Actual'
+                                    ),
+                                    React.createElement(FormControl, { name: 'current', onChange: this.onChanged.bind(this), type: 'number', placeholder: 'Actual' })
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 4 },
+                                    React.createElement(
+                                        'label',
+                                        null,
+                                        'Pendiente'
+                                    ),
+                                    React.createElement(FormControl, { name: 'pending', value: pendiente.toFixed(2), type: 'number', placeholder: 'Pendiente', disabled: true })
+                                )
+                            ),
+                            React.createElement('br', null),
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    Col,
+                                    { smOffset: 4 },
+                                    React.createElement(
+                                        FormGroup,
+                                        null,
+                                        React.createElement(
+                                            Radio,
+                                            { value: 'tarjeta', name: 'radioGroup', inline: true },
+                                            React.createElement(
+                                                'h1',
+                                                null,
+                                                React.createElement('i', { className: 'fa fa-cc-visa', 'aria-hidden': 'true' })
+                                            )
+                                        ),
+                                        ' ',
+                                        React.createElement(
+                                            Radio,
+                                            { value: 'efectivo', name: 'radioGroup', inline: true },
+                                            React.createElement(
+                                                'h1',
+                                                null,
+                                                React.createElement('i', { className: 'fa fa-money', 'aria-hidden': 'true' })
+                                            )
+                                        ),
+                                        ' ',
+                                        React.createElement(
+                                            Radio,
+                                            { value: 'cheque', name: 'radioGroup', inline: true },
+                                            React.createElement(
+                                                'h1',
+                                                null,
+                                                React.createElement('i', { className: 'fa fa-pencil-square-o', 'aria-hidden': 'true' })
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                Button,
+                                { type: 'submit' },
+                                'Guardar'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Payment;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -6059,6 +6334,7 @@ ReactDOM.render(React.createElement(
         React.createElement(Route, { path: 'updatedetail/:detailid', component: DetailModalUpdate }),
         React.createElement(Route, { path: 'mainactions/:mainactionid', component: MainActions }),
         React.createElement(Route, { path: 'updatedelivery/:deliveryid', component: UpdateDelivery }),
+        React.createElement(Route, { path: 'payment/:paymentid', component: Payment }),
         React.createElement(Route, { path: 'actions/:actionid', component: Actions }),
         React.createElement(Route, { path: 'detail', component: Detail }),
         React.createElement(Route, { path: 'master', component: Master }),
