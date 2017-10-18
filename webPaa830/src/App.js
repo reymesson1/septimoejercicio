@@ -332,12 +332,21 @@ class ActionsTableBodyFooter extends React.Component{
         let piezas = 0;
 
         let servicio;
+        
+        let fechaentrega;
+        
+        let horaentrega;
+        
+        let agregado;
 
         if(nextState[0]){
 
             zoom = nextState[0].project;
             items = nextState[0].item.length;
             servicio = nextState[0].item[0].development;
+            fechaentrega = nextState[0].fechaentrega;
+            horaentrega = nextState[0].horaentrega;
+            agregado = nextState[0].agregado;
 
             for(var x=0;x<nextState[0].item.length;x++){
 
@@ -350,6 +359,8 @@ class ActionsTableBodyFooter extends React.Component{
         itbis += ( 18 / 100) * this.props.added;
 
         let grandTotal = zoom + this.props.added + itbis;
+        
+        let nextStateFecha = this.props.masterAPI;
 
         return(
             <tfoot>
@@ -372,7 +383,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <td style={{'width':'15px',
 'font-size':'20px'}}>+&nbsp;Agregado:</td>
                 <td style={{'width':'15px',
-'font-size':'20px'}}>{this.props.added}.00</td>
+'font-size':'20px'}}>{agregado}.00</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -398,13 +409,13 @@ Total:</td>
             </tr>
             <tr>
                 <td>F/Entrega: </td>
-                <td colSpan={2}>{days}&nbsp;{today}</td>
+                <td colSpan={2}>{fechaentrega}</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>Hora: </td>
-                <td>06:00 PM</td>
+                <td>{horaentrega}</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <br/>
@@ -1089,25 +1100,72 @@ class Master extends React.Component{
         let name = details[0].firstname;
 
         let zoom = 0;
-
+        
+        let agregado = 0;
+        
+        let itbis = 0;
+        
+        for(var x=0;x<details.length;x++){
+            if(details[x].itemDetail.length>0){
+                for(var y=0;y<details[x].itemDetail.length;y++){                    
+                    zoom+=parseInt(details[x].itemDetail[y].project);
+                    agregado+=parseInt(details[x].itemDetail[y].project);
+                }
+            }
+        }
+        
+        //items sumado sin agregado
         for(var x=0;x<details.length;x++){
             zoom+=parseInt(details[x].project);
         }
+        
+        itbis = ( 18 / 100) * zoom;
+        itbis += ( 18 / 100) * agregado;
 
+        let grandTotal = zoom + agregado + itbis;
+                
+        let days = moment(new Date()).add(3,'days').format('dddd');
+        
+        if(days=='Monday'){
+           days='Lunes'
+        }else if(days=='Tuesday'){
+           days='Martes'
+        }else if(days=='Wednesday'){
+           days='Miercoles'
+        }else if(days=='Thursday'){
+           days='Jueves'
+        }else if(days=='Friday'){
+           days='Viernes'
+        }else if(days=='Saturday'){
+           days='Sabado'
+        }else{
+           days='Domingo'
+        }
+
+        let fechaentrega = moment(new Date()).add(3,'days').format('DD/MM/YYYY');
+        
+        let horaentrega = '06:00 PM';
+        
         let newMaster = {
 
             "id": Date.now(),
             "date": today,
             "name": name,
             "item": this.state.masterDetail,
-            "project": zoom,
+            "project": zoom,            
+            "agregado": agregado,            
+            "desc": 0,            
+            "itbis": itbis,            
+            "grandTotal": grandTotal,            
+            "fechaentrega": days+' '+fechaentrega,            
+            "horaentrega": horaentrega,            
             "status":"pending"
         }
-
+        
         let nextState = this.state.masterAPI;
 
         nextState.push(newMaster);
-
+        
         this.setState({
 
             masterAPI: nextState
@@ -1143,7 +1201,17 @@ class Master extends React.Component{
 
         for(var x=0;x<detailTotal.length;x++){
             if(detailTotal[x].name==itemFirst){
-                project = detailTotal[x].environment;
+                if(event.target.environment){
+                   
+                        console.log(event.target.environment.value.length);                    
+                    if(event.target.environment.value.length>0){
+
+                        project = event.target.environment.value;
+                    }
+                }else{
+                    
+                    project = detailTotal[x].environment;
+                }
                 category = detailTotal[x].category;
 
             }
@@ -1480,6 +1548,7 @@ class MasterTable extends React.Component{
                 <th>Fecha</th>
                 <th>Nombre</th>
                 <th>Articulo</th>
+                <th>Fecha de Entrega</th>
                 <th>Estatus</th>
                 <th>Acciones</th>
               </tr>
@@ -1543,6 +1612,10 @@ name={todo.name}
 
 item={todo.name}
 
+fechaentrega={todo.fechaentrega}
+
+horaentrega={todo.horaentrega}
+
 status={todo.status}
 
 masterCallback={this.props.masterCallback}
@@ -1566,10 +1639,6 @@ masterCallback={this.props.masterCallback}
 }
 
 class MasterTableBody extends React.Component{
-
-    /*<Link className="btn btn-default"
-to={'/actions/'+this.props.id}><i className="fa fa-eye"
-aria-hidden="true"></i></Link>{' '}*/
 
     onExchange(data){
 
@@ -1597,17 +1666,13 @@ aria-hidden="true"></i></Link>{' '}*/
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
                     <td>{this.props.items}</td>
+                    <td>{this.props.fechaentrega}&nbsp;{this.props.horaentrega}</td>
                     <td>{this.props.status}</td>
                     <td>
-                        <Link className="btn btn-default"
-to={'/actions/'+this.props.id}><i className="fa fa-eye"
-aria-hidden="true"></i></Link>{' '}
-                        <Button
-onClick={this.onExchange.bind(this,this.props.id)}><i className="fa
-fa-exchange" aria-hidden="true"></i></Button>
-                        <Button
-onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i
-className="fa fa-trash" aria-hidden="true"></i></Button>
+                        <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>&nbsp;&nbsp;
+                        <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
+                        <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
+                        <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                     </td>
                   </tr>
         );
@@ -1888,7 +1953,8 @@ class MasterModalField extends React.Component{
         super();
         this.state = {
 
-            value: ''
+            value: '',
+            alter: false
         }
     }
 
@@ -1897,6 +1963,20 @@ class MasterModalField extends React.Component{
 
             value: newValue
         });
+    }
+    
+    onChangeAlter(event){
+        
+        let nextState = this.state.alter;
+        
+        
+        if(event.target.value=='Alteracion'){
+           this.setState({
+               
+               alter: true
+           });           
+        }
+                
     }
 
     render(){
@@ -1961,6 +2041,34 @@ class MasterModalField extends React.Component{
                   </Row>
         );
 
+        let MasterModalFieldAlteration;
+
+        if(this.state.alter){
+         
+                MasterModalFieldAlteration = (
+
+                                
+                                <Row>
+                                    <FormGroup controlId="formHorizontalQuantity">
+                                      <Col componentClass={ControlLabel} md={1} sm={2}>
+                                        Precio
+                                      </Col>
+                                      <Col md={4} sm={6}>
+                                        <FormControl type="text" name="environment" placeholder="Precio" />
+                                      </Col>
+                                    </FormGroup>
+                                </Row>
+
+                )
+        }else{
+            
+                 MasterModalFieldAlteration = (
+                 
+                     <div></div>
+                 )
+            
+        }
+
         let MasterModalFieldES = (
 
                 <Row>
@@ -1982,7 +2090,7 @@ class MasterModalField extends React.Component{
                                   <ControlLabel>Tipo de Servicio</ControlLabel>
                                 </Col>
                                 <Col md={4} sm={6}>
-                                  <FormControl componentClass="select" name="development" placeholder="Tipo de Servicio" required >
+                                  <FormControl onChange={this.onChangeAlter.bind(this)} componentClass="select" name="development" placeholder="Tipo de Servicio" required >
                                     <option value="Lavar y Prensa">Lavar y Prensa</option>
                                     <option value="Solo Lavar">Solo Lavar</option>
                                     <option value="Solo Plancha">Solo Plancha</option>
@@ -2003,6 +2111,8 @@ class MasterModalField extends React.Component{
                               </Col>
                             </FormGroup>
                         </Row>
+                        <br/>
+                        {MasterModalFieldAlteration}
                         <br/>
                         <Row>
                             <FormGroup controlId="formHorizontalQuantity">
@@ -3171,6 +3281,7 @@ style={{'width':'55%'}}>
                                                 date={master.date}
                                                 name={master.name}
                                                 project={master.project}
+                                                grandTotal={master.grandTotal}
                                                 total={this.props.total}
                                     />
             )}
@@ -3209,7 +3320,7 @@ class PartialsTableBody extends React.Component{
                 <td style={{'font-size':'20px'}}>{this.props.date}</td>
                 <td
 style={{'font-size':'20px'}}>{this.props.name}</td>
-                <td style={{'font-size':'20px'}}>{this.props.project}.00</td>
+                <td style={{'font-size':'20px'}}>{this.props.grandTotal}.00</td>
               </tr>
         );
     }
@@ -3659,6 +3770,101 @@ class CustomerModal extends React.Component{
     }
 }
 
+class UpdateDelivery extends React.Component{
+    
+    constructor(){
+        
+        super();
+        this.state = {
+            
+            showModal:true,
+            parameter: 0,
+            masterAPI: []
+        }
+    }
+    
+    close(){
+        
+        this.setState({
+            
+            showModal: false
+        });
+    }
+    
+    componentDidMount(){
+
+          fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  masterAPI: responseData
+              })
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+        
+          this.setState({
+              
+              parameter: this.props.params.deliveryid
+          });
+
+    }
+    
+    onSubmitted(event){
+        
+        event.preventDefault();
+        
+        let nextState = this.state.masterAPI;
+        
+        let index = nextState.findIndex(x=> x.id==this.state.parameter);
+        
+        let newUpdate = {
+            
+            "index":index,
+            "fechaentrega": event.target.fechaentrega.value
+        }
+        
+        fetch(API_URL+'/updatedelivery', {
+
+          method: 'post',
+          headers: API_HEADERS,
+          body: JSON.stringify(newUpdate)
+      })
+        
+        this.setState({
+            
+            showModal:false
+        });
+    }
+    
+    render(){
+        
+        return(
+        
+            <Modal show={this.state.showModal} onHide={this.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>Actualizacion de Fecha Entrega</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form horizontal onSubmit={this.onSubmitted.bind(this)}>
+                    <FormGroup controlId="formHorizontalEmail">
+                      <Col componentClass={ControlLabel} sm={2}>
+                        Fecha de Entrega
+                      </Col>
+                      <Col sm={10}>
+                        <FormControl name="fechaentrega" type="date" placeholder="Fecha de Entrega" />
+                        <Button type="submit">Actualizar</Button>
+                      </Col>                    
+                    </FormGroup>
+                </Form>
+              </Modal.Body>
+            </Modal>
+        );
+    }
+}
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -3667,6 +3873,7 @@ ReactDOM.render((
         <Route path="partials" component={Partials}/>
         <Route path="updatedetail/:detailid" component={DetailModalUpdate}/>
         <Route path="mainactions/:mainactionid" component={MainActions}/>
+        <Route path="updatedelivery/:deliveryid" component={UpdateDelivery}/>
         <Route path="actions/:actionid" component={Actions}/>
         <Route path="detail" component={Detail}/>
         <Route path="master" component={Master}/>

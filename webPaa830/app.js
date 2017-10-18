@@ -422,6 +422,12 @@ app.post('/updatedetail',function(req,res){
     detail[obj.index].item=obj.item;
 })
 
+app.post('/updatedelivery',function(req,res){
+    var obj = req.body;
+    console.log(obj)
+    master[obj.index].fechaentrega=obj.fechaentrega;
+})
+
 app.post('/loader',function(req,res){
     console.log(req.body)
     res.send(req.body);

@@ -423,11 +423,20 @@ var ActionsTableBodyFooter = function (_React$Component4) {
 
             var servicio = void 0;
 
+            var fechaentrega = void 0;
+
+            var horaentrega = void 0;
+
+            var agregado = void 0;
+
             if (nextState[0]) {
 
                 zoom = nextState[0].project;
                 items = nextState[0].item.length;
                 servicio = nextState[0].item[0].development;
+                fechaentrega = nextState[0].fechaentrega;
+                horaentrega = nextState[0].horaentrega;
+                agregado = nextState[0].agregado;
 
                 for (var x = 0; x < nextState[0].item.length; x++) {
 
@@ -439,6 +448,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
             itbis += 18 / 100 * this.props.added;
 
             var grandTotal = zoom + this.props.added + itbis;
+
+            var nextStateFecha = this.props.masterAPI;
 
             return React.createElement(
                 'tfoot',
@@ -518,7 +529,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         'td',
                         { style: { 'width': '15px',
                                 'font-size': '20px' } },
-                        this.props.added,
+                        agregado,
                         '.00'
                     )
                 ),
@@ -608,9 +619,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                     React.createElement(
                         'td',
                         { colSpan: 2 },
-                        days,
-                        '\xA0',
-                        today
+                        fechaentrega
                     ),
                     React.createElement(
                         'td',
@@ -634,7 +643,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                     React.createElement(
                         'td',
                         null,
-                        '06:00 PM'
+                        horaentrega
                     ),
                     React.createElement(
                         'td',
@@ -1865,9 +1874,50 @@ var Master = function (_React$Component17) {
 
             var zoom = 0;
 
+            var agregado = 0;
+
+            var itbis = 0;
+
+            for (var x = 0; x < details.length; x++) {
+                if (details[x].itemDetail.length > 0) {
+                    for (var y = 0; y < details[x].itemDetail.length; y++) {
+                        zoom += parseInt(details[x].itemDetail[y].project);
+                        agregado += parseInt(details[x].itemDetail[y].project);
+                    }
+                }
+            }
+
+            //items sumado sin agregado
             for (var x = 0; x < details.length; x++) {
                 zoom += parseInt(details[x].project);
             }
+
+            itbis = 18 / 100 * zoom;
+            itbis += 18 / 100 * agregado;
+
+            var grandTotal = zoom + agregado + itbis;
+
+            var days = moment(new Date()).add(3, 'days').format('dddd');
+
+            if (days == 'Monday') {
+                days = 'Lunes';
+            } else if (days == 'Tuesday') {
+                days = 'Martes';
+            } else if (days == 'Wednesday') {
+                days = 'Miercoles';
+            } else if (days == 'Thursday') {
+                days = 'Jueves';
+            } else if (days == 'Friday') {
+                days = 'Viernes';
+            } else if (days == 'Saturday') {
+                days = 'Sabado';
+            } else {
+                days = 'Domingo';
+            }
+
+            var fechaentrega = moment(new Date()).add(3, 'days').format('DD/MM/YYYY');
+
+            var horaentrega = '06:00 PM';
 
             var newMaster = {
 
@@ -1876,6 +1926,12 @@ var Master = function (_React$Component17) {
                 "name": name,
                 "item": this.state.masterDetail,
                 "project": zoom,
+                "agregado": agregado,
+                "desc": 0,
+                "itbis": itbis,
+                "grandTotal": grandTotal,
+                "fechaentrega": days + ' ' + fechaentrega,
+                "horaentrega": horaentrega,
                 "status": "pending"
             };
 
@@ -1918,7 +1974,17 @@ var Master = function (_React$Component17) {
 
             for (var x = 0; x < detailTotal.length; x++) {
                 if (detailTotal[x].name == itemFirst) {
-                    project = detailTotal[x].environment;
+                    if (event.target.environment) {
+
+                        console.log(event.target.environment.value.length);
+                        if (event.target.environment.value.length > 0) {
+
+                            project = event.target.environment.value;
+                        }
+                    } else {
+
+                        project = detailTotal[x].environment;
+                    }
                     category = detailTotal[x].category;
                 }
             }
@@ -2341,6 +2407,11 @@ var MasterTable = function (_React$Component19) {
                 React.createElement(
                     'th',
                     null,
+                    'Fecha de Entrega'
+                ),
+                React.createElement(
+                    'th',
+                    null,
                     'Estatus'
                 ),
                 React.createElement(
@@ -2420,6 +2491,10 @@ var MasterTable = function (_React$Component19) {
 
                                 item: todo.name,
 
+                                fechaentrega: todo.fechaentrega,
+
+                                horaentrega: todo.horaentrega,
+
                                 status: todo.status,
 
                                 masterCallback: _this28.props.masterCallback
@@ -2490,12 +2565,6 @@ var MasterTableBody = function (_React$Component20) {
 
     _createClass(MasterTableBody, [{
         key: 'onExchange',
-
-
-        /*<Link className="btn btn-default"
-        to={'/actions/'+this.props.id}><i className="fa fa-eye"
-        aria-hidden="true"></i></Link>{' '}*/
-
         value: function onExchange(data) {
 
             console.log(data);
@@ -2542,6 +2611,13 @@ var MasterTableBody = function (_React$Component20) {
                 React.createElement(
                     'td',
                     null,
+                    this.props.fechaentrega,
+                    '\xA0',
+                    this.props.horaentrega
+                ),
+                React.createElement(
+                    'td',
+                    null,
                     this.props.status
                 ),
                 React.createElement(
@@ -2549,25 +2625,28 @@ var MasterTableBody = function (_React$Component20) {
                     null,
                     React.createElement(
                         Link,
-                        { className: 'btn btn-default',
-                            to: '/actions/' + this.props.id },
-                        React.createElement('i', { className: 'fa fa-eye',
-                            'aria-hidden': 'true' })
+                        { className: 'btn btn-default', to: '/actions/' + this.props.id },
+                        React.createElement('i', { className: 'fa fa-eye', 'aria-hidden': 'true' })
                     ),
-                    ' ',
+                    '\xA0\xA0',
+                    React.createElement(
+                        Link,
+                        { className: 'btn btn-default', to: '/updatedelivery/' + this.props.id },
+                        React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
+                    ),
+                    '\xA0\xA0',
                     React.createElement(
                         Button,
-                        {
-                            onClick: this.onExchange.bind(this, this.props.id) },
-                        React.createElement('i', { className: 'fa\r\nfa-exchange', 'aria-hidden': 'true' })
+                        { onClick: this.onExchange.bind(this, this.props.id) },
+                        React.createElement('i', { className: 'fa fa-exchange', 'aria-hidden': 'true' })
                     ),
+                    '\xA0\xA0',
                     React.createElement(
                         Button,
-                        {
-                            onClick: this.props.masterCallback.ondeletemaster.bind(this, this.props.id) },
-                        React.createElement('i', {
-                            className: 'fa fa-trash', 'aria-hidden': 'true' })
-                    )
+                        { onClick: this.props.masterCallback.ondeletemaster.bind(this, this.props.id) },
+                        React.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true' })
+                    ),
+                    '\xA0\xA0'
                 )
             );
         }
@@ -2913,7 +2992,8 @@ var MasterModalField = function (_React$Component26) {
 
         _this35.state = {
 
-            value: ''
+            value: '',
+            alter: false
         };
         return _this35;
     }
@@ -2928,6 +3008,19 @@ var MasterModalField = function (_React$Component26) {
 
                 value: newValue
             });
+        }
+    }, {
+        key: 'onChangeAlter',
+        value: function onChangeAlter(event) {
+
+            var nextState = this.state.alter;
+
+            if (event.target.value == 'Alteracion') {
+                this.setState({
+
+                    alter: true
+                });
+            }
         }
     }, {
         key: 'render',
@@ -3045,6 +3138,33 @@ var MasterModalField = function (_React$Component26) {
                 )
             );
 
+            var MasterModalFieldAlteration = void 0;
+
+            if (this.state.alter) {
+
+                MasterModalFieldAlteration = React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        FormGroup,
+                        { controlId: 'formHorizontalQuantity' },
+                        React.createElement(
+                            Col,
+                            { componentClass: ControlLabel, md: 1, sm: 2 },
+                            'Precio'
+                        ),
+                        React.createElement(
+                            Col,
+                            { md: 4, sm: 6 },
+                            React.createElement(FormControl, { type: 'text', name: 'environment', placeholder: 'Precio' })
+                        )
+                    )
+                );
+            } else {
+
+                MasterModalFieldAlteration = React.createElement('div', null);
+            }
+
             var MasterModalFieldES = React.createElement(
                 Row,
                 null,
@@ -3090,7 +3210,7 @@ var MasterModalField = function (_React$Component26) {
                                 { md: 4, sm: 6 },
                                 React.createElement(
                                     FormControl,
-                                    { componentClass: 'select', name: 'development', placeholder: 'Tipo de Servicio', required: true },
+                                    { onChange: this.onChangeAlter.bind(this), componentClass: 'select', name: 'development', placeholder: 'Tipo de Servicio', required: true },
                                     React.createElement(
                                         'option',
                                         { value: 'Lavar y Prensa' },
@@ -3139,6 +3259,8 @@ var MasterModalField = function (_React$Component26) {
                             )
                         )
                     ),
+                    React.createElement('br', null),
+                    MasterModalFieldAlteration,
                     React.createElement('br', null),
                     React.createElement(
                         Row,
@@ -4945,6 +5067,7 @@ var PartialsTable = function (_React$Component39) {
                                     date: master.date,
                                     name: master.name,
                                     project: master.project,
+                                    grandTotal: master.grandTotal,
                                     total: _this57.props.total
                                 });
                             })
@@ -5023,7 +5146,7 @@ var PartialsTableBody = function (_React$Component40) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    this.props.project,
+                    this.props.grandTotal,
                     '.00'
                 )
             );
@@ -5796,6 +5919,134 @@ var CustomerModal = function (_React$Component49) {
     return CustomerModal;
 }(React.Component);
 
+var UpdateDelivery = function (_React$Component50) {
+    _inherits(UpdateDelivery, _React$Component50);
+
+    function UpdateDelivery() {
+        _classCallCheck(this, UpdateDelivery);
+
+        var _this69 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
+
+        _this69.state = {
+
+            showModal: true,
+            parameter: 0,
+            masterAPI: []
+        };
+        return _this69;
+    }
+
+    _createClass(UpdateDelivery, [{
+        key: 'close',
+        value: function close() {
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this70 = this;
+
+            fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this70.setState({
+
+                    masterAPI: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+
+            this.setState({
+
+                parameter: this.props.params.deliveryid
+            });
+        }
+    }, {
+        key: 'onSubmitted',
+        value: function onSubmitted(event) {
+            var _this71 = this;
+
+            event.preventDefault();
+
+            var nextState = this.state.masterAPI;
+
+            var index = nextState.findIndex(function (x) {
+                return x.id == _this71.state.parameter;
+            });
+
+            var newUpdate = {
+
+                "index": index,
+                "fechaentrega": event.target.fechaentrega.value
+            };
+
+            fetch(API_URL + '/updatedelivery', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newUpdate)
+            });
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Modal,
+                { show: this.state.showModal, onHide: this.close },
+                React.createElement(
+                    Modal.Header,
+                    { closeButton: true },
+                    React.createElement(
+                        Modal.Title,
+                        null,
+                        'Actualizacion de Fecha Entrega'
+                    )
+                ),
+                React.createElement(
+                    Modal.Body,
+                    null,
+                    React.createElement(
+                        Form,
+                        { horizontal: true, onSubmit: this.onSubmitted.bind(this) },
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalEmail' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Fecha de Entrega'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'fechaentrega', type: 'date', placeholder: 'Fecha de Entrega' }),
+                                React.createElement(
+                                    Button,
+                                    { type: 'submit' },
+                                    'Actualizar'
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return UpdateDelivery;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -5807,6 +6058,7 @@ ReactDOM.render(React.createElement(
         React.createElement(Route, { path: 'partials', component: Partials }),
         React.createElement(Route, { path: 'updatedetail/:detailid', component: DetailModalUpdate }),
         React.createElement(Route, { path: 'mainactions/:mainactionid', component: MainActions }),
+        React.createElement(Route, { path: 'updatedelivery/:deliveryid', component: UpdateDelivery }),
         React.createElement(Route, { path: 'actions/:actionid', component: Actions }),
         React.createElement(Route, { path: 'detail', component: Detail }),
         React.createElement(Route, { path: 'master', component: Master }),
