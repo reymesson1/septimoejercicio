@@ -27,209 +27,6 @@ app.post('/cookies', function(req,res){
     }
 });
 
-/*var list = [
-"Isabella",
-"Olivia",
-"Alexis",
-"Sofía",
-"Victoria",
-"Amelia",
-"Alexa",
-"Julia",
-"Camila",
-"Alexandra",
-"Maya",
-"Andrea",
-"Ariana",
-"María",
-"Eva",
-"Angelina",
-"Valeria",
-"Natalia",
-"Isabel",
-"Sara",
-"Liliana",
-"Adriana",
-"Juliana",
-"Gabriela",
-"Daniela",
-"Valentina",
-"Lila",
-"Vivian",
-"Nora",
-"Ángela",
-"Elena",
-"Clara",
-"Eliana",
-"Alana",
-"Miranda",
-"Amanda",
-"Diana",
-"Ana",
-"Penélope",
-"Aurora",
-"Alexandría",
-"Lola",
-"Alicia",
-"Amaya",
-"Alexia",
-"Jazmín",
-"Mariana",
-"Alina",
-"Lucía",
-"Fátima",
-"Ximena",
-"Laura",
-"Cecilia",
-"Alejandra",
-"Esmeralda",
-"Verónica",
-"Daniella",
-"Miriam",
-"Carmen",
-"Iris",
-"Guadalupe",
-"Selena",
-"Fernanda",
-"Angélica",
-"Emilia",
-"Lía",
-"Tatiana",
-"Mónica",
-"Carolina",
-"Jimena",
-"Dulce",
-"Talía",
-"Estrella",
-"Brenda",
-"Lilian",
-"Paola",
-"Serena",
-"Celeste",
-"Viviana",
-"Elisa",
-"Melina",
-"Gloria",
-"Claudia",
-"Sandra",
-"Marisol",
-"Asia",
-"Ada",
-"Rosa",
-"Isabela",
-"Regina",
-"Elsa",
-"Perla",
-"Raquel",
-"Virginia",
-"Patricia",
-"Linda",
-"Marina",
-"Leila",
-"América",
-"Mercedes",
-"Daniel",
-"David",
-"Gabriel",
-"Benjamín",
-"Samuel",
-"Lucas",
-"Ángel",
-"José",
-"Adrián",
-"Sebastián",
-"Xavier",
-"Juan",
-"Luis",
-"Diego",
-"Óliver",
-"Carlos",
-"Jesús",
-"Alex",
-"Max",
-"Alejandro",
-"Antonio",
-"Miguel",
-"Víctor",
-"Joel",
-"Santiago",
-"Elías",
-"Iván",
-"Óscar",
-"Leonardo",
-"Eduardo",
-"Alan",
-"Nicolás",
-"Jorge",
-"Omar",
-"Paúl",
-"Andrés",
-"Julián",
-"Josué",
-"Román",
-"Fernando",
-"Javier",
-"Abraham",
-"Ricardo",
-"Francisco",
-"César",
-"Mario",
-"Manuel",
-"Édgar",
-"Alexis",
-"Israel",
-"Mateo",
-"Héctor",
-"Sergio",
-"Emiliano",
-"Simón",
-"Rafael",
-"Martín",
-"Marco",
-"Roberto",
-"Pedro",
-"Emanuel",
-"Abel",
-"Rubén",
-"Fabián",
-"Emilio",
-"Joaquín",
-"Marcos",
-"Lorenzo",
-"Armando",
-"Adán",
-"Raúl",
-"Julio",
-"Enrique",
-"Gerardo",
-"Pablo",
-"Jaime",
-"Saúl",
-"Esteban",
-"Gustavo",
-"Rodrigo",
-"Arturo",
-"Mauricio",
-"Orlando",
-"Hugo",
-"Salvador",
-"Alfredo",
-"Maximiliano",
-"Ramón",
-"Ernesto",
-"Tobías",
-"Abram",
-"Noé",
-"Guillermo",
-"Ezequiel",
-"Lucián",
-"Alonzo",
-"Felipe",
-"Matías",
-"Tomás",
-"Jairo"
-]*/
-
 var customer = [];
 var list = [];
 
@@ -251,60 +48,14 @@ app.post('/customer',function(req,res){
     
     for(var x=0;x<customer.length;x++){
         
-        list.push(customer[x].name+' '+customer[x].apellido);
+        //list.push(customer[x].name+' '+customer[x].apellido);
+        list.push(customer[x].telefono);
     }
     
     res.send(req.body);
 })
 
-var master = [
-
-    {
-
-        "date":"2017-10-16",
-        "id":"1508158890082",
-        "item":[{
-            "development":"select",
-            "firstname":"test",
-            "id":1508158791550,
-            "item":"react laboratory book",
-            "itemDetail":[{
-                "name":"Mongo Pro",
-                "project":"dev.test"
-            },{
-                "name":"CSS Main Book",
-                "project":"dev.test"
-            }],
-            "project":null,
-            "quantity":1
-        }],
-        "name":"test",
-        "project":null,
-        "status":"pending"
-    },{
-
-        "date":"2017-10-16",
-        "id":"1508158890083",
-        "item":[{
-            "development":"select",
-            "firstname":"test",
-            "id":1508158791550,
-            "item":"react laboratory book",
-            "itemDetail":[{
-                "name":"Mongo Pro",
-                "project":"dev.test"
-            },{
-                "name":"CSS Main Book",
-                "project":"dev.test"
-            }],
-            "project":null,
-            "quantity":1
-        }],
-        "name":"test",
-        "project":null,
-        "status":"waiting"
-    }
-];
+var master = [];
 
 app.get('/masterAPI', function(req,res){
 
@@ -446,7 +197,6 @@ app.post('/payment',function(req,res){
     master[index].status = "Pagado";
     
     res.send('end')
-    console.log(newPago);
 })
 
 app.get('/logout',function(req,res){

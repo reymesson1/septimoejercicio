@@ -148,6 +148,7 @@ class Actions extends React.Component{
           this.state = {
 
               masterAPI: [],
+              customerAPI: [],
               parameter: ''
           }
 
@@ -161,6 +162,14 @@ class Actions extends React.Component{
               this.setState({
 
                   masterAPI: responseData
+              })
+          })
+          fetch(API_URL+'/customer',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  customerAPI: responseData
               })
           })
           .catch((error)=>{
@@ -182,14 +191,13 @@ class Actions extends React.Component{
     }
 
     render(){
-
+                
         return(
             <div>
                 <ActionsTable
                                 parameter={this.state.parameter}
-
-masterAPI={this.state.masterAPI.filter((master)=>
-master.id==this.state.parameter)}
+                                masterAPI={this.state.masterAPI.filter((master)=>master.id==this.state.parameter)}
+                                customerAPI={this.state.customerAPI}
                 />
                 <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>
             </div>
@@ -206,7 +214,6 @@ class ActionsTable extends React.Component{
         let nextState = this.props.masterAPI;
 
         let obj = nextState[0];
-
 
         let name;
 
@@ -230,6 +237,16 @@ class ActionsTable extends React.Component{
         let today = moment(new Date()).format('DD-MM-YYYY');
 
 
+        let customerAPICust = this.props.customerAPI;
+        
+        let telefono;
+        
+        for(var x=0;x<nextState.length;x++){            
+            if(nextState[x].id==this.props.parameter){
+               telefono = nextState[x].item[0].telefono;
+            }            
+        }
+        
 
         return(
 
@@ -261,6 +278,7 @@ LAVANDERIA</h5>
                             <br/>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
                             <br/>
+                            <h5>IdCliente : {telefono}</h5>                            
                             <h5>Nombre : {name}</h5>
                         </Col>
                     </Row>
@@ -579,8 +597,7 @@ class Toolbar extends React.Component{
                             <Link to={'/'} onClick={this.onClicked.bind(this)}>Info-Solutions SYS</Link>
                         </div>
                     </div>
-                    <Nav>
-                      <li><Link to={'/main'}>Facturacion</Link></li>
+                    <Nav>                      
                       <li><Link to={'/master'}>Ordenes</Link></li>
                       <li><Link to={'/detail'}>Inventario</Link></li>
                       <NavDropdown eventKey={3} title="Reportes" id="basic-nav-dropdown">
@@ -604,7 +621,7 @@ class Toolbar extends React.Component{
                         </div>
                     </div>
                     <Nav>
-                      <li><Link to={'/main'}>Main</Link></li>
+                      
                       <li><Link to={'/master'}>Master</Link></li>
                       <li><Link to={'/detail'}>Details</Link></li>
                       <NavDropdown eventKey={3} title="DropDown" id="basic-nav-dropdown">
@@ -640,372 +657,6 @@ onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
 
 }
 
-class Main extends React.Component{
-
-    constructor(){
-
-        super();
-        this.state ={
-
-            showModal: false,
-            mainAPI: [],
-            filterText: ''
-        }
-    }
-
-    componentDidMount(){
-
-
-
-          fetch(API_URL+'/main',{headers: API_HEADERS})
-          .then((response)=>response.json())
-          .then((responseData)=>{
-              this.setState({
-
-                  mainAPI: responseData
-              })
-          })
-          .catch((error)=>{
-              console.log('Error fetching and parsing data', error);
-          })
-
-          this.setState({
-
-             parameter: this.props.params.actionid
-          });
-
-    }
-
-    close(){
-
-        this.setState({
-
-            showModal: false
-        })
-    }
-
-    open(){
-
-        this.setState({
-
-            showModal: true
-        })
-    }
-
-    render(){
-
-        return(
-            <div>
-                <Row>
-                    <MainSearch />
-                </Row>
-                <Row>
-                    <div className="pull-right">
-                        <Button onClick={this.open.bind(this)}>Add Main</Button>
-                        <MainModal
-                                    showModal={this.state.showModal}
-                                    mainCallback={{
-                                                    open:this.open.bind(this),
-                                                    close:this.close.bind(this)
-
-                                    }}
-                        />
-                    </div>
-                </Row>
-                <br/>
-                <Row>
-                    <MainTable
-                                filterText={this.state.filterText}
-                                mainAPI={this.state.mainAPI}
-                    />
-                </Row>
-            </div>
-        );
-    }
-}
-
-class MainModal extends React.Component{
-
-    render(){
-
-        return(
-
-            <Modal show={this.props.showModal}
-onHide={this.props.mainCallback.close}>
-              <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <h4>Text in a modal</h4>
-              </Modal.Body>
-            </Modal>
-        );
-    }
-}
-
-class MainSearch extends React.Component{
-
-    render(){
-
-        return(
-            <Panel header="Main Search">
-                <Form horizontal>
-                    <FormGroup controlId="formHorizontalEmail">
-                      <Col componentClass={ControlLabel} sm={2}>
-                        Search:
-                      </Col>
-                      <Col sm={10}>
-                        <FormControl type="text" placeholder="Search" />
-                      </Col>
-                    </FormGroup>
-                </Form>
-            </Panel>
-        );
-    }
-}
-
-class MainTable extends React.Component{
-
-    constructor() {
-        super();
-        this.state = {
-          todos: [{id: '123',date: '2017-10-09',name:
-'sas',item:'test.item',environment: 'dev'},{id:
-'454758778052139',date:'2017-10-09',name: 'sas',item:
-'test.item',environment: 'dev' },],
-          currentPage: 1,
-          todosPerPage: 3
-        };
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(event) {
-            this.setState({
-              currentPage: Number(event.target.id)
-            });
-    }
-
-    render(){
-
-        let filteredTable = this.props.mainAPI.filter(
-            (main) => main.name.indexOf(this.props.filterText) !== -1
-        )
-
-        const { todos, currentPage, todosPerPage } = this.state;
-
-        // Logic for displaying current todos
-        const indexOfLastTodo = currentPage * todosPerPage;
-        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-        const currentTodos =
-filteredTable.slice(indexOfFirstTodo,indexOfLastTodo);
-
-        // Logic for displaying page numbers
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(filteredTable.length /
-todosPerPage); i++) {
-          pageNumbers.push(i);
-        }
-
-        const renderPageNumbers = pageNumbers.map(number => {
-          return (
-            <li
-              key={number}
-              id={number}
-              onClick={this.handleClick}
-            >
-              <a role="button" href="#" id={number}>{number}</a>
-            </li>
-          );
-        });
-
-        return(
-            <Panel header="Main Table">
-                <Table striped bordered condensed hover>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    {currentTodos.map(
-                        (main,index) => <MainTableBody
-                                                        key={main.index}
-                                                        index={index}
-                                                        id={main.id}
-                                                        date={main.date}
-                                                        name={main.name}
-                                                        project={main.project}
-                                                        status={main.status}
-
-mainAPI={this.props.mainAPI}
-                                  />
-                    )}
-                  </Table>
-                  <div className="pull-right">
-                    <ul className="pagination pagination-sm">
-                      <li id="1"><a role="button" href="#">«</a></li>
-                      <li><a role="button" href="#">‹</a></li>
-                      {renderPageNumbers}
-                      <li><a role="button" href="#">›</a></li>
-                      <li><a role="button" href="#">»</a></li>
-                    </ul>
-                  </div>
-            </Panel>
-        );
-    }
-}
-
-class MainTableBody extends React.Component{
-
-    onExchange(data){
-
-
-        fetch(API_URL+'/done', {
-
-              method: 'post',
-              headers: API_HEADERS,
-              body: JSON.stringify({"id":data})
-        })
-
-        let nextState = this.props.mainAPI;
-
-
-
-        browserHistory.push("/main")
-
-    }
-
-    render(){
-
-        return(
-
-            <tbody>
-              <tr>
-                <td>{this.props.id}</td>
-                <td>{this.props.date}</td>
-                <td>{this.props.name}</td>
-                <td>{this.props.project}</td>
-                <td>{this.props.status}</td>
-                <td>
-                    <Link className="btn btn-default"
-to={'/mainactions/'+this.props.id}><i className="fa fa-eye"
-aria-hidden="true"></i></Link>
-                    <Button
-onClick={this.onExchange.bind(this,this.props.id)}><i className="fa
-fa-exchange" aria-hidden="true"></i></Button>
-                </td>
-              </tr>
-            </tbody>
-        );
-    }
-}
-
-class MainActions extends React.Component{
-
-    constructor(){
-
-        super();
-        this.state = {
-
-            parameter: '',
-            masterAPI: []
-        }
-    }
-
-    componentDidMount(){
-
-        fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
-          .then((response)=>response.json())
-          .then((responseData)=>{
-              this.setState({
-
-                  masterAPI: responseData
-              })
-        })
-
-        this.setState({
-
-            parameter: this.props.params.mainactionid
-        })
-    }
-
-    render(){
-
-        let filteredTable = this.state.masterAPI.filter(
-            (master) => master.id.indexOf(this.state.parameter) !== -1
-        )
-
-        console.log(filteredTable);
-
-        return(
-            <MainActionsTable
-                                filteredTable={filteredTable}
-            />
-        )
-    }
-}
-
-class MainActionsTable extends React.Component{
-
-    render(){
-
-        return(
-
-            <Table striped bordered condensed hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Project</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {this.props.filteredTable.map(
-                    (master,index) =>   <MainActionsTableBody
-                                                                key={index}
-                                                                index={index}
-                                                                id={master.id}
-
-name={master.name}
-
-date={master.date}
-
-project={master.project}
-
-status={master.status}
-                                        />
-                )}
-                </tbody>
-              </Table>
-        );
-    }
-}
-
-class MainActionsTableBody extends React.Component{
-
-    render(){
-
-        return(
-
-
-              <tr>
-                <td>{this.props.index+1}</td>
-                <td>{this.props.date}</td>
-                <td>{this.props.name}</td>
-                <td>{this.props.project}</td>
-                <td>{this.props.status}</td>
-              </tr>
-
-        );
-    }
-}
-
 class Master extends React.Component{
 
     constructor() {
@@ -1021,7 +672,8 @@ class Master extends React.Component{
             detailData:[],
             detailAdded: [],
             temp: '',
-            list: []
+            list: [],
+            customerAPI: []
         };
     }
 
@@ -1035,6 +687,14 @@ class Master extends React.Component{
               this.setState({
 
                   masterAPI: responseData
+              })
+          })
+          fetch(API_URL+'/customer',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  customerAPI: responseData
               })
           })
           fetch(API_URL+'/detail',{headers: API_HEADERS})
@@ -1097,6 +757,7 @@ class Master extends React.Component{
         let today = moment(new Date()).format('YYYY-MM-DD');
 
         let details = this.state.masterDetail;
+        
 
         let name = details[0].firstname;
 
@@ -1267,11 +928,30 @@ class Master extends React.Component{
 
 
                 project=project*parseInt(event.target.quantity.value)
+                
+                
+                console.log(this.state.customerAPI);
+                
+                let nextStateCust = this.state.customerAPI;
+                
+                let fullname;
+                
+                let telefono;
+                
+                for(var x=0;x<nextStateCust.length;x++){
+                    
+                    console.log(nextStateCust[x].telefono+' '+event.target.firstname.value);
+                    if(nextStateCust[x].telefono==event.target.firstname.value){
+                       fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                       telefono=event.target.firstname.value
+                    }
+                }
 
                 newItem = {
 
                     "id": Date.now(),
-                    "firstname":event.target.firstname.value,
+                    "firstname":fullname,
+                    "telefono":telefono,
                     "item":event.target.suggest.value,
                     "itemDetail": this.state.detailAdded,
                     "development":event.target.development.value,
@@ -1344,7 +1024,6 @@ class Master extends React.Component{
 
 
     render(){
-
 
         let ModalButtonEN = (
 
@@ -3137,7 +2816,7 @@ class Partials extends React.Component{
                 let grand = 0;
 
                 for(var x=0;x<nextState.length;x++){
-                    grand+=parseInt(nextState[x].project);
+                    grand+=parseInt(nextState[x].grandTotal);
                 }
 
                 this.setState({
@@ -4061,13 +3740,11 @@ ReactDOM.render((
         <Route path="loader" component={Loader}/>
         <Route path="partials" component={Partials}/>
         <Route path="updatedetail/:detailid" component={DetailModalUpdate}/>
-        <Route path="mainactions/:mainactionid" component={MainActions}/>
         <Route path="updatedelivery/:deliveryid" component={UpdateDelivery}/>
         <Route path="payment/:paymentid" component={Payment}/>
         <Route path="actions/:actionid" component={Actions}/>
         <Route path="detail" component={Detail}/>
         <Route path="master" component={Master}/>
-        <Route path="main" component={Main}/>
     </Route>
   </Router>
 ), document.getElementById('contents'));
