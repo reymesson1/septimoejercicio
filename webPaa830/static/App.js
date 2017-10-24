@@ -789,6 +789,7 @@ var ActionsTableBody = function (_React$Component5) {
                         name: master.firstname,
                         quantity: master.quantity,
                         item: master.item,
+                        itemDetail: master.itemDetail,
                         development: master.development,
                         project: master.project
                     });
@@ -813,6 +814,8 @@ var ActionsTableBodyDetail = function (_React$Component6) {
         key: 'render',
         value: function render() {
 
+            console.log(this.props.itemDetail);
+
             return React.createElement(
                 'tr',
                 null,
@@ -829,12 +832,27 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    this.props.item
+                    this.props.item,
+                    React.createElement(
+                        'table',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            this.props.itemDetail.map(function (detail) {
+                                return React.createElement(
+                                    'td',
+                                    null,
+                                    '\xA0',
+                                    detail.name
+                                );
+                            })
+                        )
+                    )
                 ),
                 React.createElement(
                     'td',
-                    {
-                        style: { 'font-size': '20px' } },
+                    { style: { 'font-size': '20px' } },
                     this.props.project,
                     '.00'
                 )
@@ -1371,7 +1389,6 @@ var Master = function (_React$Component9) {
                 if (detailTotal[x].name == itemFirst) {
                     if (event.target.environment) {
 
-                        console.log(event.target.environment.value.length);
                         if (event.target.environment.value.length > 0) {
 
                             project = event.target.environment.value;
@@ -1429,8 +1446,6 @@ var Master = function (_React$Component9) {
 
                     project = project * parseInt(event.target.quantity.value);
 
-                    console.log(this.state.customerAPI);
-
                     var nextStateCust = this.state.customerAPI;
 
                     var fullname = void 0;
@@ -1439,7 +1454,6 @@ var Master = function (_React$Component9) {
 
                     for (var x = 0; x < nextStateCust.length; x++) {
 
-                        console.log(nextStateCust[x].telefono + ' ' + event.target.firstname.value);
                         if (nextStateCust[x].telefono == event.target.firstname.value) {
                             fullname = nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
                             telefono = event.target.firstname.value;
@@ -1980,7 +1994,6 @@ var MasterTableBody = function (_React$Component12) {
         key: 'onExchange',
         value: function onExchange(data) {
 
-            console.log(data);
             fetch(API_URL + '/main', {
 
                 method: 'post',
@@ -1989,8 +2002,6 @@ var MasterTableBody = function (_React$Component12) {
             });
 
             var nextState = this.props.masterAPI;
-
-            console.log(nextState);
 
             browserHistory.push("/main");
         }
@@ -4620,8 +4631,6 @@ var Loader = function (_React$Component33) {
                 body: JSON.stringify({ "id": search })
             });
 
-            console.log(search);
-
             time = window.setTimeout(function (msg) {
 
                 this.close();
@@ -5557,7 +5566,6 @@ var Payment = function (_React$Component43) {
         key: 'onChanged',
         value: function onChanged(event) {
 
-            console.log(event.target.value);
             this.setState({
                 pendiente: event.target.value
             });
@@ -5567,12 +5575,6 @@ var Payment = function (_React$Component43) {
         value: function onSubmitted(event) {
 
             event.preventDefault();
-
-            console.log(event.target.current.value);
-            console.log(event.target.pending.value);
-            console.log(event.target.radioGroup.value);
-
-            console.log(this.state.parameter);
 
             var newPago = {
 
