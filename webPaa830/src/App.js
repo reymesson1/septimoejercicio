@@ -357,6 +357,8 @@ class ActionsTableBodyFooter extends React.Component{
         let horaentrega;
         
         let agregado;
+        
+        let descuento;
 
         if(nextState[0]){
 
@@ -366,7 +368,7 @@ class ActionsTableBodyFooter extends React.Component{
             fechaentrega = nextState[0].fechaentrega;
             horaentrega = nextState[0].horaentrega;
             agregado = nextState[0].agregado;
-
+            descuento = nextState[0].desc;            
             for(var x=0;x<nextState[0].item.length;x++){
 
                 piezas+=parseInt(nextState[0].item[x].quantity);
@@ -378,6 +380,8 @@ class ActionsTableBodyFooter extends React.Component{
         itbis += ( 18 / 100) * this.props.added;
 
         let grandTotal = zoom + this.props.added + itbis;
+        
+        grandTotal -= descuento;
         
         let nextStateFecha = this.props.masterAPI;
 
@@ -409,7 +413,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Desc.:</td>
                 <td style={{'width':'15px',
-'font-size':'20px'}}>0.00</td>
+'font-size':'20px'}}>{descuento}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -797,7 +801,26 @@ class Master extends React.Component{
         itbis += ( 18 / 100) * agregado;
 
         let grandTotal = zoom + agregado + itbis;
-                
+        
+        let nextStateCustomer = this.state.customerAPI;
+        
+        let descuento;
+        
+        for(var x=0;x<nextStateCustomer.length;x++){
+            
+            let completename= nextStateCustomer[x].name+' '+nextStateCustomer[x].apellido;
+            
+            if(completename==name){
+                descuento = nextStateCustomer[x].descuento         
+            }            
+        }
+        
+        //console.log((parseInt(descuento)/100)*grandTotal);
+        
+        let grandDescuento = (parseInt(descuento)/100)*grandTotal;
+        
+        grandTotal -= grandDescuento;
+        
         let days = moment(new Date()).add(3,'days').format('dddd');
         
         if(days=='Monday'){
@@ -828,7 +851,7 @@ class Master extends React.Component{
             "item": this.state.masterDetail,
             "project": zoom,            
             "agregado": agregado,            
-            "desc": 0,            
+            "desc": grandDescuento,            
             "itbis": itbis,            
             "grandTotal": grandTotal,            
             "fechaentrega": days+' '+fechaentrega,            
@@ -837,6 +860,7 @@ class Master extends React.Component{
             "pending": 0,
             "current": 0,
             "tipopago": "",
+            "ncf": "A00000000000001",
             "status":"pending"
         }
         
@@ -2985,7 +3009,7 @@ style={{'width':'55%'}}>
                                         <td style={{'width':'10px',
 'font-size':'20px'}}>Total</td>
                                         <td style={{'width':'10px',
-'font-size':'20px'}}>RD${this.props.total}.00</td>
+'font-size':'20px'}}>RD${this.props.total.toFixed(2)}</td>
                                         <br/>
                                         <br/>
                                     </tr>
@@ -3011,7 +3035,7 @@ class PartialsTableBody extends React.Component{
                 <td></td>
                 <td style={{'font-size':'20px'}}>{this.props.date}</td>
                 <td style={{'font-size':'20px'}}>{this.props.name}</td>
-                <td style={{'font-size':'20px'}}>{this.props.grandTotal}.00</td>
+                <td style={{'font-size':'20px'}}>{this.props.grandTotal.toFixed(2)}</td>
                 <td style={{'font-size':'20px'}}>{this.props.tipopago.toUpperCase().substring(0,1)}</td>
               </tr>
         );
@@ -3220,10 +3244,12 @@ class Customer extends React.Component{
             "rnc": event.target.rnc.value,
             "fechacumpleano":event.target.fechacumpleano.value,
             "facebook":event.target.facebook.value,
-            "correoelectronico":event.target.correoelectronico.value
-            
+            "correoelectronico":event.target.correoelectronico.value,
+            "descuento":event.target.descuento.value
             
         }
+        
+        console.log(newCustomer);
         
       fetch(API_URL+'/customer', {
 
@@ -3446,6 +3472,16 @@ class CustomerModal extends React.Component{
                               </Col>
                             </FormGroup>
                         </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Descuento
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="descuento" type="text" placeholder="Descuento" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
               </Modal.Body>
               <Modal.Footer>
                         <Row>
@@ -3653,11 +3689,18 @@ class Payment extends React.Component{
           body: JSON.stringify(newPago)
       })
         
-        
-        this.setState({
+        time = window.setTimeout(function(msg) {
+
+            this.setState({
+
+                showModal: false
+            });
             
-            showModal: false
-        });
+            browserHistory.push("/printpayment/"+this.state.parameter)
+            
+        }.bind(this), 3000);
+        
+        
     }
 
     
@@ -3732,10 +3775,131 @@ class Payment extends React.Component{
     }
 }
 
+class PrintPayment extends React.Component{
+    
+    constructor(){
+        
+        super();
+        this.state = {
+    
+            masterAPI: [],
+            customerAPI: [],
+            detailData: [],
+            list: []
+        }
+    }
+ 
+    componentDidMount(){
+
+
+
+          fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  masterAPI: responseData
+              })
+          })
+          fetch(API_URL+'/customer',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  customerAPI: responseData
+              })
+          })
+          fetch(API_URL+'/detail',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  detailData: responseData
+              })
+          })
+          fetch(API_URL+'/list',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  list: responseData
+              })
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+
+    }
+    
+    render(){
+            
+        let filteredTable=this.state.masterAPI.filter((master)=>master.id==this.props.params.printid)
+
+        let name; 
+        
+        let ncf; 
+        
+        if(filteredTable[0]){
+                       
+            name = filteredTable[0].name;
+            ncf = filteredTable[0].ncf;
+        }
+        
+        return(
+
+            <Grid>
+                <Row>                                
+                    <Col sm={4}>
+                        <Table striped bordered condensed hover>
+                            <tr>
+                                <th colspan="4">Factura</th>
+                              </tr>
+                              <tr>
+                                <td>Nombre</td>                                
+                                <td>{name}</td>
+                              </tr>
+                              <tr>                                
+                                <td>NCF</td>
+                                <td>{ncf}</td>
+                              </tr>
+                        </Table>
+                    </Col>
+                </Row>
+                <Row>                                
+                    <Col sm={4}>
+                        <Table striped bordered condensed hover>
+                            <thead>
+                              <tr>
+                                
+                                <th>Balance</th>
+                                <th>Actual</th>
+                                <th>Pendiente</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                        {filteredTable.map(
+                            (master,index) => 
+                                          <tr>
+                                            
+                                            <td>{master.balance}</td>
+                                            <td>{master.current}</td>
+                                            <td>{master.pending}</td>
+                                          </tr>
+                        )}
+                            </tbody>
+                          </Table>
+                    </Col>
+                </Row>
+            </Grid>
+        );
+    }
+}
+
 
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+        <Route path="printpayment/:printid" component={PrintPayment}/>
         <Route path="customer" component={Customer}/>
         <Route path="loader" component={Loader}/>
         <Route path="partials" component={Partials}/>

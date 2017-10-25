@@ -455,6 +455,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
 
             var agregado = void 0;
 
+            var descuento = void 0;
+
             if (nextState[0]) {
 
                 zoom = nextState[0].project;
@@ -463,7 +465,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 fechaentrega = nextState[0].fechaentrega;
                 horaentrega = nextState[0].horaentrega;
                 agregado = nextState[0].agregado;
-
+                descuento = nextState[0].desc;
                 for (var x = 0; x < nextState[0].item.length; x++) {
 
                     piezas += parseInt(nextState[0].item[x].quantity);
@@ -474,6 +476,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
             itbis += 18 / 100 * this.props.added;
 
             var grandTotal = zoom + this.props.added + itbis;
+
+            grandTotal -= descuento;
 
             var nextStateFecha = this.props.masterAPI;
 
@@ -581,7 +585,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         'td',
                         { style: { 'width': '15px',
                                 'font-size': '20px' } },
-                        '0.00'
+                        descuento
                     )
                 ),
                 React.createElement(
@@ -1306,6 +1310,25 @@ var Master = function (_React$Component9) {
 
             var grandTotal = zoom + agregado + itbis;
 
+            var nextStateCustomer = this.state.customerAPI;
+
+            var descuento = void 0;
+
+            for (var x = 0; x < nextStateCustomer.length; x++) {
+
+                var completename = nextStateCustomer[x].name + ' ' + nextStateCustomer[x].apellido;
+
+                if (completename == name) {
+                    descuento = nextStateCustomer[x].descuento;
+                }
+            }
+
+            //console.log((parseInt(descuento)/100)*grandTotal);
+
+            var grandDescuento = parseInt(descuento) / 100 * grandTotal;
+
+            grandTotal -= grandDescuento;
+
             var days = moment(new Date()).add(3, 'days').format('dddd');
 
             if (days == 'Monday') {
@@ -1336,7 +1359,7 @@ var Master = function (_React$Component9) {
                 "item": this.state.masterDetail,
                 "project": zoom,
                 "agregado": agregado,
-                "desc": 0,
+                "desc": grandDescuento,
                 "itbis": itbis,
                 "grandTotal": grandTotal,
                 "fechaentrega": days + ' ' + fechaentrega,
@@ -1345,6 +1368,7 @@ var Master = function (_React$Component9) {
                 "pending": 0,
                 "current": 0,
                 "tipopago": "",
+                "ncf": "A00000000000001",
                 "status": "pending"
             };
 
@@ -4534,8 +4558,7 @@ var PartialsTable = function (_React$Component31) {
                                     { style: { 'width': '10px',
                                             'font-size': '20px' } },
                                     'RD$',
-                                    this.props.total,
-                                    '.00'
+                                    this.props.total.toFixed(2)
                                 ),
                                 React.createElement('br', null),
                                 React.createElement('br', null)
@@ -4580,8 +4603,7 @@ var PartialsTableBody = function (_React$Component32) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    this.props.grandTotal,
-                    '.00'
+                    this.props.grandTotal.toFixed(2)
                 ),
                 React.createElement(
                     'td',
@@ -4904,9 +4926,12 @@ var Customer = function (_React$Component37) {
                 "rnc": event.target.rnc.value,
                 "fechacumpleano": event.target.fechacumpleano.value,
                 "facebook": event.target.facebook.value,
-                "correoelectronico": event.target.correoelectronico.value
+                "correoelectronico": event.target.correoelectronico.value,
+                "descuento": event.target.descuento.value
 
             };
+
+            console.log(newCustomer);
 
             fetch(API_URL + '/customer', {
 
@@ -5329,6 +5354,24 @@ var CustomerModal = function (_React$Component41) {
                                     React.createElement(FormControl, { name: 'correoelectronico', type: 'text', placeholder: 'Correo Electrico' })
                                 )
                             )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Descuento'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'descuento', type: 'text', placeholder: 'Descuento' })
+                                )
+                            )
                         )
                     ),
                     React.createElement(
@@ -5592,10 +5635,15 @@ var Payment = function (_React$Component43) {
                 body: JSON.stringify(newPago)
             });
 
-            this.setState({
+            time = window.setTimeout(function (msg) {
 
-                showModal: false
-            });
+                this.setState({
+
+                    showModal: false
+                });
+
+                browserHistory.push("/printpayment/" + this.state.parameter);
+            }.bind(this), 3000);
         }
     }, {
         key: 'render',
@@ -5732,12 +5780,209 @@ var Payment = function (_React$Component43) {
     return Payment;
 }(React.Component);
 
+var PrintPayment = function (_React$Component44) {
+    _inherits(PrintPayment, _React$Component44);
+
+    function PrintPayment() {
+        _classCallCheck(this, PrintPayment);
+
+        var _this64 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
+
+        _this64.state = {
+
+            masterAPI: [],
+            customerAPI: [],
+            detailData: [],
+            list: []
+        };
+        return _this64;
+    }
+
+    _createClass(PrintPayment, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this65 = this;
+
+            fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this65.setState({
+
+                    masterAPI: responseData
+                });
+            });
+            fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this65.setState({
+
+                    customerAPI: responseData
+                });
+            });
+            fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this65.setState({
+
+                    detailData: responseData
+                });
+            });
+            fetch(API_URL + '/list', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this65.setState({
+
+                    list: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this66 = this;
+
+            var filteredTable = this.state.masterAPI.filter(function (master) {
+                return master.id == _this66.props.params.printid;
+            });
+
+            var name = void 0;
+
+            var ncf = void 0;
+
+            if (filteredTable[0]) {
+
+                name = filteredTable[0].name;
+                ncf = filteredTable[0].ncf;
+            }
+
+            return React.createElement(
+                Grid,
+                null,
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        Col,
+                        { sm: 4 },
+                        React.createElement(
+                            Table,
+                            { striped: true, bordered: true, condensed: true, hover: true },
+                            React.createElement(
+                                'tr',
+                                null,
+                                React.createElement(
+                                    'th',
+                                    { colspan: '4' },
+                                    'Factura'
+                                )
+                            ),
+                            React.createElement(
+                                'tr',
+                                null,
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    'Nombre'
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    name
+                                )
+                            ),
+                            React.createElement(
+                                'tr',
+                                null,
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    'NCF'
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    ncf
+                                )
+                            )
+                        )
+                    )
+                ),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        Col,
+                        { sm: 4 },
+                        React.createElement(
+                            Table,
+                            { striped: true, bordered: true, condensed: true, hover: true },
+                            React.createElement(
+                                'thead',
+                                null,
+                                React.createElement(
+                                    'tr',
+                                    null,
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Balance'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Actual'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Pendiente'
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                'tbody',
+                                null,
+                                filteredTable.map(function (master, index) {
+                                    return React.createElement(
+                                        'tr',
+                                        null,
+                                        React.createElement(
+                                            'td',
+                                            null,
+                                            master.balance
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            null,
+                                            master.current
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            null,
+                                            master.pending
+                                        )
+                                    );
+                                })
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return PrintPayment;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
     React.createElement(
         Route,
         { path: '/', component: App },
+        React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
         React.createElement(Route, { path: 'customer', component: Customer }),
         React.createElement(Route, { path: 'loader', component: Loader }),
         React.createElement(Route, { path: 'partials', component: Partials }),
