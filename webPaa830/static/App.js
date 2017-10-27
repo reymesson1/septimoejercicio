@@ -4627,7 +4627,9 @@ var Loader = function (_React$Component33) {
 
         _this47.state = {
 
-            showModal: false
+            showModal: false,
+            inputText: '',
+            masterAPI: []
         };
         return _this47;
     }
@@ -4644,19 +4646,38 @@ var Loader = function (_React$Component33) {
         value: function open() {
             this.setState({ showModal: true });
 
-            var search = document.getElementById('loadersearch').value;
-
-            fetch(API_URL + '/loader', {
-
-                method: 'post',
-                headers: API_HEADERS,
-                body: JSON.stringify({ "id": search })
-            });
-
             time = window.setTimeout(function (msg) {
+                var _this48 = this;
+
+                fetch(API_URL + '/loader', {
+
+                    method: 'post',
+                    headers: API_HEADERS,
+                    body: JSON.stringify({ "id": this.state.inputText })
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (responseData) {
+                    _this48.setState({
+
+                        masterAPI: responseData
+                    });
+                });
 
                 this.close();
             }.bind(this), 3000);
+        }
+    }, {
+        key: 'onSubmitSearch',
+        value: function onSubmitSearch(event) {
+
+            event.preventDefault();
+
+            this.setState({
+
+                inputText: event.target.loadersearch.value
+            });
+
+            this.open();
         }
     }, {
         key: 'render',
@@ -4671,26 +4692,25 @@ var Loader = function (_React$Component33) {
                     React.createElement(
                         Panel,
                         { header: 'Search Loader' },
-                        React.createElement(LoaderSearch, null),
+                        React.createElement(LoaderSearch, {
+                            showModal: this.state.showModal,
+                            loaderCallback: {
+                                open: this.open.bind(this),
+                                close: this.close.bind(this),
+                                onsubmitsearch: this.onSubmitSearch.bind(this)
+                            }
+                        }),
                         React.createElement('br', null),
                         React.createElement(Col, { componentClass: ControlLabel, sm: 2 }),
                         React.createElement(
                             Col,
                             { componentClass: ControlLabel, sm: 10 },
-                            React.createElement(
-                                Button,
-                                { onClick: this.open.bind(this) },
-                                'Get Loader'
-                            ),
                             React.createElement(LoaderModal, {
                                 showModal: this.state.showModal,
                                 loaderCallback: {
-
                                     open: this.open.bind(this),
-
                                     close: this.close.bind(this)
                                 }
-
                             })
                         )
                     )
@@ -4703,7 +4723,9 @@ var Loader = function (_React$Component33) {
                 React.createElement(
                     Row,
                     null,
-                    React.createElement(LoaderListGroup, null)
+                    React.createElement(LoaderListGroup, {
+                        masterAPI: this.state.masterAPI
+                    })
                 )
             );
         }
@@ -4727,7 +4749,7 @@ var LoaderSearch = function (_React$Component34) {
 
             return React.createElement(
                 Form,
-                { horizontal: true },
+                { horizontal: true, onSubmit: this.props.loaderCallback.onsubmitsearch.bind(this) },
                 React.createElement(
                     FormGroup,
                     { controlId: 'formHorizontalEmail' },
@@ -4739,8 +4761,16 @@ var LoaderSearch = function (_React$Component34) {
                     React.createElement(
                         Col,
                         { sm: 10 },
-                        React.createElement(FormControl, { id: 'loadersearch', type: 'text',
-                            placeholder: 'Search:' })
+                        React.createElement(FormControl, { name: 'loadersearch', type: 'text', placeholder: 'Search', required: true })
+                    )
+                ),
+                React.createElement(
+                    Col,
+                    { smOffset: 2 },
+                    React.createElement(
+                        Button,
+                        { type: 'submit' },
+                        'Get Loader'
                     )
                 )
             );
@@ -4763,6 +4793,14 @@ var LoaderListGroup = function (_React$Component35) {
         key: 'render',
         value: function render() {
 
+            var nextState = this.props.masterAPI;
+
+            var date = nextState.date;
+
+            var datedel = nextState.fechaentrega;
+
+            var status = nextState.status;
+
             return React.createElement(
                 Panel,
                 { header: 'This Loader' },
@@ -4775,9 +4813,8 @@ var LoaderListGroup = function (_React$Component35) {
                         'Date created: ',
                         React.createElement(
                             Label,
-                            {
-                                bsStyle: 'success' },
-                            '12.12.2013'
+                            { bsStyle: 'success' },
+                            date
                         )
                     ),
                     React.createElement(
@@ -4786,9 +4823,8 @@ var LoaderListGroup = function (_React$Component35) {
                         'Last update: ',
                         React.createElement(
                             Label,
-                            {
-                                bsStyle: 'success' },
-                            '12.12.2013'
+                            { bsStyle: 'success' },
+                            datedel
                         )
                     ),
                     React.createElement(
@@ -4797,15 +4833,14 @@ var LoaderListGroup = function (_React$Component35) {
                         'Comment: ',
                         React.createElement(
                             Label,
-                            {
-                                bsStyle: 'success' },
-                            'customers comment goes here'
+                            { bsStyle: 'success' },
+                            status
                         )
                     ),
                     React.createElement(
                         ListGroupItem,
                         { href: '#link2' },
-                        'Comments:',
+                        'Comments: ',
                         React.createElement(
                             'span',
                             null,
@@ -4835,8 +4870,7 @@ var LoaderModal = function (_React$Component36) {
 
             return React.createElement(
                 Modal,
-                { style: { 'margin-top': '15%', 'overflow': 'hidden' },
-                    show: this.props.showModal },
+                { style: { 'margin-top': '15%', 'overflow': 'hidden' }, show: this.props.showModal },
                 React.createElement(
                     Modal.Header,
                     null,
@@ -4864,25 +4898,25 @@ var Customer = function (_React$Component37) {
     function Customer() {
         _classCallCheck(this, Customer);
 
-        var _this51 = _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).call(this));
+        var _this52 = _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).call(this));
 
-        _this51.state = {
+        _this52.state = {
 
             showModal: false,
             customerAPI: []
         };
-        return _this51;
+        return _this52;
     }
 
     _createClass(Customer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this52 = this;
+            var _this53 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this52.setState({
+                _this53.setState({
 
                     customerAPI: responseData
                 });
@@ -5405,15 +5439,15 @@ var UpdateDelivery = function (_React$Component42) {
     function UpdateDelivery() {
         _classCallCheck(this, UpdateDelivery);
 
-        var _this57 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
+        var _this58 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
 
-        _this57.state = {
+        _this58.state = {
 
             showModal: true,
             parameter: 0,
             masterAPI: []
         };
-        return _this57;
+        return _this58;
     }
 
     _createClass(UpdateDelivery, [{
@@ -5428,12 +5462,12 @@ var UpdateDelivery = function (_React$Component42) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this58 = this;
+            var _this59 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this58.setState({
+                _this59.setState({
 
                     masterAPI: responseData
                 });
@@ -5449,14 +5483,14 @@ var UpdateDelivery = function (_React$Component42) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this59 = this;
+            var _this60 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this59.state.parameter;
+                return x.id == _this60.state.parameter;
             });
 
             var newUpdate = {
@@ -5533,9 +5567,9 @@ var Payment = function (_React$Component43) {
     function Payment() {
         _classCallCheck(this, Payment);
 
-        var _this60 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
+        var _this61 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
 
-        _this60.state = {
+        _this61.state = {
 
             showModal: true,
             parameter: 0,
@@ -5544,7 +5578,7 @@ var Payment = function (_React$Component43) {
             pendiente: 0,
             actual: 0
         };
-        return _this60;
+        return _this61;
     }
 
     _createClass(Payment, [{
@@ -5559,12 +5593,12 @@ var Payment = function (_React$Component43) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this61 = this;
+            var _this62 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this61.setState({
+                _this62.setState({
 
                     masterAPI: responseData
                 });
@@ -5580,14 +5614,14 @@ var Payment = function (_React$Component43) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this62 = this;
+            var _this63 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this62.state.parameter;
+                return x.id == _this63.state.parameter;
             });
 
             var newUpdate = {
@@ -5648,12 +5682,12 @@ var Payment = function (_React$Component43) {
     }, {
         key: 'render',
         value: function render() {
-            var _this63 = this;
+            var _this64 = this;
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this63.state.parameter;
+                return x.id == _this64.state.parameter;
             });
 
             var balance = 0;
@@ -5786,27 +5820,27 @@ var PrintPayment = function (_React$Component44) {
     function PrintPayment() {
         _classCallCheck(this, PrintPayment);
 
-        var _this64 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
+        var _this65 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
 
-        _this64.state = {
+        _this65.state = {
 
             masterAPI: [],
             customerAPI: [],
             detailData: [],
             list: []
         };
-        return _this64;
+        return _this65;
     }
 
     _createClass(PrintPayment, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this65 = this;
+            var _this66 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this65.setState({
+                _this66.setState({
 
                     masterAPI: responseData
                 });
@@ -5814,7 +5848,7 @@ var PrintPayment = function (_React$Component44) {
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this65.setState({
+                _this66.setState({
 
                     customerAPI: responseData
                 });
@@ -5822,7 +5856,7 @@ var PrintPayment = function (_React$Component44) {
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this65.setState({
+                _this66.setState({
 
                     detailData: responseData
                 });
@@ -5830,7 +5864,7 @@ var PrintPayment = function (_React$Component44) {
             fetch(API_URL + '/list', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this65.setState({
+                _this66.setState({
 
                     list: responseData
                 });
@@ -5841,10 +5875,10 @@ var PrintPayment = function (_React$Component44) {
     }, {
         key: 'render',
         value: function render() {
-            var _this66 = this;
+            var _this67 = this;
 
             var filteredTable = this.state.masterAPI.filter(function (master) {
-                return master.id == _this66.props.params.printid;
+                return master.id == _this67.props.params.printid;
             });
 
             var name = void 0;
@@ -5976,12 +6010,796 @@ var PrintPayment = function (_React$Component44) {
     return PrintPayment;
 }(React.Component);
 
+var Home = function (_React$Component45) {
+    _inherits(Home, _React$Component45);
+
+    function Home() {
+        _classCallCheck(this, Home);
+
+        return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+    }
+
+    _createClass(Home, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Grid,
+                null,
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'panel panel-warning' },
+                            React.createElement(
+                                'div',
+                                { className: 'panel-heading' },
+                                React.createElement(
+                                    Row,
+                                    null,
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6 },
+                                        React.createElement('i', { className: 'fa fa-usd fa-5x' })
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6, className: 'text-right' },
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-heading' },
+                                            'R$ 950 mil'
+                                        ),
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-text' },
+                                            'Revenue'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'panel panel-info' },
+                            React.createElement(
+                                'div',
+                                { className: 'panel-heading' },
+                                React.createElement(
+                                    Row,
+                                    null,
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6 },
+                                        React.createElement('i', { className: 'fa fa-list-ol fa-5x' })
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6, className: 'text-right' },
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-heading' },
+                                            '4'
+                                        ),
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-text' },
+                                            'Customers'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'panel panel-danger' },
+                            React.createElement(
+                                'div',
+                                { className: 'panel-heading' },
+                                React.createElement(
+                                    Row,
+                                    null,
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6 },
+                                        React.createElement('i', { className: 'fa fa-area-chart fa-5x' })
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6, className: 'text-right' },
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-heading' },
+                                            '2,3 Months'
+                                        ),
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-text' },
+                                            'Average time'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'panel panel-success' },
+                            React.createElement(
+                                'div',
+                                { className: 'panel-heading' },
+                                React.createElement(
+                                    Row,
+                                    null,
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6 },
+                                        React.createElement('i', { className: 'fa fa-money fa-5x' })
+                                    ),
+                                    React.createElement(
+                                        Col,
+                                        { xs: 6, className: 'text-right' },
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-heading' },
+                                            '$ 250 k'
+                                        ),
+                                        React.createElement(
+                                            'p',
+                                            { className: 'announcement-text' },
+                                            'Recovered'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'tile-progress tile-primary', style: { "padding": "12px" } },
+                            React.createElement(
+                                'div',
+                                { 'class': 'tile-header' },
+                                React.createElement(
+                                    'h3',
+                                    null,
+                                    'Visitors'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog, and our website.'
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-progressbar' },
+                                React.createElement('span', { 'data-fill': '65.5%', style: { "width": "65.5%" } })
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-footer' },
+                                React.createElement(
+                                    'h4',
+                                    null,
+                                    React.createElement(
+                                        'span',
+                                        { className: 'pct-counter' },
+                                        '65.5'
+                                    ),
+                                    '% increase'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog and our website'
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'tile-progress tile-red', style: { "padding": "12px" } },
+                            React.createElement(
+                                'div',
+                                { 'class': 'tile-header' },
+                                React.createElement(
+                                    'h3',
+                                    null,
+                                    'Visitors'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog, and our website.'
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-progressbar' },
+                                React.createElement('span', { 'data-fill': '65.5%', style: { "width": "65.5%" } })
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-footer' },
+                                React.createElement(
+                                    'h4',
+                                    null,
+                                    React.createElement(
+                                        'span',
+                                        { className: 'pct-counter' },
+                                        '65.5'
+                                    ),
+                                    '% increase'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog and our website'
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'tile-progress tile-blue', style: { "padding": "12px" } },
+                            React.createElement(
+                                'div',
+                                { 'class': 'tile-header' },
+                                React.createElement(
+                                    'h3',
+                                    null,
+                                    'Visitors'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog, and our website.'
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-progressbar' },
+                                React.createElement('span', { 'data-fill': '65.5%', style: { "width": "65.5%" } })
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-footer' },
+                                React.createElement(
+                                    'h4',
+                                    null,
+                                    React.createElement(
+                                        'span',
+                                        { className: 'pct-counter' },
+                                        '65.5'
+                                    ),
+                                    '% increase'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog and our website'
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 3 },
+                        React.createElement(
+                            'div',
+                            { className: 'tile-progress tile-aqua', style: { "padding": "12px" } },
+                            React.createElement(
+                                'div',
+                                { 'class': 'tile-header' },
+                                React.createElement(
+                                    'h3',
+                                    null,
+                                    'Visitors'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog, and our website.'
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-progressbar' },
+                                React.createElement('span', { 'data-fill': '65.5%', style: { "width": "65.5%" } })
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'tile-footer' },
+                                React.createElement(
+                                    'h4',
+                                    null,
+                                    React.createElement(
+                                        'span',
+                                        { className: 'pct-counter' },
+                                        '65.5'
+                                    ),
+                                    '% increase'
+                                ),
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'so far in our blog and our website'
+                                )
+                            )
+                        )
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        Col,
+                        { md: 4 },
+                        React.createElement(
+                            'div',
+                            { className: 'panel-group', id: 'accordion' },
+                            React.createElement(
+                                'div',
+                                { className: 'panel panel-default' },
+                                React.createElement(
+                                    'div',
+                                    { className: 'panel-heading' },
+                                    React.createElement(
+                                        'h4',
+                                        { className: 'panel-title' },
+                                        React.createElement(
+                                            'a',
+                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse1' },
+                                            'Files'
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    'div',
+                                    { id: 'collapse1', className: 'panel-collapse collapse in' },
+                                    React.createElement(
+                                        'ul',
+                                        { className: 'list-group' },
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '253'
+                                            ),
+                                            ' New'
+                                        ),
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '17'
+                                            ),
+                                            ' Deleted'
+                                        ),
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '3'
+                                            ),
+                                            ' Reported'
+                                        )
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'panel panel-default' },
+                                React.createElement(
+                                    'div',
+                                    { className: 'panel-heading' },
+                                    React.createElement(
+                                        'h4',
+                                        { className: 'panel-title' },
+                                        React.createElement(
+                                            'a',
+                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse2' },
+                                            'Blog'
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    'div',
+                                    { id: 'collapse2', className: 'panel-collapse collapse' },
+                                    React.createElement(
+                                        'ul',
+                                        { className: 'list-group' },
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '12'
+                                            ),
+                                            ' New'
+                                        ),
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '5'
+                                            ),
+                                            ' Deleted'
+                                        )
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'panel panel-default' },
+                                React.createElement(
+                                    'div',
+                                    { className: 'panel-heading' },
+                                    React.createElement(
+                                        'h4',
+                                        { className: 'panel-title' },
+                                        React.createElement(
+                                            'a',
+                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse3' },
+                                            'Settings'
+                                        )
+                                    )
+                                ),
+                                React.createElement(
+                                    'div',
+                                    { id: 'collapse3', className: 'panel-collapse collapse' },
+                                    React.createElement(
+                                        'ul',
+                                        { className: 'list-group' },
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '1'
+                                            ),
+                                            ' Users Reported'
+                                        ),
+                                        React.createElement(
+                                            'li',
+                                            { className: 'list-group-item' },
+                                            React.createElement(
+                                                'span',
+                                                { className: 'badge' },
+                                                '5'
+                                            ),
+                                            ' User Waiting Activation'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 4 },
+                        React.createElement(
+                            'h4',
+                            null,
+                            'Today Stats'
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'Visit'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    { className: 'pull-right strong' },
+                                    '- 15%'
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            { className: 'progress' },
+                            React.createElement(
+                                'div',
+                                { className: 'progress-bar progress-bar-danger', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "15%" } },
+                                '15%'
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    '20 New Users'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    { className: 'pull-right strong' },
+                                    '+ 8%'
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            { className: 'progress' },
+                            React.createElement(
+                                'div',
+                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "8%" } },
+                                '8%'
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    '359 Downloads'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    { className: 'pull-right strong' },
+                                    '- 15%'
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            { className: 'progress' },
+                            React.createElement(
+                                'div',
+                                { className: 'progress-bar progress-bar-warning', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "15%" } },
+                                '15%'
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Col,
+                        { md: 4 },
+                        React.createElement(
+                            'h4',
+                            null,
+                            'Today Stats'
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    'Visit'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    { className: 'pull-right strong' },
+                                    '- 15%'
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            { className: 'progress' },
+                            React.createElement(
+                                'div',
+                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "45%" } },
+                                '15%'
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    '20 New Users'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    { className: 'pull-right strong' },
+                                    '+ 8%'
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            { className: 'progress' },
+                            React.createElement(
+                                'div',
+                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "58%" } },
+                                '8%'
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    null,
+                                    '359 Downloads'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { xs: 6 },
+                                React.createElement(
+                                    'span',
+                                    { className: 'pull-right strong' },
+                                    '- 15%'
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            { className: 'progress' },
+                            React.createElement(
+                                'div',
+                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "88%" } },
+                                '15%'
+                            )
+                        )
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'progress' },
+                        React.createElement('div', { className: 'one primary-color' }),
+                        React.createElement('div', { className: 'two primary-color' }),
+                        React.createElement('div', { className: 'three no-color' }),
+                        React.createElement('div', { className: 'progress-bar', style: { "width": "70%" } })
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'progress' },
+                        React.createElement('div', { className: 'one success-color' }),
+                        React.createElement('div', { className: 'two success-color' }),
+                        React.createElement('div', { className: 'three success-color' }),
+                        React.createElement('div', { className: 'progress-bar progress-bar-success', style: { "width": "100%" } })
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'progress' },
+                        React.createElement('div', { className: 'one danger-color' }),
+                        React.createElement('div', { className: 'two no-color' }),
+                        React.createElement('div', { className: 'three no-color' }),
+                        React.createElement('div', { className: 'progress-bar progress-bar-danger', style: { "width": "30%" } })
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'progress' },
+                        React.createElement('div', { className: 'one warning-color' }),
+                        React.createElement('div', { className: 'two warning-color' }),
+                        React.createElement('div', { className: 'three no-color' }),
+                        React.createElement('div', { className: 'progress-bar progress-bar-warning', style: { "width": "60%" } })
+                    )
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'progress' },
+                        React.createElement('div', { className: 'one info-color' }),
+                        React.createElement('div', { className: 'two no-color' }),
+                        React.createElement('div', { className: 'three no-color' }),
+                        React.createElement('div', { className: 'progress-bar progress-bar-info', style: { "width": "35%" } })
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Home;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
     React.createElement(
         Route,
         { path: '/', component: App },
+        React.createElement(IndexRoute, { component: Home }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
         React.createElement(Route, { path: 'customer', component: Customer }),
         React.createElement(Route, { path: 'loader', component: Loader }),

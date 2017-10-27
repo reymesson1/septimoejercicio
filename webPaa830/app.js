@@ -180,7 +180,14 @@ app.post('/updatedelivery',function(req,res){
 })
 
 app.post('/loader',function(req,res){
-    console.log(req.body)
+    var id = req.body.id;
+    
+    for(var x=0;x<master.length;x++){
+        if(master[x].id==id){            
+            res.send(master[x])
+        }        
+    }
+    
     res.send(req.body);
 });
 
