@@ -47,7 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://localhost';
+var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 

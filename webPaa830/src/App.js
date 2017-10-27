@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://localhost';
+const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
