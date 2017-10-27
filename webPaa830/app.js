@@ -178,7 +178,7 @@ app.post('/updatedelivery',function(req,res){
     console.log(obj)
     master[obj.index].fechaentrega=obj.fechaentrega;
 })
-
+ 
 app.post('/loader',function(req,res){
     var id = req.body.id;
     
