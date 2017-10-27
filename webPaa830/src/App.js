@@ -620,6 +620,7 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.1}><Link to="/partials">Cuadre</Link></MenuItem>
                             <MenuItem eventKey={3.2}><Link to="/loader">Tracking</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
+                            <MenuItem eventKey={3.3}><Link to="/partialstwo">Cuadre Articulos</Link></MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}>Separated link</MenuItem>
                       </NavDropdown>
@@ -644,6 +645,7 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.1}><Link to="/partials">Draw</Link></MenuItem>
                             <MenuItem eventKey={3.2}><Link to="/loader">loaded</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
+                            <MenuItem eventKey={3.3}><Link to="/partialstwo">Draw2</Link></MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}>Separated link</MenuItem>
                       </NavDropdown>
@@ -4248,7 +4250,109 @@ class Home extends React.Component{
     }
 }
 
+class PartialsTwo extends React.Component{
 
+constructor(){
+
+    super();
+    this.state = {
+    
+        masterAPI: []
+    }
+}
+
+componentDidMount(){
+
+      fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+      .then((response)=>response.json())
+      .then((responseData)=>{
+          this.setState({
+
+              masterAPI: responseData
+          })
+      })
+      .catch((error)=>{
+          console.log('Error fetching and parsing data', error);
+      })
+      
+}
+
+render(){
+    
+    console.log(this.state.masterAPI);
+
+    return(
+    
+        <Col sm={6}>            
+            <Table striped bordered condensed hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Item</th>                        
+                  </tr>
+                </thead>
+                <tbody>
+        {this.state.masterAPI.map(
+            (master,index) => <PartialsTwoTableBody 
+                                                        index={index}
+                                                        id={master.id}
+                                                        item={master.item}
+                              />                
+        )}
+                </tbody>
+              </Table>
+        </Col>
+    );
+}
+}
+
+class PartialsTwoTableBody extends React.Component{
+
+render(){
+
+    return(
+                 <tr>
+                    <td>&nbsp;</td>
+                    <td>{this.props.id}</td>   
+                        <Table striped bordered condensed hover>
+                            <thead>
+                              <tr>
+                                <th>Name</th>
+                                <th>Times</th>                    
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.item.map(
+                                    (master,index) => <PartialsTwoTableBodyDetail 
+                                                                            index={index}
+                                                                            item={master.item}
+                                                                            quantity={master.quantity}
+                                                />
+                                )}
+                            </tbody>
+                        </Table>
+                  </tr> 
+        
+    );
+}    
+}
+
+class PartialsTwoTableBodyDetail extends React.Component{
+
+render(){
+
+    return(
+    
+        
+              <tr>                    
+                <td>{this.props.item}</td>
+                <td>{this.props.quantity}</td>                    
+              </tr>                  
+            
+    )
+}
+}
 
 
 ReactDOM.render((
@@ -4258,6 +4362,7 @@ ReactDOM.render((
         <Route path="printpayment/:printid" component={PrintPayment}/>
         <Route path="customer" component={Customer}/>
         <Route path="loader" component={Loader}/>
+        <Route path="partialstwo" component={PartialsTwo}/>
         <Route path="partials" component={Partials}/>
         <Route path="updatedetail/:detailid" component={DetailModalUpdate}/>
         <Route path="updatedelivery/:deliveryid" component={UpdateDelivery}/>

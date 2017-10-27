@@ -1050,6 +1050,15 @@ var Toolbar = function (_React$Component8) {
                                 'Clientes'
                             )
                         ),
+                        React.createElement(
+                            MenuItem,
+                            { eventKey: 3.3 },
+                            React.createElement(
+                                Link,
+                                { to: '/partialstwo' },
+                                'Cuadre Articulos'
+                            )
+                        ),
                         React.createElement(MenuItem, { divider: true }),
                         React.createElement(
                             MenuItem,
@@ -1134,6 +1143,15 @@ var Toolbar = function (_React$Component8) {
                                 Link,
                                 { to: '/customer' },
                                 'Clientes'
+                            )
+                        ),
+                        React.createElement(
+                            MenuItem,
+                            { eventKey: 3.3 },
+                            React.createElement(
+                                Link,
+                                { to: '/partialstwo' },
+                                'Draw2'
                             )
                         ),
                         React.createElement(MenuItem, { divider: true }),
@@ -6793,6 +6811,190 @@ var Home = function (_React$Component45) {
     return Home;
 }(React.Component);
 
+var PartialsTwo = function (_React$Component46) {
+    _inherits(PartialsTwo, _React$Component46);
+
+    function PartialsTwo() {
+        _classCallCheck(this, PartialsTwo);
+
+        var _this69 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
+
+        _this69.state = {
+
+            masterAPI: []
+        };
+        return _this69;
+    }
+
+    _createClass(PartialsTwo, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this70 = this;
+
+            fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this70.setState({
+
+                    masterAPI: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            console.log(this.state.masterAPI);
+
+            return React.createElement(
+                Col,
+                { sm: 6 },
+                React.createElement(
+                    Table,
+                    { striped: true, bordered: true, condensed: true, hover: true },
+                    React.createElement(
+                        'thead',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'th',
+                                null,
+                                '#'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Id'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Item'
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'tbody',
+                        null,
+                        this.state.masterAPI.map(function (master, index) {
+                            return React.createElement(PartialsTwoTableBody, {
+                                index: index,
+                                id: master.id,
+                                item: master.item
+                            });
+                        })
+                    )
+                )
+            );
+        }
+    }]);
+
+    return PartialsTwo;
+}(React.Component);
+
+var PartialsTwoTableBody = function (_React$Component47) {
+    _inherits(PartialsTwoTableBody, _React$Component47);
+
+    function PartialsTwoTableBody() {
+        _classCallCheck(this, PartialsTwoTableBody);
+
+        return _possibleConstructorReturn(this, (PartialsTwoTableBody.__proto__ || Object.getPrototypeOf(PartialsTwoTableBody)).apply(this, arguments));
+    }
+
+    _createClass(PartialsTwoTableBody, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                    'td',
+                    null,
+                    '\xA0'
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.id
+                ),
+                React.createElement(
+                    Table,
+                    { striped: true, bordered: true, condensed: true, hover: true },
+                    React.createElement(
+                        'thead',
+                        null,
+                        React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'th',
+                                null,
+                                'Name'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Times'
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'tbody',
+                        null,
+                        this.props.item.map(function (master, index) {
+                            return React.createElement(PartialsTwoTableBodyDetail, {
+                                index: index,
+                                item: master.item,
+                                quantity: master.quantity
+                            });
+                        })
+                    )
+                )
+            );
+        }
+    }]);
+
+    return PartialsTwoTableBody;
+}(React.Component);
+
+var PartialsTwoTableBodyDetail = function (_React$Component48) {
+    _inherits(PartialsTwoTableBodyDetail, _React$Component48);
+
+    function PartialsTwoTableBodyDetail() {
+        _classCallCheck(this, PartialsTwoTableBodyDetail);
+
+        return _possibleConstructorReturn(this, (PartialsTwoTableBodyDetail.__proto__ || Object.getPrototypeOf(PartialsTwoTableBodyDetail)).apply(this, arguments));
+    }
+
+    _createClass(PartialsTwoTableBodyDetail, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.item
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.quantity
+                )
+            );
+        }
+    }]);
+
+    return PartialsTwoTableBodyDetail;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -6803,6 +7005,7 @@ ReactDOM.render(React.createElement(
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
         React.createElement(Route, { path: 'customer', component: Customer }),
         React.createElement(Route, { path: 'loader', component: Loader }),
+        React.createElement(Route, { path: 'partialstwo', component: PartialsTwo }),
         React.createElement(Route, { path: 'partials', component: Partials }),
         React.createElement(Route, { path: 'updatedetail/:detailid', component: DetailModalUpdate }),
         React.createElement(Route, { path: 'updatedelivery/:deliveryid', component: UpdateDelivery }),
