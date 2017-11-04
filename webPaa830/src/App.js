@@ -276,7 +276,7 @@ LAVANDERIA</h5>
                                 Tel.: (809)-378-0140</h5>
                             <br/>
                             <br/>
-                            <h5 className="col-xs-offset-7">Fecha: {today}</h5>
+                            <h5 className="col-xs-offset-4>Fecha: {today}</h5>
                             <br/>
                             <h5>IdCliente : {telefono}</h5>                            
                             <h5>Nombre : {name}</h5>
@@ -527,8 +527,7 @@ class ActionsTableBodyDetail extends React.Component{
                         <table>
                             <tr>
                                 {this.props.itemDetail.map(
-                                    (detail) => 
-                                                    <td>&nbsp;{detail.name}</td>
+                                    (detail) =>     <td>&nbsp;{detail.name}</td> 
                                 )}
                             </tr>
                         </table>
@@ -554,27 +553,20 @@ class Login extends React.Component{
                                     <h3 className="panel-title">Lavanderia El Tendedero</h3>
                                 </div>
                                 <div className="panel-body">
-                                    <form
-onSubmit={this.props.setcookie.bind(this)}>
+                                    <form onSubmit={this.props.setcookie.bind(this)}>
                                     <fieldset>
                                         <div className="form-group">
-                                            <input
-className="form-control" placeholder="E-mail" name="email"
-type="text"/>
+                                            <input className="form-control" placeholder="E-mail" name="email" type="text"/>
                                         </div>
                                         <div className="form-group">
-                                            <input
-className="form-control" placeholder="Password" name="password"
-type="password"/>
+                                            <input className="form-control" placeholder="Password" name="password" type="password"/>
                                         </div>
                                         <div className="checkbox">
                                             <label>
-                                                <input name="remember"
-type="checkbox" value="Remember Me"/> Remember Me
+                                                <input name="remember" type="checkbox" value="Remember Me"/> Remember Me
                                             </label>
                                         </div>
-                                            <button  className="btn
-btn-lg btn-success btn-block">Login</button>
+                                            <button  className="btn btn-lg btn-success btn-block">Login</button>
                                     </fieldset>
                                     </form>
                                 </div>
