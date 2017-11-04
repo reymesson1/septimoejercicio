@@ -45,7 +45,7 @@ app.get('/customer',function(req,res){
 app.post('/customer',function(req,res){
     
     customer.push(req.body);
-    
+    dba.addCustomer(req.body);    
     for(var x=0;x<customer.length;x++){
         
         //list.push(customer[x].name+' '+customer[x].apellido);
@@ -55,22 +55,29 @@ app.post('/customer',function(req,res){
     res.send(req.body);
 })
 
+
+
 var master = [];
 
 app.get('/masterAPI', function(req,res){
 
 
-    res.send(master);
+    dba.getMaster({}, function(data){
+
+        res.send(data);
+
+    });
+
 })
 
 app.get('/master', function(req,res){
 
+    dba.getMaster({}, function(data){
 
-    var filteredTable = master.filter(
-            (pending) => pending.status.indexOf('pending') !== -1
-    )
+        res.send(data);
 
-    res.send(master);
+    });
+
 })
 
 app.get('/main', function(req,res){
@@ -107,7 +114,7 @@ app.post('/done', function(req,res){
 
 app.post('/master', function(req,res){
 
-    //dba.addMaster(req.body);
+    dba.addMaster(req.body);
     master.push(req.body);
 });
 
@@ -122,12 +129,11 @@ app.post('/deletemaster', function(req,res){
 
 app.get('/reporte', function(req,res){
 
-    /*dba.getMaster({}, function(data){
+    dba.getMaster({}, function(data){
 
         res.send(data);
 
-    });*/
-    res.send(master)
+    });
 
 })
 
@@ -148,23 +154,22 @@ var detail = [
 
 app.get('/detail',function(req,res){
 
-    /*dba.getDetail({}, function(data){
-   res.send(data);
-    });*/
-    res.send(detail)
+   dba.getDetail({}, function(data){
+   	res.send(data);
+   });
 });
 
 app.post('/detail', function(req,res){
 
     detail.push(req.body);
-    //dba.addDetail(req.body)
+    dba.addDetail(req.body)
     res.send(req.body)
 });
 
 app.post('/deletedetail', function(req,res){
 
     var obj = req.body;
-    //dba.removeDetail({"id":obj.id})
+    dba.removeDetail({"id":obj.id})
     detail.splice(obj.index,1);
 });
 
@@ -180,15 +185,13 @@ app.post('/updatedelivery',function(req,res){
 })
  
 app.post('/loader',function(req,res){
-    var id = req.body.id;
     
-    for(var x=0;x<master.length;x++){
-        if(master[x].id==id){            
-            res.send(master[x])
-        }        
-    }
-    
-    res.send(req.body);
+    dba.getTracking(req.body, function(data){
+        res.send(data);
+
+    });
+
+
 });
 
 app.post('/payment',function(req,res){

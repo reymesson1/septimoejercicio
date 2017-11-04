@@ -368,7 +368,7 @@ class ActionsTableBodyFooter extends React.Component{
             fechaentrega = nextState[0].fechaentrega;
             horaentrega = nextState[0].horaentrega;
             agregado = nextState[0].agregado;
-            descuento = nextState[0].desc;            
+            descuento = parseFloat(nextState[0].desc).toFixed(2);            
             for(var x=0;x<nextState[0].item.length;x++){
 
                 piezas+=parseInt(nextState[0].item[x].quantity);
@@ -517,7 +517,6 @@ class ActionsTableBodyDetail extends React.Component{
 
     render(){
         
-        console.log(this.props.itemDetail);
         
         return(
             <tr>
@@ -1058,7 +1057,7 @@ class Master extends React.Component{
 
 
     render(){
-        
+	
         let ModalButtonEN = (
 
 
@@ -3072,7 +3071,7 @@ class Loader extends React.Component{
 
                   method: 'post',
                   headers: API_HEADERS,
-                  body: JSON.stringify({"id":this.state.inputText})
+                  body: JSON.stringify({"id":parseInt(this.state.inputText)})
             })
             .then((response)=>response.json())
             .then((responseData)=>{
@@ -3099,8 +3098,6 @@ class Loader extends React.Component{
     }
 
     render(){
-
-
 
         return(
             <div>
@@ -3170,21 +3167,30 @@ class LoaderListGroup extends React.Component{
 
     render(){
 
-        let nextState = this.props.masterAPI;
+	let nextState = this.props.masterAPI;
 
-        let date = nextState.date;
+	let date;
 
-        let datedel = nextState.fechaentrega;
+	let datedel;
 
-        let status = nextState.status;
+	let status;
+
+	if(nextState[0]){
+
+	        date = nextState[0].date;
+
+	        datedel = nextState[0].fechaentrega;
+
+	        status = nextState[0].status;
+	}
 
             return(
-                <Panel header="This Loader">
+                <Panel header="Estatus Orden">
                     <ListGroup>
-                    <ListGroupItem href="#link1">Date created: <Label bsStyle="success">{date}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Comment: <Label bsStyle="success">{status}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Comments: <span>Coments</span></ListGroupItem>
+                    <ListGroupItem href="#link1">Fecha de creacion: <Label bsStyle="success">{date}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Fecha de entrega: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Estatus: <Label bsStyle="success">{status}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Comentario: <span>Coments</span></ListGroupItem>
                   </ListGroup>
                 </Panel>
             );

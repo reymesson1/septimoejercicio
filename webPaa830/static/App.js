@@ -465,7 +465,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 fechaentrega = nextState[0].fechaentrega;
                 horaentrega = nextState[0].horaentrega;
                 agregado = nextState[0].agregado;
-                descuento = nextState[0].desc;
+                descuento = parseFloat(nextState[0].desc).toFixed(2);
                 for (var x = 0; x < nextState[0].item.length; x++) {
 
                     piezas += parseInt(nextState[0].item[x].quantity);
@@ -818,8 +818,6 @@ var ActionsTableBodyDetail = function (_React$Component6) {
         key: 'render',
         value: function render() {
 
-            console.log(this.props.itemDetail);
-
             return React.createElement(
                 'tr',
                 null,
@@ -941,7 +939,7 @@ var Login = function (_React$Component7) {
                                             ),
                                             React.createElement(
                                                 'button',
-                                                { className: 'btn\r\nbtn-lg btn-success btn-block' },
+                                                { className: 'btn\nbtn-lg btn-success btn-block' },
                                                 'Login'
                                             )
                                         )
@@ -4671,7 +4669,7 @@ var Loader = function (_React$Component33) {
 
                     method: 'post',
                     headers: API_HEADERS,
-                    body: JSON.stringify({ "id": this.state.inputText })
+                    body: JSON.stringify({ "id": parseInt(this.state.inputText) })
                 }).then(function (response) {
                     return response.json();
                 }).then(function (responseData) {
@@ -4813,22 +4811,31 @@ var LoaderListGroup = function (_React$Component35) {
 
             var nextState = this.props.masterAPI;
 
-            var date = nextState.date;
+            var date = void 0;
 
-            var datedel = nextState.fechaentrega;
+            var datedel = void 0;
 
-            var status = nextState.status;
+            var status = void 0;
+
+            if (nextState[0]) {
+
+                date = nextState[0].date;
+
+                datedel = nextState[0].fechaentrega;
+
+                status = nextState[0].status;
+            }
 
             return React.createElement(
                 Panel,
-                { header: 'This Loader' },
+                { header: 'Estatus Orden' },
                 React.createElement(
                     ListGroup,
                     null,
                     React.createElement(
                         ListGroupItem,
                         { href: '#link1' },
-                        'Date created: ',
+                        'Fecha de creacion: ',
                         React.createElement(
                             Label,
                             { bsStyle: 'success' },
@@ -4838,7 +4845,7 @@ var LoaderListGroup = function (_React$Component35) {
                     React.createElement(
                         ListGroupItem,
                         { href: '#link2' },
-                        'Last update: ',
+                        'Fecha de entrega: ',
                         React.createElement(
                             Label,
                             { bsStyle: 'success' },
@@ -4848,7 +4855,7 @@ var LoaderListGroup = function (_React$Component35) {
                     React.createElement(
                         ListGroupItem,
                         { href: '#link2' },
-                        'Comment: ',
+                        'Estatus: ',
                         React.createElement(
                             Label,
                             { bsStyle: 'success' },
@@ -4858,7 +4865,7 @@ var LoaderListGroup = function (_React$Component35) {
                     React.createElement(
                         ListGroupItem,
                         { href: '#link2' },
-                        'Comments: ',
+                        'Comentario: ',
                         React.createElement(
                             'span',
                             null,

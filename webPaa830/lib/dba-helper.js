@@ -8,7 +8,7 @@ module.exports = function(){
 	function getUsers(user,callback){ 
 
 		var MongoClient = require('mongodb').MongoClient;
-		var url = "mongodb://localhost:27017/mechy";
+		var url = "mongodb://localhost:27017/eltendedero";
 		MongoClient.connect(url, function(err, db) {
 	            if (err) throw err;        
 	              db.collection("users").find(user).toArray(function(err,result){            
@@ -24,7 +24,7 @@ module.exports = function(){
 	function getMaster(master,callback){ 
 
 		var MongoClient = require('mongodb').MongoClient;
-		var url = "mongodb://localhost:27017/mechy";
+		var url = "mongodb://localhost:27017/eltendedero";
 		MongoClient.connect(url, function(err, db) {
 	            if (err) throw err;        
 	              db.collection("master").find({"date":today}).toArray(function(err,result){            
@@ -38,7 +38,7 @@ module.exports = function(){
 	function getDetail(detail,callback){
 
                 var MongoClient = require('mongodb').MongoClient;
-                var url = "mongodb://localhost:27017/mechy";
+                var url = "mongodb://localhost:27017/eltendedero";
                 MongoClient.connect(url, function(err, db) {
                     if (err) throw err;
                       db.collection("detail").find({}).toArray(function(err,result){
@@ -52,7 +52,7 @@ module.exports = function(){
 	function addMaster(master){
 
 		var MongoClient = require('mongodb').MongoClient;
-		var url = "mongodb://localhost:27017/mechy";
+		var url = "mongodb://localhost:27017/eltendedero";
 
 		MongoClient.connect(url, function(err, db) {
 
@@ -68,11 +68,61 @@ module.exports = function(){
 		});
 
 	}
-	
+
+	function getCustomer(customer,callback){
+
+                var MongoClient = require('mongodb').MongoClient;
+                var url = "mongodb://localhost:27017/eltendedero";
+                MongoClient.connect(url, function(err, db) {
+                    if (err) throw err;
+                      db.collection("customer").find().toArray(function(err,result){
+                          callback(result);
+                })
+                db.close();
+                });
+
+        }
+
+
+	function addCustomer(customer){
+
+                var MongoClient = require('mongodb').MongoClient;
+                var url = "mongodb://localhost:27017/eltendedero";
+
+                MongoClient.connect(url, function(err, db) {
+
+                        if (err) throw err;
+                        db.collection("Customer").insertOne(customer, function(err, res) {
+
+                                if (err) throw err;
+                                console.log("1 record inserted");
+                                db.close();
+
+                        });
+
+                });
+
+        }
+		
+	function getTracking(tracking,callback){
+
+                var MongoClient = require('mongodb').MongoClient;
+                var url = "mongodb://localhost:27017/eltendedero";
+                MongoClient.connect(url, function(err, db) {
+                    if (err) throw err;
+                      db.collection("master").find(tracking).toArray(function(err,result){
+                          callback(result);
+                })
+                db.close();
+                });
+
+        }
+
+
 	function addDetail(detail){
 
                 var MongoClient = require('mongodb').MongoClient;
-                var url = "mongodb://localhost:27017/mechy";
+                var url = "mongodb://localhost:27017/eltendedero";
 
                 MongoClient.connect(url, function(err, db) {
 
@@ -92,7 +142,7 @@ module.exports = function(){
 	function removeDetail(detail){
 
                 var MongoClient = require('mongodb').MongoClient;
-                var url = "mongodb://localhost:27017/mechy";
+                var url = "mongodb://localhost:27017/eltendedero";
 
                 MongoClient.connect(url, function(err, db) {
 
@@ -117,6 +167,9 @@ module.exports = function(){
 		getMaster: getMaster,
 		addDetail: addDetail,
 		getDetail: getDetail,
+		getTracking: getTracking,
+		getCustomer: getCustomer,
+		addCustomer: addCustomer,
 		removeDetail: removeDetail
 	}
 
