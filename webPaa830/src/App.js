@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
 
 const API_HEADERS = {
 
@@ -276,7 +276,7 @@ LAVANDERIA</h5>
                                 Tel.: (809)-378-0140</h5>
                             <br/>
                             <br/>
-                            <h5 className="col-xs-offset-4>Fecha: {today}</h5>
+                            <h5 className="col-xs-offset-7">Fecha: {today}</h5>
                             <br/>
                             <h5>IdCliente : {telefono}</h5>                            
                             <h5>Nombre : {name}</h5>
@@ -368,7 +368,7 @@ class ActionsTableBodyFooter extends React.Component{
             fechaentrega = nextState[0].fechaentrega;
             horaentrega = nextState[0].horaentrega;
             agregado = nextState[0].agregado;
-            descuento = parseFloat(nextState[0].desc).toFixed(2);            
+            descuento = nextState[0].desc;            
             for(var x=0;x<nextState[0].item.length;x++){
 
                 piezas+=parseInt(nextState[0].item[x].quantity);
@@ -517,6 +517,7 @@ class ActionsTableBodyDetail extends React.Component{
 
     render(){
         
+        console.log(this.props.itemDetail);
         
         return(
             <tr>
@@ -527,7 +528,8 @@ class ActionsTableBodyDetail extends React.Component{
                         <table>
                             <tr>
                                 {this.props.itemDetail.map(
-                                    (detail) =>     <td>&nbsp;{detail.name}</td> 
+                                    (detail) => 
+                                                    <td>&nbsp;{detail.name}</td>
                                 )}
                             </tr>
                         </table>
@@ -553,20 +555,27 @@ class Login extends React.Component{
                                     <h3 className="panel-title">Lavanderia El Tendedero</h3>
                                 </div>
                                 <div className="panel-body">
-                                    <form onSubmit={this.props.setcookie.bind(this)}>
+                                    <form
+onSubmit={this.props.setcookie.bind(this)}>
                                     <fieldset>
                                         <div className="form-group">
-                                            <input className="form-control" placeholder="E-mail" name="email" type="text"/>
+                                            <input
+className="form-control" placeholder="E-mail" name="email"
+type="text"/>
                                         </div>
                                         <div className="form-group">
-                                            <input className="form-control" placeholder="Password" name="password" type="password"/>
+                                            <input
+className="form-control" placeholder="Password" name="password"
+type="password"/>
                                         </div>
                                         <div className="checkbox">
                                             <label>
-                                                <input name="remember" type="checkbox" value="Remember Me"/> Remember Me
+                                                <input name="remember"
+type="checkbox" value="Remember Me"/> Remember Me
                                             </label>
                                         </div>
-                                            <button  className="btn btn-lg btn-success btn-block">Login</button>
+                                            <button  className="btn
+btn-lg btn-success btn-block">Login</button>
                                     </fieldset>
                                     </form>
                                 </div>
@@ -1049,7 +1058,7 @@ class Master extends React.Component{
 
 
     render(){
-	
+        
         let ModalButtonEN = (
 
 
@@ -3063,7 +3072,7 @@ class Loader extends React.Component{
 
                   method: 'post',
                   headers: API_HEADERS,
-                  body: JSON.stringify({"id":parseInt(this.state.inputText)})
+                  body: JSON.stringify({"id":this.state.inputText})
             })
             .then((response)=>response.json())
             .then((responseData)=>{
@@ -3090,6 +3099,8 @@ class Loader extends React.Component{
     }
 
     render(){
+
+
 
         return(
             <div>
@@ -3159,30 +3170,21 @@ class LoaderListGroup extends React.Component{
 
     render(){
 
-	let nextState = this.props.masterAPI;
+        let nextState = this.props.masterAPI;
 
-	let date;
+        let date = nextState.date;
 
-	let datedel;
+        let datedel = nextState.fechaentrega;
 
-	let status;
-
-	if(nextState[0]){
-
-	        date = nextState[0].date;
-
-	        datedel = nextState[0].fechaentrega;
-
-	        status = nextState[0].status;
-	}
+        let status = nextState.status;
 
             return(
-                <Panel header="Estatus Orden">
+                <Panel header="This Loader">
                     <ListGroup>
-                    <ListGroupItem href="#link1">Fecha de creacion: <Label bsStyle="success">{date}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Fecha de entrega: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Estatus: <Label bsStyle="success">{status}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Comentario: <span>Coments</span></ListGroupItem>
+                    <ListGroupItem href="#link1">Date created: <Label bsStyle="success">{date}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Comment: <Label bsStyle="success">{status}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Comments: <span>Coments</span></ListGroupItem>
                   </ListGroup>
                 </Panel>
             );
