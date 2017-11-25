@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
 
 const API_HEADERS = {
 
@@ -2036,6 +2036,7 @@ class Detail extends React.Component{
         super();
         this.state = {
             showModal: false,
+            showModalLoader: false,
             filterText: '',
             detailData: []
         }
@@ -2043,6 +2044,11 @@ class Detail extends React.Component{
 
     componentDidMount(){
 
+        this.setState({
+            
+            showModalLoader: true
+        })
+        
         time = window.setTimeout(function(msg) {
           fetch(API_URL+'/detail',{headers: API_HEADERS})
           .then((response)=>response.json())
@@ -2059,19 +2065,35 @@ class Detail extends React.Component{
           .catch((error)=>{
               console.log('Error fetching and parsing data', error);
           })
+            
+          this.setState({
+            
+            showModalLoader: false
+          })
 
        }.bind(this), 10000);
     }
 
     close() {
         this.setState({
-            showModal: false
+            showModal: false,
+        });
+    }
+
+    closeLoader() {
+        this.setState({
+            showModalLoader: false
         });
     }
 
     open() {
         this.setState({
-            showModal: true
+            showModal: true,
+        });
+    }
+    openLoader() {
+        this.setState({
+            showModalLoader: true
         });
     }
 
@@ -2190,8 +2212,14 @@ onHandleChange:this.onHandleChange.bind(this)
                                             detailCallback={{
                                                 open:this.open,
                                                 close:this.close.bind(this),
-
-onsavedetail:this.onSaveDetail.bind(this)
+                                                onsavedetail:this.onSaveDetail.bind(this)
+                                            }}
+                            />
+                            <DetailLoaderModal showModal={this.state.showModalLoader}
+                                            detailCallback={{
+                                                open:this.openLoader,
+                                                close:this.closeLoader.bind(this),
+                                                onsavedetail:this.onSaveDetail.bind(this)
                                             }}
                             />
                         </div>
@@ -2794,6 +2822,25 @@ pullRight>Guardar</Button>
         );
     }
 }
+
+class DetailLoaderModal extends React.Component{
+
+    render(){
+        
+        return(
+        
+            <Modal style={{'margin-top':'15%','overflow':'hidden'}} show={this.props.showModal}>
+                <Modal.Header>
+                    <Modal.Title>Loading...</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                      <ProgressBar active now={99} />
+                </Modal.Body>
+            </Modal>
+        );
+    }
+}
+
 
 class Partials extends React.Component{
 
