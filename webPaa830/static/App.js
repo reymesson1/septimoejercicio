@@ -3122,10 +3122,14 @@ var Detail = function (_React$Component23) {
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this29.setState({
 
-                    detailData: responseData
-                });
+                time = window.setTimeout(function (msg) {
+
+                    this.setState({
+
+                        detailData: responseData
+                    });
+                }.bind(_this29), 3000);
             }).catch(function (error) {
                 console.log('Error fetching and parsing data', error);
             });
