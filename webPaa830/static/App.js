@@ -3117,22 +3117,22 @@ var Detail = function (_React$Component23) {
     _createClass(Detail, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this29 = this;
 
-            fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
-                return response.json();
-            }).then(function (responseData) {
+            time = window.setTimeout(function (msg) {
+                var _this29 = this;
 
-                time = window.setTimeout(function (msg) {
+                fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
+                    return response.json();
+                }).then(function (responseData) {
 
-                    this.setState({
+                    _this29.setState({
 
                         detailData: responseData
                     });
-                }.bind(_this29), 3000);
-            }).catch(function (error) {
-                console.log('Error fetching and parsing data', error);
-            });
+                }).catch(function (error) {
+                    console.log('Error fetching and parsing data', error);
+                });
+            }.bind(this), 3000);
         }
     }, {
         key: 'close',

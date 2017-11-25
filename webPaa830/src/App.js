@@ -2043,24 +2043,24 @@ class Detail extends React.Component{
 
     componentDidMount(){
 
+        time = window.setTimeout(function(msg) {
           fetch(API_URL+'/detail',{headers: API_HEADERS})
           .then((response)=>response.json())
           .then((responseData)=>{
               
-              time = window.setTimeout(function(msg) {
  
                   this.setState({
 
                       detailData: responseData
                   })
                         
-                }.bind(this), 3000);
 
           })
           .catch((error)=>{
               console.log('Error fetching and parsing data', error);
           })
 
+       }.bind(this), 3000);
     }
 
     close() {
