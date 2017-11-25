@@ -47,7 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://localhost:8082';
+var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -941,7 +941,7 @@ var Login = function (_React$Component7) {
                                             ),
                                             React.createElement(
                                                 'button',
-                                                { className: 'btn\r\nbtn-lg btn-success btn-block' },
+                                                { className: 'btn\nbtn-lg btn-success btn-block' },
                                                 'Login'
                                             )
                                         )
@@ -3132,7 +3132,7 @@ var Detail = function (_React$Component23) {
                 }).catch(function (error) {
                     console.log('Error fetching and parsing data', error);
                 });
-            }.bind(this), 3000);
+            }.bind(this), 10000);
         }
     }, {
         key: 'close',

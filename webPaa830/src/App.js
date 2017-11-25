@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://localhost:8082';
+const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -2060,7 +2060,7 @@ class Detail extends React.Component{
               console.log('Error fetching and parsing data', error);
           })
 
-       }.bind(this), 3000);
+       }.bind(this), 10000);
     }
 
     close() {
