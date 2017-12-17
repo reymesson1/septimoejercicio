@@ -45,7 +45,7 @@ app.get('/customer',function(req,res){
 app.post('/customer',function(req,res){
     
     customer.push(req.body);
-    dba.addCustomer(req.body);    
+    //dba.addCustomer(req.body);    
     for(var x=0;x<customer.length;x++){
         
         //list.push(customer[x].name+' '+customer[x].apellido);
@@ -62,21 +62,25 @@ var master = [];
 app.get('/masterAPI', function(req,res){
 
 
-    dba.getMaster({}, function(data){
+    // dba.getMaster({}, function(data){
 
-        res.send(data);
+    //     res.send(data);
 
-    });
+    // });
+
+    res.send(master)
 
 })
 
 app.get('/master', function(req,res){
 
-    dba.getMaster({}, function(data){
+    // dba.getMaster({}, function(data){
 
-        res.send(data);
+    //     res.send(data);
 
-    });
+    // });
+
+    res.send(master);
 
 })
 
@@ -114,7 +118,8 @@ app.post('/done', function(req,res){
 
 app.post('/master', function(req,res){
 
-    dba.addMaster(req.body);
+    //dba.addMaster(req.body);
+    //console.log(req.body);
     master.push(req.body);
 });
 
@@ -129,11 +134,13 @@ app.post('/deletemaster', function(req,res){
 
 app.get('/reporte', function(req,res){
 
-    dba.getMaster({}, function(data){
+    // dba.getMaster({}, function(data){
 
-        res.send(data);
+    //     res.send(data);
 
-    });
+    // });
+
+    res.send(master);
 
 })
 
@@ -154,22 +161,24 @@ var detail = [
 
 app.get('/detail',function(req,res){
 
-   dba.getDetail({"category":"servicio"}, function(data){
-   	res.send(data);
-   });
+//    dba.getDetail({"category":"servicio"}, function(data){
+//    	res.send(data);
+//    });
+
+    res.send(detail);
 });
 
 app.post('/detail', function(req,res){
 
     detail.push(req.body);
-    dba.addDetail(req.body)
+    //dba.addDetail(req.body)
     res.send(req.body)
 });
 
 app.post('/deletedetail', function(req,res){
 
     var obj = req.body;
-    dba.removeDetail({"id":obj.id})
+    //dba.removeDetail({"id":obj.id})
     detail.splice(obj.index,1);
 });
 
@@ -186,11 +195,12 @@ app.post('/updatedelivery',function(req,res){
  
 app.post('/loader',function(req,res){
     
-    dba.getTracking(req.body, function(data){
-        res.send(data);
+    // dba.getTracking(req.body, function(data){
+    //     res.send(data);
 
-    });
+    // });
 
+    res.send(master);
 
 });
 
