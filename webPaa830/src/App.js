@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://localhost:8082';
+const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -574,8 +574,7 @@ type="password"/>
 type="checkbox" value="Remember Me"/> Remember Me
                                             </label>
                                         </div>
-                                            <button  className="btn
-btn-lg btn-success btn-block">Login</button>
+                                            <button  className="btn btn-lg btn-success btn-block">Login</button>
                                     </fieldset>
                                     </form>
                                 </div>
