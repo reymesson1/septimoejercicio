@@ -362,13 +362,13 @@ class ActionsTableBodyFooter extends React.Component{
 
         if(nextState[0]){
 
-            zoom = nextState[0].project;
+            zoom = nextState[0].project.toFixed(2);
             items = nextState[0].item.length;
             servicio = nextState[0].item[0].development;
             fechaentrega = nextState[0].fechaentrega;
             horaentrega = nextState[0].horaentrega;
-            agregado = nextState[0].agregado;
-            descuento = nextState[0].desc;            
+            agregado = nextState[0].agregado.toFixed(2);
+            descuento = nextState[0].desc.toFixed(2);            
             for(var x=0;x<nextState[0].item.length;x++){
 
                 piezas+=parseInt(nextState[0].item[x].quantity);
@@ -397,38 +397,31 @@ class ActionsTableBodyFooter extends React.Component{
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>SubTotal:</td>
-                <td style={{'width':'15px',
-'font-size':'20px'}}>{zoom}.00</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{zoom}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td style={{'width':'15px',
-'font-size':'20px'}}>+&nbsp;Agregado:</td>
-                <td style={{'width':'15px',
-'font-size':'20px'}}>{agregado}.00</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>+&nbsp;Agregado:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{agregado}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Desc.:</td>
-                <td style={{'width':'15px',
-'font-size':'20px'}}>{descuento}</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{descuento}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Itbis:</td>
-                <td style={{'width':'15px',
-'font-size':'20px'}}>{itbis.toFixed(2)}</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{itbis.toFixed(2)}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>Grand
-Total:</td>
-                <td style={{'width':'15px',
-'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>Grand Total:</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>
             </tr>
             <tr>
                 <td>F/Entrega: </td>
