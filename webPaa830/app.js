@@ -148,9 +148,11 @@ var detail = [{"_id":"59f696863dd30aa07d687699","id":"Abrigo","date":"2017-10-14
 
 app.get('/detail',function(req,res){
 
-    dba.getDetail({"category":"colores"}, function(data){
-    	res.send(data);
-    });
+    // dba.getDetail({"category":"colores"}, function(data){
+    // 	res.send(data);
+    // });
+
+    res.send(detail)
 
 });
 
