@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
 
 const API_HEADERS = {
 
@@ -2491,8 +2491,8 @@ class DetailModalUpdate extends React.Component{
         let nextState = this.state.detailData;
 
         let index = nextState.findIndex(x=> x.id==this.state.parameter);
-
-        nextState[index].item = event.target.item.value
+        
+        nextState[index].environment = event.target.environment.value
 
         this.setState({
 
@@ -2503,8 +2503,7 @@ class DetailModalUpdate extends React.Component{
 
               method: 'post',
               headers: API_HEADERS,
-              body:
-JSON.stringify({"index":index,"item":event.target.item.value})
+              body: JSON.stringify({"index":index,"environment":event.target.environment.value})
         })
 
         this.setState({
@@ -2567,7 +2566,7 @@ type="text" placeholder="Name" disabled />
                           </Col>
                           <Col sm={10}>
                             <FormControl name="environment"
-value={environment} type="text" placeholder="Environment" disabled />
+ type="text" placeholder="Environment"  />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalItem">
@@ -2576,7 +2575,7 @@ value={environment} type="text" placeholder="Environment" disabled />
                           </Col>
                           <Col sm={10}>
                             <FormControl name="item" type="text"
-placeholder={item} />
+placeholder={item} disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalCategory">

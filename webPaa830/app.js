@@ -171,8 +171,8 @@ app.post('/deletedetail', function(req,res){
 });
 
 app.post('/updatedetail',function(req,res){
-    var obj = req.body;
-    detail[obj.index].item=obj.item;
+    var obj = req.body;    
+    detail[obj.index].environment=obj.environment;
 })
 
 app.post('/updatedelivery',function(req,res){

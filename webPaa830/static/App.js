@@ -47,7 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
 
 var API_HEADERS = {
 
@@ -3760,7 +3760,7 @@ var DetailModalUpdate = function (_React$Component26) {
                 return x.id == _this35.state.parameter;
             });
 
-            nextState[index].item = event.target.item.value;
+            nextState[index].environment = event.target.environment.value;
 
             this.setState({
 
@@ -3771,7 +3771,7 @@ var DetailModalUpdate = function (_React$Component26) {
 
                 method: 'post',
                 headers: API_HEADERS,
-                body: JSON.stringify({ "index": index, "item": event.target.item.value })
+                body: JSON.stringify({ "index": index, "environment": event.target.environment.value })
             });
 
             this.setState({
@@ -3868,7 +3868,7 @@ var DetailModalUpdate = function (_React$Component26) {
                                 Col,
                                 { sm: 10 },
                                 React.createElement(FormControl, { name: 'environment',
-                                    value: environment, type: 'text', placeholder: 'Environment', disabled: true })
+                                    type: 'text', placeholder: 'Environment' })
                             )
                         ),
                         React.createElement(
@@ -3883,7 +3883,7 @@ var DetailModalUpdate = function (_React$Component26) {
                                 Col,
                                 { sm: 10 },
                                 React.createElement(FormControl, { name: 'item', type: 'text',
-                                    placeholder: item })
+                                    placeholder: item, disabled: true })
                             )
                         ),
                         React.createElement(
