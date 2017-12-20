@@ -3762,6 +3762,10 @@ var DetailModalUpdate = function (_React$Component26) {
 
             nextState[index].environment = event.target.environment.value;
 
+            var today = moment(new Date()).format('YYYY-MM-DD');
+
+            nextState[index].date = today;
+
             this.setState({
 
                 detailData: nextState
@@ -3771,7 +3775,7 @@ var DetailModalUpdate = function (_React$Component26) {
 
                 method: 'post',
                 headers: API_HEADERS,
-                body: JSON.stringify({ "index": index, "environment": event.target.environment.value })
+                body: JSON.stringify({ "index": index, "environment": event.target.environment.value, "date": today })
             });
 
             this.setState({

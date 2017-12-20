@@ -8,9 +8,13 @@ app.use(express.static('static'))
 
 var dba = require('./lib/dba-helper.js')();
 
+var moment = require('moment');
+
 app.use(bodyParser.json());
 
 var cookies = true;
+
+let today = moment(new Date()).format('YYYY-MM-DD');
 
 app.get('/cookies', function(req,res){
 
@@ -159,7 +163,7 @@ app.get('/detail',function(req,res){
 app.post('/detail', function(req,res){
 
     detail.push(req.body);
-    //dba.addDetail(req.body)
+    dba.addDetail(req.body)
     res.send(req.body)
 });
 
@@ -170,9 +174,12 @@ app.post('/deletedetail', function(req,res){
     detail.splice(obj.index,1);
 });
 
+
+
 app.post('/updatedetail',function(req,res){
     var obj = req.body;    
     detail[obj.index].environment=obj.environment;
+    detail[obj.index].date=today;
 })
 
 app.post('/updatedelivery',function(req,res){
