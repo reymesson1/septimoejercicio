@@ -3110,32 +3110,19 @@ var Detail = function (_React$Component23) {
     _createClass(Detail, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _this29 = this;
 
-            this.setState({
+            fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
 
-                showModalLoader: true
+                _this29.setState({
+
+                    detailData: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
             });
-
-            time = window.setTimeout(function (msg) {
-                var _this29 = this;
-
-                fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
-                    return response.json();
-                }).then(function (responseData) {
-
-                    _this29.setState({
-
-                        detailData: responseData
-                    });
-                }).catch(function (error) {
-                    console.log('Error fetching and parsing data', error);
-                });
-
-                this.setState({
-
-                    showModalLoader: false
-                });
-            }.bind(this), 10000);
         }
     }, {
         key: 'close',

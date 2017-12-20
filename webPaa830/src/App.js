@@ -2035,13 +2035,7 @@ class Detail extends React.Component{
     }
 
     componentDidMount(){
-
-        this.setState({
-            
-            showModalLoader: true
-        })
         
-        time = window.setTimeout(function(msg) {
           fetch(API_URL+'/detail',{headers: API_HEADERS})
           .then((response)=>response.json())
           .then((responseData)=>{
@@ -2058,12 +2052,6 @@ class Detail extends React.Component{
               console.log('Error fetching and parsing data', error);
           })
             
-          this.setState({
-            
-            showModalLoader: false
-          })
-
-       }.bind(this), 10000);
     }
 
     close() {
