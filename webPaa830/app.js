@@ -165,7 +165,6 @@ app.get('/detail',function(req,res){
     	res.send(data);
     });
 
-    res.send(detail);
 });
 
 app.post('/detail', function(req,res){
