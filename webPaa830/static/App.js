@@ -3408,7 +3408,7 @@ var DetailTable = function (_React$Component25) {
         _this31.state = {
             todos: [{ id: '123', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }, { id: '454758778052139', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }],
             currentPage: 1,
-            todosPerPage: 3
+            todosPerPage: 10
         };
         _this31.handleClick = _this31.handleClick.bind(_this31);
         return _this31;

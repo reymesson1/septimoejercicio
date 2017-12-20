@@ -2290,7 +2290,7 @@ class DetailTable extends React.Component{
 'test.item',environment: 'dev'},{id: '454758778052139',date:
 '2017-10-09',name: 'sas',item: 'test.item',environment: 'dev' },],
               currentPage: 1,
-              todosPerPage: 3
+              todosPerPage: 10
             };
             this.handleClick = this.handleClick.bind(this);
     }
