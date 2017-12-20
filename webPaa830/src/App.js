@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://localhost:8082';
+const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -2491,7 +2491,7 @@ class DetailModalUpdate extends React.Component{
         let nextState = this.state.detailData;
 
         let index = nextState.findIndex(x=> x.id==this.state.parameter);
-        
+
         nextState[index].environment = event.target.environment.value
 
         this.setState({
