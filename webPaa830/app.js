@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 var cookies = true;
 
-let today = moment(new Date()).format('YYYY-MM-DD');
+var today = moment(new Date()).format('YYYY-MM-DD');
 
 app.get('/cookies', function(req,res){
 
