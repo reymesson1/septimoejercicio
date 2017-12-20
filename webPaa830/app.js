@@ -161,9 +161,9 @@ var detail = [
 
 app.get('/detail',function(req,res){
 
-//    dba.getDetail({"category":"servicio"}, function(data){
-//    	res.send(data);
-//    });
+    dba.getDetail({"category":"servicio"}, function(data){
+    	res.send(data);
+    });
 
     res.send(detail);
 });
