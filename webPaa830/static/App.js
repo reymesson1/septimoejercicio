@@ -47,7 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
 
 var API_HEADERS = {
 
@@ -5019,6 +5019,8 @@ var Customer = function (_React$Component38) {
 
             event.preventDefault();
 
+            var today = moment(new Date()).format('YYYY-MM-DD');
+
             var newCustomer = {
 
                 "id": Date.now(),
@@ -5029,7 +5031,8 @@ var Customer = function (_React$Component38) {
                 "fechacumpleano": event.target.fechacumpleano.value,
                 "facebook": event.target.facebook.value,
                 "correoelectronico": event.target.correoelectronico.value,
-                "descuento": event.target.descuento.value
+                "descuento": event.target.descuento.value,
+                "created": today
 
             };
 

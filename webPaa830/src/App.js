@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
 
 const API_HEADERS = {
 
@@ -3289,6 +3289,8 @@ class Customer extends React.Component{
         
         event.preventDefault();
 
+        let today = moment(new Date()).format('YYYY-MM-DD');        
+
         let newCustomer = {
             
             "id": Date.now(),
@@ -3299,7 +3301,8 @@ class Customer extends React.Component{
             "fechacumpleano":event.target.fechacumpleano.value,
             "facebook":event.target.facebook.value,
             "correoelectronico":event.target.correoelectronico.value,
-            "descuento":event.target.descuento.value
+            "descuento":event.target.descuento.value,
+            "created": today 
             
         }
         
