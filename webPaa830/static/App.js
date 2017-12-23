@@ -3819,7 +3819,7 @@ var DetailModalUpdate = function (_React$Component26) {
                         React.createElement(
                             'h1',
                             null,
-                            'Editing to ',
+                            'Editando a ',
                             this.state.parameter
                         )
                     )
@@ -3841,8 +3841,7 @@ var DetailModalUpdate = function (_React$Component26) {
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { value: this.state.parameter,
-                                    type: 'id', placeholder: 'id', disabled: true })
+                                React.createElement(FormControl, { value: this.state.parameter, type: 'id', placeholder: 'id', disabled: true })
                             )
                         ),
                         React.createElement(
@@ -3851,13 +3850,12 @@ var DetailModalUpdate = function (_React$Component26) {
                             React.createElement(
                                 Col,
                                 { componentClass: ControlLabel, sm: 2 },
-                                'Name'
+                                'Descripcion'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'name', value: name,
-                                    type: 'text', placeholder: 'Name', disabled: true })
+                                React.createElement(FormControl, { name: 'name', value: name, type: 'text', placeholder: 'Descripcion', disabled: true })
                             )
                         ),
                         React.createElement(
@@ -3866,13 +3864,12 @@ var DetailModalUpdate = function (_React$Component26) {
                             React.createElement(
                                 Col,
                                 { componentClass: ControlLabel, sm: 2 },
-                                'Environment'
+                                'Precio'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'environment',
-                                    type: 'text', placeholder: 'Environment' })
+                                React.createElement(FormControl, { name: 'environment', type: 'text', placeholder: 'Precio' })
                             )
                         ),
                         React.createElement(
@@ -3881,13 +3878,12 @@ var DetailModalUpdate = function (_React$Component26) {
                             React.createElement(
                                 Col,
                                 { componentClass: ControlLabel, sm: 2 },
-                                'Item'
+                                'Cantidad'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'item', type: 'text',
-                                    placeholder: item, disabled: true })
+                                React.createElement(FormControl, { name: 'item', type: 'text', placeholder: item, disabled: true })
                             )
                         ),
                         React.createElement(
@@ -3896,13 +3892,12 @@ var DetailModalUpdate = function (_React$Component26) {
                             React.createElement(
                                 Col,
                                 { componentClass: ControlLabel, sm: 2 },
-                                'Category'
+                                'Categoria'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, { name: 'category', type: 'text',
-                                    value: category, disabled: true })
+                                React.createElement(FormControl, { name: 'category', type: 'text', value: category, disabled: true })
                             )
                         )
                     ),
@@ -3912,7 +3907,7 @@ var DetailModalUpdate = function (_React$Component26) {
                         React.createElement(
                             Button,
                             { type: 'submit' },
-                            'Save'
+                            'Guardar'
                         )
                     )
                 )

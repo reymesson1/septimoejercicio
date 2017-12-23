@@ -2541,7 +2541,7 @@ class DetailModalUpdate extends React.Component{
             <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
                 <Modal.Header>
                     <Modal.Title>
-                        <h1>Editing to {this.state.parameter}</h1>
+                        <h1>Editando a {this.state.parameter}</h1>
                     </Modal.Title>
                 </Modal.Header>
                     <Form onSubmit={this.onSubmitted.bind(this)} horizontal>
@@ -2551,49 +2551,44 @@ class DetailModalUpdate extends React.Component{
                             ID
                           </Col>
                           <Col sm={10}>
-                            <FormControl value={this.state.parameter}
-type="id" placeholder="id" disabled />
+                            <FormControl value={this.state.parameter} type="id" placeholder="id" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalName">
                           <Col componentClass={ControlLabel} sm={2}>
-                            Name
+                            Descripcion
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="name" value={name}
-type="text" placeholder="Name" disabled />
+                            <FormControl name="name" value={name} type="text" placeholder="Descripcion" disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalEnvironment">
                           <Col componentClass={ControlLabel} sm={2}>
-                            Environment
+                            Precio
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="environment"
- type="text" placeholder="Environment"  />
+                            <FormControl name="environment" type="text" placeholder="Precio"  />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalItem">
                           <Col componentClass={ControlLabel} sm={2}>
-                            Item
+                            Cantidad
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="item" type="text"
-placeholder={item} disabled />
+                            <FormControl name="item" type="text" placeholder={item} disabled />
                           </Col>
                         </FormGroup>
                         <FormGroup controlId="formHorizontalCategory">
                           <Col componentClass={ControlLabel} sm={2}>
-                            Category
+                            Categoria
                           </Col>
                           <Col sm={10}>
-                            <FormControl name="category" type="text"
-value={category} disabled />
+                            <FormControl name="category" type="text" value={category} disabled />
                           </Col>
                         </FormGroup>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit" >Save</Button>
+                    <Button type="submit" >Guardar</Button>
                 </Modal.Footer>
                     </Form>
             </Modal>
