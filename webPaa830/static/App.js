@@ -737,18 +737,17 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    '\u200A\u200A'
+                    '\u200A'
                 ),
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
                     this.props.quantity,
-                    ' \u200A '
+                    '\u200A'
                 ),
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    '\u200A',
                     this.props.item,
                     React.createElement(
                         'table',
@@ -770,7 +769,7 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    ' \u200A\u200A\u200A\u200A\u200A\u200A ',
+                    ' \u200A\u200A ',
                     this.props.project,
                     '.00'
                 )

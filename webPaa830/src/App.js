@@ -503,9 +503,9 @@ class ActionsTableBodyDetail extends React.Component{
         
         return(
             <tr>
-                    <td style={{'font-size':'20px'}}>&#8202;&#8202;</td>
-                    <td style={{'font-size':'20px'}}>{this.props.quantity} &#8202; </td>
-                    <td style={{'font-size':'20px'}}>&#8202;
+                    <td style={{'font-size':'20px'}}>&#8202;</td>
+                    <td style={{'font-size':'20px'}}>{this.props.quantity}&#8202;</td>
+                    <td style={{'font-size':'20px'}}>
                         {this.props.item}
                         <table>
                             <tr>
@@ -516,7 +516,7 @@ class ActionsTableBodyDetail extends React.Component{
                             </tr>
                         </table>
                     </td>
-                    <td style={{'font-size':'20px'}}> &#8202;&#8202;&#8202;&#8202;&#8202;&#8202; {this.props.project}.00</td>
+                    <td style={{'font-size':'20px'}}> &#8202;&#8202; {this.props.project}.00</td>
             </tr>
         );
     }
