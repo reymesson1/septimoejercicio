@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
 
 const API_HEADERS = {
 
@@ -256,25 +256,15 @@ class ActionsTable extends React.Component{
                         <Col xs={12}>
                             <img src="/logoprint.png"/>
 
-<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EL TENDEDERO
-LAVANDERIA</h5>
-                            <h5>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                RNC: 131213367</h5>
-                            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                AGORA MALL, LOCAL S1-03</h5>
-                            <h5>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                Santo Domingo. D.N.
-                            </h5>
-                            <h5>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                Tel.: (809)-378-0140</h5>
-                            <br/>
+<h5>EL TENDEDERO LAVANDERIA</h5>
+<h5>RNC: 131213367</h5>
+<h5>GALERIA 360, LOCAL S1-02</h5>
+<h5>
+    Santo Domingo. D.N.
+</h5>
+<h5>
+    Tel.: (809)-378-0140</h5>
+<br/>
                             <br/>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
                             <br/>
@@ -284,8 +274,7 @@ LAVANDERIA</h5>
                     </Row>
                     <Row>
                         <Col xs={12}>
-                            <Table striped bordered condensed hover
-style={{'position':'relative','width':'55%', 'margin':'0'}}>
+                            <Table striped bordered condensed hover style={{'position':'relative','width':'55%', 'margin':'0'}}>
                                 <thead>
                                   <tr>
                                     <th style={{'width':'15px','font-size':'25px', 'border-spacing':'030px'}}>#</th>
@@ -388,52 +377,52 @@ class ActionsTableBodyFooter extends React.Component{
         return(
             <tfoot>
             <tr>
-                <td>{items}&nbsp;&nbsp;Items</td>
-                <td>&nbsp;</td>
-                <td>{piezas}&nbsp;&nbsp;Piezas</td>
-                <td>&nbsp;</td>
+                <td>{items}Items</td>
+                <td></td>
+                <td>{piezas}Piezas</td>
+                <td></td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>SubTotal:</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>{zoom}</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>+&nbsp;Agregado:</td>
+                <td></td>
+                <td></td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>+Agregado:</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>{agregado}</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Desc.:</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>{descuento}</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Itbis:</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>{itbis.toFixed(2)}</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Grand Total:</td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>
             </tr>
             <tr>
                 <td>F/Entrega: </td>
                 <td colSpan={2}>{fechaentrega}</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>Hora: </td>
                 <td>{horaentrega}</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <br/>
                 <br/>
                 <br/>
@@ -443,7 +432,7 @@ class ActionsTableBodyFooter extends React.Component{
             </tr>
             <tr>
                 <td colSpan={3}>{servicio}</td>
-                <td>&nbsp;</td>
+                <td></td>
                 <br/>
                 <br/>
                 <br/>
@@ -452,8 +441,8 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <td colSpan={2}>Aprobacion Cliente</td>
                 <br/>
                 <br/>
@@ -465,7 +454,7 @@ class ActionsTableBodyFooter extends React.Component{
             <tr>
                 <td colSpan={2}>Le Atendio:</td>
                 <td>Admin</td>
-                <td>&nbsp;</td>
+                <td></td>
                 <br/>
                 <br/>
                 <br/>
@@ -514,20 +503,20 @@ class ActionsTableBodyDetail extends React.Component{
         
         return(
             <tr>
-                    <td style={{'font-size':'20px'}}>&nbsp;</td>
-                    <td style={{'font-size':'20px'}}>{this.props.quantity}</td>
-                    <td style={{'font-size':'20px'}}>
+                    <td style={{'font-size':'20px'}}>&#8202;&#8202;</td>
+                    <td style={{'font-size':'20px'}}>{this.props.quantity} &#8202; </td>
+                    <td style={{'font-size':'20px'}}>&#8202;
                         {this.props.item}
                         <table>
                             <tr>
                                 {this.props.itemDetail.map(
                                     (detail) => 
-                                                    <td>&nbsp;{detail.name}</td>
+                                                    <td>   {detail.name}</td>
                                 )}
                             </tr>
                         </table>
                     </td>
-                    <td style={{'font-size':'20px'}}>{this.props.project}.00</td>
+                    <td style={{'font-size':'20px'}}> &#8202;&#8202;&#8202;&#8202;&#8202;&#8202; {this.props.project}.00</td>
             </tr>
         );
     }
@@ -1374,7 +1363,7 @@ class MasterTableBody extends React.Component{
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
                     <td>{this.props.items}</td>
-                    <td>{this.props.fechaentrega}&nbsp;{this.props.horaentrega}</td>
+                    <td>{this.props.fechaentrega}{this.props.horaentrega}</td>
                     <td>{this.props.status}</td>
                     <td>
                         <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>&nbsp;&nbsp;

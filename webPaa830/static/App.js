@@ -47,7 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
 
 var API_HEADERS = {
 
@@ -299,27 +299,27 @@ var ActionsTable = function (_React$Component3) {
                             React.createElement(
                                 'h5',
                                 null,
-                                '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0EL TENDEDERO LAVANDERIA'
+                                'EL TENDEDERO LAVANDERIA'
                             ),
                             React.createElement(
                                 'h5',
                                 null,
-                                '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0 \xA0\xA0\xA0\xA0\xA0\xA0 RNC: 131213367'
+                                'RNC: 131213367'
                             ),
                             React.createElement(
                                 'h5',
                                 null,
-                                '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0 AGORA MALL, LOCAL S1-03'
+                                'GALERIA 360, LOCAL S1-02'
                             ),
                             React.createElement(
                                 'h5',
                                 null,
-                                '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0 \xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0 Santo Domingo. D.N.'
+                                'Santo Domingo. D.N.'
                             ),
                             React.createElement(
                                 'h5',
                                 null,
-                                '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0 \xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0 Tel.: (809)-378-0140'
+                                'Tel.: (809)-378-0140'
                             ),
                             React.createElement('br', null),
                             React.createElement('br', null),
@@ -352,8 +352,7 @@ var ActionsTable = function (_React$Component3) {
                             { xs: 12 },
                             React.createElement(
                                 Table,
-                                { striped: true, bordered: true, condensed: true, hover: true,
-                                    style: { 'position': 'relative', 'width': '55%', 'margin': '0' } },
+                                { striped: true, bordered: true, condensed: true, hover: true, style: { 'position': 'relative', 'width': '55%', 'margin': '0' } },
                                 React.createElement(
                                     'thead',
                                     null,
@@ -491,38 +490,22 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         'td',
                         null,
                         items,
-                        '\xA0\xA0Items'
+                        'Items'
                     ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         null,
                         piezas,
-                        '\xA0\xA0Piezas'
+                        'Piezas'
                     ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    )
+                    React.createElement('td', null)
                 ),
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
@@ -537,20 +520,12 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
-                        '+\xA0Agregado:'
+                        '+Agregado:'
                     ),
                     React.createElement(
                         'td',
@@ -561,16 +536,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
@@ -585,16 +552,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
@@ -609,16 +568,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
@@ -643,16 +594,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         { colSpan: 2 },
                         fechaentrega
                     ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    )
+                    React.createElement('td', null),
+                    React.createElement('td', null)
                 ),
                 React.createElement(
                     'tr',
@@ -667,16 +610,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         null,
                         horaentrega
                     ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement('br', null),
                     React.createElement('br', null),
                     React.createElement('br', null),
@@ -692,11 +627,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         { colSpan: 3 },
                         servicio
                     ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
                     React.createElement('br', null),
                     React.createElement('br', null),
                     React.createElement('br', null),
@@ -707,16 +638,8 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
+                    React.createElement('td', null),
                     React.createElement(
                         'td',
                         { colSpan: 2 },
@@ -742,11 +665,7 @@ var ActionsTableBodyFooter = function (_React$Component4) {
                         null,
                         'Admin'
                     ),
-                    React.createElement(
-                        'td',
-                        null,
-                        '\xA0'
-                    ),
+                    React.createElement('td', null),
                     React.createElement('br', null),
                     React.createElement('br', null),
                     React.createElement('br', null),
@@ -818,16 +737,18 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    '\xA0'
+                    '\u200A\u200A'
                 ),
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
-                    this.props.quantity
+                    this.props.quantity,
+                    ' \u200A '
                 ),
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
+                    '\u200A',
                     this.props.item,
                     React.createElement(
                         'table',
@@ -839,7 +760,7 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                                 return React.createElement(
                                     'td',
                                     null,
-                                    '\xA0',
+                                    '   ',
                                     detail.name
                                 );
                             })
@@ -849,6 +770,7 @@ var ActionsTableBodyDetail = function (_React$Component6) {
                 React.createElement(
                     'td',
                     { style: { 'font-size': '20px' } },
+                    ' \u200A\u200A\u200A\u200A\u200A\u200A ',
                     this.props.project,
                     '.00'
                 )
@@ -2070,7 +1992,6 @@ var MasterTableBody = function (_React$Component12) {
                     'td',
                     null,
                     this.props.fechaentrega,
-                    '\xA0',
                     this.props.horaentrega
                 ),
                 React.createElement(
