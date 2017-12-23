@@ -3291,6 +3291,14 @@ class Customer extends React.Component{
 
         let today = moment(new Date()).format('YYYY-MM-DD');        
 
+        let discount;
+
+        if(event.target.descuento.value.length==0){
+            discount = "0";
+        }else{
+            discount = event.target.descuento.value;
+        }
+
         let newCustomer = {
             
             "id": Date.now(),
@@ -3301,7 +3309,7 @@ class Customer extends React.Component{
             "fechacumpleano":event.target.fechacumpleano.value,
             "facebook":event.target.facebook.value,
             "correoelectronico":event.target.correoelectronico.value,
-            "descuento":event.target.descuento.value,
+            "descuento":discount,
             "created": today 
             
         }

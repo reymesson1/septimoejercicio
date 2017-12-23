@@ -5021,6 +5021,14 @@ var Customer = function (_React$Component38) {
 
             var today = moment(new Date()).format('YYYY-MM-DD');
 
+            var discount = void 0;
+
+            if (event.target.descuento.value.length == 0) {
+                discount = "0";
+            } else {
+                discount = event.target.descuento.value;
+            }
+
             var newCustomer = {
 
                 "id": Date.now(),
@@ -5031,7 +5039,7 @@ var Customer = function (_React$Component38) {
                 "fechacumpleano": event.target.fechacumpleano.value,
                 "facebook": event.target.facebook.value,
                 "correoelectronico": event.target.correoelectronico.value,
-                "descuento": event.target.descuento.value,
+                "descuento": discount,
                 "created": today
 
             };
