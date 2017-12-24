@@ -47,7 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
 
 var API_HEADERS = {
 
@@ -472,9 +472,10 @@ var ActionsTableBodyFooter = function (_React$Component4) {
             }
 
             var itbis = 18 / 100 * zoom;
-            itbis += 18 / 100 * this.props.added;
 
-            var grandTotal = zoom + this.props.added + itbis;
+            var grandTotal = void 0;
+
+            grandTotal = parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
 
             grandTotal -= descuento;
 
@@ -6826,8 +6827,6 @@ var PartialsTwo = function (_React$Component47) {
     }, {
         key: 'render',
         value: function render() {
-
-            console.log(this.state.masterAPI);
 
             return React.createElement(
                 Col,

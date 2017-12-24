@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
 
 const API_HEADERS = {
 
@@ -364,14 +364,14 @@ class ActionsTableBodyFooter extends React.Component{
             }
         }
 
-
         let itbis = ( 18 / 100) * zoom;
-        itbis += ( 18 / 100) * this.props.added;
 
-        let grandTotal = zoom + this.props.added + itbis;
+        let grandTotal;
+
+        grandTotal= parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
         
         grandTotal -= descuento;
-        
+    
         let nextStateFecha = this.props.masterAPI;
 
         return(
@@ -4309,8 +4309,7 @@ componentDidMount(){
 
 render(){
     
-    console.log(this.state.masterAPI);
-
+    
     return(
     
         <Col sm={6}>            
