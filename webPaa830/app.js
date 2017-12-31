@@ -34,7 +34,7 @@ app.post('/cookies', function(req,res){
 
     dba.getCustomer({}, function(data){
 
-        console.log(data);
+        console.log("init " + data);
 
 
     });
