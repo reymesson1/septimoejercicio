@@ -35,6 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
+//const API_URL = 'http://localhost:8082';
 const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
@@ -537,23 +538,17 @@ class Login extends React.Component{
                                     <h3 className="panel-title">Lavanderia El Tendedero</h3>
                                 </div>
                                 <div className="panel-body">
-                                    <form
-onSubmit={this.props.setcookie.bind(this)}>
+                                    <form onSubmit={this.props.setcookie.bind(this)}>
                                     <fieldset>
                                         <div className="form-group">
-                                            <input
-className="form-control" placeholder="E-mail" name="email"
-type="text"/>
+                                            <input className="form-control" placeholder="E-mail" name="email" type="text"/>
                                         </div>
                                         <div className="form-group">
-                                            <input
-className="form-control" placeholder="Password" name="password"
-type="password"/>
+                                            <input className="form-control" placeholder="Password" name="password" type="password"/>
                                         </div>
                                         <div className="checkbox">
                                             <label>
-                                                <input name="remember"
-type="checkbox" value="Remember Me"/> Remember Me
+                                                <input name="remember" type="checkbox" value="Remember Me"/> Remember Me
                                             </label>
                                         </div>
                                             <button  className="btn btn-lg btn-success btn-block">Login</button>
@@ -630,9 +625,7 @@ class Toolbar extends React.Component{
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}>Separated link</MenuItem>
                       </NavDropdown>
-                      <li
-style={{'float':'right','position':'absolute','left':'80%'}}><Link
-onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
+                      <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
                 </Navbar>
         );
@@ -1087,12 +1080,9 @@ class Master extends React.Component{
                     <MasterSearch
                                     filterText={this.state.filterText}
                                     masterCallback = {{
-
-onsavedetail:this.onSaveDetail.bind(this),
-
-onsavemaster:this.onSaveMaster.bind(this),
-
-onhandleuserinput:this.onHandleUserInput.bind(this)
+                                        onsavedetail:this.onSaveDetail.bind(this),
+                                        onsavemaster:this.onSaveMaster.bind(this),
+                                        onhandleuserinput:this.onHandleUserInput.bind(this)
                                     }}
 
                     />
@@ -1104,20 +1094,16 @@ onhandleuserinput:this.onHandleUserInput.bind(this)
 
 
                                             detailAdded={this.state.detailAdded}
-
-masterDetail={this.state.masterDetail}
+                                            masterDetail={this.state.masterDetail}
                                             detail={this.state.detail}
                                             showModal={this.state.showModal}
                                             list={this.state.list}
                                             open={this.open}
                                             close={this.close.bind(this)}
                                             masterCallback = {{
-
-onsavedetail:this.onSaveDetail.bind(this),
-
-onsavedetailadded:this.onSaveDetailAdded.bind(this),
-
-onsavemaster:this.onSaveMaster.bind(this)
+                                                onsavedetail:this.onSaveDetail.bind(this),
+                                                onsavedetailadded:this.onSaveDetailAdded.bind(this),
+                                                onsavemaster:this.onSaveMaster.bind(this)
                                             }}
                             />
                         </div>
@@ -1129,12 +1115,9 @@ onsavemaster:this.onSaveMaster.bind(this)
                                         filterText={this.state.filterText}
                                         masterData={this.state.masterAPI}
                                         masterCallback = {{
-
-onsavedetail:this.onSaveDetail.bind(this),
-
-onsavemaster:this.onSaveMaster.bind(this),
-
-ondeletemaster:this.onDeleteMaster.bind(this)
+                                            onsavedetail:this.onSaveDetail.bind(this),
+                                            onsavemaster:this.onSaveMaster.bind(this),
+                                            ondeletemaster:this.onDeleteMaster.bind(this)
                                         }}
                         />
                     </Panel>
@@ -1158,11 +1141,9 @@ class MasterSearch extends React.Component{
                           <label>Search:</label>
                         </div>
                         <div className="col-md-10 col-sm-10">
-                          <input
-onChange={this.props.masterCallback.onhandleuserinput.bind(this)}
+                          <input onChange={this.props.masterCallback.onhandleuserinput.bind(this)}
                                  type="text"
-                                 className="form-control"
-id="first_name" name="first_name"/>
+                                 className="form-control" id="first_name" name="first_name"/>
                         </div>
                     </div>
                   </form>
@@ -3236,7 +3217,8 @@ class Customer extends React.Component{
         this.state = {
             
             showModal: false,
-            customerAPI: []
+            customerAPI: [],
+            filterText: ""
         }
     }
     
@@ -3302,9 +3284,7 @@ class Customer extends React.Component{
             "created": today 
             
         }
-        
-        console.log(newCustomer);
-        
+                
       fetch(API_URL+'/customer', {
 
           method: 'post',
@@ -3327,6 +3307,13 @@ class Customer extends React.Component{
       });
         
     }
+
+    onChangeFilter(event){
+
+        this.setState({
+            filterText: event.target.value
+        })
+    }
     
     render(){
         
@@ -3334,7 +3321,11 @@ class Customer extends React.Component{
         
             <div>
                 <Row>
-                    <CustomerSearch />
+                    <CustomerSearch
+                                        customerCallback={{
+                                            onchangefilter: this.onChangeFilter.bind(this)
+                                        }}
+                    />
                 </Row>
                 <Row>
                     <div className="pull-right">
@@ -3353,6 +3344,7 @@ class Customer extends React.Component{
                 <Row>
                     <CustomerTable
                                     customer={this.state.customerAPI}
+                                    filterText={this.state.filterText}
                     />
                 </Row>
             </div>
@@ -3361,9 +3353,14 @@ class Customer extends React.Component{
 }
  
 class CustomerTable extends React.Component{
+
     
     render(){
         
+        let filteredTable = this.props.customer.filter(
+            (master) => master.name.indexOf(this.props.filterText) !== -1
+        )
+
         return(
         
             <Panel header="Listado de Cliente">
@@ -3381,7 +3378,7 @@ class CustomerTable extends React.Component{
                   </tr>
                 </thead>
                 <tbody>
-                {this.props.customer.map(
+                {filteredTable.map(
                     (cliente, index) =>  <CustomerTablebody
                                                     key={index}
                                                     index={index}
@@ -3429,16 +3426,18 @@ class CustomerSearch extends React.Component{
         return(
         
             <Panel header="Busqueda de cliente">
-                  <Form horizontal>
-                    <FormGroup controlId="formHorizontalEmail">
-                      <Col componentClass={ControlLabel} sm={2}>
-                        Buscar
-                      </Col>
-                      <Col sm={10}>
-                        <FormControl type="text" placeholder="Buscar" />
-                      </Col>
-                    </FormGroup>
-                  </Form>
+                  <form>
+                    <div className="form-group">
+                        <div className="col-md-2 col-sm-2">
+                            <label>Buscar:</label>
+                        </div>
+                        <div className="col-md-10 col-sm-10">
+                            <input onChange={this.props.customerCallback.onchangefilter.bind(this)}
+                                type="text"
+                                className="form-control" id="first_name" name="first_name"/>
+                        </div>
+                    </div>
+                    </form>
             </Panel>
         );
     }

@@ -47,6 +47,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
+//const API_URL = 'http://localhost:8082';
 var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
@@ -823,24 +824,19 @@ var Login = function (_React$Component7) {
                                     { className: 'panel-body' },
                                     React.createElement(
                                         'form',
-                                        {
-                                            onSubmit: this.props.setcookie.bind(this) },
+                                        { onSubmit: this.props.setcookie.bind(this) },
                                         React.createElement(
                                             'fieldset',
                                             null,
                                             React.createElement(
                                                 'div',
                                                 { className: 'form-group' },
-                                                React.createElement('input', {
-                                                    className: 'form-control', placeholder: 'E-mail', name: 'email',
-                                                    type: 'text' })
+                                                React.createElement('input', { className: 'form-control', placeholder: 'E-mail', name: 'email', type: 'text' })
                                             ),
                                             React.createElement(
                                                 'div',
                                                 { className: 'form-group' },
-                                                React.createElement('input', {
-                                                    className: 'form-control', placeholder: 'Password', name: 'password',
-                                                    type: 'password' })
+                                                React.createElement('input', { className: 'form-control', placeholder: 'Password', name: 'password', type: 'password' })
                                             ),
                                             React.createElement(
                                                 'div',
@@ -848,8 +844,7 @@ var Login = function (_React$Component7) {
                                                 React.createElement(
                                                     'label',
                                                     null,
-                                                    React.createElement('input', { name: 'remember',
-                                                        type: 'checkbox', value: 'Remember Me' }),
+                                                    React.createElement('input', { name: 'remember', type: 'checkbox', value: 'Remember Me' }),
                                                     ' Remember Me'
                                                 )
                                             ),
@@ -1077,12 +1072,10 @@ var Toolbar = function (_React$Component8) {
                     ),
                     React.createElement(
                         'li',
-                        {
-                            style: { 'float': 'right', 'position': 'absolute', 'left': '80%' } },
+                        { style: { 'float': 'right', 'position': 'absolute', 'left': '80%' } },
                         React.createElement(
                             Link,
-                            {
-                                onClick: this.onClicked, to: '/logout' },
+                            { onClick: this.onClicked, to: '/logout' },
                             'Logout'
                         )
                     )
@@ -1533,11 +1526,8 @@ var Master = function (_React$Component9) {
                     React.createElement(MasterSearch, {
                         filterText: this.state.filterText,
                         masterCallback: {
-
                             onsavedetail: this.onSaveDetail.bind(this),
-
                             onsavemaster: this.onSaveMaster.bind(this),
-
                             onhandleuserinput: this.onHandleUserInput.bind(this)
                         }
 
@@ -1553,7 +1543,6 @@ var Master = function (_React$Component9) {
                         React.createElement(MasterModal, {
 
                             detailAdded: this.state.detailAdded,
-
                             masterDetail: this.state.masterDetail,
                             detail: this.state.detail,
                             showModal: this.state.showModal,
@@ -1561,11 +1550,8 @@ var Master = function (_React$Component9) {
                             open: this.open,
                             close: this.close.bind(this),
                             masterCallback: {
-
                                 onsavedetail: this.onSaveDetail.bind(this),
-
                                 onsavedetailadded: this.onSaveDetailAdded.bind(this),
-
                                 onsavemaster: this.onSaveMaster.bind(this)
                             }
                         })
@@ -1582,11 +1568,8 @@ var Master = function (_React$Component9) {
                             filterText: this.state.filterText,
                             masterData: this.state.masterAPI,
                             masterCallback: {
-
                                 onsavedetail: this.onSaveDetail.bind(this),
-
                                 onsavemaster: this.onSaveMaster.bind(this),
-
                                 ondeletemaster: this.onDeleteMaster.bind(this)
                             }
                         })
@@ -1636,11 +1619,9 @@ var MasterSearch = function (_React$Component10) {
                             React.createElement(
                                 'div',
                                 { className: 'col-md-10 col-sm-10' },
-                                React.createElement('input', {
-                                    onChange: this.props.masterCallback.onhandleuserinput.bind(this),
+                                React.createElement('input', { onChange: this.props.masterCallback.onhandleuserinput.bind(this),
                                     type: 'text',
-                                    className: 'form-control',
-                                    id: 'first_name', name: 'first_name' })
+                                    className: 'form-control', id: 'first_name', name: 'first_name' })
                             )
                         )
                     )
@@ -4892,7 +4873,8 @@ var Customer = function (_React$Component38) {
         _this53.state = {
 
             showModal: false,
-            customerAPI: []
+            customerAPI: [],
+            filterText: ""
         };
         return _this53;
     }
@@ -4965,8 +4947,6 @@ var Customer = function (_React$Component38) {
 
             };
 
-            console.log(newCustomer);
-
             fetch(API_URL + '/customer', {
 
                 method: 'post',
@@ -4989,6 +4969,14 @@ var Customer = function (_React$Component38) {
             });
         }
     }, {
+        key: 'onChangeFilter',
+        value: function onChangeFilter(event) {
+
+            this.setState({
+                filterText: event.target.value
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -4998,7 +4986,11 @@ var Customer = function (_React$Component38) {
                 React.createElement(
                     Row,
                     null,
-                    React.createElement(CustomerSearch, null)
+                    React.createElement(CustomerSearch, {
+                        customerCallback: {
+                            onchangefilter: this.onChangeFilter.bind(this)
+                        }
+                    })
                 ),
                 React.createElement(
                     Row,
@@ -5026,7 +5018,8 @@ var Customer = function (_React$Component38) {
                     Row,
                     null,
                     React.createElement(CustomerTable, {
-                        customer: this.state.customerAPI
+                        customer: this.state.customerAPI,
+                        filterText: this.state.filterText
                     })
                 )
             );
@@ -5048,6 +5041,11 @@ var CustomerTable = function (_React$Component39) {
     _createClass(CustomerTable, [{
         key: 'render',
         value: function render() {
+            var _this56 = this;
+
+            var filteredTable = this.props.customer.filter(function (master) {
+                return master.name.indexOf(_this56.props.filterText) !== -1;
+            });
 
             return React.createElement(
                 Panel,
@@ -5106,7 +5104,7 @@ var CustomerTable = function (_React$Component39) {
                     React.createElement(
                         'tbody',
                         null,
-                        this.props.customer.map(function (cliente, index) {
+                        filteredTable.map(function (cliente, index) {
                             return React.createElement(CustomerTablebody, {
                                 key: index,
                                 index: index,
@@ -5208,20 +5206,26 @@ var CustomerSearch = function (_React$Component41) {
                 Panel,
                 { header: 'Busqueda de cliente' },
                 React.createElement(
-                    Form,
-                    { horizontal: true },
+                    'form',
+                    null,
                     React.createElement(
-                        FormGroup,
-                        { controlId: 'formHorizontalEmail' },
+                        'div',
+                        { className: 'form-group' },
                         React.createElement(
-                            Col,
-                            { componentClass: ControlLabel, sm: 2 },
-                            'Buscar'
+                            'div',
+                            { className: 'col-md-2 col-sm-2' },
+                            React.createElement(
+                                'label',
+                                null,
+                                'Buscar:'
+                            )
                         ),
                         React.createElement(
-                            Col,
-                            { sm: 10 },
-                            React.createElement(FormControl, { type: 'text', placeholder: 'Buscar' })
+                            'div',
+                            { className: 'col-md-10 col-sm-10' },
+                            React.createElement('input', { onChange: this.props.customerCallback.onchangefilter.bind(this),
+                                type: 'text',
+                                className: 'form-control', id: 'first_name', name: 'first_name' })
                         )
                     )
                 )
@@ -5439,15 +5443,15 @@ var UpdateDelivery = function (_React$Component43) {
     function UpdateDelivery() {
         _classCallCheck(this, UpdateDelivery);
 
-        var _this59 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
+        var _this60 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
 
-        _this59.state = {
+        _this60.state = {
 
             showModal: true,
             parameter: 0,
             masterAPI: []
         };
-        return _this59;
+        return _this60;
     }
 
     _createClass(UpdateDelivery, [{
@@ -5462,12 +5466,12 @@ var UpdateDelivery = function (_React$Component43) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this60 = this;
+            var _this61 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this60.setState({
+                _this61.setState({
 
                     masterAPI: responseData
                 });
@@ -5483,14 +5487,14 @@ var UpdateDelivery = function (_React$Component43) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this61 = this;
+            var _this62 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this61.state.parameter;
+                return x.id == _this62.state.parameter;
             });
 
             var newUpdate = {
@@ -5567,9 +5571,9 @@ var Payment = function (_React$Component44) {
     function Payment() {
         _classCallCheck(this, Payment);
 
-        var _this62 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
+        var _this63 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
 
-        _this62.state = {
+        _this63.state = {
 
             showModal: true,
             parameter: 0,
@@ -5578,7 +5582,7 @@ var Payment = function (_React$Component44) {
             pendiente: 0,
             actual: 0
         };
-        return _this62;
+        return _this63;
     }
 
     _createClass(Payment, [{
@@ -5593,12 +5597,12 @@ var Payment = function (_React$Component44) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this63 = this;
+            var _this64 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this63.setState({
+                _this64.setState({
 
                     masterAPI: responseData
                 });
@@ -5614,14 +5618,14 @@ var Payment = function (_React$Component44) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this64 = this;
+            var _this65 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this64.state.parameter;
+                return x.id == _this65.state.parameter;
             });
 
             var newUpdate = {
@@ -5682,12 +5686,12 @@ var Payment = function (_React$Component44) {
     }, {
         key: 'render',
         value: function render() {
-            var _this65 = this;
+            var _this66 = this;
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this65.state.parameter;
+                return x.id == _this66.state.parameter;
             });
 
             var balance = 0;
@@ -5820,27 +5824,27 @@ var PrintPayment = function (_React$Component45) {
     function PrintPayment() {
         _classCallCheck(this, PrintPayment);
 
-        var _this66 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
+        var _this67 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
 
-        _this66.state = {
+        _this67.state = {
 
             masterAPI: [],
             customerAPI: [],
             detailData: [],
             list: []
         };
-        return _this66;
+        return _this67;
     }
 
     _createClass(PrintPayment, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this67 = this;
+            var _this68 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this67.setState({
+                _this68.setState({
 
                     masterAPI: responseData
                 });
@@ -5848,7 +5852,7 @@ var PrintPayment = function (_React$Component45) {
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this67.setState({
+                _this68.setState({
 
                     customerAPI: responseData
                 });
@@ -5856,7 +5860,7 @@ var PrintPayment = function (_React$Component45) {
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this67.setState({
+                _this68.setState({
 
                     detailData: responseData
                 });
@@ -5864,7 +5868,7 @@ var PrintPayment = function (_React$Component45) {
             fetch(API_URL + '/list', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this67.setState({
+                _this68.setState({
 
                     list: responseData
                 });
@@ -5875,10 +5879,10 @@ var PrintPayment = function (_React$Component45) {
     }, {
         key: 'render',
         value: function render() {
-            var _this68 = this;
+            var _this69 = this;
 
             var filteredTable = this.state.masterAPI.filter(function (master) {
-                return master.id == _this68.props.params.printid;
+                return master.id == _this69.props.params.printid;
             });
 
             var name = void 0;
@@ -6799,24 +6803,24 @@ var PartialsTwo = function (_React$Component47) {
     function PartialsTwo() {
         _classCallCheck(this, PartialsTwo);
 
-        var _this70 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
+        var _this71 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
 
-        _this70.state = {
+        _this71.state = {
 
             masterAPI: []
         };
-        return _this70;
+        return _this71;
     }
 
     _createClass(PartialsTwo, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this71 = this;
+            var _this72 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this71.setState({
+                _this72.setState({
 
                     masterAPI: responseData
                 });
