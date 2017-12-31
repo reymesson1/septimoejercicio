@@ -75,7 +75,7 @@ module.exports = function(){
                 var url = "mongodb://localhost:27017/eltendedero";
                 MongoClient.connect(url, function(err, db) {
                     if (err) throw err;
-                      db.collection("customer").find().toArray(function(err,result){
+                      db.collection("customers").find().toArray(function(err,result){
                           callback(result);
                 })
                 db.close();
