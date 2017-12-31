@@ -50,6 +50,15 @@ app.get('/list',function(req,res){
 
 app.get('/customer',function(req,res){
     
+    dba.getCustomer({}, function(data){
+
+        console.log("get " + data);
+
+
+    });
+
+
+
     res.send(customer);
     
 });
