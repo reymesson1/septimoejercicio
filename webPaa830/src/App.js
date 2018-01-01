@@ -35,8 +35,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -3986,19 +3986,7 @@ class Home extends React.Component{
                     </div>
                 </Col>
                 <Col md={3}>
-                    <div className="panel panel-info">
-                        <div className="panel-heading">
-                            <Row>
-                                <Col xs={6}>
-                                    <i className="fa fa-list-ol fa-5x"></i>
-                                </Col>
-                                <Col xs={6} className="text-right">
-                                    <p className="announcement-heading">4</p>
-                                    <p className="announcement-text">Customers</p>
-                                </Col>
-                            </Row>
-                        </div>
-                    </div>
+                 <DashboardCustomer/>                    
                 </Col>
                 <Col md={3}>
                     <div className="panel panel-danger">
@@ -4119,45 +4107,15 @@ class Home extends React.Component{
                             <div className="panel-heading">
                               <h4 className="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                Files</a>
+                                Cumpleaños de hoy</a>
                               </h4>
                             </div>
                             <div id="collapse1" className="panel-collapse collapse in">
-                                <ul className="list-group">
-                                    <li className="list-group-item"><span className="badge">253</span> New</li>
-                                    <li className="list-group-item"><span className="badge">17</span> Deleted</li>
-                                    <li className="list-group-item"><span className="badge">3</span> Reported</li>
-                                </ul>
+                                <Birthday/>
+          
                             </div>
                           </div>
-                          <div className="panel panel-default">
-                            <div className="panel-heading">
-                              <h4 className="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                Blog</a>
-                              </h4>
-                            </div>
-                            <div id="collapse2" className="panel-collapse collapse">
-                                <ul className="list-group">
-                                    <li className="list-group-item"><span className="badge">12</span> New</li>
-                                    <li className="list-group-item"><span className="badge">5</span> Deleted</li>
-                                </ul>
-                            </div>
-                          </div>
-                            <div className="panel panel-default">
-                            <div className="panel-heading">
-                              <h4 className="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                Settings</a>
-                              </h4>
-                            </div>
-                            <div id="collapse3" className="panel-collapse collapse">
-                                <ul className="list-group">
-                                    <li className="list-group-item"><span className="badge">1</span> Users Reported</li>
-                                    <li className="list-group-item"><span className="badge">5</span> User Waiting Activation</li>
-                                </ul>
-                            </div>
-                          </div>
+                          
                         </div>
                 </Col>
                 <Col md={4}>
@@ -4396,6 +4354,113 @@ render(){
 }
 }
 
+class Birthday extends React.Component{
+
+    constructor() {
+
+        super();
+        this.state = {
+            customers: []
+        }
+    }
+
+    componentDidMount(){
+        
+          fetch(API_URL+'/customer',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              
+ 
+                  this.setState({
+
+                      customers: responseData
+                  })
+                        
+
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+            
+    }
+
+
+
+
+    render(){
+
+      let today = moment(new Date()).format('0001-MM-DD');
+
+      let filteredTable = this.state.customers.filter(
+            (master) => master.fechacumpleano.indexOf(today) !== -1
+            //(master) => master.fechacumpleano.indexOf('0001-12-13') !== -1
+      )
+
+      return (
+
+        <ul className="list-group">
+            {filteredTable.map(
+
+                (customer, index) => <li className="list-group-item"><span className="badge">{customer.fechacumpleano}</span>{customer.name + " " + customer.apellido}</li>
+            )}
+        </ul>
+      )
+    }
+}
+
+class DashboardCustomer extends React.Component{
+
+    constructor() {
+
+        super();
+        this.state = {
+            customers: []
+        }
+    }
+
+    componentDidMount(){
+        
+          fetch(API_URL+'/customer',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              
+ 
+                  this.setState({
+
+                      customers: responseData
+                  })
+                        
+
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+            
+    }
+
+
+
+
+    render(){
+
+      return (
+
+        <div className="panel panel-info">
+            <div className="panel-heading">
+                <Row>
+                    <Col xs={6}>
+                        <i className="fa fa-list-ol fa-5x"></i>
+                    </Col>
+                    <Col xs={6} className="text-right">
+                        <p className="announcement-heading">{this.state.customers.length}</p>
+                        <p className="announcement-text">Clientes</p>
+                    </Col>
+                </Row>
+            </div>
+        </div>
+      )
+    }
+}
 
 ReactDOM.render((
   <Router history={browserHistory}>

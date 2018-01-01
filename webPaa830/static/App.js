@@ -47,8 +47,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -6101,37 +6101,7 @@ var Home = function (_React$Component46) {
                     React.createElement(
                         Col,
                         { md: 3 },
-                        React.createElement(
-                            'div',
-                            { className: 'panel panel-info' },
-                            React.createElement(
-                                'div',
-                                { className: 'panel-heading' },
-                                React.createElement(
-                                    Row,
-                                    null,
-                                    React.createElement(
-                                        Col,
-                                        { xs: 6 },
-                                        React.createElement('i', { className: 'fa fa-list-ol fa-5x' })
-                                    ),
-                                    React.createElement(
-                                        Col,
-                                        { xs: 6, className: 'text-right' },
-                                        React.createElement(
-                                            'p',
-                                            { className: 'announcement-heading' },
-                                            '4'
-                                        ),
-                                        React.createElement(
-                                            'p',
-                                            { className: 'announcement-text' },
-                                            'Customers'
-                                        )
-                                    )
-                                )
-                            )
-                        )
+                        React.createElement(DashboardCustomer, null)
                     ),
                     React.createElement(
                         Col,
@@ -6415,137 +6385,14 @@ var Home = function (_React$Component46) {
                                         React.createElement(
                                             'a',
                                             { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse1' },
-                                            'Files'
+                                            'Cumplea\xF1os de hoy'
                                         )
                                     )
                                 ),
                                 React.createElement(
                                     'div',
                                     { id: 'collapse1', className: 'panel-collapse collapse in' },
-                                    React.createElement(
-                                        'ul',
-                                        { className: 'list-group' },
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '253'
-                                            ),
-                                            ' New'
-                                        ),
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '17'
-                                            ),
-                                            ' Deleted'
-                                        ),
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '3'
-                                            ),
-                                            ' Reported'
-                                        )
-                                    )
-                                )
-                            ),
-                            React.createElement(
-                                'div',
-                                { className: 'panel panel-default' },
-                                React.createElement(
-                                    'div',
-                                    { className: 'panel-heading' },
-                                    React.createElement(
-                                        'h4',
-                                        { className: 'panel-title' },
-                                        React.createElement(
-                                            'a',
-                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse2' },
-                                            'Blog'
-                                        )
-                                    )
-                                ),
-                                React.createElement(
-                                    'div',
-                                    { id: 'collapse2', className: 'panel-collapse collapse' },
-                                    React.createElement(
-                                        'ul',
-                                        { className: 'list-group' },
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '12'
-                                            ),
-                                            ' New'
-                                        ),
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '5'
-                                            ),
-                                            ' Deleted'
-                                        )
-                                    )
-                                )
-                            ),
-                            React.createElement(
-                                'div',
-                                { className: 'panel panel-default' },
-                                React.createElement(
-                                    'div',
-                                    { className: 'panel-heading' },
-                                    React.createElement(
-                                        'h4',
-                                        { className: 'panel-title' },
-                                        React.createElement(
-                                            'a',
-                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse3' },
-                                            'Settings'
-                                        )
-                                    )
-                                ),
-                                React.createElement(
-                                    'div',
-                                    { id: 'collapse3', className: 'panel-collapse collapse' },
-                                    React.createElement(
-                                        'ul',
-                                        { className: 'list-group' },
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '1'
-                                            ),
-                                            ' Users Reported'
-                                        ),
-                                        React.createElement(
-                                            'li',
-                                            { className: 'list-group-item' },
-                                            React.createElement(
-                                                'span',
-                                                { className: 'badge' },
-                                                '5'
-                                            ),
-                                            ' User Waiting Activation'
-                                        )
-                                    )
+                                    React.createElement(Birthday, null)
                                 )
                             )
                         )
@@ -7007,6 +6854,143 @@ var PartialsTwoTableBodyDetail = function (_React$Component49) {
     }]);
 
     return PartialsTwoTableBodyDetail;
+}(React.Component);
+
+var Birthday = function (_React$Component50) {
+    _inherits(Birthday, _React$Component50);
+
+    function Birthday() {
+        _classCallCheck(this, Birthday);
+
+        var _this75 = _possibleConstructorReturn(this, (Birthday.__proto__ || Object.getPrototypeOf(Birthday)).call(this));
+
+        _this75.state = {
+            customers: []
+        };
+        return _this75;
+    }
+
+    _createClass(Birthday, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this76 = this;
+
+            fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this76.setState({
+
+                    customers: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var today = moment(new Date()).format('0001-MM-DD');
+
+            var filteredTable = this.state.customers.filter(function (master) {
+                return master.fechacumpleano.indexOf(today) !== -1;
+            }
+            //(master) => master.fechacumpleano.indexOf('0001-12-13') !== -1
+            );
+
+            return React.createElement(
+                'ul',
+                { className: 'list-group' },
+                filteredTable.map(function (customer, index) {
+                    return React.createElement(
+                        'li',
+                        { className: 'list-group-item' },
+                        React.createElement(
+                            'span',
+                            { className: 'badge' },
+                            customer.fechacumpleano
+                        ),
+                        customer.name + " " + customer.apellido
+                    );
+                })
+            );
+        }
+    }]);
+
+    return Birthday;
+}(React.Component);
+
+var DashboardCustomer = function (_React$Component51) {
+    _inherits(DashboardCustomer, _React$Component51);
+
+    function DashboardCustomer() {
+        _classCallCheck(this, DashboardCustomer);
+
+        var _this77 = _possibleConstructorReturn(this, (DashboardCustomer.__proto__ || Object.getPrototypeOf(DashboardCustomer)).call(this));
+
+        _this77.state = {
+            customers: []
+        };
+        return _this77;
+    }
+
+    _createClass(DashboardCustomer, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this78 = this;
+
+            fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this78.setState({
+
+                    customers: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'div',
+                { className: 'panel panel-info' },
+                React.createElement(
+                    'div',
+                    { className: 'panel-heading' },
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            Col,
+                            { xs: 6 },
+                            React.createElement('i', { className: 'fa fa-list-ol fa-5x' })
+                        ),
+                        React.createElement(
+                            Col,
+                            { xs: 6, className: 'text-right' },
+                            React.createElement(
+                                'p',
+                                { className: 'announcement-heading' },
+                                this.state.customers.length
+                            ),
+                            React.createElement(
+                                'p',
+                                { className: 'announcement-text' },
+                                'Clientes'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return DashboardCustomer;
 }(React.Component);
 
 ReactDOM.render(React.createElement(
