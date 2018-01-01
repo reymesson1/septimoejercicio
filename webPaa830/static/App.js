@@ -4938,6 +4938,7 @@ var Customer = function (_React$Component38) {
                 "name": event.target.nombre.value,
                 "apellido": event.target.apellido.value,
                 "telefono": event.target.telefono.value,
+                "telefono2": event.target.telefono2.value,
                 "rnc": event.target.rnc.value,
                 "fechacumpleano": event.target.fechacumpleano.value,
                 "facebook": event.target.facebook.value,
@@ -5077,7 +5078,12 @@ var CustomerTable = function (_React$Component39) {
                             React.createElement(
                                 'th',
                                 null,
-                                'Telefono'
+                                'Telefono #1'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Telefono #2'
                             ),
                             React.createElement(
                                 'th',
@@ -5112,6 +5118,7 @@ var CustomerTable = function (_React$Component39) {
                                 name: cliente.name,
                                 apellido: cliente.apellido,
                                 telefono: cliente.telefono,
+                                telefono2: cliente.telefono2,
                                 rnc: cliente.rnc,
                                 fechacumpleano: cliente.fechacumpleano,
                                 facebook: cliente.facebook,
@@ -5161,6 +5168,11 @@ var CustomerTablebody = function (_React$Component40) {
                     'td',
                     null,
                     this.props.telefono
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.telefono2
                 ),
                 React.createElement(
                     'td',
@@ -5312,12 +5324,30 @@ var CustomerModal = function (_React$Component42) {
                                 React.createElement(
                                     Col,
                                     { componentClass: ControlLabel, sm: 2 },
-                                    'Telefono'
+                                    'Telefono #1'
                                 ),
                                 React.createElement(
                                     Col,
                                     { sm: 9 },
-                                    React.createElement(FormControl, { name: 'telefono', type: 'text', placeholder: 'Telefono' })
+                                    React.createElement(FormControl, { name: 'telefono', type: 'text', placeholder: 'Telefono #1' })
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Row,
+                            null,
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formHorizontalEmail' },
+                                React.createElement(
+                                    Col,
+                                    { componentClass: ControlLabel, sm: 2 },
+                                    'Telefono #2'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { sm: 9 },
+                                    React.createElement(FormControl, { name: 'telefono2', type: 'text', placeholder: 'Telefono #2' })
                                 )
                             )
                         ),

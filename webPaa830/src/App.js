@@ -3276,6 +3276,7 @@ class Customer extends React.Component{
             "name": event.target.nombre.value,
             "apellido": event.target.apellido.value,
             "telefono": event.target.telefono.value,
+            "telefono2": event.target.telefono2.value,
             "rnc": event.target.rnc.value,
             "fechacumpleano":event.target.fechacumpleano.value,
             "facebook":event.target.facebook.value,
@@ -3370,7 +3371,8 @@ class CustomerTable extends React.Component{
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Telefono</th>
+                    <th>Telefono #1</th>
+                    <th>Telefono #2</th>
                     <th>RNC</th>
                     <th>Fecha Cumpleaño</th>
                     <th>Facebook</th>
@@ -3386,6 +3388,7 @@ class CustomerTable extends React.Component{
                                                     name={cliente.name}
                                                     apellido={cliente.apellido}
                                                     telefono={cliente.telefono}
+                                                    telefono2={cliente.telefono2}
                                                     rnc={cliente.rnc}
                                                     fechacumpleano={cliente.fechacumpleano}
                                                     facebook={cliente.facebook}
@@ -3409,6 +3412,7 @@ class CustomerTablebody extends React.Component{
                     <td>{this.props.name}</td>
                     <td>{this.props.apellido}</td>
                     <td>{this.props.telefono}</td>
+                    <td>{this.props.telefono2}</td>
                     <td>{this.props.rnc}</td>
                     <td>{this.props.fechacumpleano}</td>
                     <td>{this.props.facebook}</td>
@@ -3478,10 +3482,20 @@ class CustomerModal extends React.Component{
                         <Row>
                             <FormGroup controlId="formHorizontalEmail">
                               <Col componentClass={ControlLabel} sm={2}>
-                                Telefono
+                                Telefono #1
                               </Col>
                               <Col sm={9}>
-                                <FormControl name="telefono" type="text" placeholder="Telefono" />
+                                <FormControl name="telefono" type="text" placeholder="Telefono #1" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Telefono #2
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="telefono2" type="text" placeholder="Telefono #2" />
                               </Col>
                             </FormGroup>
                         </Row>
