@@ -49,8 +49,8 @@ app.get('/customer',function(req,res){
 //app.get('/customer', function(req,res){
     for(var x=0;x<customer.length;x++){
         
-        //list.push(customer[x].name+' '+customer[x].apellido);
-        list.push(customer[x].telefono);
+        list.push(customer[x].telefono.trim().replace(/-(?=\d)|\s/g,''));
+
     }
 //})
 
@@ -180,7 +180,7 @@ app.post('/deletedetail', function(req,res){
 
 app.post('/updatecustomer',function(req,res){
     var obj = req.body;
-    
+
     customer[obj.index].telefono=obj.telefono;
     customer[obj.index].date=today;
     res.send('end');
