@@ -35,8 +35,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -3449,7 +3449,7 @@ class CustomerTablebody extends React.Component{
                     <td>{this.props.correoelectronico}</td>
                     <td>
                         
-                            <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                                                    
+                            <Link className="btn btn-default" to={'/updatecustomer/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                                                    
                             <Button onClick={this.props.customerCallback.ondeleted.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>                            
                         
                     </td>
@@ -3600,6 +3600,227 @@ class CustomerModal extends React.Component{
         );
     }
 }
+
+class UpdateCustomer extends React.Component{
+
+        constructor(){
+   
+           super();
+           this.state = {
+   
+               parameter: '',
+               showModal: true,
+               customerAPI: []
+           }
+   
+       }
+   
+       close(){
+   
+           this.setState({
+   
+               showModal: false
+           });
+   
+           //window.location.href = '/'
+       }
+   
+       open(){
+   
+           this.setState({
+   
+               showModal: true
+           });
+   
+       }
+   
+       componentDidMount(){
+   
+           fetch(API_URL+'/customer',{headers: API_HEADERS})
+             .then((response)=>response.json())
+             .then((responseData)=>{
+                 this.setState({
+   
+                     customerAPI: responseData
+                 })
+             })
+             .catch((error)=>{
+                 console.log('Error fetching and parsing data', error);
+           })
+   
+           this.setState({
+   
+               parameter: this.props.params.detailid
+           });
+   
+       }
+   
+       onSubmitted(event){
+   
+           event.preventDefault();
+   
+           let nextState = this.state.customerAPI;
+   
+           let index = nextState.findIndex(x=> x.id==this.state.parameter);
+
+           nextState[index].telefono = event.target.telefono.value
+   
+           let today = moment(new Date()).format('YYYY-MM-DD');        
+   
+           nextState[index].date = today;
+   
+           this.setState({
+   
+               customerAPI: nextState
+           });
+   
+           fetch(API_URL+'/updatecustomer', {
+   
+                 method: 'post',
+                 headers: API_HEADERS,
+                 body: JSON.stringify({"index":index,"telefono":event.target.telefono.value, "date": today})
+           })
+   
+           this.setState({
+   
+               showModal: false
+           });
+   
+   
+       }
+   
+       render(){
+   
+           let nextState = this.state.customerAPI;
+   
+           let index = nextState.findIndex(x=> x.id==this.state.parameter);
+   
+           let name;
+           let apellido;
+           let telefono;
+           let telefono2;
+           let rnc;
+           let fechacumpleano;
+           let facebook;
+           let correoelectrico;
+           let descuento;
+           let environment;
+           let item;
+           let category;
+   
+           if(nextState[index]){
+   
+               name = nextState[index].name
+               apellido = nextState[index].apellido
+               telefono = nextState[index].telefono
+               telefono2 = nextState[index].telefono2
+               rnc = nextState[index].rnc
+               fechacumpleano = nextState[index].fechacumpleano
+               facebook = nextState[index].facebook
+               correoelectrico = nextState[index].correoelectrico
+               descuento = nextState[index].descuento
+           }
+   
+           return(
+               <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+                   <Modal.Header>
+                       <Modal.Title>
+                           {/* <h1>Editando a {this.state.parameter}</h1> */}
+                           <h1>Editando a {name}</h1>
+                       </Modal.Title>
+                   </Modal.Header>
+                       <Form onSubmit={this.onSubmitted.bind(this)} horizontal>
+                   <Modal.Body>
+                           <FormGroup controlId="formHorizontalId">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               ID
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl value={this.state.parameter} type="id" placeholder="id" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Nombre
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="name" value={name} type="text" placeholder="Nombre" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Apellido
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="apellido" value={apellido} type="text" placeholder="Apellido" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Telefono #1
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="telefono" type="text" placeholder={telefono} />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Telefono #2
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="telefono2" value={telefono2} type="text" placeholder="Telefono #2" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               RNC
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="rnc" value={rnc} type="text" placeholder="RNC" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Fecha de Cumpleaño
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="fechacumpleano" value={fechacumpleano} type="date" placeholder="Fecha de Cumpleaño" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Facebook
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="facebook" value={rnc} type="text" placeholder="Facebook" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Correo Electronico
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="correoelectrico" value={rnc} type="text" placeholder="Correo Electronico" disabled />
+                             </Col>
+                           </FormGroup>
+                           <FormGroup controlId="formHorizontalName">
+                             <Col componentClass={ControlLabel} sm={2}>
+                               Descuento
+                             </Col>
+                             <Col sm={10}>
+                               <FormControl name="descuento" value={rnc} type="text" placeholder="Descuento" disabled />
+                             </Col>
+                           </FormGroup>                           
+                   </Modal.Body>
+                   <Modal.Footer>
+                       <Button type="submit" >Guardar</Button>
+                   </Modal.Footer>
+                       </Form>
+               </Modal>
+           );
+       }
+   }
+   
 
 class UpdateDelivery extends React.Component{
     
@@ -4509,6 +4730,7 @@ ReactDOM.render((
         <Route path="partials" component={Partials}/>
         <Route path="updatedetail/:detailid" component={DetailModalUpdate}/>
         <Route path="updatedelivery/:deliveryid" component={UpdateDelivery}/>
+        <Route path="updatecustomer/:detailid" component={UpdateCustomer}/>
         <Route path="payment/:paymentid" component={Payment}/>
         <Route path="actions/:actionid" component={Actions}/>
         <Route path="detail" component={Detail}/>

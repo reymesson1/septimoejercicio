@@ -47,8 +47,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -5234,7 +5234,7 @@ var CustomerTablebody = function (_React$Component40) {
                     null,
                     React.createElement(
                         Link,
-                        { className: 'btn btn-default', to: '/updatedelivery/' + this.props.id },
+                        { className: 'btn btn-default', to: '/updatecustomer/' + this.props.id },
                         React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
                     ),
                     '\xA0\xA0',
@@ -5517,21 +5517,334 @@ var CustomerModal = function (_React$Component42) {
     return CustomerModal;
 }(React.Component);
 
-var UpdateDelivery = function (_React$Component43) {
-    _inherits(UpdateDelivery, _React$Component43);
+var UpdateCustomer = function (_React$Component43) {
+    _inherits(UpdateCustomer, _React$Component43);
+
+    function UpdateCustomer() {
+        _classCallCheck(this, UpdateCustomer);
+
+        var _this60 = _possibleConstructorReturn(this, (UpdateCustomer.__proto__ || Object.getPrototypeOf(UpdateCustomer)).call(this));
+
+        _this60.state = {
+
+            parameter: '',
+            showModal: true,
+            customerAPI: []
+        };
+
+        return _this60;
+    }
+
+    _createClass(UpdateCustomer, [{
+        key: 'close',
+        value: function close() {
+
+            this.setState({
+
+                showModal: false
+            });
+
+            //window.location.href = '/'
+        }
+    }, {
+        key: 'open',
+        value: function open() {
+
+            this.setState({
+
+                showModal: true
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this61 = this;
+
+            fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this61.setState({
+
+                    customerAPI: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+
+            this.setState({
+
+                parameter: this.props.params.detailid
+            });
+        }
+    }, {
+        key: 'onSubmitted',
+        value: function onSubmitted(event) {
+            var _this62 = this;
+
+            event.preventDefault();
+
+            var nextState = this.state.customerAPI;
+
+            var index = nextState.findIndex(function (x) {
+                return x.id == _this62.state.parameter;
+            });
+
+            nextState[index].telefono = event.target.telefono.value;
+
+            var today = moment(new Date()).format('YYYY-MM-DD');
+
+            nextState[index].date = today;
+
+            this.setState({
+
+                customerAPI: nextState
+            });
+
+            fetch(API_URL + '/updatecustomer', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({ "index": index, "telefono": event.target.telefono.value, "date": today })
+            });
+
+            this.setState({
+
+                showModal: false
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this63 = this;
+
+            var nextState = this.state.customerAPI;
+
+            var index = nextState.findIndex(function (x) {
+                return x.id == _this63.state.parameter;
+            });
+
+            var name = void 0;
+            var apellido = void 0;
+            var telefono = void 0;
+            var telefono2 = void 0;
+            var rnc = void 0;
+            var fechacumpleano = void 0;
+            var facebook = void 0;
+            var correoelectrico = void 0;
+            var descuento = void 0;
+            var environment = void 0;
+            var item = void 0;
+            var category = void 0;
+
+            if (nextState[index]) {
+
+                name = nextState[index].name;
+                apellido = nextState[index].apellido;
+                telefono = nextState[index].telefono;
+                telefono2 = nextState[index].telefono2;
+                rnc = nextState[index].rnc;
+                fechacumpleano = nextState[index].fechacumpleano;
+                facebook = nextState[index].facebook;
+                correoelectrico = nextState[index].correoelectrico;
+                descuento = nextState[index].descuento;
+            }
+
+            return React.createElement(
+                Modal,
+                { show: this.state.showModal, onHide: this.close.bind(this) },
+                React.createElement(
+                    Modal.Header,
+                    null,
+                    React.createElement(
+                        Modal.Title,
+                        null,
+                        React.createElement(
+                            'h1',
+                            null,
+                            'Editando a ',
+                            name
+                        )
+                    )
+                ),
+                React.createElement(
+                    Form,
+                    { onSubmit: this.onSubmitted.bind(this), horizontal: true },
+                    React.createElement(
+                        Modal.Body,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalId' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'ID'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { value: this.state.parameter, type: 'id', placeholder: 'id', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Nombre'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'name', value: name, type: 'text', placeholder: 'Nombre', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Apellido'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'apellido', value: apellido, type: 'text', placeholder: 'Apellido', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Telefono #1'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'telefono', type: 'text', placeholder: telefono })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Telefono #2'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'telefono2', value: telefono2, type: 'text', placeholder: 'Telefono #2', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'RNC'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'rnc', value: rnc, type: 'text', placeholder: 'RNC', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Fecha de Cumplea\xF1o'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'fechacumpleano', value: fechacumpleano, type: 'date', placeholder: 'Fecha de Cumplea\xF1o', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Facebook'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'facebook', value: rnc, type: 'text', placeholder: 'Facebook', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Correo Electronico'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'correoelectrico', value: rnc, type: 'text', placeholder: 'Correo Electronico', disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Descuento'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'descuento', value: rnc, type: 'text', placeholder: 'Descuento', disabled: true })
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Modal.Footer,
+                        null,
+                        React.createElement(
+                            Button,
+                            { type: 'submit' },
+                            'Guardar'
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return UpdateCustomer;
+}(React.Component);
+
+var UpdateDelivery = function (_React$Component44) {
+    _inherits(UpdateDelivery, _React$Component44);
 
     function UpdateDelivery() {
         _classCallCheck(this, UpdateDelivery);
 
-        var _this60 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
+        var _this64 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
 
-        _this60.state = {
+        _this64.state = {
 
             showModal: true,
             parameter: 0,
             masterAPI: []
         };
-        return _this60;
+        return _this64;
     }
 
     _createClass(UpdateDelivery, [{
@@ -5546,12 +5859,12 @@ var UpdateDelivery = function (_React$Component43) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this61 = this;
+            var _this65 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this61.setState({
+                _this65.setState({
 
                     masterAPI: responseData
                 });
@@ -5567,14 +5880,14 @@ var UpdateDelivery = function (_React$Component43) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this62 = this;
+            var _this66 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this62.state.parameter;
+                return x.id == _this66.state.parameter;
             });
 
             var newUpdate = {
@@ -5645,15 +5958,15 @@ var UpdateDelivery = function (_React$Component43) {
     return UpdateDelivery;
 }(React.Component);
 
-var Payment = function (_React$Component44) {
-    _inherits(Payment, _React$Component44);
+var Payment = function (_React$Component45) {
+    _inherits(Payment, _React$Component45);
 
     function Payment() {
         _classCallCheck(this, Payment);
 
-        var _this63 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
+        var _this67 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
 
-        _this63.state = {
+        _this67.state = {
 
             showModal: true,
             parameter: 0,
@@ -5662,7 +5975,7 @@ var Payment = function (_React$Component44) {
             pendiente: 0,
             actual: 0
         };
-        return _this63;
+        return _this67;
     }
 
     _createClass(Payment, [{
@@ -5677,12 +5990,12 @@ var Payment = function (_React$Component44) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this64 = this;
+            var _this68 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this64.setState({
+                _this68.setState({
 
                     masterAPI: responseData
                 });
@@ -5698,14 +6011,14 @@ var Payment = function (_React$Component44) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this65 = this;
+            var _this69 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this65.state.parameter;
+                return x.id == _this69.state.parameter;
             });
 
             var newUpdate = {
@@ -5766,12 +6079,12 @@ var Payment = function (_React$Component44) {
     }, {
         key: 'render',
         value: function render() {
-            var _this66 = this;
+            var _this70 = this;
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this66.state.parameter;
+                return x.id == _this70.state.parameter;
             });
 
             var balance = 0;
@@ -5898,33 +6211,33 @@ var Payment = function (_React$Component44) {
     return Payment;
 }(React.Component);
 
-var PrintPayment = function (_React$Component45) {
-    _inherits(PrintPayment, _React$Component45);
+var PrintPayment = function (_React$Component46) {
+    _inherits(PrintPayment, _React$Component46);
 
     function PrintPayment() {
         _classCallCheck(this, PrintPayment);
 
-        var _this67 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
+        var _this71 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
 
-        _this67.state = {
+        _this71.state = {
 
             masterAPI: [],
             customerAPI: [],
             detailData: [],
             list: []
         };
-        return _this67;
+        return _this71;
     }
 
     _createClass(PrintPayment, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this68 = this;
+            var _this72 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this68.setState({
+                _this72.setState({
 
                     masterAPI: responseData
                 });
@@ -5932,7 +6245,7 @@ var PrintPayment = function (_React$Component45) {
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this68.setState({
+                _this72.setState({
 
                     customerAPI: responseData
                 });
@@ -5940,7 +6253,7 @@ var PrintPayment = function (_React$Component45) {
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this68.setState({
+                _this72.setState({
 
                     detailData: responseData
                 });
@@ -5948,7 +6261,7 @@ var PrintPayment = function (_React$Component45) {
             fetch(API_URL + '/list', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this68.setState({
+                _this72.setState({
 
                     list: responseData
                 });
@@ -5959,10 +6272,10 @@ var PrintPayment = function (_React$Component45) {
     }, {
         key: 'render',
         value: function render() {
-            var _this69 = this;
+            var _this73 = this;
 
             var filteredTable = this.state.masterAPI.filter(function (master) {
-                return master.id == _this69.props.params.printid;
+                return master.id == _this73.props.params.printid;
             });
 
             var name = void 0;
@@ -6094,8 +6407,8 @@ var PrintPayment = function (_React$Component45) {
     return PrintPayment;
 }(React.Component);
 
-var Home = function (_React$Component46) {
-    _inherits(Home, _React$Component46);
+var Home = function (_React$Component47) {
+    _inherits(Home, _React$Component47);
 
     function Home() {
         _classCallCheck(this, Home);
@@ -6724,30 +7037,30 @@ var Home = function (_React$Component46) {
     return Home;
 }(React.Component);
 
-var PartialsTwo = function (_React$Component47) {
-    _inherits(PartialsTwo, _React$Component47);
+var PartialsTwo = function (_React$Component48) {
+    _inherits(PartialsTwo, _React$Component48);
 
     function PartialsTwo() {
         _classCallCheck(this, PartialsTwo);
 
-        var _this71 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
+        var _this75 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
 
-        _this71.state = {
+        _this75.state = {
 
             masterAPI: []
         };
-        return _this71;
+        return _this75;
     }
 
     _createClass(PartialsTwo, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this72 = this;
+            var _this76 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this72.setState({
+                _this76.setState({
 
                     masterAPI: responseData
                 });
@@ -6807,8 +7120,8 @@ var PartialsTwo = function (_React$Component47) {
     return PartialsTwo;
 }(React.Component);
 
-var PartialsTwoTableBody = function (_React$Component48) {
-    _inherits(PartialsTwoTableBody, _React$Component48);
+var PartialsTwoTableBody = function (_React$Component49) {
+    _inherits(PartialsTwoTableBody, _React$Component49);
 
     function PartialsTwoTableBody() {
         _classCallCheck(this, PartialsTwoTableBody);
@@ -6873,8 +7186,8 @@ var PartialsTwoTableBody = function (_React$Component48) {
     return PartialsTwoTableBody;
 }(React.Component);
 
-var PartialsTwoTableBodyDetail = function (_React$Component49) {
-    _inherits(PartialsTwoTableBodyDetail, _React$Component49);
+var PartialsTwoTableBodyDetail = function (_React$Component50) {
+    _inherits(PartialsTwoTableBodyDetail, _React$Component50);
 
     function PartialsTwoTableBodyDetail() {
         _classCallCheck(this, PartialsTwoTableBodyDetail);
@@ -6906,30 +7219,30 @@ var PartialsTwoTableBodyDetail = function (_React$Component49) {
     return PartialsTwoTableBodyDetail;
 }(React.Component);
 
-var Birthday = function (_React$Component50) {
-    _inherits(Birthday, _React$Component50);
+var Birthday = function (_React$Component51) {
+    _inherits(Birthday, _React$Component51);
 
     function Birthday() {
         _classCallCheck(this, Birthday);
 
-        var _this75 = _possibleConstructorReturn(this, (Birthday.__proto__ || Object.getPrototypeOf(Birthday)).call(this));
+        var _this79 = _possibleConstructorReturn(this, (Birthday.__proto__ || Object.getPrototypeOf(Birthday)).call(this));
 
-        _this75.state = {
+        _this79.state = {
             customers: []
         };
-        return _this75;
+        return _this79;
     }
 
     _createClass(Birthday, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this76 = this;
+            var _this80 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
 
-                _this76.setState({
+                _this80.setState({
 
                     customers: responseData
                 });
@@ -6971,30 +7284,30 @@ var Birthday = function (_React$Component50) {
     return Birthday;
 }(React.Component);
 
-var DashboardCustomer = function (_React$Component51) {
-    _inherits(DashboardCustomer, _React$Component51);
+var DashboardCustomer = function (_React$Component52) {
+    _inherits(DashboardCustomer, _React$Component52);
 
     function DashboardCustomer() {
         _classCallCheck(this, DashboardCustomer);
 
-        var _this77 = _possibleConstructorReturn(this, (DashboardCustomer.__proto__ || Object.getPrototypeOf(DashboardCustomer)).call(this));
+        var _this81 = _possibleConstructorReturn(this, (DashboardCustomer.__proto__ || Object.getPrototypeOf(DashboardCustomer)).call(this));
 
-        _this77.state = {
+        _this81.state = {
             customers: []
         };
-        return _this77;
+        return _this81;
     }
 
     _createClass(DashboardCustomer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this78 = this;
+            var _this82 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
 
-                _this78.setState({
+                _this82.setState({
 
                     customers: responseData
                 });
@@ -7057,6 +7370,7 @@ ReactDOM.render(React.createElement(
         React.createElement(Route, { path: 'partials', component: Partials }),
         React.createElement(Route, { path: 'updatedetail/:detailid', component: DetailModalUpdate }),
         React.createElement(Route, { path: 'updatedelivery/:deliveryid', component: UpdateDelivery }),
+        React.createElement(Route, { path: 'updatecustomer/:detailid', component: UpdateCustomer }),
         React.createElement(Route, { path: 'payment/:paymentid', component: Payment }),
         React.createElement(Route, { path: 'actions/:actionid', component: Actions }),
         React.createElement(Route, { path: 'detail', component: Detail }),

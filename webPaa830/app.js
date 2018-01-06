@@ -178,6 +178,14 @@ app.post('/deletedetail', function(req,res){
 });
 
 
+app.post('/updatecustomer',function(req,res){
+    var obj = req.body;
+    
+    customer[obj.index].telefono=obj.telefono;
+    customer[obj.index].date=today;
+    res.send('end');
+})
+
 
 app.post('/updatedetail',function(req,res){
     var obj = req.body;    
