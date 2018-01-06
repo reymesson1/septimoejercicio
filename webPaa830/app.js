@@ -217,6 +217,15 @@ app.post('/payment',function(req,res){
     res.send('end')
 })
 
+app.post('/deletecustomer', function(req,res){
+
+    var obj = req.body;
+
+    customer.splice(obj.index,1);
+    
+    res.send('end');
+});
+
 app.get('/logout',function(req,res){
 
     cookies = false;

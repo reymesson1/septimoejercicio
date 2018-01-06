@@ -731,8 +731,6 @@ var ActionsTableBodyDetail = function (_React$Component6) {
         key: 'render',
         value: function render() {
 
-            console.log(this.props.itemDetail);
-
             return React.createElement(
                 'tr',
                 null,
@@ -4978,6 +4976,30 @@ var Customer = function (_React$Component38) {
             });
         }
     }, {
+        key: 'onDeleted',
+        value: function onDeleted(value) {
+
+            var nextState = this.state.customerAPI;
+
+            var index = nextState.findIndex(function (x) {
+                return x.id == value;
+            });
+
+            nextState.splice(index, 1);
+
+            this.setState({
+
+                customerAPI: nextState
+            });
+
+            fetch(API_URL + '/deletecustomer', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({ "index": index, "id": value })
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -5009,7 +5031,8 @@ var Customer = function (_React$Component38) {
                             customerCallback: {
                                 open: this.open.bind(this),
                                 close: this.close.bind(this),
-                                onsavecustomer: this.onSaveCustomer.bind(this)
+                                onsavecustomer: this.onSaveCustomer.bind(this),
+                                ondeleted: this.onDeleted.bind(this)
                             }
                         })
                     )
@@ -5020,7 +5043,13 @@ var Customer = function (_React$Component38) {
                     null,
                     React.createElement(CustomerTable, {
                         customer: this.state.customerAPI,
-                        filterText: this.state.filterText
+                        filterText: this.state.filterText,
+                        customerCallback: {
+                            open: this.open.bind(this),
+                            close: this.close.bind(this),
+                            onsavecustomer: this.onSaveCustomer.bind(this),
+                            ondeleted: this.onDeleted.bind(this)
+                        }
                     })
                 )
             );
@@ -5104,6 +5133,11 @@ var CustomerTable = function (_React$Component39) {
                                 'th',
                                 null,
                                 'Correo Electrico'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Acciones'
                             )
                         )
                     ),
@@ -5122,7 +5156,8 @@ var CustomerTable = function (_React$Component39) {
                                 rnc: cliente.rnc,
                                 fechacumpleano: cliente.fechacumpleano,
                                 facebook: cliente.facebook,
-                                correoelectronico: cliente.correoelectronico
+                                correoelectronico: cliente.correoelectronico,
+                                customerCallback: _this56.props.customerCallback
                             });
                         })
                     )
@@ -5193,6 +5228,21 @@ var CustomerTablebody = function (_React$Component40) {
                     'td',
                     null,
                     this.props.correoelectronico
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    React.createElement(
+                        Link,
+                        { className: 'btn btn-default', to: '/updatedelivery/' + this.props.id },
+                        React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
+                    ),
+                    '\xA0\xA0',
+                    React.createElement(
+                        Button,
+                        { onClick: this.props.customerCallback.ondeleted.bind(this, this.props.id) },
+                        React.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true' })
+                    )
                 )
             );
         }

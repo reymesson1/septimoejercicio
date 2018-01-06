@@ -499,9 +499,7 @@ class ActionsTableBodyDetail extends React.Component{
 
 
     render(){
-        
-        console.log(this.props.itemDetail);
-        
+                
         return(
             <tr>
                     <td style={{'font-size':'20px'}}>&#8202;</td>
@@ -3315,6 +3313,29 @@ class Customer extends React.Component{
             filterText: event.target.value
         })
     }
+
+    onDeleted(value){
+
+        let nextState = this.state.customerAPI;
+
+        var index = nextState.findIndex(x=> x.id==value);
+        
+        nextState.splice(index,1);
+
+        this.setState({
+
+            customerAPI: nextState
+        });
+
+        fetch(API_URL+'/deletecustomer', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify({"index":index,"id":value})
+        });
+
+    }
+
     
     render(){
         
@@ -3336,7 +3357,8 @@ class Customer extends React.Component{
                                         customerCallback={{
                                                             open:this.open.bind(this),
                                                             close:this.close.bind(this),
-                                                            onsavecustomer:this.onSaveCustomer.bind(this)
+                                                            onsavecustomer:this.onSaveCustomer.bind(this),
+                                                            ondeleted:this.onDeleted.bind(this)
                                         }}
                         />
                     </div>
@@ -3345,7 +3367,13 @@ class Customer extends React.Component{
                 <Row>
                     <CustomerTable
                                     customer={this.state.customerAPI}
-                                    filterText={this.state.filterText}
+                                    filterText={this.state.filterText}                                    
+                                    customerCallback={{
+                                        open:this.open.bind(this),
+                                        close:this.close.bind(this),
+                                        onsavecustomer:this.onSaveCustomer.bind(this),
+                                        ondeleted:this.onDeleted.bind(this)
+                                    }}
                     />
                 </Row>
             </div>
@@ -3377,6 +3405,7 @@ class CustomerTable extends React.Component{
                     <th>Fecha Cumpleaño</th>
                     <th>Facebook</th>
                     <th>Correo Electrico</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -3393,6 +3422,7 @@ class CustomerTable extends React.Component{
                                                     fechacumpleano={cliente.fechacumpleano}
                                                     facebook={cliente.facebook}
                                                     correoelectronico={cliente.correoelectronico}
+                                                    customerCallback={this.props.customerCallback}
                               />
                 )}
                 </tbody>
@@ -3417,6 +3447,12 @@ class CustomerTablebody extends React.Component{
                     <td>{this.props.fechacumpleano}</td>
                     <td>{this.props.facebook}</td>
                     <td>{this.props.correoelectronico}</td>
+                    <td>
+                        
+                            <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                                                    
+                            <Button onClick={this.props.customerCallback.ondeleted.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>                            
+                        
+                    </td>
                   </tr>
 
         );
