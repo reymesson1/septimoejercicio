@@ -46,15 +46,18 @@ app.get('/customer',function(req,res){
     
 });
 
-app.post('/customer',function(req,res){
-    
-    customer.push(req.body);
-    //dba.addCustomer(req.body);    
+//app.get('/customer', function(req,res){
     for(var x=0;x<customer.length;x++){
         
         //list.push(customer[x].name+' '+customer[x].apellido);
         list.push(customer[x].telefono);
     }
+//})
+
+app.post('/customer',function(req,res){
+    
+    customer.push(req.body);
+    //dba.addCustomer(req.body);    
     
     res.send(req.body);
 })
