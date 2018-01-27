@@ -35,8 +35,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -730,7 +730,7 @@ class Master extends React.Component{
         let detailItem = [];
 
         for(var x=0;x<nextState.length;x++){
-            detailItem.push(nextState[x].name);
+            detailItem.push(nextState[x]);
         }
 
         this.setState({
@@ -864,6 +864,8 @@ class Master extends React.Component{
     onSaveDetail(event){
 
         event.preventDefault();
+
+        //console.log(event.target.developmentlist.value);
 
         let nextState = this.state.masterDetail;
 
@@ -1543,7 +1545,7 @@ class AwesompleteInput extends React.Component {
              onChange={this.onChange}
              className={className}
              placeholder={placeholder}
-             name="suggest"
+             name="developmentlist"
              />);
   }
 }
@@ -1631,6 +1633,7 @@ class MasterModalField extends React.Component{
         this.state = {
 
             value: '',
+            valueItem: '',
             alter: false
         }
     }
@@ -1656,9 +1659,21 @@ class MasterModalField extends React.Component{
                 
     }
 
+    onChangeItem(data){
+        this.setState({
+            valueItem: data.target.value
+        })
+    }
+
     render(){
 
         let precio = 0;
+
+        let datos = [];
+
+        let filteredTable = this.props.detail.filter(
+            (detail) => detail.name.indexOf(this.state.valueItem.toUpperCase()) !== -1
+        )
 
         let MasterModalFieldEN = (
                 <Row>
@@ -1784,8 +1799,23 @@ class MasterModalField extends React.Component{
                                 Articulo
                               </Col>
                               <Col md={4} sm={6} style={{"width":"31%"}}>
-                                <AwesompleteInput className="form-control" list={this.props.detail} />
+                                <AwesompleteInput onChange={this.onChangeItem.bind(this)} className="form-control" list={datos} />
                               </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <FormGroup controlId="formControlsSelect">
+                                <Col md={1} sm={2}>
+                                  <ControlLabel>List</ControlLabel>
+                                </Col>
+                                <Col md={4} sm={6}>
+                                  <FormControl componentClass="select" multiple={true} name="suggest" placeholder="List" required >
+                                    {filteredTable.map(
+                                        (detail) => <option value={detail.name}>{detail.name}</option>
+                                    )}
+                                  </FormControl>
+                                </Col>
                             </FormGroup>
                         </Row>
                         <br/>
