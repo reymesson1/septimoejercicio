@@ -1631,6 +1631,7 @@ class MasterModalField extends React.Component{
         this.state = {
 
             value: '',
+            valueMod: '',
             alter: false
         }
     }
@@ -1656,9 +1657,20 @@ class MasterModalField extends React.Component{
                 
     }
 
+    onChagedMod(event){
+        this.setState({
+            valueMod: event.target.value
+        });
+    }
+
     render(){
 
         let precio = 0;
+
+        let filteredTable = this.props.detail.filter(
+            (detail) => detail.indexOf(this.state.valueMod) !== -1
+        )
+
 
         let MasterModalFieldEN = (
                 <Row>
@@ -1784,8 +1796,23 @@ class MasterModalField extends React.Component{
                                 Articulo
                               </Col>
                               <Col md={4} sm={6} style={{"width":"31%"}}>
-                                <AwesompleteInput className="form-control" list={this.props.detail} />
+                                  <FormControl type="text" onChange={this.onChagedMod.bind(this)} placeholder="Articulo" />
                               </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <FormGroup controlId="formControlsSelect">
+                                <Col md={1} sm={2}>
+                                  <ControlLabel>Tipo de Servicio</ControlLabel>
+                                </Col>
+                                <Col md={4} sm={6}>
+                                  <FormControl multiple={true} name="suggest" componentClass="select" placeholder="Tipo de Servicio" required >
+                                  {filteredTable.map(
+                                      (detail) => <option value={detail}>{detail}</option>
+                                  )}
+                                  </FormControl>
+                                </Col>
                             </FormGroup>
                         </Row>
                         <br/>
