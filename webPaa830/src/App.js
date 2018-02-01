@@ -1631,8 +1631,7 @@ class MasterModalField extends React.Component{
         this.state = {
 
             value: '',
-            alter: false,
-            valueMod: ""
+            alter: false
         }
     }
 
@@ -1657,20 +1656,9 @@ class MasterModalField extends React.Component{
                 
     }
 
-    onChangedList(event){
-
-        this.setState({
-            valueMod: event.target.value
-        })
-    }
-
     render(){
 
         let precio = 0;
-
-        let filteredTable = this.props.detail.filter(
-            (detail) => detail.indexOf(this.state.valueMod) !== -1
-        )
 
         let MasterModalFieldEN = (
                 <Row>
@@ -1796,24 +1784,8 @@ class MasterModalField extends React.Component{
                                 Articulo
                               </Col>
                               <Col md={4} sm={6} style={{"width":"31%"}}>
-                                <FormControl type="text" name="suggest" placeholder="Articulo" onChange={this.onChangedList.bind(this)} />
+                                <AwesompleteInput className="form-control" list={this.props.detail} />
                               </Col>
-                            </FormGroup>
-                        </Row>
-                        <br/>
-                        <Row>
-                            <FormGroup controlId="formControlsSelect">
-                                <Col md={1} sm={2}>
-                                  <ControlLabel>Listado</ControlLabel>
-                                </Col>
-                                <Col md={4} sm={6}>
-                                  <FormControl multiple={true} onChange={this.onChangeAlter.bind(this)} componentClass="select" name="development" placeholder="Tipo de Servicio" required >
-                                    {filteredTable.map(
-                                        (detail) => <option value={detail}>{detail}</option>
-
-                                    )}
-                                  </FormControl>
-                                </Col>
                             </FormGroup>
                         </Row>
                         <br/>
