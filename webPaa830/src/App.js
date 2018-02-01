@@ -730,7 +730,7 @@ class Master extends React.Component{
         let detailItem = [];
 
         for(var x=0;x<nextState.length;x++){
-            detailItem.push(nextState[x].name);
+            detailItem.push(nextState[x]);
         }
 
         this.setState({
@@ -864,6 +864,8 @@ class Master extends React.Component{
     onSaveDetail(event){
 
         event.preventDefault();
+
+        //console.log(event.target.developmentlist.value);
 
         let nextState = this.state.masterDetail;
 
@@ -1543,7 +1545,7 @@ class AwesompleteInput extends React.Component {
              onChange={this.onChange}
              className={className}
              placeholder={placeholder}
-             name="suggest"
+             name="developmentlist"
              />);
   }
 }
@@ -1631,7 +1633,7 @@ class MasterModalField extends React.Component{
         this.state = {
 
             value: '',
-            valueMod: '',
+            valueItem: '',
             alter: false
         }
     }
@@ -1657,20 +1659,21 @@ class MasterModalField extends React.Component{
                 
     }
 
-    onChagedMod(event){
+    onChangeItem(data){
         this.setState({
-            valueMod: event.target.value
-        });
+            valueItem: data.target.value
+        })
     }
 
     render(){
 
         let precio = 0;
 
-        let filteredTable = this.props.detail.filter(
-            (detail) => detail.indexOf(this.state.valueMod) !== -1
-        )
+        let datos = [];
 
+        let filteredTable = this.props.detail.filter(
+            (detail) => detail.name.indexOf(this.state.valueItem.toUpperCase()) !== -1
+        )
 
         let MasterModalFieldEN = (
                 <Row>
@@ -1796,7 +1799,7 @@ class MasterModalField extends React.Component{
                                 Articulo
                               </Col>
                               <Col md={4} sm={6} style={{"width":"31%"}}>
-                                  <FormControl type="text" onChange={this.onChagedMod.bind(this)} placeholder="Articulo" />
+                                <AwesompleteInput onChange={this.onChangeItem.bind(this)} className="form-control" list={datos} />
                               </Col>
                             </FormGroup>
                         </Row>
@@ -1804,13 +1807,13 @@ class MasterModalField extends React.Component{
                         <Row>
                             <FormGroup controlId="formControlsSelect">
                                 <Col md={1} sm={2}>
-                                  <ControlLabel>Tipo de Servicio</ControlLabel>
+                                  <ControlLabel>List</ControlLabel>
                                 </Col>
                                 <Col md={4} sm={6}>
-                                  <FormControl multiple={true} name="suggest" componentClass="select" placeholder="Tipo de Servicio" required >
-                                  {filteredTable.map(
-                                      (detail) => <option value={detail}>{detail}</option>
-                                  )}
+                                  <FormControl componentClass="select" multiple={true} name="suggest" placeholder="List" required >
+                                    {filteredTable.map(
+                                        (detail) => <option value={detail.name}>{detail.name}</option>
+                                    )}
                                   </FormControl>
                                 </Col>
                             </FormGroup>
