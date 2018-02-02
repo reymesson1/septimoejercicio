@@ -2284,11 +2284,10 @@ class DetailTable extends React.Component{
     constructor() {
             super();
             this.state = {
-              todos: [{id: '123',date: '2017-10-09',name: 'sas',item:
-'test.item',environment: 'dev'},{id: '454758778052139',date:
-'2017-10-09',name: 'sas',item: 'test.item',environment: 'dev' },],
+              todos: [],
               currentPage: 1,
-              todosPerPage: 10
+              todosPerPage: 10,
+              detailItem: []
             };
             this.handleClick = this.handleClick.bind(this);
     }
@@ -2297,6 +2296,28 @@ class DetailTable extends React.Component{
             this.setState({
               currentPage: Number(event.target.id)
             });
+    }
+
+    onChangedNext(){
+        let nextState = this.props.detailData;
+        fetch(API_URL+'/detailnext', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({"id":"test"})
+        })
+        .then((response)=>response.json())
+        .then((responseData)=>{
+                this.setState({
+
+                    detailItem: responseData
+                })
+        })
+
+        for(var x=0;x<this.state.detailItem;x++){
+            nextState.push(this.state.detailItem[x]);
+        }
+        
     }
 
     render(){
@@ -2310,13 +2331,11 @@ class DetailTable extends React.Component{
         // Logic for displaying current todos
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-        const currentTodos =
-filteredTable.slice(indexOfFirstTodo,indexOfLastTodo);
+        const currentTodos = filteredTable.slice(indexOfFirstTodo,indexOfLastTodo);
 
         // Logic for displaying page numbers
         const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(filteredTable.length /
-todosPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(filteredTable.length / todosPerPage); i++) {
           pageNumbers.push(i);
         }
 
@@ -2352,10 +2371,8 @@ todosPerPage); i++) {
                                                         id={todo.id}
                                                         name={todo.name}
                                                         item={todo.item}
-
-environment={todo.environment}
-
-detailCallback={this.props.detailCallback}
+                                                        environment={todo.environment}
+                                                        detailCallback={this.props.detailCallback}
                                  />
             )}
                     </tbody>
@@ -2392,10 +2409,8 @@ detailCallback={this.props.detailCallback}
                                                         id={todo.id}
                                                         name={todo.name}
                                                         item={todo.item}
-
-environment={todo.environment}
-
-detailCallback={this.props.detailCallback}
+                                                        environment={todo.environment}
+                                                        detailCallback={this.props.detailCallback}
                                  />
             )}
                     </tbody>
@@ -2405,7 +2420,7 @@ detailCallback={this.props.detailCallback}
                       <li id="1"><a role="button" href="#">«</a></li>
                       <li><a role="button" href="#">‹</a></li>
                       {renderPageNumbers}
-                      <li><a role="button" href="#">›</a></li>
+                      <li><a role="button" onClick={this.onChangedNext.bind(this)} >›</a></li>
                       <li><a role="button" href="#">»</a></li>
                     </ul>
                   </div>
