@@ -2621,12 +2621,8 @@ class DetailTableBody extends React.Component{
                 <td>{this.props.item}</td>
                 <td>{this.props.environment}</td>
                 <td>
-                    <Link className="btn btn-default"
-to={'/updatedetail/'+this.props.id}><i className="fa fa-edit"
-aria-hidden="true"></i></Link>
-                    <Button
-onClick={this.props.detailCallback.onDeleted.bind(this,this.props.id)}><i
-className="fa fa-trash" aria-hidden="true"></i></Button>
+                    <Link className="btn btn-default" to={'/updatedetail/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>
+                    <Button onClick={this.props.detailCallback.onDeleted.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>
                 </td>
               </tr>
 
@@ -3445,8 +3441,6 @@ class CustomerTable extends React.Component{
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Telefono #1</th>
-                    <th>Telefono #2</th>
-                    <th>RNC</th>
                     <th>Fecha Cumpleaño</th>
                     <th>Facebook</th>
                     <th>Correo Electronico</th>
@@ -3487,16 +3481,12 @@ class CustomerTablebody extends React.Component{
                     <td>{this.props.name}</td>
                     <td>{this.props.apellido}</td>
                     <td>{this.props.telefono}</td>
-                    <td>{this.props.telefono2}</td>
-                    <td>{this.props.rnc}</td>
                     <td>{this.props.fechacumpleano}</td>
                     <td>{this.props.facebook}</td>
                     <td>{this.props.correoelectronico}</td>
-                    <td>
-                        
-                            <Link className="btn btn-default" to={'/updatecustomer/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                                                    
+                    <td>    
+                            <Link className="btn btn-default" to={'/updatecustomer/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>
                             <Button onClick={this.props.customerCallback.ondeleted.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>                            
-                        
                     </td>
                   </tr>
 
