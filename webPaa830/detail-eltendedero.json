@@ -1,0 +1,311 @@
+{"_id":"59f696863dd30aa07d687699","id":"Abrigo","date":"2017-12-20","environment":"350","item":"10000","name":"Abrigo","category":"servicio"}
+{"_id":"59f696993dd30aa07d68769b","id":"Alas mariposas","date":"2017-12-20","name":"Alas mariposas","item":"10000","environment":"400","category":"servicio"}
+{"_id":"5a14cb91f2ae746cc819ddf6","id":"AJUSTES SIN FORRO","date":"2018-01-18","name":"AJUSTES SIN FORRO","item":"1","environment":"400","category":"colores"}
+{"_id":"5a2cb3b5d6473527217e8a01","id":"Blanco","date":"2017-12-10","name":"Blanco","item":"1","environment":"0","category":"colores"}
+{"_id":"5a612102d4a6231851c74908","id":"AJUSTAR AREA DE CINTURA","date":"2018-01-18","name":"AJUSTAR AREA DE CINTURA","item":"1","environment":"400","category":"propiedades"}
+{"_id":"5a61211ad4a6231851c74909","id":"CAMBIAR ZIPPER","date":"2018-01-18","name":"CAMBIAR ZIPPER","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a612135d4a6231851c7490a","id":"RUEDO CON FORRO","date":"2018-01-18","name":"RUEDO CON FORRO","item":"1","environment":"450","category":"propiedades"}
+{"_id":"5a61214fd4a6231851c7490b","id":"RUEDO SIN FORRO","date":"2018-01-18","name":"RUEDO SIN FORRO","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a612181d4a6231851c7490c","id":"ENTALLAR ESPALDA CON ZIPPER","date":"2018-01-18","name":"ENTALLAR ESPALDA CON ZIPPER","item":"1","environment":"400","category":"propiedades"}
+{"_id":"5a612191d4a6231851c7490d","id":"SUBIR TIRO","date":"2018-01-18","name":"SUBIR TIRO","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a6121a2d4a6231851c7490e","id":"ESTRECHAR MANGA","date":"2018-01-18","name":"ESTRECHAR MANGA","item":"1","environment":"250","category":"propiedades"}
+{"_id":"5a6121b9d4a6231851c7490f","id":"HACER FORRO","date":"2018-01-18","name":"HACER FORRO","item":"1","environment":"800","category":"propiedades"}
+{"_id":"5a6121ded4a6231851c74910","id":"HACER FORRO (COMPRANDO TELA)","date":"2018-01-18","name":"HACER FORRO (COMPRANDO TELA)","item":"1","environment":"800","category":"propiedades"}
+{"_id":"5a6121eed4a6231851c74911","id":"SUBIR TALLE","date":"2018-01-18","name":"SUBIR TALLE","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a612203d4a6231851c74912","id":"PEGAR BOTONES ","date":"2018-01-18","name":"PEGAR BOTONES ","item":"1","environment":"100","category":"propiedades"}
+{"_id":"5a612210d4a6231851c74913","id":"HACER OJALES","date":"2018-01-18","name":"HACER OJALES","item":"1","environment":"100","category":"propiedades"}
+{"_id":"5a61225fd4a6231851c74914","id":"VESTIDO LARGO","date":"2018-01-18","name":"VESTIDO LARGO","item":"1","environment":"1","category":"servicio"}
+{"_id":"5a61232ad4a6231851c74915","id":"AJUSTAR O AMPLIAR SIN FORRO -  VESTIDO LARGO","date":"2018-01-18","name":"AJUSTAR O AMPLIAR SIN FORRO -  VESTIDO LARGO","item":"1","environment":"600","category":"propiedades"}
+{"_id":"5a61233ad4a6231851c74916","id":"AJUSTAR O AMPLIAR CON FORRO -  VESTIDO LARGO","date":"2018-01-18","name":"AJUSTAR O AMPLIAR CON FORRO -  VESTIDO LARGO","item":"1","environment":"900","category":"propiedades"}
+{"_id":"5a612352d4a6231851c74917","id":"AJUSTAR AREA DE CINTURA - VESTIDO LARGO","date":"2018-01-18","name":"AJUSTAR AREA DE CINTURA - VESTIDO LARGO","item":"1","environment":"450","category":"propiedades"}
+{"_id":"5a61236cd4a6231851c74918","id":"CAMBIAR ZIPPER - VESTIDO LARGO","date":"2018-01-18","name":"CAMBIAR ZIPPER - VESTIDO LARGO","item":"1","environment":"500","category":"propiedades"}
+{"_id":"5a6123c5d4a6231851c74919","id":"COGER RUEDO CON FORRO - VESTIDO LARGO","date":"2018-01-18","name":"COGER RUEDO CON FORRO - VESTIDO LARGO","item":"1","environment":"800","category":"propiedades"}
+{"_id":"5a6123d2d4a6231851c7491a","id":"COGER RUEDO SIN FORRO - VESTIDO LARGO","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - VESTIDO LARGO","item":"1","environment":"800","category":"propiedades"}
+{"_id":"5a6123e5d4a6231851c7491b","id":"SUBIR HOMBRO - VESTIDO LARGO","date":"2018-01-18","name":"SUBIR HOMBRO - VESTIDO LARGO","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a612400d4a6231851c7491c","id":"SUBIR TIROS - VESTIDO LARGO","date":"2018-01-18","name":"SUBIR TIROS - VESTIDO LARGO","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a61241dd4a6231851c7491d","id":"ESTRECHAR MANGA - VESTIDO LARGO","date":"2018-01-18","name":"ESTRECHAR MANGA - VESTIDO LARGO","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a612432d4a6231851c7491e","id":"SUBIR TALLE","date":"2018-01-18","name":"SUBIR TALLE","item":"1","environment":"500","category":"propiedades"}
+{"_id":"5a612444d4a6231851c7491f","id":"RUEDO DE BOLILLO","date":"2018-01-18","name":"RUEDO DE BOLILLO","item":"1","environment":"500","category":"propiedades"}
+{"_id":"5a6124b1d4a6231851c74920","id":"AJUSTE CON FORRO - FALDAS CORTAS","date":"2018-01-18","name":"AJUSTE CON FORRO - FALDAS CORTAS","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6124bdd4a6231851c74921","id":"AJUSTE SIN FORRO - FALDAS CORTAS","date":"2018-01-18","name":"AJUSTE SIN FORRO - FALDAS CORTAS","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a6124d2d4a6231851c74922","id":"AJUSTE CINTURA - FALDAS CORTAS","date":"2018-01-18","name":"AJUSTE CINTURA - FALDAS CORTAS","item":"1","environment":"250","category":"propiedades"}
+{"_id":"5a6124e2d4a6231851c74923","id":"CAMBIAR ZIPPER - FALDAS CORTA","date":"2018-01-18","name":"CAMBIAR ZIPPER - FALDAS CORTA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a61250fd4a6231851c74924","id":"COGER RUEDO CON FORRO - FALDAS CORTAS","date":"2018-01-18","name":"COGER RUEDO CON FORRO - FALDAS CORTAS","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a612522d4a6231851c74925","id":"COGER RUEDO SIN FORRO - FALDAS CORTAS","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - FALDAS CORTAS","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a612534d4a6231851c74926","id":"HACER FORRO - FALDAS CORTAS","date":"2018-01-18","name":"HACER FORRO - FALDAS CORTAS","item":"1","environment":"500","category":"propiedades"}
+{"_id":"5a612547d4a6231851c74927","id":"SUBIR PRETINA - FALDA CORTA","date":"2018-01-18","name":"SUBIR PRETINA - FALDA CORTA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a612590d4a6231851c74928","id":"AJUSTAR O AMPLIAR - FALDA LARGA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - FALDA LARGA","item":"1","environment":"450","category":"propiedades"}
+{"_id":"5a6125a3d4a6231851c74929","id":"AJUSTAR O AMPLIAR CON FORRO - FALDA LARGA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR CON FORRO - FALDA LARGA","item":"1","environment":"500","category":"propiedades"}
+{"_id":"5a6125bdd4a6231851c7492a","id":"AJUSTAR AREA DE CINTURA - FALDA LARGA","date":"2018-01-18","name":"AJUSTAR AREA DE CINTURA - FALDA LARGA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6125d3d4a6231851c7492b","id":"CAMBIAR ZIPPER - FALDA LARGA","date":"2018-01-18","name":"CAMBIAR ZIPPER - FALDA LARGA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6125e4d4a6231851c7492c","id":"","date":"2018-01-18","name":"","item":"","environment":"","category":"servicio"}
+{"_id":"5a61260cd4a6231851c7492d","id":"COGER RUEDO SIN FORRO - FALDAS LARGA","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - FALDAS LARGA","item":"1","environment":"800","category":"propiedades"}
+{"_id":"5a61261cd4a6231851c7492e","id":"COGER RUEDO SIN FORRO - FALDAS LARGA","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - FALDAS LARGA","item":"1","environment":"650","category":"propiedades"}
+{"_id":"5a61262fd4a6231851c7492f","id":"HACER FORRO - FALDA LARGA","date":"2018-01-18","name":"HACER FORRO - FALDA LARGA","item":"1","environment":"600","category":"propiedades"}
+{"_id":"5a612642d4a6231851c74930","id":"SUBIR PRETINA - FALDA LARGA","date":"2018-01-18","name":"SUBIR PRETINA - FALDA LARGA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a61271dd4a6231851c74931","id":"PEGAR BOTONES - BLUSA","date":"2018-01-18","name":"PEGAR BOTONES - BLUSA","item":"1","environment":"100","category":"propiedades"}
+{"_id":"5a612782d4a6231851c74932","id":"CORTA MANGA - BLUSA","date":"2018-01-18","name":"CORTA MANGA - BLUSA","item":"1","environment":"250","category":"propiedades"}
+{"_id":"5a612795d4a6231851c74933","id":"AJUSTAR O AMPLIAR - BLUSA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6127a3d4a6231851c74934","id":"HACER FORRO - BLUSA","date":"2018-01-18","name":"HACER FORRO - BLUSA","item":"1","environment":"600","category":"propiedades"}
+{"_id":"5a6127b8d4a6231851c74935","id":"PINSA TRASERA - BLUSA","date":"2018-01-18","name":"PINSA TRASERA - BLUSA","item":"1","environment":"250","category":"propiedades"}
+{"_id":"5a6127c9d4a6231851c74936","id":"SUBIR MANGA DE HOMBRO - BLUSA","date":"2018-01-18","name":"SUBIR MANGA DE HOMBRO - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6127dfd4a6231851c74937","id":"BAJAR O SUBIR RUEDO SIN FORRO - BLUSA","date":"2018-01-18","name":"BAJAR O SUBIR RUEDO SIN FORRO - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6127edd4a6231851c74938","id":"BAJAR O SUBIR RUEDO CON FORRO - BLUSA","date":"2018-01-18","name":"BAJAR O SUBIR RUEDO CON FORRO - BLUSA","item":"1","environment":"400","category":"propiedades"}
+{"_id":"5a612810d4a6231851c74939","id":"SUBIR TIRO - BLUSA","date":"2018-01-18","name":"SUBIR TIRO - BLUSA","item":"1","environment":"250","category":"propiedades"}
+{"_id":"5a612845d4a6231851c7493a","id":"SUBIR MANGA CON PU�O - BLUSA","date":"2018-01-18","name":"SUBIR MANGA CON PU�O - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a61285ed4a6231851c7493b","id":"JEANS ORIGINALES - PANTALONES","date":"2018-01-18","name":"JEANS ORIGINALES - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a61286cd4a6231851c7493c","id":"RUEDO NORMAL - PANTALONES","date":"2018-01-18","name":"RUEDO NORMAL - PANTALONES","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a612881d4a6231851c7493d","id":"JEANS CINTURA - PANTALONES","date":"2018-01-18","name":"JEANS CINTURA - PANTALONES","item":"1","environment":"400","category":"propiedades"}
+{"_id":"5a6128a4d4a6231851c7493e","id":"PANTALON NORMAL CINTURA - PANTALONES","date":"2018-01-18","name":"PANTALON NORMAL CINTURA - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6128b5d4a6231851c7493f","id":"AJUSTAR PIERNA - PANTALONES","date":"2018-01-18","name":"AJUSTAR PIERNA - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6128c4d4a6231851c74940","id":"CAMBIAR ZIPPER - PANTALONES","date":"2018-01-18","name":"CAMBIAR ZIPPER - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6128d3d4a6231851c74941","id":"CINTURA - PANTALON","date":"2018-01-18","name":"CINTURA - PANTALON","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6128e9d4a6231851c74942","id":"AJUSTAR O AMPLIAR - PANTALON","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - PANTALON","item":"1","environment":"450","category":"propiedades"}
+{"_id":"5a61290ed4a6231851c74943","id":"FORRO - TRAJE DE BANO","date":"2018-01-18","name":"FORRO - TRAJE DE BANO","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a61291dd4a6231851c74944","id":"AJUSTAR - TRAJE DE BANO","date":"2018-01-18","name":"AJUSTAR - TRAJE DE BANO","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a61292dd4a6231851c74945","id":"SUBIR TIRO - TRAJE DE BANO","date":"2018-01-18","name":"SUBIR TIRO - TRAJE DE BANO","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a612948d4a6231851c74946","id":"HOMBROS - CHAQUETA","date":"2018-01-18","name":"HOMBROS - CHAQUETA","item":"1","environment":"600","category":"propiedades"}
+{"_id":"5a612956d4a6231851c74947","id":"PINSA - CHAQUETA","date":"2018-01-18","name":"PINSA - CHAQUETA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a612969d4a6231851c74948","id":"AJUSTAR O AMPLIAR - CHAQUETA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - CHAQUETA","item":"1","environment":"600","category":"propiedades"}
+{"_id":"5a61297cd4a6231851c74949","id":"RUEDO DE CHAQUETA - CHAQUETA","date":"2018-01-18","name":"RUEDO DE CHAQUETA - CHAQUETA","item":"1","environment":"600","category":"propiedades"}
+{"_id":"5a612991d4a6231851c7494a","id":"SUBIR MANGA - CHAQUETA","date":"2018-01-18","name":"SUBIR MANGA - CHAQUETA","item":"1","environment":"850","category":"propiedades"}
+{"_id":"5a61299dd4a6231851c7494b","id":"PONER BOTON - CHAQUETA","date":"2018-01-18","name":"PONER BOTON - CHAQUETA","item":"1","environment":"100","category":"propiedades"}
+{"_id":"5a6129b2d4a6231851c7494c","id":"COGER HOMBRO - CAMISA","date":"2018-01-18","name":"COGER HOMBRO - CAMISA","item":"1","environment":"450","category":"propiedades"}
+{"_id":"5a6129cad4a6231851c7494d","id":"AJUSTAR O AMPLIAR -  CHAQUETA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR -  CHAQUETA","item":"1","environment":"400","category":"propiedades"}
+{"_id":"5a6129d7d4a6231851c7494e","id":"RUEDO -  CHAQUETA","date":"2018-01-18","name":"RUEDO -  CHAQUETA","item":"1","environment":"350","category":"propiedades"}
+{"_id":"5a6129ead4a6231851c7494f","id":"SUBIR PUNO - CHAQUETA","date":"2018-01-18","name":"SUBIR PUNO - CHAQUETA","item":"1","environment":"300","category":"propiedades"}
+{"_id":"5a612c23d4a6231851c74950","id":"CAMISA ML","date":"2018-01-18","name":"CAMISA ML","item":"1","environment":"150","category":"servicio"}
+{"_id":"5a612dd2d4a6231851c74951","id":"LENTEJUELAS","date":"2018-01-18","name":"LENTEJUELAS","item":"1","environment":"100","category":"propiedades"}
+{"_id":"5a61313dd4a6231851c74952","id":"CAMISA MC - SOLO PLANCHA","date":"2018-01-18","name":"CAMISA MC - SOLO PLANCHA","item":"1","environment":"110","category":"servicio"}
+{"_id":"5a613147d4a6231851c74953","id":"CAMISA ML - SOLO PLANCHA","date":"2018-01-18","name":"CAMISA ML - SOLO PLANCHA","item":"1","environment":"120","category":"servicio"}
+{"_id":"5a613162d4a6231851c74954","id":"CHACABANA - SOLO PLANCHA","date":"2018-01-18","name":"CHACABANA - SOLO PLANCHA","item":"1","environment":"125","category":"servicio"}
+{"_id":"5a61319ed4a6231851c74955","id":"LINO - SOLO PLANCHA","date":"2018-01-18","name":"LINO - SOLO PLANCHA","item":"1","environment":"25","category":"propiedades"}
+{"_id":"5a6131d2d4a6231851c74956","id":"SEDAN - SOLO PLANCHA","date":"2018-01-18","name":"SEDAN - SOLO PLANCHA","item":"1","environment":"25","category":"propiedades"}
+{"_id":"5a6131f6d4a6231851c74957","id":"BLUSA - SOLO PLANCHA","date":"2018-01-18","name":"BLUSA - SOLO PLANCHA","item":"1","environment":"105","category":"servicio"}
+{"_id":"5a613206d4a6231851c74958","id":"POLOSHIRT - SOLO PLANCHA","date":"2018-01-18","name":"POLOSHIRT - SOLO PLANCHA","item":"1","environment":"115","category":"servicio"}
+{"_id":"5a613212d4a6231851c74959","id":"TSHIRT - SOLO PLANCHA","date":"2018-01-18","name":"TSHIRT - SOLO PLANCHA","item":"1","environment":"85","category":"servicio"}
+{"_id":"5a61323ed4a6231851c7495a","id":"PIEDRERIA - SOLO PLANCHA","date":"2018-01-18","name":"PIEDRERIA - SOLO PLANCHA","item":"1","environment":"25","category":"propiedades"}
+{"_id":"5a61324bd4a6231851c7495b","id":"PANTALON - SOLO PLANCHA","date":"2018-01-18","name":"PANTALON - SOLO PLANCHA","item":"1","environment":"110","category":"servicio"}
+{"_id":"5a613293d4a6231851c7495c","id":"BERMUDA - SOLO PLANCHA","date":"2018-01-18","name":"BERMUDA - SOLO PLANCHA","item":"1","environment":"105","category":"servicio"}
+{"_id":"5a6132ded4a6231851c7495d","id":"SHORT - SOLO PLANCHA","date":"2018-01-18","name":"SHORT - SOLO PLANCHA","item":"1","environment":"95","category":"servicio"}
+{"_id":{"$oid":"59f696863dd30aa07d687699"},"id":"Abrigo","date":"2017-10-14","environment":"250","item":"10000","name":"Abrigo","category":"servicio"}
+{"_id":{"$oid":"59f696933dd30aa07d68769a"},"id":"Abrigo","date":"2017-10-14","environment":"250","item":"10000","name":"Abrigo","category":"servicio"}
+{"_id":{"$oid":"59f696993dd30aa07d68769b"},"id":"Alas mariposas","date":"2017-10-14","name":"Alas mariposas","item":"10000","environment":"250","category":"servicio"}
+{"_id":{"$oid":"59f6969f3dd30aa07d68769c"},"id":"Alfombras","date":"2017-10-14","name":"Alfombras","item":"1000","environment":"250","category":"servicio"}
+{"_id":{"$oid":"59f696a33dd30aa07d68769d"},"id":"Bata de Laboratorio","date":"2017-10-14","name":"Bata de Laboratorio","item":"100000","environment":"250","category":"servicio"}
+{"_id":{"$oid":"59f696a73dd30aa07d68769e"},"id":"Birrete","date":"2017-10-14","name":"Birrete","item":"100000","environment":"250","category":"servicio"}
+{"_id":{"$oid":"59fe2f044133d62d3b1c5bbd"},"id":"PANTALON","date":"2017-11-04","name":"PANTALON","item":"1","environment":"350","category":"servicio"}
+{"_id":{"$oid":"59fe2f7e4133d62d3b1c5bbe"},"id":"Rueda","date":"2017-11-04","name":"Rueda","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"59fe2ffc4133d62d3b1c5bbf"},"id":"RUEDO","date":"2017-11-04","name":"RUEDO","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"59fe31284133d62d3b1c5bc0"},"id":"Expreso 1","date":"2017-11-04","name":"Expreso 1","item":"1","environment":"50","category":"propiedades"}
+{"_id":{"$oid":"59fe31364133d62d3b1c5bc1"},"id":"Expreso 2","date":"2017-11-04","name":"Expreso 2","item":"1","environment":"25","category":"propiedades"}
+{"_id":{"$oid":"5a14be37f2ae746cc819dd99"},"id":"Traje de baño","date":"2017-11-21","name":"Traje de baño","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bee2f2ae746cc819dd9a"},"id":"TRAJES 2 PIEZAS","date":"2017-11-21","name":"TRAJES 2 PIEZAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14befdf2ae746cc819dd9b"},"id":"VESTIDO","date":"2017-11-21","name":"VESTIDO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bf1df2ae746cc819dd9c"},"id":"VESTIDO CORTO","date":"2017-11-21","name":"VESTIDO CORTO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bf3ff2ae746cc819dd9d"},"id":"VESTIDO DE NINA","date":"2017-11-21","name":"VESTIDO DE NINA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bf71f2ae746cc819dd9e"},"id":"VESTIDO DE NINA","date":"2017-11-21","name":"VESTIDO DE NINA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bfa6f2ae746cc819dd9f"},"id":"VESTIDO GALA CON ADORNO","date":"2017-11-21","name":"VESTIDO GALA CON ADORNO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bfc8f2ae746cc819dda0"},"id":"VESTIDO GALA SIN ADORNO","date":"2017-11-21","name":"VESTIDO GALA SIN ADORNO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bfe7f2ae746cc819dda1"},"id":"TOALLA","date":"2017-11-21","name":"TOALLA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14bff6f2ae746cc819dda2"},"id":"TOGA","date":"2017-11-21","name":"TOGA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c01ef2ae746cc819dda3"},"id":"TOGA CORTA","date":"2017-11-21","name":"TOGA CORTA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c04af2ae746cc819dda4"},"id":"TRAJE DE 3 PIEZAS","date":"2017-11-21","name":"TRAJE DE 3 PIEZAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c072f2ae746cc819dda5"},"id":"SERVICIO LAVANDERÍA","date":"2017-11-21","name":"SERVICIO LAVANDERÍA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c088f2ae746cc819dda6"},"id":"SERVILLETAS","date":"2017-11-21","name":"SERVILLETAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c0a5f2ae746cc819dda7"},"id":"SHORT","date":"2017-11-21","name":"SHORT","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c0b7f2ae746cc819dda8"},"id":"SMOKING","date":"2017-11-21","name":"SMOKING","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c0d1f2ae746cc819dda9"},"id":"SOMBRERO","date":"2017-11-21","name":"SOMBRERO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c0eff2ae746cc819ddaa"},"id":"T-SHIRT","date":"2017-11-21","name":"T-SHIRT","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c10ef2ae746cc819ddab"},"id":"ROPA INTERIOR","date":"2017-11-21","name":"ROPA INTERIOR","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c12ff2ae746cc819ddac"},"id":"SABANA KING","date":"2017-11-21","name":"SABANA KING","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c14cf2ae746cc819ddad"},"id":"SABANA QUEEN","date":"2017-11-21","name":"SABANA QUEEN","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c165f2ae746cc819ddae"},"id":"SABANAS","date":"2017-11-21","name":"SABANAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c18df2ae746cc819ddaf"},"id":"SALIDA DE PLAYA","date":"2017-11-21","name":"SALIDA DE PLAYA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c1a8f2ae746cc819ddb0"},"id":"PAÑO","date":"2017-11-21","name":"0","item":"","environment":"","category":"servicio"}
+{"_id":{"$oid":"5a14c1bef2ae746cc819ddb1"},"id":"PAÑO","date":"2017-11-21","name":"PAÑO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c1eef2ae746cc819ddb2"},"id":"PELUCHE","date":"2017-11-21","name":"PELUCHE","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c20af2ae746cc819ddb3"},"id":"PIJAMAS","date":"2017-11-21","name":"PIJAMAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c22bf2ae746cc819ddb4"},"id":"POLO SHIRT","date":"2017-11-21","name":"POLO SHIRT","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c242f2ae746cc819ddb5"},"id":"REFAJO","date":"2017-11-21","name":"REFAJO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c261f2ae746cc819ddb6"},"id":"ROPA INTERIOR","date":"2017-11-21","name":"ROPA INTERIOR","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c27cf2ae746cc819ddb7"},"id":"OVEROL","date":"2017-11-21","name":"OVEROL","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c2a8f2ae746cc819ddb8"},"id":"PANTALON MUJER","date":"2017-11-21","name":"PANTALON MUJER","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c2bef2ae746cc819ddb9"},"id":"PANTALON NINO","date":"2017-11-21","name":"PANTALON NINO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c2e1f2ae746cc819ddba"},"id":"PAÑUELO","date":"2017-11-21","name":"PAÑUELO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c309f2ae746cc819ddbb"},"id":"MANTEL GRANDE","date":"2017-11-21","name":"MANTEL GRANDE","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c325f2ae746cc819ddbc"},"id":"MANTEL MEDIANO","date":"2017-11-21","name":"MANTEL MEDIANO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c33ef2ae746cc819ddbd"},"id":"MANTEL PEQ.","date":"2017-11-21","name":"MANTEL PEQ.","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c365f2ae746cc819ddbe"},"id":"MEDIA","date":"2017-11-21","name":"MEDIA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c37df2ae746cc819ddbf"},"id":"NOVIEMBRE","date":"2017-11-21","name":"NOVIEMBRE","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c39ff2ae746cc819ddc0"},"id":"FUNDA DE ALMOHADA","date":"2017-11-21","name":"FUNDA DE ALMOHADA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c3b7f2ae746cc819ddc1"},"id":"GORRA","date":"2017-11-21","name":"GORRA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c3d1f2ae746cc819ddc2"},"id":"INDIVIDUAL","date":"2017-11-21","name":"INDIVIDUAL","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c3e7f2ae746cc819ddc3"},"id":"JACKET","date":"2017-11-21","name":"JACKET","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c408f2ae746cc819ddc4"},"id":"JONSUIT","date":"2017-11-21","name":"JONSUIT","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c432f2ae746cc819ddc5"},"id":"MANDOLES","date":"2017-11-21","name":"MANDOLES","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c44ef2ae746cc819ddc6"},"id":"FORRO DE CARRO","date":"2017-11-21","name":"FORRO DE CARRO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c470f2ae746cc819ddc7"},"id":"FORRO MUNET","date":"2017-11-21","name":"FORRO MUNET","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c492f2ae746cc819ddc8"},"id":"FAJA","date":"2017-11-21","name":"FAJA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c4aaf2ae746cc819ddc9"},"id":"FALDA","date":"2017-11-21","name":"FALDA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c4c7f2ae746cc819ddca"},"id":"FALDA LARGA","date":"2017-11-21","name":"FALDA LARGA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c4e9f2ae746cc819ddcb"},"id":"FORRO DE ROPA","date":"2017-11-21","name":"FORRO DE ROPA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c50bf2ae746cc819ddcc"},"id":"FORRO DUVET","date":"2017-11-21","name":"FORRO DUVET","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c527f2ae746cc819ddcd"},"id":"CORTINAS","date":"2017-11-21","name":"CORTINAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c53df2ae746cc819ddce"},"id":"CORTINAS GRANDE","date":"2017-11-21","name":"CORTINAS GRANDE","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c560f2ae746cc819ddcf"},"id":"COUT O ABRIGO LARGO","date":"2017-11-21","name":"COUT O ABRIGO LARGO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c582f2ae746cc819ddd0"},"id":"CUBRE COLCHON","date":"2017-11-21","name":"CUBRE COLCHON","item":"CUBRE COLCHON","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c5a4f2ae746cc819ddd1"},"id":"CORBATA","date":"2017-11-21","name":"CORBATA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c5bcf2ae746cc819ddd2"},"id":"CORCHA PEQ","date":"2017-11-21","name":"CORCHA PEQ","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c5d6f2ae746cc819ddd3"},"id":"CORTINA LISA PEQ","date":"2017-11-21","name":"CORTINA LISA PEQ","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c5f0f2ae746cc819ddd4"},"id":"CORTINA MEDIANA","date":"2017-11-21","name":"CORTINA MEDIANA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c630f2ae746cc819ddd5"},"id":"CORTINA GRUESA","date":"2017-11-21","name":"CORTINA GRUESA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c66cf2ae746cc819ddd6"},"id":"COLCHA GRUESA Q K","date":"2017-11-21","name":"COLCHA GRUESA Q K","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c6a1f2ae746cc819ddd7"},"id":"COLCHA GRUESA F T","date":"2017-11-21","name":"COLCHA GRUESA F T","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c6f0f2ae746cc819ddd8"},"id":"COLCHA SENCILLA","date":"2017-11-21","name":"COLCHA SENCILLA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c710f2ae746cc819ddd9"},"id":"COLCHA SENCILLA F T","date":"2017-11-21","name":"COLCHA SENCILLA F T","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c728f2ae746cc819ddda"},"id":"COLCHA SENCILLA Q K","date":"2017-11-21","name":"COLCHA SENCILLA Q K","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c74af2ae746cc819dddb"},"id":"CONJUNTO 2/PIEZAS","date":"2017-11-21","name":"CONJUNTO 2/PIEZAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c788f2ae746cc819dddc"},"id":"CONJUNTO 3/PIEZAS","date":"2017-11-21","name":"CONJUNTO 3/PIEZAS","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c7b1f2ae746cc819dddd"},"id":"CHALECO","date":"2017-11-21","name":"CHALECO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c7cef2ae746cc819ddde"},"id":"CHAQUETA DE HOMBRE","date":"2017-11-21","name":"CHAQUETA DE HOMBRE","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c7e1f2ae746cc819dddf"},"id":"CHAQUETA DE MUJER","date":"2017-11-21","name":"CHAQUETA DE MUJER","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c808f2ae746cc819dde0"},"id":"CHAQUETA DE  NINO","date":"2017-11-21","name":"CHAQUETA DE  NINO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c840f2ae746cc819dde1"},"id":"COJINES","date":"2017-11-21","name":"COJINES","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c861f2ae746cc819dde2"},"id":"COLCHA GRUESA F T","date":"2017-11-21","name":"COLCHA GRUESA F T","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c880f2ae746cc819dde3"},"id":"BULTO DE TELA","date":"2017-11-21","name":"BULTO DE TELA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c894f2ae746cc819dde4"},"id":"CAMINO","date":"2017-11-21","name":"CAMINO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c8b6f2ae746cc819dde5"},"id":"CAMISA MC","date":"2017-11-21","name":"CAMISA MC","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c8d7f2ae746cc819dde6"},"id":"CAPA","date":"2017-11-21","name":"CAPA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c8f3f2ae746cc819dde7"},"id":"CHACABANA","date":"2017-11-21","name":"CHACABANA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c914f2ae746cc819dde8"},"id":"BUFANDA","date":"2017-11-21","name":"BUFANDA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c934f2ae746cc819dde9"},"id":"BULTO DE TELA","date":"2017-11-21","name":"BULTO DE TELA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c963f2ae746cc819ddea"},"id":"BODY CON FALDA","date":"2017-11-21","name":"BODY CON FALDA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c993f2ae746cc819ddeb"},"id":"BLUSA","date":"2017-11-21","name":"BLUSA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c9b4f2ae746cc819ddec"},"id":"BIRRETE","date":"2017-11-21","name":"BIRRETE","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14c9d4f2ae746cc819dded"},"id":"BERMUDA","date":"2017-11-21","name":"BERMUDA","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14ca04f2ae746cc819ddee"},"id":"BANDERINES","date":"2017-11-21","name":"BANDERINES","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14ca51f2ae746cc819ddef"},"id":"BOTON DAÑADO","date":"2017-11-21","name":"BOTON DAÑADO","item":"1","environment":"0","category":"servicio"}
+{"_id":{"$oid":"5a14ca6ff2ae746cc819ddf0"},"id":"DESTIÑIDO","date":"2017-11-21","name":"DESTIÑIDO","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"5a14ca9af2ae746cc819ddf1"},"id":"ROTO","date":"2017-11-21","name":"ROTO","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"5a14cad2f2ae746cc819ddf2"},"id":"PIEL","date":"2017-11-21","name":"PIEL","item":"1","environment":"200","category":"propiedades"}
+{"_id":{"$oid":"5a14cafaf2ae746cc819ddf3"},"id":"ZURCIDO","date":"2017-11-21","name":"ZURCIDO","item":"1","environment":"200","category":"servicio"}
+{"_id":{"$oid":"5a14cb28f2ae746cc819ddf4"},"id":"AJUSTAR FORRO","date":"2017-11-21","name":"AJUSTAR FORRO","item":"1","environment":"200","category":"servicio"}
+{"_id":{"$oid":"5a14cb60f2ae746cc819ddf5"},"id":"ZIPERS FORRO","date":"2017-11-21","name":"ZIPERS FORRO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a14cb91f2ae746cc819ddf6"},"id":"AJUSTES SIN FORRO","date":"2017-11-21","name":"AJUSTES SIN FORRO","item":"1","environment":"0","category":"colores"}
+{"_id":{"$oid":"5a14cbd1f2ae746cc819ddf7"},"id":"FALTA DE CORDON","date":"2017-11-21","name":"FALTA DE CORDON","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"5a14cc03f2ae746cc819ddf8"},"id":"DESCOCIDO","date":"2017-11-21","name":"DESCOCIDO","item":"1","environment":"150","category":"propiedades"}
+{"_id":{"$oid":"5a14cc22f2ae746cc819ddf9"},"id":"GALA","date":"2017-11-21","name":"GALA","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a14cc60f2ae746cc819ddfa"},"id":"SUBIR HOMBRO","date":"2017-11-21","name":"SUBIR HOMBRO","item":"1","environment":"850","category":"propiedades"}
+{"_id":{"$oid":"5a14cc8ef2ae746cc819ddfb"},"id":"GRANDE","date":"2017-11-21","name":"GRANDE","item":"1","environment":"525","category":"propiedades"}
+{"_id":{"$oid":"5a14cca8f2ae746cc819ddfc"},"id":"ROTO","date":"2017-11-21","name":"ROTO","item":"1","environment":"150","category":"propiedades"}
+{"_id":{"$oid":"5a14ccecf2ae746cc819ddfd"},"id":"DESHILADO","date":"2017-11-21","name":"DESHILADO","item":"1","environment":"150","category":"servicio"}
+{"_id":{"$oid":"5a14cd11f2ae746cc819ddfe"},"id":"LANA","date":"2017-11-21","name":"LANA","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"5a14cd3df2ae746cc819ddff"},"id":"LARGO","date":"2017-11-21","name":"LARGO","item":"1","environment":"50","category":"propiedades"}
+{"_id":{"$oid":"5a14cd73f2ae746cc819de00"},"id":"LINO","date":"2017-11-21","name":"LINO","item":"1","environment":"50","category":"propiedades"}
+{"_id":{"$oid":"5a14cd9bf2ae746cc819de01"},"id":"JEAN","date":"2017-11-21","name":"JEAN","item":"1","environment":"15","category":"propiedades"}
+{"_id":{"$oid":"5a14cdc0f2ae746cc819de02"},"id":"SEDA","date":"2017-11-21","name":"SEDA","item":"1","environment":"50","category":"propiedades"}
+{"_id":{"$oid":"5a14ce07f2ae746cc819de03"},"id":"PIEDRERIA","date":"2017-11-21","name":"PIEDRERIA","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a14ce27f2ae746cc819de04"},"id":"ROTO","date":"2017-11-21","name":"ROTO","item":"1","environment":"0","category":"propiedades"}
+{"_id":{"$oid":"5a14ce48f2ae746cc819de05"},"id":"ENCAJE","date":"2017-11-21","name":"ENCAJE","item":"1","environment":"50","category":"servicio"}
+{"_id":{"$oid":"5a14ce7ef2ae746cc819de06"},"id":"PLIZADO","date":"2017-11-21","name":"PLIZADO","item":"1","environment":"50","category":"propiedades"}
+{"_id":{"$oid":"5a14cedbf2ae746cc819de07"},"id":"CHIFON","date":"2017-11-21","name":"CHIFON","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a2cb3b5d6473527217e8a01"},"id":"Blanco","date":"2017-12-10","name":"Blanco","item":"1","environment":"0","category":"colores"}
+{"_id":{"$oid":"5a3ecb89275d206457945fa9"},"id":"CAMISA","date":"2017-12-23","name":"CAMISA","item":"1","environment":"125","category":"servicio"}
+{"_id":{"$oid":"5a3ecd35275d206457945faa"},"id":"SUBIR PUNO","date":"2017-12-23","name":"SUBIR PUNO","item":"","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a3ecd47275d206457945fab"},"id":"ESTRECHAR O AMPLIAR","date":"2017-12-23","name":"ESTRECHAR O AMPLIAR","item":"","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a3ecd65275d206457945fac"},"id":"CAMBIAR CUELLO","date":"2017-12-23","name":"CAMBIAR CUELLO","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a3ecd6f275d206457945fad"},"id":"CORTA MANGA","date":"2017-12-23","name":"CORTA MANGA","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a3ed039275d206457945fae"},"id":"ABRIGO","date":"2017-12-23","name":"ABRIGO","item":"1","environment":"170","category":"servicio"}
+{"_id":{"$oid":"5a4c4374f20ff845ab3d334f"},"id":"CAMBIAR PUÑO","date":"2018-01-02","name":"CAMBIAR PUÑO","item":"1","environment":"100","category":"servicio"}
+{"_id":{"$oid":"5a4c4399f20ff845ab3d3350"},"id":"ESTRECHAR O AMPLIAR","date":"2018-01-02","name":"ESTRECHAR O AMPLIAR","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612102d4a6231851c74908"},"id":"AJUSTAR AREA DE CINTURA","date":"2018-01-18","name":"AJUSTAR AREA DE CINTURA","item":"1","environment":"400","category":"propiedades"}
+{"_id":{"$oid":"5a61211ad4a6231851c74909"},"id":"CAMBIAR ZIPPER","date":"2018-01-18","name":"CAMBIAR ZIPPER","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612135d4a6231851c7490a"},"id":"RUEDO CON FORRO","date":"2018-01-18","name":"RUEDO CON FORRO","item":"1","environment":"450","category":"propiedades"}
+{"_id":{"$oid":"5a61214fd4a6231851c7490b"},"id":"RUEDO SIN FORRO","date":"2018-01-18","name":"RUEDO SIN FORRO","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612181d4a6231851c7490c"},"id":"ENTALLAR ESPALDA CON ZIPPER","date":"2018-01-18","name":"ENTALLAR ESPALDA CON ZIPPER","item":"1","environment":"400","category":"propiedades"}
+{"_id":{"$oid":"5a612191d4a6231851c7490d"},"id":"SUBIR TIRO","date":"2018-01-18","name":"SUBIR TIRO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a6121a2d4a6231851c7490e"},"id":"ESTRECHAR MANGA","date":"2018-01-18","name":"ESTRECHAR MANGA","item":"1","environment":"250","category":"propiedades"}
+{"_id":{"$oid":"5a6121b9d4a6231851c7490f"},"id":"HACER FORRO","date":"2018-01-18","name":"HACER FORRO","item":"1","environment":"800","category":"propiedades"}
+{"_id":{"$oid":"5a6121ded4a6231851c74910"},"id":"HACER FORRO (COMPRANDO TELA)","date":"2018-01-18","name":"HACER FORRO (COMPRANDO TELA)","item":"1","environment":"800","category":"propiedades"}
+{"_id":{"$oid":"5a6121eed4a6231851c74911"},"id":"SUBIR TALLE","date":"2018-01-18","name":"SUBIR TALLE","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612203d4a6231851c74912"},"id":"PEGAR BOTONES ","date":"2018-01-18","name":"PEGAR BOTONES ","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a612210d4a6231851c74913"},"id":"HACER OJALES","date":"2018-01-18","name":"HACER OJALES","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a61225fd4a6231851c74914"},"id":"VESTIDO LARGO","date":"2018-01-18","name":"VESTIDO LARGO","item":"1","environment":"1","category":"servicio"}
+{"_id":{"$oid":"5a61232ad4a6231851c74915"},"id":"AJUSTAR O AMPLIAR SIN FORRO -  VESTIDO LARGO","date":"2018-01-18","name":"AJUSTAR O AMPLIAR SIN FORRO -  VESTIDO LARGO","item":"1","environment":"600","category":"propiedades"}
+{"_id":{"$oid":"5a61233ad4a6231851c74916"},"id":"AJUSTAR O AMPLIAR CON FORRO -  VESTIDO LARGO","date":"2018-01-18","name":"AJUSTAR O AMPLIAR CON FORRO -  VESTIDO LARGO","item":"1","environment":"900","category":"propiedades"}
+{"_id":{"$oid":"5a612352d4a6231851c74917"},"id":"AJUSTAR AREA DE CINTURA - VESTIDO LARGO","date":"2018-01-18","name":"AJUSTAR AREA DE CINTURA - VESTIDO LARGO","item":"1","environment":"450","category":"propiedades"}
+{"_id":{"$oid":"5a61236cd4a6231851c74918"},"id":"CAMBIAR ZIPPER - VESTIDO LARGO","date":"2018-01-18","name":"CAMBIAR ZIPPER - VESTIDO LARGO","item":"1","environment":"500","category":"propiedades"}
+{"_id":{"$oid":"5a6123c5d4a6231851c74919"},"id":"COGER RUEDO CON FORRO - VESTIDO LARGO","date":"2018-01-18","name":"COGER RUEDO CON FORRO - VESTIDO LARGO","item":"1","environment":"800","category":"propiedades"}
+{"_id":{"$oid":"5a6123d2d4a6231851c7491a"},"id":"COGER RUEDO SIN FORRO - VESTIDO LARGO","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - VESTIDO LARGO","item":"1","environment":"800","category":"propiedades"}
+{"_id":{"$oid":"5a6123e5d4a6231851c7491b"},"id":"SUBIR HOMBRO - VESTIDO LARGO","date":"2018-01-18","name":"SUBIR HOMBRO - VESTIDO LARGO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a612400d4a6231851c7491c"},"id":"SUBIR TIROS - VESTIDO LARGO","date":"2018-01-18","name":"SUBIR TIROS - VESTIDO LARGO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a61241dd4a6231851c7491d"},"id":"ESTRECHAR MANGA - VESTIDO LARGO","date":"2018-01-18","name":"ESTRECHAR MANGA - VESTIDO LARGO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a612432d4a6231851c7491e"},"id":"SUBIR TALLE","date":"2018-01-18","name":"SUBIR TALLE","item":"1","environment":"500","category":"propiedades"}
+{"_id":{"$oid":"5a612444d4a6231851c7491f"},"id":"RUEDO DE BOLILLO","date":"2018-01-18","name":"RUEDO DE BOLILLO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a6124b1d4a6231851c74920"},"id":"AJUSTE CON FORRO - FALDAS CORTAS","date":"2018-01-18","name":"AJUSTE CON FORRO - FALDAS CORTAS","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6124bdd4a6231851c74921"},"id":"AJUSTE SIN FORRO - FALDAS CORTAS","date":"2018-01-18","name":"AJUSTE SIN FORRO - FALDAS CORTAS","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a6124d2d4a6231851c74922"},"id":"AJUSTE CINTURA - FALDAS CORTAS","date":"2018-01-18","name":"AJUSTE CINTURA - FALDAS CORTAS","item":"1","environment":"250","category":"propiedades"}
+{"_id":{"$oid":"5a6124e2d4a6231851c74923"},"id":"CAMBIAR ZIPPER - FALDAS CORTA","date":"2018-01-18","name":"CAMBIAR ZIPPER - FALDAS CORTA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a61250fd4a6231851c74924"},"id":"COGER RUEDO CON FORRO - FALDAS CORTAS","date":"2018-01-18","name":"COGER RUEDO CON FORRO - FALDAS CORTAS","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612522d4a6231851c74925"},"id":"COGER RUEDO SIN FORRO - FALDAS CORTAS","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - FALDAS CORTAS","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a612534d4a6231851c74926"},"id":"HACER FORRO - FALDAS CORTAS","date":"2018-01-18","name":"HACER FORRO - FALDAS CORTAS","item":"1","environment":"500","category":"propiedades"}
+{"_id":{"$oid":"5a612547d4a6231851c74927"},"id":"SUBIR PRETINA - FALDA CORTA","date":"2018-01-18","name":"SUBIR PRETINA - FALDA CORTA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612590d4a6231851c74928"},"id":"AJUSTAR O AMPLIAR - FALDA LARGA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - FALDA LARGA","item":"1","environment":"450","category":"propiedades"}
+{"_id":{"$oid":"5a6125a3d4a6231851c74929"},"id":"AJUSTAR O AMPLIAR CON FORRO - FALDA LARGA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR CON FORRO - FALDA LARGA","item":"1","environment":"500","category":"propiedades"}
+{"_id":{"$oid":"5a6125bdd4a6231851c7492a"},"id":"AJUSTAR AREA DE CINTURA - FALDA LARGA","date":"2018-01-18","name":"AJUSTAR AREA DE CINTURA - FALDA LARGA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6125d3d4a6231851c7492b"},"id":"CAMBIAR ZIPPER - FALDA LARGA","date":"2018-01-18","name":"CAMBIAR ZIPPER - FALDA LARGA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6125e4d4a6231851c7492c"},"id":"","date":"2018-01-18","name":"","item":"","environment":"","category":"servicio"}
+{"_id":{"$oid":"5a61260cd4a6231851c7492d"},"id":"COGER RUEDO SIN FORRO - FALDAS LARGA","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - FALDAS LARGA","item":"1","environment":"800","category":"propiedades"}
+{"_id":{"$oid":"5a61261cd4a6231851c7492e"},"id":"COGER RUEDO SIN FORRO - FALDAS LARGA","date":"2018-01-18","name":"COGER RUEDO SIN FORRO - FALDAS LARGA","item":"1","environment":"650","category":"propiedades"}
+{"_id":{"$oid":"5a61262fd4a6231851c7492f"},"id":"HACER FORRO - FALDA LARGA","date":"2018-01-18","name":"HACER FORRO - FALDA LARGA","item":"1","environment":"600","category":"propiedades"}
+{"_id":{"$oid":"5a612642d4a6231851c74930"},"id":"SUBIR PRETINA - FALDA LARGA","date":"2018-01-18","name":"SUBIR PRETINA - FALDA LARGA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a61271dd4a6231851c74931"},"id":"PEGAR BOTONES - BLUSA","date":"2018-01-18","name":"PEGAR BOTONES - BLUSA","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a612782d4a6231851c74932"},"id":"CORTA MANGA - BLUSA","date":"2018-01-18","name":"CORTA MANGA - BLUSA","item":"1","environment":"250","category":"propiedades"}
+{"_id":{"$oid":"5a612795d4a6231851c74933"},"id":"AJUSTAR O AMPLIAR - BLUSA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6127a3d4a6231851c74934"},"id":"HACER FORRO - BLUSA","date":"2018-01-18","name":"HACER FORRO - BLUSA","item":"1","environment":"600","category":"propiedades"}
+{"_id":{"$oid":"5a6127b8d4a6231851c74935"},"id":"PINSA TRASERA - BLUSA","date":"2018-01-18","name":"PINSA TRASERA - BLUSA","item":"1","environment":"250","category":"propiedades"}
+{"_id":{"$oid":"5a6127c9d4a6231851c74936"},"id":"SUBIR MANGA DE HOMBRO - BLUSA","date":"2018-01-18","name":"SUBIR MANGA DE HOMBRO - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6127dfd4a6231851c74937"},"id":"BAJAR O SUBIR RUEDO SIN FORRO - BLUSA","date":"2018-01-18","name":"BAJAR O SUBIR RUEDO SIN FORRO - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6127edd4a6231851c74938"},"id":"BAJAR O SUBIR RUEDO CON FORRO - BLUSA","date":"2018-01-18","name":"BAJAR O SUBIR RUEDO CON FORRO - BLUSA","item":"1","environment":"400","category":"propiedades"}
+{"_id":{"$oid":"5a612810d4a6231851c74939"},"id":"SUBIR TIRO - BLUSA","date":"2018-01-18","name":"SUBIR TIRO - BLUSA","item":"1","environment":"250","category":"propiedades"}
+{"_id":{"$oid":"5a612845d4a6231851c7493a"},"id":"SUBIR MANGA CON PUÑO - BLUSA","date":"2018-01-18","name":"SUBIR MANGA CON PUÑO - BLUSA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a61285ed4a6231851c7493b"},"id":"JEANS ORIGINALES - PANTALONES","date":"2018-01-18","name":"JEANS ORIGINALES - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a61286cd4a6231851c7493c"},"id":"RUEDO NORMAL - PANTALONES","date":"2018-01-18","name":"RUEDO NORMAL - PANTALONES","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a612881d4a6231851c7493d"},"id":"JEANS CINTURA - PANTALONES","date":"2018-01-18","name":"JEANS CINTURA - PANTALONES","item":"1","environment":"400","category":"propiedades"}
+{"_id":{"$oid":"5a6128a4d4a6231851c7493e"},"id":"PANTALON NORMAL CINTURA - PANTALONES","date":"2018-01-18","name":"PANTALON NORMAL CINTURA - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6128b5d4a6231851c7493f"},"id":"AJUSTAR PIERNA - PANTALONES","date":"2018-01-18","name":"AJUSTAR PIERNA - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6128c4d4a6231851c74940"},"id":"CAMBIAR ZIPPER - PANTALONES","date":"2018-01-18","name":"CAMBIAR ZIPPER - PANTALONES","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6128d3d4a6231851c74941"},"id":"CINTURA - PANTALON","date":"2018-01-18","name":"CINTURA - PANTALON","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6128e9d4a6231851c74942"},"id":"AJUSTAR O AMPLIAR - PANTALON","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - PANTALON","item":"1","environment":"450","category":"propiedades"}
+{"_id":{"$oid":"5a61290ed4a6231851c74943"},"id":"FORRO - TRAJE DE BANO","date":"2018-01-18","name":"FORRO - TRAJE DE BANO","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a61291dd4a6231851c74944"},"id":"AJUSTAR - TRAJE DE BANO","date":"2018-01-18","name":"AJUSTAR - TRAJE DE BANO","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a61292dd4a6231851c74945"},"id":"SUBIR TIRO - TRAJE DE BANO","date":"2018-01-18","name":"SUBIR TIRO - TRAJE DE BANO","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a612948d4a6231851c74946"},"id":"HOMBROS - CHAQUETA","date":"2018-01-18","name":"HOMBROS - CHAQUETA","item":"1","environment":"600","category":"propiedades"}
+{"_id":{"$oid":"5a612956d4a6231851c74947"},"id":"PINSA - CHAQUETA","date":"2018-01-18","name":"PINSA - CHAQUETA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a612969d4a6231851c74948"},"id":"AJUSTAR O AMPLIAR - CHAQUETA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR - CHAQUETA","item":"1","environment":"600","category":"propiedades"}
+{"_id":{"$oid":"5a61297cd4a6231851c74949"},"id":"RUEDO DE CHAQUETA - CHAQUETA","date":"2018-01-18","name":"RUEDO DE CHAQUETA - CHAQUETA","item":"1","environment":"600","category":"propiedades"}
+{"_id":{"$oid":"5a612991d4a6231851c7494a"},"id":"SUBIR MANGA - CHAQUETA","date":"2018-01-18","name":"SUBIR MANGA - CHAQUETA","item":"1","environment":"850","category":"propiedades"}
+{"_id":{"$oid":"5a61299dd4a6231851c7494b"},"id":"PONER BOTON - CHAQUETA","date":"2018-01-18","name":"PONER BOTON - CHAQUETA","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a6129b2d4a6231851c7494c"},"id":"COGER HOMBRO - CAMISA","date":"2018-01-18","name":"COGER HOMBRO - CAMISA","item":"1","environment":"450","category":"propiedades"}
+{"_id":{"$oid":"5a6129cad4a6231851c7494d"},"id":"AJUSTAR O AMPLIAR -  CHAQUETA","date":"2018-01-18","name":"AJUSTAR O AMPLIAR -  CHAQUETA","item":"1","environment":"400","category":"propiedades"}
+{"_id":{"$oid":"5a6129d7d4a6231851c7494e"},"id":"RUEDO -  CHAQUETA","date":"2018-01-18","name":"RUEDO -  CHAQUETA","item":"1","environment":"350","category":"propiedades"}
+{"_id":{"$oid":"5a6129ead4a6231851c7494f"},"id":"SUBIR PUNO - CHAQUETA","date":"2018-01-18","name":"SUBIR PUNO - CHAQUETA","item":"1","environment":"300","category":"propiedades"}
+{"_id":{"$oid":"5a612c23d4a6231851c74950"},"id":"CAMISA ML","date":"2018-01-18","name":"CAMISA ML","item":"1","environment":"150","category":"servicio"}
+{"_id":{"$oid":"5a612dd2d4a6231851c74951"},"id":"LENTEJUELAS","date":"2018-01-18","name":"LENTEJUELAS","item":"1","environment":"100","category":"propiedades"}
+{"_id":{"$oid":"5a61313dd4a6231851c74952"},"id":"CAMISA MC - SOLO PLANCHA","date":"2018-01-18","name":"CAMISA MC - SOLO PLANCHA","item":"1","environment":"110","category":"servicio"}
+{"_id":{"$oid":"5a613147d4a6231851c74953"},"id":"CAMISA ML - SOLO PLANCHA","date":"2018-01-18","name":"CAMISA ML - SOLO PLANCHA","item":"1","environment":"120","category":"servicio"}
+{"_id":{"$oid":"5a613162d4a6231851c74954"},"id":"CHACABANA - SOLO PLANCHA","date":"2018-01-18","name":"CHACABANA - SOLO PLANCHA","item":"1","environment":"125","category":"servicio"}
+{"_id":{"$oid":"5a61319ed4a6231851c74955"},"id":"LINO - SOLO PLANCHA","date":"2018-01-18","name":"LINO - SOLO PLANCHA","item":"1","environment":"25","category":"propiedades"}
+{"_id":{"$oid":"5a6131d2d4a6231851c74956"},"id":"SEDAN - SOLO PLANCHA","date":"2018-01-18","name":"SEDAN - SOLO PLANCHA","item":"1","environment":"25","category":"propiedades"}
+{"_id":{"$oid":"5a6131f6d4a6231851c74957"},"id":"BLUSA - SOLO PLANCHA","date":"2018-01-18","name":"BLUSA - SOLO PLANCHA","item":"1","environment":"105","category":"servicio"}
+{"_id":{"$oid":"5a613206d4a6231851c74958"},"id":"POLOSHIRT - SOLO PLANCHA","date":"2018-01-18","name":"POLOSHIRT - SOLO PLANCHA","item":"1","environment":"115","category":"servicio"}
+{"_id":{"$oid":"5a613212d4a6231851c74959"},"id":"TSHIRT - SOLO PLANCHA","date":"2018-01-18","name":"TSHIRT - SOLO PLANCHA","item":"1","environment":"85","category":"servicio"}
+{"_id":{"$oid":"5a61323ed4a6231851c7495a"},"id":"PIEDRERIA - SOLO PLANCHA","date":"2018-01-18","name":"PIEDRERIA - SOLO PLANCHA","item":"1","environment":"25","category":"propiedades"}
+{"_id":{"$oid":"5a61324bd4a6231851c7495b"},"id":"PANTALON - SOLO PLANCHA","date":"2018-01-18","name":"PANTALON - SOLO PLANCHA","item":"1","environment":"110","category":"servicio"}
+{"_id":{"$oid":"5a613293d4a6231851c7495c"},"id":"BERMUDA - SOLO PLANCHA","date":"2018-01-18","name":"BERMUDA - SOLO PLANCHA","item":"1","environment":"105","category":"servicio"}
+{"_id":{"$oid":"5a6132ded4a6231851c7495d"},"id":"SHORT - SOLO PLANCHA","date":"2018-01-18","name":"SHORT - SOLO PLANCHA","item":"1","environment":"95","category":"servicio"}
+{"_id":{"$oid":"5a7c9290aa9f8c1f3fe50d67"},"id":"AJUSTAR O AMPLIAR SIN FORRO - VESTIDO CORTO","date":"2018-02-08","name":"AJUSTAR O AMPLIAR SIN FORRO - VESTIDO CORTO","item":"1","environment":"300","category":"propiedades","tipo":"alteracion"}
+{"_id":{"$oid":"5a7c92a1aa9f8c1f3fe50d68"},"id":"VESTIDO CORTO","date":"2018-02-08","name":"VESTIDO CORTO","item":"1","environment":"0","category":"servicio","tipo":"alteracion"}
+{"_id":{"$oid":"5a7c933ebb20311d1e404e4d"},"id":"AJUSTAR O AMPLIAR SIN FORRO - VESTIDO CORTO","date":"2018-02-08","name":"AJUSTAR O AMPLIAR SIN FORRO - VESTIDO CORTO","item":"1","environment":"300","category":"propiedades","tipo":"alteracion"}
+{"_id":{"$oid":"5a7c935ebb20311d1e404e4e"},"id":"VESTIDO CORTO","date":"2018-02-08","name":"VESTIDO CORTO","item":"1","environment":"100","category":"servicio","tipo":"alteracion"}
