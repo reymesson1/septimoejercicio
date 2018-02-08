@@ -35,8 +35,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -369,9 +369,15 @@ class ActionsTableBodyFooter extends React.Component{
 
         let grandTotal;
 
-        grandTotal= parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
+        grandTotal = parseFloat(zoom) + parseFloat(itbis) * piezas;
+
+        //grandTotal= parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
+
+        //console.log(grandTotal);
         
-        grandTotal -= descuento;
+        //grandTotal -= descuento;
+
+        //grandTotal = 0;
     
         let nextStateFecha = this.props.masterAPI;
 
@@ -497,7 +503,7 @@ class ActionsTableBody extends React.Component{
 
 class ActionsTableBodyDetail extends React.Component{
 
-
+    
     render(){
                 
         return(
@@ -515,7 +521,7 @@ class ActionsTableBodyDetail extends React.Component{
                             </tr>
                         </table>
                     </td>
-                    <td style={{'font-size':'20px'}}> &#8202;&#8202; {this.props.project}.00</td>
+                    <td style={{'font-size':'20px'}}> &#8202;&#8202; {this.props.itemDetail[0].project}.00</td>
             </tr>
         );
     }
