@@ -2360,7 +2360,8 @@ var MasterModalField = function (_React$Component18) {
 
             value: '',
             valueItem: '',
-            alter: false
+            alter: false,
+            valueCombo: 'lavaryprensa'
         };
         return _this23;
     }
@@ -2381,6 +2382,10 @@ var MasterModalField = function (_React$Component18) {
         value: function onChangeAlter(event) {
 
             var nextState = this.state.alter;
+
+            this.setState({
+                valueCombo: event.target.value.toLowerCase().replace(/\s/g, '')
+            });
 
             if (event.target.value == 'Alteracion') {
                 this.setState({
@@ -2405,7 +2410,11 @@ var MasterModalField = function (_React$Component18) {
 
             var datos = [];
 
-            var filteredTable = this.props.detail.filter(function (detail) {
+            var filteredTableCombo = this.props.detail.filter(function (detail) {
+                return detail.tipo.indexOf(_this24.state.valueCombo) !== -1;
+            });
+
+            var filteredTable = filteredTableCombo.filter(function (detail) {
                 return detail.name.indexOf(_this24.state.valueItem.toUpperCase()) !== -1;
             });
 
@@ -2673,8 +2682,6 @@ var MasterModalField = function (_React$Component18) {
                             )
                         )
                     ),
-                    React.createElement('br', null),
-                    MasterModalFieldAlteration,
                     React.createElement('br', null),
                     React.createElement(
                         Row,
@@ -3115,7 +3122,7 @@ var Detail = function (_React$Component23) {
 
                 "id": Date.now(),
                 "date": today
-            }, _defineProperty(_newDetail, 'id', event.target.id.value), _defineProperty(_newDetail, "name", event.target.name.value), _defineProperty(_newDetail, "item", event.target.item.value), _defineProperty(_newDetail, "environment", event.target.environment.value), _defineProperty(_newDetail, "category", event.target.category.value), _newDetail);
+            }, _defineProperty(_newDetail, 'id', event.target.id.value), _defineProperty(_newDetail, "name", event.target.name.value), _defineProperty(_newDetail, "item", event.target.item.value), _defineProperty(_newDetail, "environment", event.target.environment.value), _defineProperty(_newDetail, "category", event.target.category.value), _defineProperty(_newDetail, "tipo", event.target.tipo.value), _newDetail);
 
             var nextState = this.state.detailData;
 
@@ -3769,6 +3776,7 @@ var DetailModalUpdate = function (_React$Component26) {
             var environment = void 0;
             var item = void 0;
             var category = void 0;
+            var tipo = void 0;
 
             if (nextState[index]) {
 
@@ -3776,6 +3784,7 @@ var DetailModalUpdate = function (_React$Component26) {
                 environment = nextState[index].environment;
                 item = nextState[index].item;
                 category = nextState[index].category;
+                tipo = nextState[index].tipo;
             }
 
             return React.createElement(
@@ -3869,6 +3878,20 @@ var DetailModalUpdate = function (_React$Component26) {
                                 Col,
                                 { sm: 10 },
                                 React.createElement(FormControl, { name: 'category', type: 'text', value: category, disabled: true })
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalCategory' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Tipo'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(FormControl, { name: 'tipo', type: 'text', value: tipo, disabled: true })
                             )
                         )
                     ),
@@ -4079,8 +4102,7 @@ var DetailModal = function (_React$Component28) {
             );
             var DetailModalES = React.createElement(
                 Modal,
-                { show: this.props.showModal,
-                    onHide: this.props.detailCallback.close },
+                { show: this.props.showModal, onHide: this.props.detailCallback.close },
                 React.createElement(
                     Modal.Header,
                     { closeButton: true },
@@ -4092,87 +4114,72 @@ var DetailModal = function (_React$Component28) {
                 ),
                 React.createElement(
                     Form,
-                    { horizontal: true,
-                        onSubmit: this.props.detailCallback.onsavedetail.bind(this) },
+                    { horizontal: true, onSubmit: this.props.detailCallback.onsavedetail.bind(this) },
                     React.createElement(
                         Modal.Body,
                         null,
                         React.createElement(
                             FormGroup,
-                            {
-                                controlId: 'formHorizontalid' },
+                            { controlId: 'formHorizontalid' },
                             React.createElement(
                                 Col,
-                                {
-                                    componentClass: ControlLabel, sm: 2 },
+                                { componentClass: ControlLabel, sm: 2 },
                                 'Codigo'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, {
-                                    type: 'text', name: 'id', placeholder: 'Codigo' })
+                                React.createElement(FormControl, { type: 'text', name: 'id', placeholder: 'Codigo' })
                             )
                         ),
                         React.createElement(
                             FormGroup,
-                            {
-                                controlId: 'formHorizontalname' },
+                            { controlId: 'formHorizontalname' },
                             React.createElement(
                                 Col,
-                                {
-                                    componentClass: ControlLabel, sm: 2 },
+                                { componentClass: ControlLabel, sm: 2 },
                                 'Descripcion'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, {
-                                    type: 'text', name: 'name', placeholder: 'Descripcion' })
+                                React.createElement(FormControl, { type: 'text', name: 'name', placeholder: 'Descripcion' })
                             )
                         ),
                         React.createElement(
                             FormGroup,
-                            {
-                                controlId: 'formHorizontalEnvironment' },
+                            { controlId: 'formHorizontalEnvironment' },
                             React.createElement(
                                 Col,
-                                {
-                                    componentClass: ControlLabel, sm: 2 },
+                                { componentClass: ControlLabel, sm: 2 },
                                 'Precio'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, {
-                                    type: 'text', name: 'environment', placeholder: 'Precio' })
+                                React.createElement(FormControl, { type: 'text', name: 'environment', placeholder: 'Precio' })
                             )
                         ),
                         React.createElement(
                             FormGroup,
-                            {
-                                controlId: 'formHorizontalItem' },
+                            { controlId: 'formHorizontalItem' },
                             React.createElement(
                                 Col,
-                                {
-                                    componentClass: ControlLabel, sm: 2 },
+                                { componentClass: ControlLabel, sm: 2 },
                                 'Cantidad'
                             ),
                             React.createElement(
                                 Col,
                                 { sm: 10 },
-                                React.createElement(FormControl, {
-                                    type: 'text', name: 'item', placeholder: 'Cantidad' })
+                                React.createElement(FormControl, { type: 'text', name: 'item', placeholder: 'Cantidad' })
                             )
                         ),
                         React.createElement(
                             FormGroup,
-                            {
-                                controlId: 'formHorizontalItem' },
+                            { controlId: 'formHorizontalItem' },
                             React.createElement(
                                 Col,
-                                {
-                                    componentClass: ControlLabel, sm: 2 },
+                                { componentClass: ControlLabel, sm: 2 },
                                 'Categoria'
                             ),
                             React.createElement(
@@ -4180,25 +4187,63 @@ var DetailModal = function (_React$Component28) {
                                 { sm: 10 },
                                 React.createElement(
                                     FormControl,
-                                    {
-                                        name: 'category', componentClass: 'select', placeholder: 'select' },
+                                    { name: 'category', componentClass: 'select', placeholder: 'select' },
                                     React.createElement(
                                         'option',
-                                        {
-                                            value: 'servicio' },
+                                        { value: 'servicio' },
                                         'Servicio'
                                     ),
                                     React.createElement(
                                         'option',
-                                        {
-                                            value: 'colores' },
+                                        { value: 'colores' },
                                         'Colores'
                                     ),
                                     React.createElement(
                                         'option',
-                                        {
-                                            value: 'propiedades' },
+                                        { value: 'propiedades' },
                                         'Propiedades'
+                                    )
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalItem' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, sm: 2 },
+                                'Tipo'
+                            ),
+                            React.createElement(
+                                Col,
+                                { sm: 10 },
+                                React.createElement(
+                                    FormControl,
+                                    { name: 'tipo', componentClass: 'select', placeholder: 'select' },
+                                    React.createElement(
+                                        'option',
+                                        { value: 'lavaryprensa' },
+                                        'Lavar y Prensa'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'sololavar' },
+                                        'Solo Lavar'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'soloplancha' },
+                                        'Solo Plancha'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'alteracion' },
+                                        'Alteracion'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'agregacion' },
+                                        'Agregacion'
                                     )
                                 )
                             )

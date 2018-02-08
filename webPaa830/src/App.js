@@ -1634,7 +1634,8 @@ class MasterModalField extends React.Component{
 
             value: '',
             valueItem: '',
-            alter: false
+            alter: false,
+            valueCombo: 'lavaryprensa'
         }
     }
 
@@ -1648,7 +1649,10 @@ class MasterModalField extends React.Component{
     onChangeAlter(event){
         
         let nextState = this.state.alter;
-        
+
+        this.setState({
+            valueCombo: event.target.value.toLowerCase().replace(/\s/g, '')
+        });        
         
         if(event.target.value=='Alteracion'){
            this.setState({
@@ -1671,7 +1675,11 @@ class MasterModalField extends React.Component{
 
         let datos = [];
 
-        let filteredTable = this.props.detail.filter(
+        let filteredTableCombo = this.props.detail.filter(
+            (detail) => detail.tipo.indexOf(this.state.valueCombo) !== -1
+        )
+
+        let filteredTable = filteredTableCombo.filter(
             (detail) => detail.name.indexOf(this.state.valueItem.toUpperCase()) !== -1
         )
 
@@ -1818,8 +1826,6 @@ class MasterModalField extends React.Component{
                                 </Col>
                             </FormGroup>
                         </Row>
-                        <br/>
-                        {MasterModalFieldAlteration}
                         <br/>
                         <Row>
                             <FormGroup controlId="formHorizontalQuantity">
@@ -2089,8 +2095,8 @@ class Detail extends React.Component{
             "name": event.target.name.value,
             "item": event.target.item.value,
             "environment": event.target.environment.value,
-            "category": event.target.category.value
-            //"category": event.target.host.value
+            "category": event.target.category.value,
+            "tipo": event.target.tipo.value
         }
 
         let nextState = this.state.detailData;
@@ -2541,6 +2547,7 @@ class DetailModalUpdate extends React.Component{
         let environment;
         let item;
         let category;
+        let tipo;
 
         if(nextState[index]){
 
@@ -2548,6 +2555,7 @@ class DetailModalUpdate extends React.Component{
             environment = nextState[index].environment
             item = nextState[index].item
             category = nextState[index].category
+            tipo = nextState[index].tipo
         }
 
         return(
@@ -2597,6 +2605,14 @@ class DetailModalUpdate extends React.Component{
                           </Col>
                           <Col sm={10}>
                             <FormControl name="category" type="text" value={category} disabled />
+                          </Col>
+                        </FormGroup>
+                        <FormGroup controlId="formHorizontalCategory">
+                          <Col componentClass={ControlLabel} sm={2}>
+                            Tipo
+                          </Col>
+                          <Col sm={10}>
+                            <FormControl name="tipo" type="text" value={tipo} disabled />
                           </Col>
                         </FormGroup>
                 </Modal.Body>
@@ -2713,73 +2729,67 @@ pullRight>Save</Button>
         let DetailModalES = (
 
 
-                            <Modal show={this.props.showModal}
-onHide={this.props.detailCallback.close}>
+                            <Modal show={this.props.showModal} onHide={this.props.detailCallback.close}>
                               <Modal.Header closeButton>
                                 <Modal.Title>Agregar Articulo</Modal.Title>
                               </Modal.Header>
-                              <Form horizontal
-onSubmit={this.props.detailCallback.onsavedetail.bind(this)}>
+                              <Form horizontal onSubmit={this.props.detailCallback.onsavedetail.bind(this)}>
                                   <Modal.Body>
-                                            <FormGroup
-controlId="formHorizontalid">
-                                              <Col
-componentClass={ControlLabel} sm={2}>
+                                            <FormGroup controlId="formHorizontalid">
+                                              <Col componentClass={ControlLabel} sm={2}>
                                                 Codigo
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl
-type="text" name="id" placeholder="Codigo" />
+                                                <FormControl type="text" name="id" placeholder="Codigo" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup
-controlId="formHorizontalname">
-                                              <Col
-componentClass={ControlLabel} sm={2}>
+                                            <FormGroup controlId="formHorizontalname">
+                                              <Col componentClass={ControlLabel} sm={2}>
                                                 Descripcion
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl
-type="text" name="name" placeholder="Descripcion" />
+                                                <FormControl type="text" name="name" placeholder="Descripcion" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup
-controlId="formHorizontalEnvironment">
-                                              <Col
-componentClass={ControlLabel} sm={2}>
+                                            <FormGroup controlId="formHorizontalEnvironment">
+                                              <Col componentClass={ControlLabel} sm={2}>
                                                 Precio
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl
-type="text" name="environment" placeholder="Precio" />
+                                                <FormControl type="text" name="environment" placeholder="Precio" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup
-controlId="formHorizontalItem">
-                                              <Col
-componentClass={ControlLabel} sm={2}>
+                                            <FormGroup controlId="formHorizontalItem">
+                                              <Col componentClass={ControlLabel} sm={2}>
                                                 Cantidad
                                               </Col>
                                               <Col sm={10}>
-                                                <FormControl
-type="text" name="item" placeholder="Cantidad" />
+                                                <FormControl type="text" name="item" placeholder="Cantidad" />
                                               </Col>
                                             </FormGroup>
-                                            <FormGroup
-controlId="formHorizontalItem">
-                                              <Col
-componentClass={ControlLabel} sm={2}>
+                                            <FormGroup controlId="formHorizontalItem">
+                                              <Col componentClass={ControlLabel} sm={2}>
                                                 Categoria
                                               </Col>
                                               <Col sm={10}>
-                                              <FormControl
-name="category" componentClass="select" placeholder="select">
-                                                <option
-value="servicio">Servicio</option>
-                                                <option
-value="colores">Colores</option>
-                                                <option
-value="propiedades">Propiedades</option>
+                                              <FormControl name="category" componentClass="select" placeholder="select">
+                                                <option value="servicio">Servicio</option>
+                                                <option value="colores">Colores</option>
+                                                <option value="propiedades">Propiedades</option>
+                                              </FormControl>
+                                              </Col>
+                                            </FormGroup>
+                                            <FormGroup controlId="formHorizontalItem">
+                                              <Col componentClass={ControlLabel} sm={2}>
+                                                Tipo
+                                              </Col>
+                                              <Col sm={10}>
+                                              <FormControl name="tipo" componentClass="select" placeholder="select">
+                                                <option value="lavaryprensa">Lavar y Prensa</option>
+                                                <option value="sololavar">Solo Lavar</option>
+                                                <option value="soloplancha">Solo Plancha</option>
+                                                <option value="alteracion">Alteracion</option>
+                                                <option value="agregacion">Agregacion</option>
                                               </FormControl>
                                               </Col>
                                             </FormGroup>
