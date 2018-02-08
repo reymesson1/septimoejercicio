@@ -35,13 +35,13 @@ module.exports = function(){
 
 	}
 
-	function getDetail(detail,start,end,callback){
+	function getDetail(detail,callback){
 
                 var MongoClient = require('mongodb').MongoClient;
                 var url = "mongodb://localhost:27017/eltendedero";
                 MongoClient.connect(url, function(err, db) {
                     if (err) throw err;
-                      db.collection("detail").find(detail).skip(start).limit(end).toArray(function(err,result){
+                      db.collection("detail").find(detail).toArray(function(err,result){
                           callback(result);
                 })
                 db.close();

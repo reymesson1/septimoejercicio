@@ -1188,7 +1188,7 @@ var Master = function (_React$Component9) {
             var detailItem = [];
 
             for (var x = 0; x < nextState.length; x++) {
-                detailItem.push(nextState[x].name);
+                detailItem.push(nextState[x]);
             }
 
             this.setState({
@@ -1321,6 +1321,8 @@ var Master = function (_React$Component9) {
         value: function onSaveDetail(event) {
 
             event.preventDefault();
+
+            //console.log(event.target.developmentlist.value);
 
             var nextState = this.state.masterDetail;
 
@@ -2257,7 +2259,7 @@ var AwesompleteInput = function (_React$Component16) {
                 onChange: this.onChange,
                 className: className,
                 placeholder: placeholder,
-                name: 'suggest'
+                name: 'developmentlist'
             });
         }
     }]);
@@ -2357,6 +2359,7 @@ var MasterModalField = function (_React$Component18) {
         _this23.state = {
 
             value: '',
+            valueItem: '',
             alter: false
         };
         return _this23;
@@ -2387,10 +2390,24 @@ var MasterModalField = function (_React$Component18) {
             }
         }
     }, {
+        key: 'onChangeItem',
+        value: function onChangeItem(data) {
+            this.setState({
+                valueItem: data.target.value
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this24 = this;
 
             var precio = 0;
+
+            var datos = [];
+
+            var filteredTable = this.props.detail.filter(function (detail) {
+                return detail.name.indexOf(_this24.state.valueItem.toUpperCase()) !== -1;
+            });
 
             var MasterModalFieldEN = React.createElement(
                 Row,
@@ -2619,7 +2636,40 @@ var MasterModalField = function (_React$Component18) {
                             React.createElement(
                                 Col,
                                 { md: 4, sm: 6, style: { "width": "31%" } },
-                                React.createElement(AwesompleteInput, { className: 'form-control', list: this.props.detail })
+                                React.createElement(AwesompleteInput, { onChange: this.onChangeItem.bind(this), className: 'form-control', list: datos })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formControlsSelect' },
+                            React.createElement(
+                                Col,
+                                { md: 1, sm: 2 },
+                                React.createElement(
+                                    ControlLabel,
+                                    null,
+                                    'List'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(
+                                    FormControl,
+                                    { componentClass: 'select', multiple: true, name: 'suggest', placeholder: 'List', required: true },
+                                    filteredTable.map(function (detail) {
+                                        return React.createElement(
+                                            'option',
+                                            { value: detail.name },
+                                            detail.name
+                                        );
+                                    })
+                                )
                             )
                         )
                     ),
@@ -2996,27 +3046,27 @@ var Detail = function (_React$Component23) {
     function Detail() {
         _classCallCheck(this, Detail);
 
-        var _this28 = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this));
+        var _this29 = _possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this));
 
-        _this28.state = {
+        _this29.state = {
             showModal: false,
             showModalLoader: false,
             filterText: '',
             detailData: []
         };
-        return _this28;
+        return _this29;
     }
 
     _createClass(Detail, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this29 = this;
+            var _this30 = this;
 
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
 
-                _this29.setState({
+                _this30.setState({
 
                     detailData: responseData
                 });
@@ -3303,15 +3353,16 @@ var DetailTable = function (_React$Component25) {
     function DetailTable() {
         _classCallCheck(this, DetailTable);
 
-        var _this31 = _possibleConstructorReturn(this, (DetailTable.__proto__ || Object.getPrototypeOf(DetailTable)).call(this));
+        var _this32 = _possibleConstructorReturn(this, (DetailTable.__proto__ || Object.getPrototypeOf(DetailTable)).call(this));
 
-        _this31.state = {
-            todos: [{ id: '123', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }, { id: '454758778052139', date: '2017-10-09', name: 'sas', item: 'test.item', environment: 'dev' }],
+        _this32.state = {
+            todos: [],
             currentPage: 1,
-            todosPerPage: 10
+            todosPerPage: 10,
+            detailItem: []
         };
-        _this31.handleClick = _this31.handleClick.bind(_this31);
-        return _this31;
+        _this32.handleClick = _this32.handleClick.bind(_this32);
+        return _this32;
     }
 
     _createClass(DetailTable, [{
@@ -3322,12 +3373,36 @@ var DetailTable = function (_React$Component25) {
             });
         }
     }, {
+        key: 'onChangedNext',
+        value: function onChangedNext() {
+            var _this33 = this;
+
+            var nextState = this.props.detailData;
+            fetch(API_URL + '/detailnext', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({ "id": "test" })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this33.setState({
+
+                    detailItem: responseData
+                });
+            });
+
+            for (var x = 0; x < this.state.detailItem; x++) {
+                nextState.push(this.state.detailItem[x]);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _this32 = this;
+            var _this34 = this;
 
             var filteredTable = this.props.detailData.filter(function (detail) {
-                return detail.name.indexOf(_this32.props.filterText) !== -1;
+                return detail.name.indexOf(_this34.props.filterText) !== -1;
             });
 
             var _state2 = this.state,
@@ -3353,7 +3428,7 @@ var DetailTable = function (_React$Component25) {
                     {
                         key: number,
                         id: number,
-                        onClick: _this32.handleClick
+                        onClick: _this34.handleClick
                     },
                     React.createElement(
                         'a',
@@ -3411,10 +3486,8 @@ var DetailTable = function (_React$Component25) {
                                 id: todo.id,
                                 name: todo.name,
                                 item: todo.item,
-
                                 environment: todo.environment,
-
-                                detailCallback: _this32.props.detailCallback
+                                detailCallback: _this34.props.detailCallback
                             });
                         })
                     )
@@ -3514,10 +3587,8 @@ var DetailTable = function (_React$Component25) {
                                 id: todo.id,
                                 name: todo.name,
                                 item: todo.item,
-
                                 environment: todo.environment,
-
-                                detailCallback: _this32.props.detailCallback
+                                detailCallback: _this34.props.detailCallback
                             });
                         })
                     )
@@ -3552,7 +3623,7 @@ var DetailTable = function (_React$Component25) {
                             null,
                             React.createElement(
                                 'a',
-                                { role: 'button', href: '#' },
+                                { role: 'button', onClick: this.onChangedNext.bind(this) },
                                 '\u203A'
                             )
                         ),
@@ -3594,16 +3665,16 @@ var DetailModalUpdate = function (_React$Component26) {
     function DetailModalUpdate() {
         _classCallCheck(this, DetailModalUpdate);
 
-        var _this33 = _possibleConstructorReturn(this, (DetailModalUpdate.__proto__ || Object.getPrototypeOf(DetailModalUpdate)).call(this));
+        var _this35 = _possibleConstructorReturn(this, (DetailModalUpdate.__proto__ || Object.getPrototypeOf(DetailModalUpdate)).call(this));
 
-        _this33.state = {
+        _this35.state = {
 
             parameter: '',
             showModal: true,
             detailData: []
         };
 
-        return _this33;
+        return _this35;
     }
 
     _createClass(DetailModalUpdate, [{
@@ -3629,12 +3700,12 @@ var DetailModalUpdate = function (_React$Component26) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this34 = this;
+            var _this36 = this;
 
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this34.setState({
+                _this36.setState({
 
                     detailData: responseData
                 });
@@ -3650,14 +3721,14 @@ var DetailModalUpdate = function (_React$Component26) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this35 = this;
+            var _this37 = this;
 
             event.preventDefault();
 
             var nextState = this.state.detailData;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this35.state.parameter;
+                return x.id == _this37.state.parameter;
             });
 
             nextState[index].environment = event.target.environment.value;
@@ -3686,12 +3757,12 @@ var DetailModalUpdate = function (_React$Component26) {
     }, {
         key: 'render',
         value: function render() {
-            var _this36 = this;
+            var _this38 = this;
 
             var nextState = this.state.detailData;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this36.state.parameter;
+                return x.id == _this38.state.parameter;
             });
 
             var name = void 0;
@@ -3859,17 +3930,13 @@ var DetailTableBody = function (_React$Component27) {
                     null,
                     React.createElement(
                         Link,
-                        { className: 'btn btn-default',
-                            to: '/updatedetail/' + this.props.id },
-                        React.createElement('i', { className: 'fa fa-edit',
-                            'aria-hidden': 'true' })
+                        { className: 'btn btn-default', to: '/updatedetail/' + this.props.id },
+                        React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
                     ),
                     React.createElement(
                         Button,
-                        {
-                            onClick: this.props.detailCallback.onDeleted.bind(this, this.props.id) },
-                        React.createElement('i', {
-                            className: 'fa fa-trash', 'aria-hidden': 'true' })
+                        { onClick: this.props.detailCallback.onDeleted.bind(this, this.props.id) },
+                        React.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true' })
                     )
                 )
             );
@@ -4212,27 +4279,27 @@ var Partials = function (_React$Component30) {
     function Partials() {
         _classCallCheck(this, Partials);
 
-        var _this40 = _possibleConstructorReturn(this, (Partials.__proto__ || Object.getPrototypeOf(Partials)).call(this));
+        var _this42 = _possibleConstructorReturn(this, (Partials.__proto__ || Object.getPrototypeOf(Partials)).call(this));
 
-        _this40.state = {
+        _this42.state = {
 
             masterAPI: [],
             searchData: '2017-10-06',
             total: 0
         };
 
-        return _this40;
+        return _this42;
     }
 
     _createClass(Partials, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this41 = this;
+            var _this43 = this;
 
             fetch(API_URL + '/reporte', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this41.setState({
+                _this43.setState({
 
                     masterAPI: responseData
                 });
@@ -4259,10 +4326,10 @@ var Partials = function (_React$Component30) {
     }, {
         key: 'onRun',
         value: function onRun() {
-            var _this42 = this;
+            var _this44 = this;
 
             var nextState = this.state.masterAPI.filter(function (master) {
-                return master.date == _this42.state.searchData;
+                return master.date == _this44.state.searchData;
             });
 
             var grand = 0;
@@ -4281,7 +4348,7 @@ var Partials = function (_React$Component30) {
     }, {
         key: 'render',
         value: function render() {
-            var _this43 = this;
+            var _this45 = this;
 
             var PartialsEN = React.createElement(
                 'h1',
@@ -4326,7 +4393,7 @@ var Partials = function (_React$Component30) {
                     React.createElement(PartialsTable, {
 
                         masterAPI: this.state.masterAPI.filter(function (master) {
-                            return master.date == _this43.state.searchData;
+                            return master.date == _this45.state.searchData;
                         }),
                         total: this.state.total
                     })
@@ -4397,7 +4464,7 @@ var PartialsTable = function (_React$Component32) {
     _createClass(PartialsTable, [{
         key: 'render',
         value: function render() {
-            var _this46 = this;
+            var _this48 = this;
 
             var partialsTableEN = React.createElement(
                 'tr',
@@ -4495,7 +4562,7 @@ var PartialsTable = function (_React$Component32) {
                                     project: master.project,
                                     grandTotal: master.grandTotal,
                                     tipopago: master.tipopago,
-                                    total: _this46.props.total
+                                    total: _this48.props.total
                                 });
                             })
                         ),
@@ -4591,15 +4658,15 @@ var Loader = function (_React$Component34) {
     function Loader() {
         _classCallCheck(this, Loader);
 
-        var _this48 = _possibleConstructorReturn(this, (Loader.__proto__ || Object.getPrototypeOf(Loader)).call(this));
+        var _this50 = _possibleConstructorReturn(this, (Loader.__proto__ || Object.getPrototypeOf(Loader)).call(this));
 
-        _this48.state = {
+        _this50.state = {
 
             showModal: false,
             inputText: '',
             masterAPI: []
         };
-        return _this48;
+        return _this50;
     }
 
     _createClass(Loader, [{
@@ -4615,7 +4682,7 @@ var Loader = function (_React$Component34) {
             this.setState({ showModal: true });
 
             time = window.setTimeout(function (msg) {
-                var _this49 = this;
+                var _this51 = this;
 
                 fetch(API_URL + '/loader', {
 
@@ -4625,7 +4692,7 @@ var Loader = function (_React$Component34) {
                 }).then(function (response) {
                     return response.json();
                 }).then(function (responseData) {
-                    _this49.setState({
+                    _this51.setState({
 
                         masterAPI: responseData
                     });
@@ -4866,26 +4933,26 @@ var Customer = function (_React$Component38) {
     function Customer() {
         _classCallCheck(this, Customer);
 
-        var _this53 = _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).call(this));
+        var _this55 = _possibleConstructorReturn(this, (Customer.__proto__ || Object.getPrototypeOf(Customer)).call(this));
 
-        _this53.state = {
+        _this55.state = {
 
             showModal: false,
             customerAPI: [],
             filterText: ""
         };
-        return _this53;
+        return _this55;
     }
 
     _createClass(Customer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this54 = this;
+            var _this56 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this54.setState({
+                _this56.setState({
 
                     customerAPI: responseData
                 });
@@ -5071,10 +5138,10 @@ var CustomerTable = function (_React$Component39) {
     _createClass(CustomerTable, [{
         key: 'render',
         value: function render() {
-            var _this56 = this;
+            var _this58 = this;
 
             var filteredTable = this.props.customer.filter(function (master) {
-                return master.name.indexOf(_this56.props.filterText) !== -1;
+                return master.name.indexOf(_this58.props.filterText) !== -1;
             });
 
             return React.createElement(
@@ -5108,16 +5175,6 @@ var CustomerTable = function (_React$Component39) {
                                 'th',
                                 null,
                                 'Telefono #1'
-                            ),
-                            React.createElement(
-                                'th',
-                                null,
-                                'Telefono #2'
-                            ),
-                            React.createElement(
-                                'th',
-                                null,
-                                'RNC'
                             ),
                             React.createElement(
                                 'th',
@@ -5157,7 +5214,7 @@ var CustomerTable = function (_React$Component39) {
                                 fechacumpleano: cliente.fechacumpleano,
                                 facebook: cliente.facebook,
                                 correoelectronico: cliente.correoelectronico,
-                                customerCallback: _this56.props.customerCallback
+                                customerCallback: _this58.props.customerCallback
                             });
                         })
                     )
@@ -5207,16 +5264,6 @@ var CustomerTablebody = function (_React$Component40) {
                 React.createElement(
                     'td',
                     null,
-                    this.props.telefono2
-                ),
-                React.createElement(
-                    'td',
-                    null,
-                    this.props.rnc
-                ),
-                React.createElement(
-                    'td',
-                    null,
                     this.props.fechacumpleano
                 ),
                 React.createElement(
@@ -5237,7 +5284,6 @@ var CustomerTablebody = function (_React$Component40) {
                         { className: 'btn btn-default', to: '/updatecustomer/' + this.props.id },
                         React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
                     ),
-                    '\xA0\xA0',
                     React.createElement(
                         Button,
                         { onClick: this.props.customerCallback.ondeleted.bind(this, this.props.id) },
@@ -5523,16 +5569,16 @@ var UpdateCustomer = function (_React$Component43) {
     function UpdateCustomer() {
         _classCallCheck(this, UpdateCustomer);
 
-        var _this60 = _possibleConstructorReturn(this, (UpdateCustomer.__proto__ || Object.getPrototypeOf(UpdateCustomer)).call(this));
+        var _this62 = _possibleConstructorReturn(this, (UpdateCustomer.__proto__ || Object.getPrototypeOf(UpdateCustomer)).call(this));
 
-        _this60.state = {
+        _this62.state = {
 
             parameter: '',
             showModal: true,
             customerAPI: []
         };
 
-        return _this60;
+        return _this62;
     }
 
     _createClass(UpdateCustomer, [{
@@ -5558,12 +5604,12 @@ var UpdateCustomer = function (_React$Component43) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this61 = this;
+            var _this63 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this61.setState({
+                _this63.setState({
 
                     customerAPI: responseData
                 });
@@ -5579,14 +5625,14 @@ var UpdateCustomer = function (_React$Component43) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this62 = this;
+            var _this64 = this;
 
             event.preventDefault();
 
             var nextState = this.state.customerAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this62.state.parameter;
+                return x.id == _this64.state.parameter;
             });
 
             nextState[index].telefono = event.target.telefono.value;
@@ -5615,12 +5661,12 @@ var UpdateCustomer = function (_React$Component43) {
     }, {
         key: 'render',
         value: function render() {
-            var _this63 = this;
+            var _this65 = this;
 
             var nextState = this.state.customerAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this63.state.parameter;
+                return x.id == _this65.state.parameter;
             });
 
             var name = void 0;
@@ -5836,15 +5882,15 @@ var UpdateDelivery = function (_React$Component44) {
     function UpdateDelivery() {
         _classCallCheck(this, UpdateDelivery);
 
-        var _this64 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
+        var _this66 = _possibleConstructorReturn(this, (UpdateDelivery.__proto__ || Object.getPrototypeOf(UpdateDelivery)).call(this));
 
-        _this64.state = {
+        _this66.state = {
 
             showModal: true,
             parameter: 0,
             masterAPI: []
         };
-        return _this64;
+        return _this66;
     }
 
     _createClass(UpdateDelivery, [{
@@ -5859,12 +5905,12 @@ var UpdateDelivery = function (_React$Component44) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this65 = this;
+            var _this67 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this65.setState({
+                _this67.setState({
 
                     masterAPI: responseData
                 });
@@ -5880,14 +5926,14 @@ var UpdateDelivery = function (_React$Component44) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this66 = this;
+            var _this68 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this66.state.parameter;
+                return x.id == _this68.state.parameter;
             });
 
             var newUpdate = {
@@ -5964,9 +6010,9 @@ var Payment = function (_React$Component45) {
     function Payment() {
         _classCallCheck(this, Payment);
 
-        var _this67 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
+        var _this69 = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
 
-        _this67.state = {
+        _this69.state = {
 
             showModal: true,
             parameter: 0,
@@ -5975,7 +6021,7 @@ var Payment = function (_React$Component45) {
             pendiente: 0,
             actual: 0
         };
-        return _this67;
+        return _this69;
     }
 
     _createClass(Payment, [{
@@ -5990,12 +6036,12 @@ var Payment = function (_React$Component45) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this68 = this;
+            var _this70 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this68.setState({
+                _this70.setState({
 
                     masterAPI: responseData
                 });
@@ -6011,14 +6057,14 @@ var Payment = function (_React$Component45) {
     }, {
         key: 'onSubmitted',
         value: function onSubmitted(event) {
-            var _this69 = this;
+            var _this71 = this;
 
             event.preventDefault();
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this69.state.parameter;
+                return x.id == _this71.state.parameter;
             });
 
             var newUpdate = {
@@ -6079,12 +6125,12 @@ var Payment = function (_React$Component45) {
     }, {
         key: 'render',
         value: function render() {
-            var _this70 = this;
+            var _this72 = this;
 
             var nextState = this.state.masterAPI;
 
             var index = nextState.findIndex(function (x) {
-                return x.id == _this70.state.parameter;
+                return x.id == _this72.state.parameter;
             });
 
             var balance = 0;
@@ -6217,27 +6263,27 @@ var PrintPayment = function (_React$Component46) {
     function PrintPayment() {
         _classCallCheck(this, PrintPayment);
 
-        var _this71 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
+        var _this73 = _possibleConstructorReturn(this, (PrintPayment.__proto__ || Object.getPrototypeOf(PrintPayment)).call(this));
 
-        _this71.state = {
+        _this73.state = {
 
             masterAPI: [],
             customerAPI: [],
             detailData: [],
             list: []
         };
-        return _this71;
+        return _this73;
     }
 
     _createClass(PrintPayment, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this72 = this;
+            var _this74 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this72.setState({
+                _this74.setState({
 
                     masterAPI: responseData
                 });
@@ -6245,7 +6291,7 @@ var PrintPayment = function (_React$Component46) {
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this72.setState({
+                _this74.setState({
 
                     customerAPI: responseData
                 });
@@ -6253,7 +6299,7 @@ var PrintPayment = function (_React$Component46) {
             fetch(API_URL + '/detail', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this72.setState({
+                _this74.setState({
 
                     detailData: responseData
                 });
@@ -6261,7 +6307,7 @@ var PrintPayment = function (_React$Component46) {
             fetch(API_URL + '/list', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this72.setState({
+                _this74.setState({
 
                     list: responseData
                 });
@@ -6272,10 +6318,10 @@ var PrintPayment = function (_React$Component46) {
     }, {
         key: 'render',
         value: function render() {
-            var _this73 = this;
+            var _this75 = this;
 
             var filteredTable = this.state.masterAPI.filter(function (master) {
-                return master.id == _this73.props.params.printid;
+                return master.id == _this75.props.params.printid;
             });
 
             var name = void 0;
@@ -7043,24 +7089,24 @@ var PartialsTwo = function (_React$Component48) {
     function PartialsTwo() {
         _classCallCheck(this, PartialsTwo);
 
-        var _this75 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
+        var _this77 = _possibleConstructorReturn(this, (PartialsTwo.__proto__ || Object.getPrototypeOf(PartialsTwo)).call(this));
 
-        _this75.state = {
+        _this77.state = {
 
             masterAPI: []
         };
-        return _this75;
+        return _this77;
     }
 
     _createClass(PartialsTwo, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this76 = this;
+            var _this78 = this;
 
             fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
-                _this76.setState({
+                _this78.setState({
 
                     masterAPI: responseData
                 });
@@ -7225,24 +7271,24 @@ var Birthday = function (_React$Component51) {
     function Birthday() {
         _classCallCheck(this, Birthday);
 
-        var _this79 = _possibleConstructorReturn(this, (Birthday.__proto__ || Object.getPrototypeOf(Birthday)).call(this));
+        var _this81 = _possibleConstructorReturn(this, (Birthday.__proto__ || Object.getPrototypeOf(Birthday)).call(this));
 
-        _this79.state = {
+        _this81.state = {
             customers: []
         };
-        return _this79;
+        return _this81;
     }
 
     _createClass(Birthday, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this80 = this;
+            var _this82 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
 
-                _this80.setState({
+                _this82.setState({
 
                     customers: responseData
                 });
@@ -7290,24 +7336,24 @@ var DashboardCustomer = function (_React$Component52) {
     function DashboardCustomer() {
         _classCallCheck(this, DashboardCustomer);
 
-        var _this81 = _possibleConstructorReturn(this, (DashboardCustomer.__proto__ || Object.getPrototypeOf(DashboardCustomer)).call(this));
+        var _this83 = _possibleConstructorReturn(this, (DashboardCustomer.__proto__ || Object.getPrototypeOf(DashboardCustomer)).call(this));
 
-        _this81.state = {
+        _this83.state = {
             customers: []
         };
-        return _this81;
+        return _this83;
     }
 
     _createClass(DashboardCustomer, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this82 = this;
+            var _this84 = this;
 
             fetch(API_URL + '/customer', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
 
-                _this82.setState({
+                _this84.setState({
 
                     customers: responseData
                 });
