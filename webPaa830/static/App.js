@@ -476,9 +476,15 @@ var ActionsTableBodyFooter = function (_React$Component4) {
 
             var grandTotal = void 0;
 
-            grandTotal = parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
+            grandTotal = parseFloat(zoom) + parseFloat(itbis) * piezas;
 
-            grandTotal -= descuento;
+            //grandTotal= parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
+
+            //console.log(grandTotal);
+
+            //grandTotal -= descuento;
+
+            //grandTotal = 0;
 
             var nextStateFecha = this.props.masterAPI;
 
@@ -731,49 +737,79 @@ var ActionsTableBodyDetail = function (_React$Component6) {
         key: 'render',
         value: function render() {
 
-            return React.createElement(
-                'tr',
-                null,
-                React.createElement(
-                    'td',
-                    { style: { 'font-size': '20px' } },
-                    '\u200A'
-                ),
-                React.createElement(
-                    'td',
-                    { style: { 'font-size': '20px' } },
-                    this.props.quantity,
-                    '\u200A'
-                ),
-                React.createElement(
-                    'td',
-                    { style: { 'font-size': '20px' } },
-                    this.props.item,
+            if (this.props.itemDetail.length == 0) {
+
+                return React.createElement(
+                    'tr',
+                    null,
                     React.createElement(
-                        'table',
-                        null,
-                        React.createElement(
-                            'tr',
-                            null,
-                            this.props.itemDetail.map(function (detail) {
-                                return React.createElement(
-                                    'td',
-                                    null,
-                                    '   ',
-                                    detail.name
-                                );
-                            })
-                        )
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        '\u200A'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        this.props.quantity,
+                        '\u200A'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        this.props.item
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        this.props.project.toFixed(2)
                     )
-                ),
-                React.createElement(
-                    'td',
-                    { style: { 'font-size': '20px' } },
-                    ' \u200A\u200A ',
-                    this.props.project,
-                    '.00'
-                )
-            );
+                );
+            } else {
+
+                return React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        '\u200A'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        this.props.quantity,
+                        '\u200A'
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        this.props.item,
+                        React.createElement(
+                            'table',
+                            null,
+                            React.createElement(
+                                'tr',
+                                null,
+                                this.props.itemDetail.map(function (detail) {
+                                    return React.createElement(
+                                        'td',
+                                        null,
+                                        '   ',
+                                        detail.name
+                                    );
+                                })
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        'td',
+                        { style: { 'font-size': '20px' } },
+                        ' \u200A\u200A ',
+                        this.props.itemDetail[0].project,
+                        '.00'
+                    )
+                );
+            }
         }
     }]);
 

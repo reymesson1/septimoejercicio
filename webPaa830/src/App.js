@@ -502,12 +502,23 @@ class ActionsTableBody extends React.Component{
 }
 
 class ActionsTableBodyDetail extends React.Component{
-
     
     render(){
-                
-        return(
-            <tr>
+
+        if(this.props.itemDetail.length==0){
+
+            return (
+                <tr>
+                    <td style={{'font-size':'20px'}}>&#8202;</td>
+                    <td style={{'font-size':'20px'}}>{this.props.quantity}&#8202;</td>
+                    <td style={{'font-size':'20px'}}>{this.props.item}</td>
+                    <td style={{'font-size':'20px'}}>{this.props.project.toFixed(2)}</td>
+                </tr>
+            );
+        }else{
+
+            return(
+                <tr>
                     <td style={{'font-size':'20px'}}>&#8202;</td>
                     <td style={{'font-size':'20px'}}>{this.props.quantity}&#8202;</td>
                     <td style={{'font-size':'20px'}}>
@@ -516,14 +527,15 @@ class ActionsTableBodyDetail extends React.Component{
                             <tr>
                                 {this.props.itemDetail.map(
                                     (detail) => 
-                                                    <td>   {detail.name}</td>
+                                    <td>   {detail.name}</td>
                                 )}
                             </tr>
                         </table>
                     </td>
                     <td style={{'font-size':'20px'}}> &#8202;&#8202; {this.props.itemDetail[0].project}.00</td>
-            </tr>
-        );
+                </tr>
+            );
+        }
     }
 }
 
@@ -1257,8 +1269,7 @@ class MasterTable extends React.Component{
 
         const indexOfLastTodo = currentPage * todosPerPage;
         const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-        const currentTodos = filteredTable.slice(indexOfFirstTodo,
-indexOfLastTodo);
+        const currentTodos = filteredTable.slice(indexOfFirstTodo, indexOfLastTodo);
 
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(filteredTable.length /
