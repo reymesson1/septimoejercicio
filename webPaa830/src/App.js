@@ -777,7 +777,7 @@ class Master extends React.Component{
         
         for(var x=0;x<details.length;x++){
             if(details[x].itemDetail.length>0){
-                for(var y=0;y<details[x].itemDetail.length;y++){                    
+                for(var y=0;y<details[x].itemDetail.length;y++){                                        
                     zoom+=parseInt(details[x].itemDetail[y].project);
                     agregado+=parseInt(details[x].itemDetail[y].project);
                 }
@@ -883,11 +883,11 @@ class Master extends React.Component{
 
         event.preventDefault();
 
-        //console.log(event.target.developmentlist.value);
-
         let nextState = this.state.masterDetail;
 
         let detailTotal = this.state.detailData;
+
+        let develop = event.target.development.value.toLowerCase().replace(" ","").replace(" ","");
 
         let itemFirst = event.target.suggest.value;
 
@@ -896,19 +896,23 @@ class Master extends React.Component{
         let category;
 
         for(var x=0;x<detailTotal.length;x++){
-            if(detailTotal[x].name==itemFirst){
-                if(event.target.environment){
-                                           
-                    if(event.target.environment.value.length>0){
 
-                        project = event.target.environment.value;
+            if(detailTotal[x].tipo==develop){
+
+                if(detailTotal[x].name==itemFirst){
+                    if(event.target.environment){
+                        
+                        if(event.target.environment.value.length>0){
+                            
+                            project = event.target.environment.value;
+                        }
+                    }else{
+                        
+                        project = detailTotal[x].environment;
                     }
-                }else{
+                    category = detailTotal[x].category;
                     
-                    project = detailTotal[x].environment;
                 }
-                category = detailTotal[x].category;
-
             }
         }
 

@@ -1358,11 +1358,11 @@ var Master = function (_React$Component9) {
 
             event.preventDefault();
 
-            //console.log(event.target.developmentlist.value);
-
             var nextState = this.state.masterDetail;
 
             var detailTotal = this.state.detailData;
+
+            var develop = event.target.development.value.toLowerCase().replace(" ", "").replace(" ", "");
 
             var itemFirst = event.target.suggest.value;
 
@@ -1371,18 +1371,22 @@ var Master = function (_React$Component9) {
             var category = void 0;
 
             for (var x = 0; x < detailTotal.length; x++) {
-                if (detailTotal[x].name == itemFirst) {
-                    if (event.target.environment) {
 
-                        if (event.target.environment.value.length > 0) {
+                if (detailTotal[x].tipo == develop) {
 
-                            project = event.target.environment.value;
+                    if (detailTotal[x].name == itemFirst) {
+                        if (event.target.environment) {
+
+                            if (event.target.environment.value.length > 0) {
+
+                                project = event.target.environment.value;
+                            }
+                        } else {
+
+                            project = detailTotal[x].environment;
                         }
-                    } else {
-
-                        project = detailTotal[x].environment;
+                        category = detailTotal[x].category;
                     }
-                    category = detailTotal[x].category;
                 }
             }
 
