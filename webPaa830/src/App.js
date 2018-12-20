@@ -35,8 +35,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -44,7 +44,14 @@ const API_HEADERS = {
     Authentication: 'any-string-you-like'
 }
 
+const TOKEN_KEY = "token";
+
 const languageActive = false;
+
+function token(){
+    
+       return localStorage.getItem(TOKEN_KEY);
+}
 
 let time;
 
@@ -89,17 +96,49 @@ class App extends React.Component{
           "password": event.target.password.value
       }
 
-      fetch(API_URL+'/cookies', {
+      fetch(API_URL+'/login', {
 
-          method: 'post',
-          headers: API_HEADERS,
-          body: JSON.stringify(newCookie)
-      })
-
-
-      window.location.reload();
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newCookie)
+    }).then(response => response.json()).then(response => {
+        if(response.token!=undefined){
+          localStorage.setItem(TOKEN_KEY, response.token)
+        }
+    }); 
+    
+    window.location.reload();
 
   }
+
+  isAuthenticated(){
+
+    return !!localStorage.getItem(TOKEN_KEY);
+}
+
+setRegistration(event){
+
+    event.preventDefault();
+
+    let newCookie = {
+
+        "id":"1",
+        "username": event.target.email.value,
+        "password": event.target.password.value
+    }
+
+    fetch(API_URL+'/register', {
+
+        method: 'post',
+        headers: API_HEADERS,
+        body: JSON.stringify(newCookie)
+    })
+
+
+    window.location.reload();
+
+}
+
 
   render() {
 
@@ -116,29 +155,68 @@ class App extends React.Component{
 
     let login = (
 
+        <div>
+            {/* <Registration */}
+           <Login
+        
+                  setcookie={this.setCookie}
+                  setregistration={this.setRegistration}
+
+          />
+        </div>
+
+  )
+  if(this.isAuthenticated()){
+
+      return (
+
           <div>
-            <Login
-                    setcookie={this.setCookie}
-            />
+              {dashboard}
           </div>
-
-    )
-    if(this.state.cookies){
-
-        return (
-
-            <div>
-                {dashboard}
-            </div>
-        )
-    }
-        return (
-
-            <div>
-                {login}
-            </div>
-        )
+      )
   }
+      return (
+
+          <div>
+              {login}
+          </div>
+      )
+
+  }
+}
+
+class Registration extends React.Component{
+
+    render(){
+        return(
+            <div className="container">
+                <div className="row vertical-offset-100">
+                    <div className="col-md-4 col-md-offset-4">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Please sign up</h3>
+                            </div>
+                            <div className="panel-body">
+                                <form onSubmit={this.props.setregistration.bind(this)}>
+                                <fieldset>
+                                    <div className="form-group">
+                                        <input className="form-control" placeholder="E-mail" name="email" type="text"/>
+                                    </div>
+                                    <div className="form-group">
+                                        <input className="form-control" placeholder="Password" name="password" type="password"/>
+                                    </div>                                    
+                                    <button className="btn btn-lg btn-success btn-block">Save</button>
+                                </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        );
+    }
+
 }
 
 class Actions extends React.Component{
@@ -592,8 +670,8 @@ class Toolbar extends React.Component{
 
     onClicked(){
 
-        window.location.reload();
-    }
+        localStorage.removeItem(TOKEN_KEY)
+        window.location.reload();    }
 
     render(){
 
