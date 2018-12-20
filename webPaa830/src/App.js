@@ -157,7 +157,7 @@ setRegistration(event){
 
         <div>
             {/* <Registration */}
-           <Login
+            <Login
         
                   setcookie={this.setCookie}
                   setregistration={this.setRegistration}
@@ -184,6 +184,8 @@ setRegistration(event){
 
   }
 }
+
+
 
 class Registration extends React.Component{
 
@@ -671,7 +673,12 @@ class Toolbar extends React.Component{
     onClicked(){
 
         localStorage.removeItem(TOKEN_KEY)
-        window.location.reload();    }
+        window.location.reload();    
+    }
+
+    onRefreshed(){
+        window.location.reload();
+    }
 
     render(){
 
@@ -680,7 +687,7 @@ class Toolbar extends React.Component{
             <Navbar>
                     <div className="navbar-header">
                         <div className="navbar-brand">
-                            <Link to={'/'} onClick={this.onClicked.bind(this)}>Info-Solutions SYS</Link>
+                            <Link to={'/'} onClick={this.onRefreshed.bind(this)}>Info-Solutions SYS</Link>
                         </div>
                     </div>
                     <Nav>                      
@@ -742,6 +749,61 @@ class Toolbar extends React.Component{
     }
 
 }
+
+class Autocomplete extends React.Component {
+    
+    constructor(props){
+      super(props);
+      this.state = {
+        label: null,
+        //dataList: ["France", "Germany", "England"]
+        dataList: this.props.detail.map(function(item,i){
+            return item.name
+        })
+      };
+    }
+    
+    // on component loading
+    componentDidMount(){
+      this.initAwesomplete();
+    }
+    
+    // Init awesomplete
+    initAwesomplete(){
+      var input = document.getElementById("autocomplete");
+      //use Awesomplete lib
+      new Awesomplete(input, {
+        list: this.state.dataList
+      });
+    }
+    
+    // on input change function
+    onChange(event){
+      // Anytime the input change, the State change
+      // Anytime the state change, the component will be rendered with the new label
+      
+      this.setState({
+        label: event.target.value        
+      });
+    }
+   
+    render(){
+      return (
+        <div>          
+          <input style={{"width":"360px"}}
+            value={this.state.label}
+            // value={this.props.detail.map(function(item,i){
+            //     return item.name
+            // })}
+            className='form-control'
+            id={"autocomplete"} 
+            onChange={this.onChange.bind(this)}
+            name='suggest'
+            />
+        </div>
+      );
+    }
+  }
 
 class Master extends React.Component{
 
@@ -1901,27 +1963,14 @@ class MasterModalField extends React.Component{
                         </Row>
                         <br/>
                         <Row>
-                            <FormGroup controlId="formHorizontalItem">
-                              <Col componentClass={ControlLabel} md={1} sm={2}>
-                                Articulo
-                              </Col>
-                              <Col md={4} sm={6} style={{"width":"31%"}}>
-                                <AwesompleteInput onChange={this.onChangeItem.bind(this)} className="form-control" list={datos} />
-                              </Col>
-                            </FormGroup>
-                        </Row>
-                        <br/>
-                        <Row>
                             <FormGroup controlId="formControlsSelect">
                                 <Col md={1} sm={2}>
                                   <ControlLabel>List</ControlLabel>
                                 </Col>
                                 <Col md={4} sm={6}>
-                                  <FormControl componentClass="select" multiple={true} name="suggest" placeholder="List" required >
-                                    {filteredTable.map(
-                                        (detail) => <option value={detail.name}>{detail.name}</option>
-                                    )}
-                                  </FormControl>
+                                <Autocomplete
+                                    detail={this.props.detail}
+                                />
                                 </Col>
                             </FormGroup>
                         </Row>
