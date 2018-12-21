@@ -1,0 +1,15 @@
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+
+var userSchema = new mongoose.Schema({
+    name: String,
+    apellido: String,
+    telefono: String,
+    rnc: String,
+    fechacumpleano: String,
+    facebook: String,
+    correoelectronico: String,
+    descuento: String
+})
+
+module.exports = mongoose.model('Customer', userSchema)
