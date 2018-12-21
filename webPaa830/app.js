@@ -74,9 +74,6 @@ app.post('/customer',function(req,res){
             console.log('New Customer')
         }
     })
-
-    console.log(newCustomer)
-    
     res.send(req.body);
 })
 
