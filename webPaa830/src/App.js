@@ -156,8 +156,8 @@ setRegistration(event){
     let login = (
 
         <div>
-            {/* <Login */}
-            <Registration
+            {/* <Registration */}
+            <Login
         
                   setcookie={this.setCookie}
                   setregistration={this.setRegistration}
