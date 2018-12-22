@@ -172,7 +172,7 @@ var App = function (_React$Component) {
             var login = React.createElement(
                 'div',
                 null,
-                React.createElement(Login, {
+                React.createElement(Registration, {
 
                     setcookie: this.setCookie,
                     setregistration: this.setRegistration
@@ -964,7 +964,7 @@ var Login = function (_React$Component8) {
                                     React.createElement(
                                         'h3',
                                         { className: 'panel-title' },
-                                        'Lavanderia El Tendedero'
+                                        'Login'
                                     )
                                 ),
                                 React.createElement(

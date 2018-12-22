@@ -156,8 +156,8 @@ setRegistration(event){
     let login = (
 
         <div>
-            {/* <Registration */}
-            <Login
+            {/* <Login */}
+            <Registration
         
                   setcookie={this.setCookie}
                   setregistration={this.setRegistration}
@@ -631,7 +631,7 @@ class Login extends React.Component{
                         <div className="col-md-4 col-md-offset-4">
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Lavanderia El Tendedero</h3>
+                                    <h3 className="panel-title">Login</h3>
                                 </div>
                                 <div className="panel-body">
                                     <form onSubmit={this.props.setcookie.bind(this)}>
