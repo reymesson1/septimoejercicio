@@ -23,12 +23,23 @@ exports.setDetail = async(req,res)=>{
 }
 
 exports.removeDetail = async(req,res)=>{
-
+    
     var detail = await Detail.remove({"id":req.body.id},function(err){
         if(!err){
             console.log('Detail removed');
         }
     });
+}
 
+exports.updateDetail = async(req,res)=>{
+
+    var detail = await Detail.findOne({"id":req.body.id},function(err,detail){
+        if(!err){
+            detail.environment = req.body.environment;
+            detail.save(function(err,d){
+                console.log('Detail updated');
+            })
+        }
+    })
 
 }

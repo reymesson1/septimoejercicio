@@ -2674,7 +2674,7 @@ class DetailModalUpdate extends React.Component{
 
               method: 'post',
               headers: API_HEADERS,
-              body: JSON.stringify({"index":index,"environment":event.target.environment.value, "date": today})
+              body: JSON.stringify({"id":this.state.parameter,"environment":event.target.environment.value})
         })
 
         this.setState({

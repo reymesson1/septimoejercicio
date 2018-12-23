@@ -171,7 +171,7 @@ app.get('/reporte', function(req,res){
 app.get('/detail', detailController.getDetail)
 app.post('/detail', detailController.setDetail)
 app.post('/deletedetail', detailController.removeDetail);
-
+app.post('/updatedetail', detailController.updateDetail);
 
 app.post('/updatecustomer',function(req,res){
     var obj = req.body;
@@ -179,13 +179,6 @@ app.post('/updatecustomer',function(req,res){
     customer[obj.index].telefono=obj.telefono;
     customer[obj.index].date=today;
     res.send('end');
-})
-
-
-app.post('/updatedetail',function(req,res){
-    var obj = req.body;    
-    detail[obj.index].environment=obj.environment;
-    detail[obj.index].date=today;
 })
 
 app.post('/updatedelivery',function(req,res){
