@@ -28,6 +28,8 @@ var bcrypt = require('bcrypt-nodejs');
 
 var jwt = require('jwt-simple');
 
+var detailController = require('./controller/detailController');
+
 app.get('/cookies', function(req,res){
 
     res.send(cookies);
@@ -166,13 +168,8 @@ app.get('/reporte', function(req,res){
 
 })
 
-app.get('/detail', async(req,res)=>{
+app.get('/detail', detailController.getDetail)
 
-    var detail = await Detail.find({})
-
-    res.send(detail)
-
-});
 
 app.post('/detail', function(req,res){
 
