@@ -170,14 +170,7 @@ app.get('/reporte', function(req,res){
 
 app.get('/detail', detailController.getDetail)
 app.post('/detail', detailController.setDetail)
-
-
-app.post('/deletedetail', function(req,res){
-
-    var obj = req.body;
-    //dba.removeDetail({"id":obj.id})
-    detail.splice(obj.index,1);
-});
+app.post('/deletedetail', detailController.removeDetail);
 
 
 app.post('/updatecustomer',function(req,res){

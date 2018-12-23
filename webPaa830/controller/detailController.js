@@ -9,16 +9,26 @@ exports.getDetail = async(req,res)=>{
     res.send(detail)
 
 }
-
 exports.setDetail = async(req,res)=>{
-
+    
     var detail = new Detail(req.body)
-
+    
     detail.save(function(err){
         if(!err){
             console.log('Detail Saved');
         }
     })
-
+    
     res.send(req.body)
+}
+
+exports.removeDetail = async(req,res)=>{
+
+    var detail = await Detail.remove({"id":req.body.id},function(err){
+        if(!err){
+            console.log('Detail removed');
+        }
+    });
+
+
 }
