@@ -169,20 +169,8 @@ app.get('/reporte', function(req,res){
 })
 
 app.get('/detail', detailController.getDetail)
+app.post('/detail', detailController.setDetail)
 
-
-app.post('/detail', function(req,res){
-
-    var detail = new Detail(req.body)
-
-    detail.save(function(err){
-        if(!err){
-            console.log('Detail Saved');
-        }
-    })
-
-    res.send(req.body)
-});
 
 app.post('/deletedetail', function(req,res){
 
