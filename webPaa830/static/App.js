@@ -1927,7 +1927,7 @@ var MasterTable = function (_React$Component13) {
         _this17.state = {
 
             currentPage: 1,
-            todosPerPage: 3
+            todosPerPage: 30
         };
         return _this17;
     }
@@ -2030,7 +2030,7 @@ var MasterTable = function (_React$Component13) {
             }
 
             var filteredTable = this.props.masterData.filter(function (master) {
-                return master.name.indexOf(_this18.props.filterText) !== -1;
+                return master.id.indexOf(_this18.props.filterText) !== -1;
             });
             var _state = this.state,
                 todos = _state.todos,
@@ -2077,7 +2077,9 @@ var MasterTable = function (_React$Component13) {
                     React.createElement(
                         'tbody',
                         null,
-                        currentTodos.map(function (todo, index) {
+                        currentTodos.sort(function (a, b) {
+                            return b.id - a.id;
+                        }).map(function (todo, index) {
                             return React.createElement(MasterTableBody, {
 
                                 key: index,

@@ -1359,7 +1359,7 @@ class MasterTable extends React.Component{
         this.state = {
 
           currentPage: 1,
-          todosPerPage: 3
+          todosPerPage: 30
         }
     }
 
@@ -1407,7 +1407,7 @@ class MasterTable extends React.Component{
         }
 
         let filteredTable = this.props.masterData.filter(
-            (master) => master.name.indexOf(this.props.filterText) !== -1
+            (master) => master.id.indexOf(this.props.filterText) !== -1
         )
         const { todos, currentPage, todosPerPage } = this.state;
 
@@ -1441,7 +1441,7 @@ todosPerPage); i++) {
                             {MasterTableActive}
                         </thead>
                         <tbody>
-                            {currentTodos.map(
+                            {currentTodos.sort((a,b)=>b.id-a.id).map(
                                 (todo,index) => <MasterTableBody
 
                                                                     key={index}

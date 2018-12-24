@@ -30,6 +30,8 @@ var jwt = require('jwt-simple');
 
 var detailController = require('./controller/detailController');
 
+var masterController = require('./controller/masterController');
+
 app.get('/cookies', function(req,res){
 
     res.send(cookies);
@@ -83,30 +85,11 @@ app.post('/customer',function(req,res){
 
 var master = [];
 
-app.get('/masterAPI', function(req,res){
+app.get('/masterAPI', masterController.getMaster)
 
+app.get('/master', masterController.getMaster)
 
-    // dba.getMaster({}, function(data){
-
-    //     res.send(data);
-
-    // });
-
-    res.send(master)
-
-})
-
-app.get('/master', function(req,res){
-
-    // dba.getMaster({}, function(data){
-
-    //     res.send(data);
-
-    // });
-
-    res.send(master);
-
-})
+app.post('/master', masterController.setMaster);
 
 app.get('/main', function(req,res){
 
@@ -140,20 +123,7 @@ app.post('/done', function(req,res){
     res.send('exchanged');
 })
 
-app.post('/master', function(req,res){
-
-    //dba.addMaster(req.body);
-    //console.log(req.body);
-    master.push(req.body);
-});
-
-
-app.post('/deletemaster', function(req,res){
-
-    var index = req.body.id;
-
-    master.splice(index,1);
-});
+app.post('/deletemaster', masterController.removeMaster);
 
 
 app.get('/reporte', function(req,res){
