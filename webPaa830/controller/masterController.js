@@ -27,10 +27,16 @@ exports.setMaster = async(req,res)=>{
 }
 
 exports.removeMaster = async(req,res)=>{
-
+  
   // var index = req.body.id;
-
+  
   // master.splice(index,1);
-
+  
   console.log(req.body);
+}
+exports.reportMaster = async(req,res)=>{
+
+  var master = await Master.find({"date":"2018-12-23"})
+
+  res.send(master)
 }

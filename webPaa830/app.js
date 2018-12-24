@@ -124,19 +124,7 @@ app.post('/done', function(req,res){
 })
 
 app.post('/deletemaster', masterController.removeMaster);
-
-
-app.get('/reporte', function(req,res){
-
-    // dba.getMaster({}, function(data){
-
-    //     res.send(data);
-
-    // });
-
-    res.send(master);
-
-})
+app.get('/reporte', masterController.reportMaster)
 
 app.get('/detail', detailController.getDetail)
 app.post('/detail', detailController.setDetail)
