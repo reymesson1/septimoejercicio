@@ -4068,6 +4068,7 @@ class UpdateDelivery extends React.Component{
         let newUpdate = {
             
             "index":index,
+            "id":this.state.parameter,
             "fechaentrega": event.target.fechaentrega.value
         }
         

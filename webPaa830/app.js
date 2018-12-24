@@ -85,11 +85,17 @@ app.post('/customer',function(req,res){
 
 var master = [];
 
-app.get('/masterAPI', masterController.getMaster)
+app.get('/masterAPI', masterController.MasterAPI)
 
 app.get('/master', masterController.getMaster)
 
 app.post('/master', masterController.setMaster);
+
+app.post('/deletemaster', masterController.removeMaster);
+
+app.get('/reporte', masterController.reportMaster)
+
+app.post('/updatedelivery', masterController.updateDeliveryMaster)
 
 app.get('/main', function(req,res){
 
@@ -123,9 +129,6 @@ app.post('/done', function(req,res){
     res.send('exchanged');
 })
 
-app.post('/deletemaster', masterController.removeMaster);
-app.get('/reporte', masterController.reportMaster)
-
 app.get('/detail', detailController.getDetail)
 app.post('/detail', detailController.setDetail)
 app.post('/deletedetail', detailController.removeDetail);
@@ -139,11 +142,6 @@ app.post('/updatecustomer',function(req,res){
     res.send('end');
 })
 
-app.post('/updatedelivery',function(req,res){
-    var obj = req.body;
-    console.log(obj)
-    master[obj.index].fechaentrega=obj.fechaentrega;
-})
  
 app.post('/loader',function(req,res){
     

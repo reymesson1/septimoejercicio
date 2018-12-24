@@ -6193,6 +6193,7 @@ var UpdateDelivery = function (_React$Component46) {
             var newUpdate = {
 
                 "index": index,
+                "id": this.state.parameter,
                 "fechaentrega": event.target.fechaentrega.value
             };
 

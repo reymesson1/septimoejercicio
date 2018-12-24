@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Master = require('../models/master.js');
 var jwt = require('jwt-simple');
-
-var master = [];
+var moment = require('moment');
+var today = moment(new Date()).format('YYYY-MM-DD');
 
 exports.getMaster = async(req,res)=>{
 
@@ -36,7 +36,24 @@ exports.removeMaster = async(req,res)=>{
 }
 exports.reportMaster = async(req,res)=>{
 
-  var master = await Master.find({"date":"2018-12-23"})
+  var master = await Master.find({"date":today})
 
   res.send(master)
+}
+exports.MasterAPI = async(req,res)=>{
+  
+  var master = await Master.find({"date":today})
+  
+  res.send(master)
+}
+exports.updateDeliveryMaster = async(req,res)=>{
+
+  var obj = req.body;
+  var master = await Master.findOne({"id":obj.id},function(err,master){
+    master.fechaentrega = obj.fechaentrega
+    master.save(function(err,m){
+      console.log("Master updated");
+    })
+  })
+
 }
