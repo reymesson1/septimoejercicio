@@ -106,14 +106,7 @@ app.post('/loader', masterController.masterLoader);
 
 app.post('/payment', masterController.paymentMaster)
 
-app.post('/deletecustomer', function(req,res){
-
-    var obj = req.body;
-
-    customer.splice(obj.index,1);
-    
-    res.send('end');
-});
+app.post('/deletecustomer', customerController.removeCustomer);
 
 app.get('/logout',function(req,res){
 

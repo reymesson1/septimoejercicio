@@ -39,17 +39,30 @@ exports.setCustomer = async(req,res)=>{
 }
 
 exports.setCustomerUpdate = async(req,res)=>{
-
+    
     var obj = req.body;
-
+    
     var customer = await Customer.findOne({"id":obj.id},function(err,customer){
         customer.telefono = obj.telefono
         customer.save(function(err,c){
             console.log("Customer updated");
         })        
     });
-
+    
     console.log(obj.telefono);
-
+    
     res.send('end');
+}
+exports.removeCustomer = async(req,res)=>{
+
+    var obj = req.body;
+
+    var customer = await Customer.remove({"id":obj.id},function(err,customer){
+        if(!err){
+            console.log("Customer removed");
+        }
+    })
+    
+    res.send('end');
+
 }
