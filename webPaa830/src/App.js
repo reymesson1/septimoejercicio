@@ -4769,8 +4769,9 @@ render(){
                         <Table striped bordered condensed hover>
                             <thead>
                               <tr>
-                                <th>Name</th>
-                                <th>Times</th>                    
+                                <th>Nombre</th>
+                                <th>Cantidad</th>                    
+                                <th>Precio</th>                    
                               </tr>
                             </thead>
                             <tbody>
@@ -4779,6 +4780,7 @@ render(){
                                                                             index={index}
                                                                             item={master.item}
                                                                             quantity={master.quantity}
+                                                                            project={master.project}
                                                 />
                                 )}
                             </tbody>
@@ -4799,6 +4801,7 @@ render(){
               <tr>                    
                 <td>{this.props.item}</td>
                 <td>{this.props.quantity}</td>                    
+                <td>{this.props.project}</td>                    
               </tr>                  
             
     )

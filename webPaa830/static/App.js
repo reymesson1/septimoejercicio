@@ -7459,12 +7459,17 @@ var PartialsTwoTableBody = function (_React$Component51) {
                             React.createElement(
                                 'th',
                                 null,
-                                'Name'
+                                'Nombre'
                             ),
                             React.createElement(
                                 'th',
                                 null,
-                                'Times'
+                                'Cantidad'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Precio'
                             )
                         )
                     ),
@@ -7475,7 +7480,8 @@ var PartialsTwoTableBody = function (_React$Component51) {
                             return React.createElement(PartialsTwoTableBodyDetail, {
                                 index: index,
                                 item: master.item,
-                                quantity: master.quantity
+                                quantity: master.quantity,
+                                project: master.project
                             });
                         })
                     )
@@ -7512,6 +7518,11 @@ var PartialsTwoTableBodyDetail = function (_React$Component52) {
                     'td',
                     null,
                     this.props.quantity
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.project
                 )
             );
         }
