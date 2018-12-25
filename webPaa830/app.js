@@ -81,16 +81,7 @@ app.get('/main', function(req,res){
     res.send(filteredTable);
 })
 
-app.post('/main', function(req,res){
-
-    var id = req.body.id;
-
-    var index = master.findIndex(x=> x.id==id);
-
-    master[index].status='waiting'
-
-    res.send('exchanged');
-})
+app.post('/main', masterController.mainMaster)
 
 app.post('/done', function(req,res){
 
@@ -111,16 +102,7 @@ app.post('/updatedetail', detailController.updateDetail);
 app.post('/updatecustomer', customerController.setCustomerUpdate)
 
  
-app.post('/loader',function(req,res){
-    
-    // dba.getTracking(req.body, function(data){
-    //     res.send(data);
-
-    // });
-
-    res.send(master);
-
-});
+app.post('/loader', masterController.masterLoader);
 
 app.post('/payment', masterController.paymentMaster)
 

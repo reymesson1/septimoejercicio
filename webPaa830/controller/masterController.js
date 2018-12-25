@@ -73,3 +73,26 @@ exports.paymentMaster = async(req,res)=>{
     
   res.send('end')
 }
+exports.mainMaster = async(req,res)=>{
+
+  var id = req.body.id;
+
+   var master = await Master.findOne({"id":id},function(err,master){
+    master.status = "waiting"
+    master.save(function(err,m){
+      console.log("Main Master");
+    })
+  })
+
+  res.send('exchanged');
+
+}
+exports.masterLoader = async(req,res)=>{
+
+  var id = req.body.id;
+
+   var master = await Master.findOne({"id":id})
+
+  res.send(master);
+
+}
