@@ -47,13 +47,29 @@ exports.MasterAPI = async(req,res)=>{
   res.send(master)
 }
 exports.updateDeliveryMaster = async(req,res)=>{
-
+  
   var obj = req.body;
   var master = await Master.findOne({"id":obj.id},function(err,master){
-    master.fechaentrega = obj.fechaentrega
+    master.fechaentrega = obj.fechaentrega + " "
     master.save(function(err,m){
       console.log("Master updated");
     })
   })
+  
+}
+exports.paymentMaster = async(req,res)=>{
+  var newPago = req.body
 
+  var master = await Master.findOne({"id":newPago.id},function(err,master){
+    master.balance = newPago.balance
+    master.current = newPago.current
+    master.pending = newPago.pending
+    master.tipopago = newPago.tipopago
+    master.status = "Pagado"
+    master.save(function(err,m){
+      console.log("Master Payment");
+    })
+  })
+    
+  res.send('end')
 }

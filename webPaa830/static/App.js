@@ -5904,7 +5904,7 @@ var UpdateCustomer = function (_React$Component45) {
 
                 method: 'post',
                 headers: API_HEADERS,
-                body: JSON.stringify({ "index": index, "telefono": event.target.telefono.value, "date": today })
+                body: JSON.stringify({ "index": index, "id": this.state.parameter, "telefono": event.target.telefono.value, "date": today })
             });
 
             this.setState({
@@ -6293,7 +6293,7 @@ var Payment = function (_React$Component47) {
         value: function componentDidMount() {
             var _this72 = this;
 
-            fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
+            fetch(API_URL + '/master', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
                 _this72.setState({
@@ -6535,7 +6535,7 @@ var PrintPayment = function (_React$Component48) {
         value: function componentDidMount() {
             var _this76 = this;
 
-            fetch(API_URL + '/masterAPI', { headers: API_HEADERS }).then(function (response) {
+            fetch(API_URL + '/master', { headers: API_HEADERS }).then(function (response) {
                 return response.json();
             }).then(function (responseData) {
                 _this76.setState({

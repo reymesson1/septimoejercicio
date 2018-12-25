@@ -32,6 +32,8 @@ var detailController = require('./controller/detailController');
 
 var masterController = require('./controller/masterController');
 
+var customerController = require('./controller/customerController');
+
 app.get('/cookies', function(req,res){
 
     res.send(cookies);
@@ -49,39 +51,11 @@ app.post('/cookies', function(req,res){
 
 
 
-app.get('/list',async(req,res)=>{
+app.get('/list', customerController.getCustomerList)
 
-    var list = [];
-    var customer = await Customer.find({})
-    
-    
-    for(var x=0;x<customer.length;x++){
-        
-        list.push(customer[x].telefono.trim().replace(/-(?=\d)|\s/g,''));
-    
-    }
+app.get('/customer', customerController.getCustomer);
 
-    res.send(list);
-})
-
-app.get('/customer', async(req,res)=>{
-
-    var customer = await Customer.find({})
-    
-    res.send(customer);
-    
-});
-
-app.post('/customer',function(req,res){
-    
-    var newCustomer = new Customer(req.body)
-    newCustomer.save(function(err){
-        if(!err){
-            console.log('New Customer')
-        }
-    })
-    res.send(req.body);
-})
+app.post('/customer', customerController.setCustomer)
 
 var master = [];
 
@@ -134,13 +108,7 @@ app.post('/detail', detailController.setDetail)
 app.post('/deletedetail', detailController.removeDetail);
 app.post('/updatedetail', detailController.updateDetail);
 
-app.post('/updatecustomer',function(req,res){
-    var obj = req.body;
-
-    customer[obj.index].telefono=obj.telefono;
-    customer[obj.index].date=today;
-    res.send('end');
-})
+app.post('/updatecustomer', customerController.setCustomerUpdate)
 
  
 app.post('/loader',function(req,res){
@@ -154,20 +122,7 @@ app.post('/loader',function(req,res){
 
 });
 
-app.post('/payment',function(req,res){
-    
-    var newPago = req.body
-    
-    var index = master.findIndex(x=> x.id==newPago.id);
-    
-    master[index].balance = newPago.balance;
-    master[index].current = newPago.current;
-    master[index].pending = newPago.pending;
-    master[index].tipopago = newPago.tipopago;
-    master[index].status = "Pagado";
-    
-    res.send('end')
-})
+app.post('/payment', masterController.paymentMaster)
 
 app.post('/deletecustomer', function(req,res){
 

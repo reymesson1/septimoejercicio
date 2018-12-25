@@ -3871,7 +3871,7 @@ class UpdateCustomer extends React.Component{
    
                  method: 'post',
                  headers: API_HEADERS,
-                 body: JSON.stringify({"index":index,"telefono":event.target.telefono.value, "date": today})
+                 body: JSON.stringify({"index":index,"id":this.state.parameter,"telefono":event.target.telefono.value, "date": today})
            })
    
            this.setState({
@@ -4137,7 +4137,7 @@ class Payment extends React.Component{
     
     componentDidMount(){
 
-          fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+          fetch(API_URL+'/master',{headers: API_HEADERS})
           .then((response)=>response.json())
           .then((responseData)=>{
               this.setState({
@@ -4311,7 +4311,7 @@ class PrintPayment extends React.Component{
 
 
 
-          fetch(API_URL+'/masterAPI',{headers: API_HEADERS})
+          fetch(API_URL+'/master',{headers: API_HEADERS})
           .then((response)=>response.json())
           .then((responseData)=>{
               this.setState({
