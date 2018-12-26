@@ -73,19 +73,27 @@ exports.paymentMaster = async(req,res)=>{
     
   res.send('end')
 }
-exports.mainMaster = async(req,res)=>{
+exports.maingetMaster = async(req,res)=>{
 
+    var filteredTable = master.filter(
+      (pending) => pending.status.indexOf('waiting') !== -1
+  )
+
+  res.send(filteredTable);
+}
+exports.mainsetMaster = async(req,res)=>{
+  
   var id = req.body.id;
-
-   var master = await Master.findOne({"id":id},function(err,master){
+  
+  var master = await Master.findOne({"id":id},function(err,master){
     master.status = "waiting"
     master.save(function(err,m){
       console.log("Main Master");
     })
   })
-
+  
   res.send('exchanged');
-
+  
 }
 exports.masterLoader = async(req,res)=>{
 

@@ -34,30 +34,12 @@ var masterController = require('./controller/masterController');
 
 var customerController = require('./controller/customerController');
 
-app.get('/cookies', function(req,res){
+var userController = require('./controller/userController');
 
-    res.send(cookies);
-});
-
-app.post('/cookies', function(req,res){
-
-    var newCookie = req.body;
-
-    if(newCookie.username=='admin'){
-        console.log(req.body);
-        cookies=true;
-    }
-});
-
-
-
-app.get('/list', customerController.getCustomerList)
-
-app.get('/customer', customerController.getCustomer);
-
-app.post('/customer', customerController.setCustomer)
-
-var master = [];
+/*********
+*   Master Controller
+*
+**********/
 
 app.get('/masterAPI', masterController.MasterAPI)
 
@@ -71,17 +53,13 @@ app.get('/reporte', masterController.reportMaster)
 
 app.post('/updatedelivery', masterController.updateDeliveryMaster)
 
-app.get('/main', function(req,res){
+app.post('/loader', masterController.masterLoader);
 
+app.post('/payment', masterController.paymentMaster)
 
-    var filteredTable = master.filter(
-            (pending) => pending.status.indexOf('waiting') !== -1
-    )
+app.get('/main', masterController.maingetMaster)
 
-    res.send(filteredTable);
-})
-
-app.post('/main', masterController.mainMaster)
+app.post('/main', masterController.mainsetMaster)
 
 app.post('/done', function(req,res){
 
@@ -94,95 +72,49 @@ app.post('/done', function(req,res){
     res.send('exchanged');
 })
 
+/*********
+*   Detail Controller
+*
+**********/
+
 app.get('/detail', detailController.getDetail)
 app.post('/detail', detailController.setDetail)
 app.post('/deletedetail', detailController.removeDetail);
 app.post('/updatedetail', detailController.updateDetail);
 
-app.post('/updatecustomer', customerController.setCustomerUpdate)
 
- 
-app.post('/loader', masterController.masterLoader);
+/*********
+*   Customer Controller
+*
+**********/
 
-app.post('/payment', masterController.paymentMaster)
+app.get('/customer', customerController.getCustomer);
+
+app.post('/customer', customerController.setCustomer)
 
 app.post('/deletecustomer', customerController.removeCustomer);
 
-app.get('/logout',function(req,res){
+app.post('/updatecustomer', customerController.setCustomerUpdate)
 
-    cookies = false;
-    res.redirect('/');
-});
+app.get('/list', customerController.getCustomerList)
 
+/*********
+*   User Controller
+*
+**********/
 
-app.post('/register', async (req, res)=>{
-    
-    var userData = req.body;
+app.get('/logout', userController.getLogout);
 
-    var user = new User({
-        "username":userData.username
-    })
-    bcrypt.hash(userData.password, null, null, (err, hash)=>{                   
-        user.password = hash;          
-    })
-    user.save(function(err){
-        if(!err){
-            console.log('User saved');
-        }
-    })
+app.post('/register', userController.setRegister);
   
-})
-  
-app.post('/login', async (req, res)=>{
-    var userData = req.body;
-    var user = await User.findOne({username: userData.username});
-    
-    if(!user){
-        return res.status(401).send({message: 'Email or Password Invalid'})
-    }
+app.post('/login', userController.setLogin);
 
-    bcrypt.compare(userData.password, user.password, (err, isMatch) =>{
-        if(!isMatch){
-            return res.status(401).send({message: 'Email or Password Invalid'})
-        }
-        
-    var payload = { sub: user._id }
-
-    var token = jwt.encode(payload, '123')
-
-    res.status(200).send({token})
-    })
-
-})
-
-app.post('/resetpassword', async (req, res)=>{  
-    
-    var userObj = req.body    
-    var decode = jwt.decode(req.body.token,'123')
-    userObj.author = decode.sub
-
-    const ObjectId = mongoose.Types.ObjectId;        
-
-    var user = await User.findOne({"_id":ObjectId(userObj.author)},function(err,users){
-        if(!err){
-            bcrypt.hash(userObj.newpassword, null, null, (err, hash)=>{                   
-                users.password = hash;          
-            })
-            users.save(function(err,user){
-                console.log('User saved: ', user);
-            })
-        }
-    })
-
-    res.send({"message":"Successfully reset!"})
-})
-
+app.post('/resetpassword', userController.setResetPassword);
 
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');
     }
 })
-
 
 app.listen(8082);
