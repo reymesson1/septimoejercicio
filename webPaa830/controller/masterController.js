@@ -86,7 +86,11 @@ exports.mainsetMaster = async(req,res)=>{
   var id = req.body.id;
   
   var master = await Master.findOne({"id":id},function(err,master){
-    master.status = "waiting"
+    if(master.status =="pending"){
+      master.status = "waiting"
+    }else{
+      master.status = "done"
+    }
     master.save(function(err,m){
       console.log("Main Master");
     })
