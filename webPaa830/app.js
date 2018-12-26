@@ -1,37 +1,20 @@
 var express = require('express');
-
 var bodyParser = require('body-parser');
-
 var app = express();
-
 app.use(express.static('static'))
-
 var moment = require('moment');
-
 app.use(bodyParser.json());
-
 var cookies = true;
-
 var today = moment(new Date()).format('YYYY-MM-DD');
-
 var User = require('./models/user.js');
-
 var Customer = require('./models/customer.js');
-
 var Detail = require('./models/detail.js');
-
 var mongoose = require('mongoose');
-
 var bcrypt = require('bcrypt-nodejs');
-
 var jwt = require('jwt-simple');
-
 var detailController = require('./controller/detailController');
-
 var masterController = require('./controller/masterController');
-
 var customerController = require('./controller/customerController');
-
 var userController = require('./controller/userController');
 
 /*********
