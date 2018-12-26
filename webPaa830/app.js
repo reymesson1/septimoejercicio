@@ -4,7 +4,6 @@ var app = express();
 app.use(express.static('static'))
 var moment = require('moment');
 app.use(bodyParser.json());
-var cookies = true;
 var today = moment(new Date()).format('YYYY-MM-DD');
 var User = require('./models/user.js');
 var Customer = require('./models/customer.js');
