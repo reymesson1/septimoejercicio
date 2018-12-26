@@ -6,8 +6,6 @@ var app = express();
 
 app.use(express.static('static'))
 
-var dba = require('./lib/dba-helper.js')();
-
 var moment = require('moment');
 
 app.use(bodyParser.json());
@@ -77,9 +75,12 @@ app.post('/done', function(req,res){
 *
 **********/
 
-app.get('/detail', detailController.getDetail)
-app.post('/detail', detailController.setDetail)
+app.get('/detail', detailController.getDetail);
+
+app.post('/detail', detailController.setDetail);
+
 app.post('/deletedetail', detailController.removeDetail);
+
 app.post('/updatedetail', detailController.updateDetail);
 
 
