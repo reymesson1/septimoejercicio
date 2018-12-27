@@ -35,7 +35,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://localhost:8082';
 const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
@@ -67,21 +67,6 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-
-      fetch(API_URL+'/cookies',{headers: API_HEADERS})
-      .then((response)=>response.json())
-      .then((responseData)=>{
-          this.setState({
-
-              cookies: responseData
-          })
-      })
-      .catch((error)=>{
-          console.log('Error fetching and parsing data', error);
-      })
-
-
-
 
   }
 
@@ -337,14 +322,13 @@ class ActionsTable extends React.Component{
                         <Col xs={12}>
                             <img src="/logoprint.png"/>
 
-<h5>EL TENDEDERO LAVANDERIA</h5>
-<h5>RNC: 131213367</h5>
-<h5>GALERIA 360, LOCAL S1-02</h5>
-<h5>
-    Santo Domingo. D.N.
-</h5>
-<h5>
-    Tel.: (809)-378-0140</h5>
+<h5>RNC: 131-473865</h5>
+<h1>Tel.: (809)-638-9999</h1>
+<h5>Nuestro horario</h5>
+<h5>Abiertos los sabados 8am a 1pm</h5>
+<h5>Lunes a Viernes 7:30am a 7:00pm</h5>
+<h5>Domingos Cerrado</h5>
+<h1>Orden de Servicio</h1>
 <br/>
                             <br/>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
@@ -382,6 +366,7 @@ class ActionsTable extends React.Component{
                               </Table>
                         </Col>
                     </Row>
+
                 </Grid>
             </div>
         );
@@ -528,9 +513,21 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
             </tr>
             <tr>
+                <td colSpan={4} style={{'width':'15px'}}>
+                    <div style={{'font-size':'16px'}}>Condiciones de lavado y/o Planchado:</div>
+                    <div style={{'font-size':'14px'}}>1- NO SE ENTREGARA ROPA SIN ESTE RECIBO</div>
+                    <div style={{'font-size':'14px'}}>2- Esta Orden vence en 30 dias pasados este tiempo su ropa sera declarada en en abandono y sera donada</div>
+                    <div style={{'font-size':'14px'}}>3- Despues que entregamos no somos responsable de su ropa</div>
+                    <div style={{'font-size':'14px'}}>4- No hay garantia de prendas elaboradas con telas de mala calidad que destiñe, ropa recibida percudidas o con manchas rebeldes</div>
+                    <div style={{'font-size':'14px'}}>5- No somos responsables por mancha tratas que no ha sido removidas y no hay devolucion de dinero. Ya que el servicio brindado requiere inversion en la aplicacion productos especiales para desmanchar y el tiempo del personal</div>
+                    <div style={{'font-size':'14px'}}>6- En caso de perdidas o daños, muestra responsabilidad maxima es el 30% del costo de la prenda y se pagara en servicio consumidos</div>
+                    <div style={{'font-size':'14px'}}>7- La aceptacion a esta Orden o Factura es señal de conformidad a estas condiciones</div>
+                    <br/>
+                    <div style={{'font-weight':'bold','font-size':'14px'}}>** GRACIAS POR SU VISITA **</div>
+                </td>
+                <td colSpan={3}>
+                </td>
                 <td></td>
-                <td></td>
-                <td colSpan={2}>Aprobacion Cliente</td>
                 <br/>
                 <br/>
                 <br/>
@@ -539,8 +536,8 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
             </tr>
             <tr>
-                <td colSpan={2}>Le Atendio:</td>
-                <td>Admin</td>
+                <td colSpan={2}></td>
+                <td></td>
                 <td></td>
                 <br/>
                 <br/>
@@ -711,7 +708,7 @@ class Toolbar extends React.Component{
             <Navbar>
                     <div className="navbar-header">
                         <div className="navbar-brand">
-                            <Link to={'/'} onClick={this.onClicked.bind(this)}>React-Bootstrap</Link>
+                            <Link to={'/'} onClick={this.onRefreshed.bind(this)}>React-Bootstrap</Link>
                         </div>
                     </div>
                     <Nav>
@@ -1170,7 +1167,7 @@ class Master extends React.Component{
 
               method: 'post',
               headers: API_HEADERS,
-              body: JSON.stringify({"id":index})
+              body: JSON.stringify({"id":value})
         })
     }
 
@@ -1407,7 +1404,7 @@ class MasterTable extends React.Component{
         }
 
         let filteredTable = this.props.masterData.filter(
-            (master) => master.id.indexOf(this.props.filterText) !== -1
+            (master) => master.name.toLowerCase().indexOf(this.props.filterText.toLowerCase()) !== -1
         )
         const { todos, currentPage, todosPerPage } = this.state;
 
@@ -3482,6 +3479,8 @@ class Customer extends React.Component{
             "created": today 
             
         }
+
+        newCustomer["fechacumpleano"] = "0001"+newCustomer.fechacumpleano.substring(4,10)
                 
       fetch(API_URL+'/customer', {
 
@@ -4843,11 +4842,10 @@ class Birthday extends React.Component{
 
     render(){
 
-      let today = moment(new Date()).format('0001-MM-DD');
+      var today = moment(new Date()).week();      
 
       let filteredTable = this.state.customers.filter(
-            (master) => master.fechacumpleano.indexOf(today) !== -1
-            //(master) => master.fechacumpleano.indexOf('0001-12-13') !== -1
+          (master) => moment(master.fechacumpleano).week() == today
       )
 
       return (
