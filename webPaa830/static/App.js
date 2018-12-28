@@ -47,8 +47,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -2275,6 +2275,12 @@ var MasterTableBody = function (_React$Component14) {
                         Button,
                         { onClick: this.onExchange.bind(this, this.props.id) },
                         React.createElement('i', { className: 'fa fa-exchange', 'aria-hidden': 'true' })
+                    ),
+                    '\xA0\xA0',
+                    React.createElement(
+                        Link,
+                        { className: 'btn btn-default', to: '/quotation/' + this.props.id },
+                        React.createElement('i', { className: 'fa fa-file', 'aria-hidden': 'true' })
                     ),
                     '\xA0\xA0',
                     React.createElement(
@@ -7702,6 +7708,381 @@ var DashboardCustomer = function (_React$Component54) {
     return DashboardCustomer;
 }(React.Component);
 
+var Quotation = function (_React$Component55) {
+    _inherits(Quotation, _React$Component55);
+
+    function Quotation() {
+        _classCallCheck(this, Quotation);
+
+        var _this86 = _possibleConstructorReturn(this, (Quotation.__proto__ || Object.getPrototypeOf(Quotation)).call(this));
+
+        _this86.state = {
+
+            showModal: false,
+            inputText: '',
+            masterAPI: [],
+            parameter: ''
+        };
+        return _this86;
+    }
+
+    _createClass(Quotation, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this87 = this;
+
+            fetch(API_URL + '/quotation', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({ "id": this.props.params.quotationid })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this87.setState({
+
+                    masterAPI: responseData
+                });
+            });
+
+            this.setState({
+                parameter: this.props.params.quotationid
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var nextState = this.state.masterAPI;
+
+            var obj = nextState[0];
+
+            var name = void 0;
+
+            if (obj) {
+
+                name = obj.name.toUpperCase();
+            }
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    Grid,
+                    null,
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            Col,
+                            { md: 6 },
+                            React.createElement(
+                                Panel,
+                                null,
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    React.createElement(
+                                        'h5',
+                                        { style: { 'font-weight': 'bold' } },
+                                        'Name: '
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 10 },
+                                    React.createElement(
+                                        'h5',
+                                        null,
+                                        name
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    React.createElement(
+                                        'h5',
+                                        { style: { 'font-weight': 'bold' } },
+                                        'Address: '
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 10 },
+                                    React.createElement(
+                                        'h5',
+                                        null,
+                                        name
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    React.createElement(
+                                        'h5',
+                                        { style: { 'font-weight': 'bold' } },
+                                        'Phone:'
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 10 },
+                                    React.createElement(
+                                        'h5',
+                                        null,
+                                        name
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    React.createElement(
+                                        'h5',
+                                        { style: { 'font-weight': 'bold' } },
+                                        'RNC: '
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 10 },
+                                    React.createElement(
+                                        'h5',
+                                        null,
+                                        name
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    React.createElement(
+                                        'h5',
+                                        { style: { 'font-weight': 'bold' } },
+                                        'Email: '
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 10 },
+                                    React.createElement(
+                                        'h5',
+                                        null,
+                                        name
+                                    )
+                                )
+                            )
+                        ),
+                        React.createElement(
+                            Col,
+                            { md: 6 },
+                            React.createElement(
+                                Panel,
+                                null,
+                                React.createElement(
+                                    'h5',
+                                    { style: { 'font-weight': 'bold' } },
+                                    'Quote-Id: '
+                                ),
+                                React.createElement(
+                                    'h5',
+                                    { style: { 'font-weight': 'bold' } },
+                                    'Date: '
+                                ),
+                                React.createElement(
+                                    'h5',
+                                    { style: { 'font-weight': 'bold' } },
+                                    'Valid-Date: '
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            Table,
+                            { striped: true, bordered: true, condensed: true, hover: true },
+                            React.createElement(
+                                'thead',
+                                null,
+                                React.createElement(
+                                    'tr',
+                                    null,
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        '#'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Description'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Quantity'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Unit'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Price'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Amount'
+                                    )
+                                )
+                            ),
+                            React.createElement(
+                                'tbody',
+                                null,
+                                React.createElement(
+                                    'tr',
+                                    null,
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '1'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        'Mark'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        'Otto'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@mdo'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@mdo'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@mdo'
+                                    )
+                                ),
+                                React.createElement(
+                                    'tr',
+                                    null,
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '2'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        'Jacob'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        'Thornton'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@fat'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@fat'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@fat'
+                                    )
+                                ),
+                                React.createElement(
+                                    'tr',
+                                    null,
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '3'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        'Jacob'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        'Thornton'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@fat'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@fat'
+                                    ),
+                                    React.createElement(
+                                        'td',
+                                        null,
+                                        '@fat'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(Col, { md: 6 }),
+                        React.createElement(
+                            Col,
+                            { md: 6 },
+                            React.createElement(
+                                Panel,
+                                null,
+                                React.createElement(
+                                    'h5',
+                                    { style: { 'font-weight': 'bold' } },
+                                    'Sub-Total'
+                                ),
+                                React.createElement(
+                                    'h5',
+                                    { style: { 'font-weight': 'bold' } },
+                                    'Imp'
+                                ),
+                                React.createElement(
+                                    'h5',
+                                    { style: { 'font-weight': 'bold' } },
+                                    'Total'
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Quotation;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -7709,6 +8090,7 @@ ReactDOM.render(React.createElement(
         Route,
         { path: '/', component: App },
         React.createElement(IndexRoute, { component: Home }),
+        React.createElement(Route, { path: 'quotation/:quotationid', component: Quotation }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
         React.createElement(Route, { path: 'customer', component: Customer }),
         React.createElement(Route, { path: 'loader', component: Loader }),

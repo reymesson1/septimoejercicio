@@ -35,8 +35,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -1509,6 +1509,7 @@ class MasterTableBody extends React.Component{
                         <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
                         <Link className="btn btn-default" to={'/payment/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
+                        <Link className="btn btn-default" to={'/quotation/'+this.props.id}><i className="fa fa-file" aria-hidden="true"></i></Link>&nbsp;&nbsp;
                         <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                     </td>
                   </tr>
@@ -4914,10 +4915,164 @@ class DashboardCustomer extends React.Component{
     }
 }
 
+class Quotation extends React.Component{
+
+    constructor(){
+
+        super();
+        this.state = {
+
+            showModal: false,
+            inputText: '',
+            masterAPI: [],
+            parameter: ''
+        }
+    }
+
+    componentDidMount(){
+            
+            fetch(API_URL+'/quotation', {
+                
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({"id":this.props.params.quotationid })
+            })
+            .then((response)=>response.json())
+            .then((responseData)=>{
+                this.setState({
+                    
+                    masterAPI: responseData
+                })
+            })
+            
+            this.setState({
+                parameter: this.props.params.quotationid                
+        })
+
+
+    }
+
+    render(){
+
+        let nextState = this.state.masterAPI;
+        
+        let obj = nextState[0];
+
+        let name;
+
+        if(obj){
+            
+                        name = obj.name.toUpperCase();
+        }
+       
+        return(
+            <div>
+                <Grid>
+                    <Row>   
+                        <Col md={6}>                     
+                        <Panel>      
+                            <Col xs={2}>
+                                <h5 style={{'font-weight':'bold'}}>Name: </h5>                                
+                            </Col>
+                            <Col xs={10}>
+                                <h5>{name}</h5>
+                            </Col>                                
+                            <Col xs={2}>
+                                <h5 style={{'font-weight':'bold'}}>Address: </h5>                                
+                            </Col>
+                            <Col xs={10}>
+                                <h5>{name}</h5>
+                            </Col>                                
+                            <Col xs={2}>
+                                <h5 style={{'font-weight':'bold'}}>Phone:</h5>                                
+                            </Col>
+                            <Col xs={10}>
+                                <h5>{name}</h5>
+                            </Col>                                
+                            <Col xs={2}>
+                                <h5 style={{'font-weight':'bold'}}>RNC: </h5>                                
+                            </Col>
+                            <Col xs={10}>
+                                <h5>{name}</h5>
+                            </Col>                                
+                            <Col xs={2}>
+                                <h5 style={{'font-weight':'bold'}}>Email: </h5>                                
+                            </Col>
+                            <Col xs={10}>
+                                <h5>{name}</h5>
+                            </Col>                                                                
+                        </Panel>
+                        </Col>                     
+                        <Col md={6}>                     
+                        <Panel>
+                            <h5 style={{'font-weight':'bold'}}>Quote-Id: </h5>
+                            <h5 style={{'font-weight':'bold'}}>Date: </h5>
+                            <h5 style={{'font-weight':'bold'}}>Valid-Date: </h5>
+                        </Panel>
+                        </Col>                     
+                    </Row>                    
+                    <Row>                    
+                    <Table striped bordered condensed hover>
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        </tr>
+                        <tr>
+                        <td>2</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+                        </tr>
+                        <tr>
+                        <td>3</td>                            
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+                        <td>@fat</td>                            
+                        </tr>
+                    </tbody>
+                    </Table>                        
+                    </Row>                    
+                    <Row>      
+                        <Col md={6}>                                              
+                        </Col>
+                        <Col md={6}>              
+                            <Panel>
+                                <h5 style={{'font-weight':'bold'}}>Sub-Total</h5>
+                                <h5 style={{'font-weight':'bold'}}>Imp</h5>
+                                <h5 style={{'font-weight':'bold'}}>Total</h5>
+                            </Panel>
+                        </Col>
+                    </Row>                                                                                                             
+                </Grid>
+            </div>
+        );
+    }
+}
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={Home}/>
+        <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>
         <Route path="customer" component={Customer}/>
         <Route path="loader" component={Loader}/>

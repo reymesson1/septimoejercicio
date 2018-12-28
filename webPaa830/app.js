@@ -41,6 +41,8 @@ app.get('/main', masterController.maingetMaster)
 
 app.post('/main', masterController.mainsetMaster)
 
+app.post('/quotation', masterController.masterQuotation)
+
 app.post('/done', function(req,res){
 
     var id = req.body.id;

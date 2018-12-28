@@ -110,3 +110,12 @@ exports.masterLoader = async(req,res)=>{
   res.send(master);
 
 }
+
+exports.masterQuotation = async(req,res)=>{
+
+  var id = req.body.id;
+  
+  var master = await Master.find({"id":id})
+  
+  res.send(master);
+}
