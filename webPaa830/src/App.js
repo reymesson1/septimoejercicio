@@ -5036,37 +5036,45 @@ class Quotation extends React.Component{
         let subtotal;
         let grandTotal;
 
-        let customer = this.state.customerAPI.filter(
-            (master) => master.telefono.indexOf('8095445556') !== -1
-        )
 
-        if(customer[0]){
-            console.log(customer[0].correoelectronico)
-            address = customer[0].direccion.toUpperCase();
-            if(customer[0].telefono==null){
-                phone='n/a'
-            }else{
-                phone = customer[0].telefono;
-            }
-            if(customer[0].correoelectronico==""){
-                email='n/a'
-            }else{
-                email = customer[0].correoelectronico;
-            }
-            if(customer[0].rnc==""){
-                rnc='n/a'
-            }else{
-                rnc = customer[0].rnc;
-            }
 
-        }
-
+        
         if(obj){   
-                        name = obj.name.toUpperCase();        
-                        quoteId = obj.id;        
-                        date = obj.date;
-                        subtotal = obj.project        
-                        grandTotal = obj.grandTotal        
+            name = obj.name.toUpperCase();        
+            quoteId = obj.id;        
+            date = obj.date;
+            subtotal = obj.project        
+            grandTotal = obj.grandTotal        
+            
+
+            let customer = this.state.customerAPI.filter(
+                (master) => master.telefono.indexOf(obj.item[0].telefono) !== -1
+            )
+
+            if(customer[0]){
+                if(customer[0].address){
+                    address='n/a'
+                }else{
+                    address = customer[0].direccion
+                }
+                if(customer[0].telefono==null){
+                    phone='n/a'
+                }else{
+                    phone = customer[0].telefono;
+                }
+                if(customer[0].correoelectronico==""){
+                    email='n/a'
+                }else{
+                    email = customer[0].correoelectronico;
+                }
+                if(customer[0].rnc==""){
+                    rnc='n/a'
+                }else{
+                    rnc = customer[0].rnc;
+                }
+
+            }
+
         }
        
         return(
@@ -5089,7 +5097,7 @@ class Quotation extends React.Component{
                                 <h5 style={{'font-weight':'bold'}}>Address: </h5>                                
                             </Col>
                             <Col xs={10}>
-                                <h5>{address}</h5>
+                                <h5>{'n/a'}</h5>
                             </Col>                                
                             <Col xs={2}>
                                 <h5 style={{'font-weight':'bold'}}>Phone:</h5>                                

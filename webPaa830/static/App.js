@@ -7848,36 +7848,39 @@ var Quotation = function (_React$Component55) {
             var subtotal = void 0;
             var grandTotal = void 0;
 
-            var customer = this.state.customerAPI.filter(function (master) {
-                return master.telefono.indexOf('8095445556') !== -1;
-            });
-
-            if (customer[0]) {
-                console.log(customer[0].correoelectronico);
-                address = customer[0].direccion.toUpperCase();
-                if (customer[0].telefono == null) {
-                    phone = 'n/a';
-                } else {
-                    phone = customer[0].telefono;
-                }
-                if (customer[0].correoelectronico == "") {
-                    email = 'n/a';
-                } else {
-                    email = customer[0].correoelectronico;
-                }
-                if (customer[0].rnc == "") {
-                    rnc = 'n/a';
-                } else {
-                    rnc = customer[0].rnc;
-                }
-            }
-
             if (obj) {
                 name = obj.name.toUpperCase();
                 quoteId = obj.id;
                 date = obj.date;
                 subtotal = obj.project;
                 grandTotal = obj.grandTotal;
+
+                var customer = this.state.customerAPI.filter(function (master) {
+                    return master.telefono.indexOf(obj.item[0].telefono) !== -1;
+                });
+
+                if (customer[0]) {
+                    if (customer[0].address) {
+                        address = 'n/a';
+                    } else {
+                        address = customer[0].direccion;
+                    }
+                    if (customer[0].telefono == null) {
+                        phone = 'n/a';
+                    } else {
+                        phone = customer[0].telefono;
+                    }
+                    if (customer[0].correoelectronico == "") {
+                        email = 'n/a';
+                    } else {
+                        email = customer[0].correoelectronico;
+                    }
+                    if (customer[0].rnc == "") {
+                        rnc = 'n/a';
+                    } else {
+                        rnc = customer[0].rnc;
+                    }
+                }
             }
 
             return React.createElement(
@@ -7934,7 +7937,7 @@ var Quotation = function (_React$Component55) {
                                     React.createElement(
                                         'h5',
                                         null,
-                                        address
+                                        'n/a'
                                     )
                                 ),
                                 React.createElement(
