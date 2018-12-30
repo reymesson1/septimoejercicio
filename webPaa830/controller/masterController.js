@@ -119,3 +119,27 @@ exports.masterQuotation = async(req,res)=>{
   
   res.send(master);
 }
+
+exports.getMasterCSV = async(req,res)=>{
+
+  var master = await Master.find({})
+  
+  var arr = [];
+  
+  var second = [];
+  
+  for(var x=0;x<master.length;x++){
+  
+  second = []
+  
+  second.push("'"+master[x].id)
+  second.push(master[x].date)
+  second.push(master[x].name)
+  second.push(master[x].project)
+  second.push(master[x].status)
+  
+  arr.push(second)
+  }
+  
+  res.send(arr);
+}

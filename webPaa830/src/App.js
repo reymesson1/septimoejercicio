@@ -5,6 +5,7 @@ const Link = ReactRouter.Link;
 const browserHistory = ReactRouter.browserHistory ;
 
 const Button = ReactBootstrap.Button;
+const SplitButton = ReactBootstrap.SplitButton;
 const Label = ReactBootstrap.Label;
 const ListGroup = ReactBootstrap.ListGroup;
 const Radio = ReactBootstrap.Radio;
@@ -35,8 +36,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -818,7 +819,8 @@ class Master extends React.Component{
             detailAdded: [],
             temp: '',
             list: [],
-            customerAPI: []
+            customerAPI: [],
+            masterAPICSV:[]
         };
     }
 
@@ -856,6 +858,14 @@ class Master extends React.Component{
               this.setState({
 
                   list: responseData
+              })
+          })
+          fetch(API_URL+'/mastercsv',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+                  
+                  masterAPICSV: responseData
               })
           })
           .catch((error)=>{
@@ -1189,20 +1199,57 @@ class Master extends React.Component{
 
     }
 
+    downloadCSV(){
+
+        console.log(this.state.masterAPICSV)
+    
+        //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+        const rows = this.state.masterAPICSV
+        let csvContent = "data:text/csv;charset=utf-8,";
+        rows.forEach(function(rowArray){
+           let row = rowArray.join(",");
+           csvContent += row + "\r\n";
+        }); 
+    
+        var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
+    
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "my_data.csv");
+        document.body.appendChild(link); // Required for FF
+        
+        link.click(); // This will download the data file named "my_data.csv".
+    
+    }
+
 
     render(){
         
         let ModalButtonEN = (
 
-
-                <Button onClick={this.open.bind(this)}>Add Master</Button>
-
+            <SplitButton
+            bsStyle={'default'}
+            title={'Add Master'}
+            key={'1'}
+            id={`split-button-basic-${'1'}`}
+            onClick={this.open.bind(this)}>
+                  <MenuItem onClick={this.downloadCSV.bind(this)}>Download   CSV</MenuItem>
+            </SplitButton>
 
         );
 
         let ModalButtonES = (
 
-                <Button onClick={this.open.bind(this)}>Agregar Orden</Button>
+            <SplitButton
+            bsStyle={'default'}
+            title={'Agregar Orden'}
+            key={'1'}
+            id={`split-button-basic-${'1'}`}
+            onClick={this.open.bind(this)}>
+                  <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
+            </SplitButton>
 
 
         );
@@ -4968,6 +5015,10 @@ class Quotation extends React.Component{
         return(
             <div>
                 <Grid>
+                    <Row>
+                        <img src="/logoprint.png"/>   
+                    </Row>   
+                    <br/>
                     <Row>   
                         <Col md={6}>                     
                         <Panel>      

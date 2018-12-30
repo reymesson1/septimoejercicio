@@ -17,6 +17,7 @@ var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
 
 var Button = ReactBootstrap.Button;
+var SplitButton = ReactBootstrap.SplitButton;
 var Label = ReactBootstrap.Label;
 var ListGroup = ReactBootstrap.ListGroup;
 var Radio = ReactBootstrap.Radio;
@@ -47,8 +48,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -1383,7 +1384,8 @@ var Master = function (_React$Component11) {
             detailAdded: [],
             temp: '',
             list: [],
-            customerAPI: []
+            customerAPI: [],
+            masterAPICSV: []
         };
         return _this13;
     }
@@ -1423,6 +1425,14 @@ var Master = function (_React$Component11) {
                 _this14.setState({
 
                     list: responseData
+                });
+            });
+            fetch(API_URL + '/mastercsv', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this14.setState({
+
+                    masterAPICSV: responseData
                 });
             }).catch(function (error) {
                 console.log('Error fetching and parsing data', error);
@@ -1752,19 +1762,62 @@ var Master = function (_React$Component11) {
             });
         }
     }, {
+        key: 'downloadCSV',
+        value: function downloadCSV() {
+
+            console.log(this.state.masterAPICSV);
+
+            //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+            var rows = this.state.masterAPICSV;
+            var csvContent = "data:text/csv;charset=utf-8,";
+            rows.forEach(function (rowArray) {
+                var row = rowArray.join(",");
+                csvContent += row + "\r\n";
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            window.open(encodedUri);
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "my_data.csv");
+            document.body.appendChild(link); // Required for FF
+
+            link.click(); // This will download the data file named "my_data.csv".
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             var ModalButtonEN = React.createElement(
-                Button,
-                { onClick: this.open.bind(this) },
-                'Add Master'
+                SplitButton,
+                {
+                    bsStyle: 'default',
+                    title: 'Add Master',
+                    key: '1',
+                    id: 'split-button-basic-' + '1',
+                    onClick: this.open.bind(this) },
+                React.createElement(
+                    MenuItem,
+                    { onClick: this.downloadCSV.bind(this) },
+                    'Download   CSV'
+                )
             );
 
             var ModalButtonES = React.createElement(
-                Button,
-                { onClick: this.open.bind(this) },
-                'Agregar Orden'
+                SplitButton,
+                {
+                    bsStyle: 'default',
+                    title: 'Agregar Orden',
+                    key: '1',
+                    id: 'split-button-basic-' + '1',
+                    onClick: this.open.bind(this) },
+                React.createElement(
+                    MenuItem,
+                    { onClick: this.downloadCSV.bind(this) },
+                    'Exportar a CSV'
+                )
             );
 
             var MasterTableEN = "Master List";
@@ -7770,6 +7823,12 @@ var Quotation = function (_React$Component55) {
                 React.createElement(
                     Grid,
                     null,
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement('img', { src: '/logoprint.png' })
+                    ),
+                    React.createElement('br', null),
                     React.createElement(
                         Row,
                         null,

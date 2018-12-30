@@ -54,6 +54,9 @@ app.post('/done', function(req,res){
     res.send('exchanged');
 })
 
+app.get('/mastercsv', masterController.getMasterCSV)
+
+
 /*********
 *   Detail Controller
 *
