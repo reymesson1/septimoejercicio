@@ -3517,6 +3517,7 @@ class Customer extends React.Component{
             "id": Date.now(),
             "name": event.target.nombre.value,
             "apellido": event.target.apellido.value,
+            "direccion": event.target.direccion.value,
             "telefono": event.target.telefono.value,
             "telefono2": event.target.telefono2.value,
             "rnc": event.target.rnc.value,
@@ -3753,6 +3754,16 @@ class CustomerModal extends React.Component{
                                   <Col sm={9}>
                                     <FormControl name="apellido" type="text" placeholder="Apellido" />
                                   </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Direccion
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="direccion" type="text" placeholder="Direccion" />
+                              </Col>
                             </FormGroup>
                         </Row>
                         <Row>
@@ -4972,7 +4983,8 @@ class Quotation extends React.Component{
             showModal: false,
             inputText: '',
             masterAPI: [],
-            parameter: ''
+            parameter: '',
+            customerAPI: []
         }
     }
 
@@ -4991,10 +5003,18 @@ class Quotation extends React.Component{
                     masterAPI: responseData
                 })
             })
+            fetch(API_URL+'/customer',{headers: API_HEADERS})
+            .then((response)=>response.json())
+            .then((responseData)=>{
+                this.setState({
+
+                    customerAPI: responseData
+                })
+            })
             
             this.setState({
                 parameter: this.props.params.quotationid                
-        })
+            })
 
 
     }
@@ -5002,14 +5022,51 @@ class Quotation extends React.Component{
     render(){
 
         let nextState = this.state.masterAPI;
+
         
         let obj = nextState[0];
 
         let name;
+        let address;
+        let phone;
+        let rnc;
+        let email;
+        let quoteId;
+        let date;
+        let subtotal;
+        let grandTotal;
 
-        if(obj){
-            
-                        name = obj.name.toUpperCase();
+        let customer = this.state.customerAPI.filter(
+            (master) => master.telefono.indexOf('8095445556') !== -1
+        )
+
+        if(customer[0]){
+            console.log(customer[0].correoelectronico)
+            address = customer[0].direccion.toUpperCase();
+            if(customer[0].telefono==null){
+                phone='n/a'
+            }else{
+                phone = customer[0].telefono;
+            }
+            if(customer[0].correoelectronico==""){
+                email='n/a'
+            }else{
+                email = customer[0].correoelectronico;
+            }
+            if(customer[0].rnc==""){
+                rnc='n/a'
+            }else{
+                rnc = customer[0].rnc;
+            }
+
+        }
+
+        if(obj){   
+                        name = obj.name.toUpperCase();        
+                        quoteId = obj.id;        
+                        date = obj.date;
+                        subtotal = obj.project        
+                        grandTotal = obj.grandTotal        
         }
        
         return(
@@ -5032,89 +5089,158 @@ class Quotation extends React.Component{
                                 <h5 style={{'font-weight':'bold'}}>Address: </h5>                                
                             </Col>
                             <Col xs={10}>
-                                <h5>{name}</h5>
+                                <h5>{address}</h5>
                             </Col>                                
                             <Col xs={2}>
                                 <h5 style={{'font-weight':'bold'}}>Phone:</h5>                                
                             </Col>
                             <Col xs={10}>
-                                <h5>{name}</h5>
+                                <h5>{phone}</h5>
                             </Col>                                
                             <Col xs={2}>
                                 <h5 style={{'font-weight':'bold'}}>RNC: </h5>                                
                             </Col>
                             <Col xs={10}>
-                                <h5>{name}</h5>
+                                <h5>{rnc}</h5>
                             </Col>                                
                             <Col xs={2}>
                                 <h5 style={{'font-weight':'bold'}}>Email: </h5>                                
                             </Col>
                             <Col xs={10}>
-                                <h5>{name}</h5>
+                                <h5>{email}</h5>
                             </Col>                                                                
                         </Panel>
                         </Col>                     
                         <Col md={6}>                     
                         <Panel>
-                            <h5 style={{'font-weight':'bold'}}>Quote-Id: </h5>
-                            <h5 style={{'font-weight':'bold'}}>Date: </h5>
-                            <h5 style={{'font-weight':'bold'}}>Valid-Date: </h5>
+                            <Col xs={3}>
+                                <h5 style={{'font-weight':'bold'}}>Quote-Id: </h5>                                
+                            </Col>
+                            <Col xs={9}>
+                                <h5>{quoteId}</h5>
+                            </Col>
+                            <Col xs={3}>
+                                <h5 style={{'font-weight':'bold'}}>Date: </h5>                                
+                            </Col>
+                            <Col xs={9}>
+                                <h5>{date}</h5>
+                            </Col>
+                            <Col xs={3}>
+                                <h5 style={{'font-weight':'bold'}}>Valid-Date: </h5>                                
+                            </Col>
+                            <Col xs={9}>
+                                <h5>{'n/a'}</h5>
+                            </Col>
                         </Panel>
                         </Col>                     
                     </Row>                    
-                    <Row>                    
-                    <Table striped bordered condensed hover>
-                    <thead>
-                        <tr>
-                        <th>#</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Unit</th>
-                        <th>Price</th>
-                        <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        </tr>
-                        <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                        </tr>
-                        <tr>
-                        <td>3</td>                            
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@fat</td>
-                        <td>@fat</td>                            
-                        </tr>
-                    </tbody>
-                    </Table>                        
+                    <Row>  
+                        <QuotationTable
+                            master = {this.state.masterAPI}
+                        />                 
+                                                 
                     </Row>                    
                     <Row>      
                         <Col md={6}>                                              
                         </Col>
                         <Col md={6}>              
                             <Panel>
-                                <h5 style={{'font-weight':'bold'}}>Sub-Total</h5>
-                                <h5 style={{'font-weight':'bold'}}>Imp</h5>
-                                <h5 style={{'font-weight':'bold'}}>Total</h5>
+                                <Col xs={3}>
+                                    <h5 style={{'font-weight':'bold'}}>Sub-Total: </h5>                                
+                                </Col>
+                                <Col xs={9}>
+                                    <h5>{subtotal}{'.00'}</h5>
+                                </Col>
+                                <Col xs={3}>
+                                    <h5 style={{'font-weight':'bold'}}>ITBIS: </h5>                                
+                                </Col>
+                                <Col xs={9}>
+                                    <h5>{subtotal*18/100}{'.00'}</h5>
+                                </Col>
+                                <Col xs={3}>
+                                    <h5 style={{'font-weight':'bold'}}>TOTAL: </h5>                                
+                                </Col>
+                                <Col xs={9}>
+                                    <h5>{grandTotal}{'.00'}</h5>
+                                </Col>
                             </Panel>
                         </Col>
                     </Row>                                                                                                             
                 </Grid>
             </div>
+        );
+    }
+}
+
+class QuotationTable extends React.Component{
+
+    componentDidMount(){
+        console.log(this.props.master)
+    }
+
+    render(){
+        return(
+            <div>
+                <Table striped bordered condensed hover>
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        </tr>
+                    </thead>
+                    
+                        {this.props.master.map(
+                            (todo,index) => <QuotationTableBody 
+                                                key = {index}
+                                                id = {todo.id}
+                                                item = {todo.item}
+                                                quantity = {todo.quantity}
+                                            />
+                        )}
+                    
+                    </Table>
+            </div>
+        );
+    }
+}
+
+class QuotationTableBody extends React.Component{
+   
+    render(){
+        return(
+            <tbody>
+                  {this.props.item.map(
+                      (todo,index) => <QuotationTableBodyDetail
+                                                                key = {index}
+                                                                id = {todo.id}
+                                                                item = {todo.item}
+                                                                quantity = {todo.quantity}
+                                                                project = {todo.project}
+                                     />
+                  )}
+            </tbody>
+        );
+    }
+}
+
+class QuotationTableBodyDetail extends React.Component{
+
+    componentDidMount(){
+        console.log(this.props.item);
+    }
+
+    render(){
+        return(
+                <tr>
+                    <td>{this.props.id}</td>
+                    <td>{this.props.item}</td>
+                    <td>{this.props.quantity}</td>
+                    <td>{this.props.project}{'.00'}</td>
+                    <td>{this.props.project*118/100}{'.00'}</td>
+                </tr>
         );
     }
 }
