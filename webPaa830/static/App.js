@@ -48,7 +48,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-// const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://localhost:8082';
 var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
@@ -7240,101 +7240,29 @@ var Home = function (_React$Component49) {
                         Col,
                         { md: 4 },
                         React.createElement(
-                            'h4',
-                            null,
-                            'Today Stats'
-                        ),
-                        React.createElement(
-                            Row,
-                            null,
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    null,
-                                    'Visit'
-                                )
-                            ),
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    { className: 'pull-right strong' },
-                                    '- 15%'
-                                )
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            { className: 'progress' },
+                            'div',
+                            { className: 'panel-group', id: 'accordion' },
                             React.createElement(
                                 'div',
-                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "45%" } },
-                                '15%'
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            null,
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
+                                { className: 'panel panel-default' },
                                 React.createElement(
-                                    'span',
-                                    null,
-                                    '20 New Users'
-                                )
-                            ),
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
+                                    'div',
+                                    { className: 'panel-heading' },
+                                    React.createElement(
+                                        'h4',
+                                        { className: 'panel-title' },
+                                        React.createElement(
+                                            'a',
+                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse1' },
+                                            'Recibidos hoy'
+                                        )
+                                    )
+                                ),
                                 React.createElement(
-                                    'span',
-                                    { className: 'pull-right strong' },
-                                    '+ 8%'
+                                    'div',
+                                    { id: 'collapse1', className: 'panel-collapse collapse in' },
+                                    React.createElement(TodayItemReport, null)
                                 )
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            { className: 'progress' },
-                            React.createElement(
-                                'div',
-                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "58%" } },
-                                '8%'
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            null,
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    null,
-                                    '359 Downloads'
-                                )
-                            ),
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    { className: 'pull-right strong' },
-                                    '- 15%'
-                                )
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            { className: 'progress' },
-                            React.createElement(
-                                'div',
-                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "88%" } },
-                                '15%'
                             )
                         )
                     )
@@ -8327,6 +8255,65 @@ var TodayReport = function (_React$Component59) {
     }]);
 
     return TodayReport;
+}(React.Component);
+
+var TodayItemReport = function (_React$Component60) {
+    _inherits(TodayItemReport, _React$Component60);
+
+    function TodayItemReport() {
+        _classCallCheck(this, TodayItemReport);
+
+        var _this93 = _possibleConstructorReturn(this, (TodayItemReport.__proto__ || Object.getPrototypeOf(TodayItemReport)).call(this));
+
+        _this93.state = {
+            master: []
+        };
+        return _this93;
+    }
+
+    _createClass(TodayItemReport, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this94 = this;
+
+            fetch(API_URL + '/masteritemreport', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this94.setState({
+
+                    master: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var today = moment(new Date()).format('DD/MM/YYYY');
+
+            return React.createElement(
+                'ul',
+                { className: 'list-group' },
+                this.state.master.map(function (master) {
+                    return React.createElement(
+                        'li',
+                        { className: 'list-group-item' },
+                        React.createElement(
+                            'span',
+                            { className: 'badge' },
+                            master.total
+                        ),
+                        master._id
+                    );
+                })
+            );
+        }
+    }]);
+
+    return TodayItemReport;
 }(React.Component);
 
 ReactDOM.render(React.createElement(

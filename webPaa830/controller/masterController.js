@@ -143,3 +143,11 @@ exports.getMasterCSV = async(req,res)=>{
   
   res.send(arr);
 }
+exports.getMasterItemReport = async(req,res)=>{
+
+  //var master = await Master.find({})
+  var master = await Master.aggregate([{"$match":{"date":{"$gte":today}}},{"$unwind":"$item"},{"$group":{"_id":"$item.item","total":{"$sum":1}}}])
+
+
+  res.send(master);
+}
