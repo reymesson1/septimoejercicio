@@ -3359,7 +3359,8 @@ var Detail = function (_React$Component25) {
             showModal: false,
             showModalLoader: false,
             filterText: '',
-            detailData: []
+            detailData: [],
+            detailAPICSV: []
         };
         return _this30;
     }
@@ -3376,6 +3377,15 @@ var Detail = function (_React$Component25) {
                 _this31.setState({
 
                     detailData: responseData
+                });
+            });
+            fetch(API_URL + '/detailcsv', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this31.setState({
+
+                    detailAPICSV: responseData
                 });
             }).catch(function (error) {
                 console.log('Error fetching and parsing data', error);
@@ -3481,19 +3491,60 @@ var Detail = function (_React$Component25) {
             });
         }
     }, {
+        key: 'downloadCSV',
+        value: function downloadCSV() {
+
+            //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+            var rows = this.state.detailAPICSV;
+            var csvContent = "data:text/csv;charset=utf-8,";
+            rows.forEach(function (rowArray) {
+                var row = rowArray.join(",");
+                csvContent += row + "\r\n";
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            window.open(encodedUri);
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "my_data.csv");
+            document.body.appendChild(link); // Required for FF
+
+            link.click(); // This will download the data file named "my_data.csv".
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             var DetailEN = React.createElement(
-                Button,
-                { onClick: this.open.bind(this) },
-                'Add Detail'
+                SplitButton,
+                {
+                    bsStyle: 'default',
+                    title: 'Add Detail',
+                    key: '1',
+                    id: 'split-button-basic-' + '1',
+                    onClick: this.open.bind(this) },
+                React.createElement(
+                    MenuItem,
+                    { onClick: this.downloadCSV.bind(this) },
+                    'Exportar a CSV'
+                )
             );
 
             var DetailES = React.createElement(
-                Button,
-                { onClick: this.open.bind(this) },
-                'Agregar Articulo'
+                SplitButton,
+                {
+                    bsStyle: 'default',
+                    title: 'Agregar Orden',
+                    key: '1',
+                    id: 'split-button-basic-' + '1',
+                    onClick: this.open.bind(this) },
+                React.createElement(
+                    MenuItem,
+                    { onClick: this.downloadCSV.bind(this) },
+                    'Exportar a CSV'
+                )
             );
 
             var DetailActive = void 0;
@@ -5323,6 +5374,7 @@ var Customer = function (_React$Component40) {
 
             showModal: false,
             customerAPI: [],
+            customerAPICSV: [],
             filterText: ""
         };
         return _this56;
@@ -5339,6 +5391,14 @@ var Customer = function (_React$Component40) {
                 _this57.setState({
 
                     customerAPI: responseData
+                });
+            });
+            fetch(API_URL + '/customercsv', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this57.setState({
+
+                    customerAPICSV: responseData
                 });
             });
 
@@ -5454,6 +5514,29 @@ var Customer = function (_React$Component40) {
             });
         }
     }, {
+        key: 'downloadCSV',
+        value: function downloadCSV() {
+
+            //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+            var rows = this.state.customerAPICSV;
+            var csvContent = "data:text/csv;charset=utf-8,";
+            rows.forEach(function (rowArray) {
+                var row = rowArray.join(",");
+                csvContent += row + "\r\n";
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            window.open(encodedUri);
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "my_data.csv");
+            document.body.appendChild(link); // Required for FF
+
+            link.click(); // This will download the data file named "my_data.csv".
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -5476,9 +5559,18 @@ var Customer = function (_React$Component40) {
                         'div',
                         { className: 'pull-right' },
                         React.createElement(
-                            Button,
-                            { onClick: this.open.bind(this) },
-                            'Agregar Cliente'
+                            SplitButton,
+                            {
+                                bsStyle: 'default',
+                                title: 'Agregar Cliente',
+                                key: '1',
+                                id: 'split-button-basic-' + '1',
+                                onClick: this.open.bind(this) },
+                            React.createElement(
+                                MenuItem,
+                                { onClick: this.downloadCSV.bind(this) },
+                                'Exportar a CSV'
+                            )
                         ),
                         React.createElement(CustomerModal, {
                             showModal: this.state.showModal,

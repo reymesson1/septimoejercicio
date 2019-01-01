@@ -9,6 +9,29 @@ exports.getDetail = async(req,res)=>{
     res.send(detail)
 
 }
+exports.getDetailCSV = async(req,res)=>{
+
+    var detail = await Detail.find({})
+    
+    var arr = [];
+    
+    var second = [];
+    
+    for(var x=0;x<detail.length;x++){
+    
+    second = []
+    
+    second.push("'"+detail[x].id)
+    second.push(detail[x].date)
+    second.push(detail[x].name)
+    second.push(detail[x].project)
+    second.push(detail[x].status)
+    
+    arr.push(second)
+    }
+    
+    res.send(arr);
+}
 exports.setDetail = async(req,res)=>{
     
     var detail = new Detail(req.body)

@@ -66,6 +66,8 @@ app.get('/dashboardmaster', masterController.getDashboardMaster)
 
 app.get('/detail', detailController.getDetail);
 
+app.get('/detailcsv', detailController.getDetailCSV);
+
 app.post('/detail', detailController.setDetail);
 
 app.post('/deletedetail', detailController.removeDetail);
@@ -79,6 +81,8 @@ app.post('/updatedetail', detailController.updateDetail);
 **********/
 
 app.get('/customer', customerController.getCustomer);
+
+app.get('/customercsv', customerController.getCustomerCSV);
 
 app.post('/customer', customerController.setCustomer)
 

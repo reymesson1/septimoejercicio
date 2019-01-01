@@ -66,3 +66,26 @@ exports.removeCustomer = async(req,res)=>{
     res.send('end');
 
 }
+exports.getCustomerCSV = async(req,res)=>{
+
+    var customer = await Customer.find({})
+    
+    var arr = [];
+    
+    var second = [];
+    
+    for(var x=0;x<customer.length;x++){
+    
+    second = []
+    
+    second.push("'"+customer[x].id)
+    second.push(customer[x].date)
+    second.push(customer[x].name)
+    second.push(customer[x].project)
+    second.push(customer[x].status)
+    
+    arr.push(second)
+    }
+    
+    res.send(arr);
+}

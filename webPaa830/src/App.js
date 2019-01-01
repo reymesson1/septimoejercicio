@@ -2226,7 +2226,8 @@ class Detail extends React.Component{
             showModal: false,
             showModalLoader: false,
             filterText: '',
-            detailData: []
+            detailData: [],
+            detailAPICSV: []
         }
     }
 
@@ -2240,6 +2241,18 @@ class Detail extends React.Component{
                   this.setState({
 
                       detailData: responseData
+                  })
+                        
+
+          })
+          fetch(API_URL+'/detailcsv',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              
+ 
+                  this.setState({
+
+                    detailAPICSV: responseData
                   })
                         
 
@@ -2345,6 +2358,29 @@ class Detail extends React.Component{
         })
     }
 
+    downloadCSV(){
+
+        //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+        const rows = this.state.detailAPICSV
+        let csvContent = "data:text/csv;charset=utf-8,";
+        rows.forEach(function(rowArray){
+           let row = rowArray.join(",");
+           csvContent += row + "\r\n";
+        }); 
+    
+        var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
+    
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "my_data.csv");
+        document.body.appendChild(link); // Required for FF
+        
+        link.click(); // This will download the data file named "my_data.csv".
+    
+    }
+
     render(){
 
 
@@ -2353,12 +2389,26 @@ class Detail extends React.Component{
 
         let DetailEN = (
 
-            <Button onClick={this.open.bind(this)}>Add Detail</Button>
+            <SplitButton
+            bsStyle={'default'}
+            title={'Add Detail'}
+            key={'1'}
+            id={`split-button-basic-${'1'}`}
+            onClick={this.open.bind(this)}>
+                  <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
+            </SplitButton>
         );
 
         let DetailES = (
 
-            <Button onClick={this.open.bind(this)}>Agregar Articulo</Button>
+            <SplitButton
+            bsStyle={'default'}
+            title={'Agregar Orden'}
+            key={'1'}
+            id={`split-button-basic-${'1'}`}
+            onClick={this.open.bind(this)}>
+                  <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
+            </SplitButton>
         );
 
         let DetailActive;
@@ -3477,6 +3527,7 @@ class Customer extends React.Component{
             
             showModal: false,
             customerAPI: [],
+            customerAPICSV: [],
             filterText: ""
         }
     }
@@ -3489,6 +3540,14 @@ class Customer extends React.Component{
               this.setState({
 
                   customerAPI: responseData
+              })
+        })
+        fetch(API_URL+'/customercsv',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                customerAPICSV: responseData
               })
         })
 
@@ -3600,6 +3659,29 @@ class Customer extends React.Component{
 
     }
 
+    downloadCSV(){
+
+        //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+        const rows = this.state.customerAPICSV
+        let csvContent = "data:text/csv;charset=utf-8,";
+        rows.forEach(function(rowArray){
+           let row = rowArray.join(",");
+           csvContent += row + "\r\n";
+        }); 
+    
+        var encodedUri = encodeURI(csvContent);
+        window.open(encodedUri);
+    
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "my_data.csv");
+        document.body.appendChild(link); // Required for FF
+        
+        link.click(); // This will download the data file named "my_data.csv".
+    
+    }
+
     
     render(){
         
@@ -3615,7 +3697,15 @@ class Customer extends React.Component{
                 </Row>
                 <Row>
                     <div className="pull-right">
-                        <Button onClick={this.open.bind(this)}>Agregar Cliente</Button>
+                    <SplitButton
+                    bsStyle={'default'}
+                    title={'Agregar Cliente'}
+                    key={'1'}
+                    id={`split-button-basic-${'1'}`}
+                    onClick={this.open.bind(this)}>
+                        <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
+                    </SplitButton>
+
                         <CustomerModal 
                                         showModal={this.state.showModal}
                                         customerCallback={{
