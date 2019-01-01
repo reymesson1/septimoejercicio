@@ -36,8 +36,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -4122,13 +4122,28 @@ class UpdateDelivery extends React.Component{
         let nextState = this.state.masterAPI;
         
         let index = nextState.findIndex(x=> x.id==this.state.parameter);
+
+        let newDate = event.target.fechaentrega.value;
+
+        console.log(newDate.substring(0,4))
+        console.log(newDate.substring(5,7))
+        console.log(newDate.substring(8,10))
+
+        let formatedDate = "* "+ newDate.substring(8,10) + "/" + newDate.substring(5,7) + "/" + newDate.substring(0,4)
         
         let newUpdate = {
             
             "index":index,
             "id":this.state.parameter,
-            "fechaentrega": event.target.fechaentrega.value
+            "fechaentrega": formatedDate
         }
+        
+        // let newUpdate = {
+            
+        //     "index":index,
+        //     "id":this.state.parameter,
+        //     "fechaentrega": event.target.fechaentrega.value
+        // }
         
         fetch(API_URL+'/updatedelivery', {
 
@@ -4629,43 +4644,21 @@ class Home extends React.Component{
                 </Col>
                 <Col md={4}>
 
-                        <h4>Today Stats</h4>                         
-                            <Row>
-                                <Col xs={6}>
-                                    <span >Visit</span>
-                                </Col>
-                                <Col xs={6}>
-                                    <span className="pull-right strong">- 15%</span>
-                                </Col>
-                            </Row>
-                            <Row className="progress">
-                                <div className="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{"width":"15%"}}>15%</div>
-                            </Row>
-
-                            <Row>
-                                <Col xs={6}>
-                                    <span >20 New Users</span>
-                                </Col>
-                                <Col xs={6}>
-                                    <span className="pull-right strong">+ 8%</span>
-                                </Col>
-                            </Row>        
-                            <Row className="progress">
-                                <div className="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{"width":"8%"}}>8%</div>
-                            </Row>
-
-                            <Row>
-                                <Col xs={6}>
-                                    <span >359 Downloads</span>
-                                </Col>
-                                <Col xs={6}>
-                                    <span className="pull-right strong">- 15%</span>
-                                </Col>
-                            </Row>
-                            <Row className="progress">
-                                <div className="progress-bar progress-bar-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100" style={{"width":"15%"}}>15%</div>
-                            </Row>
-
+                <div className="panel-group" id="accordion">
+                          <div className="panel panel-default">
+                            <div className="panel-heading">
+                              <h4 className="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                Entregas para hoy</a>
+                              </h4>
+                            </div>
+                            <div id="collapse1" className="panel-collapse collapse in">
+                                <TodayReport/>
+          
+                            </div>
+                          </div>
+                          
+                        </div>
 
                 </Col>
                 <Col md={4}>
@@ -5250,6 +5243,69 @@ class QuotationTableBodyDetail extends React.Component{
                     <td>{this.props.project*118/100}{'.00'}</td>
                 </tr>
         );
+    }
+}
+
+class TodayReport extends React.Component{
+
+    constructor() {
+
+        super();
+        this.state = {
+            master: []
+        }
+    }
+
+    componentDidMount(){
+        
+          fetch(API_URL+'/master',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              
+ 
+                  this.setState({
+
+                      master: responseData
+                  })
+                        
+
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+            
+    }
+
+
+
+
+    render(){
+
+      var today = moment(new Date()).format('DD/MM/YYYY');      
+
+      
+      if(this.state.master[0]){
+          var value = this.state.master[0].fechaentrega.split(' ')
+          console.log(value[1]==today)
+          //console.log(today)
+          
+      }
+
+    let filteredTable = this.state.master.filter(
+        (master) => master.fechaentrega.split(' ')[1] == today
+    )
+
+    
+
+      return (
+
+        <ul className="list-group">
+             {filteredTable.map(
+
+                (master, index) => <li className="list-group-item"><span className="badge">{master.fechaentrega}</span>{master.name}</li>
+            )} 
+        </ul>
+      )
     }
 }
 

@@ -48,8 +48,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -6304,14 +6304,28 @@ var UpdateDelivery = function (_React$Component46) {
                 return x.id == _this69.state.parameter;
             });
 
+            var newDate = event.target.fechaentrega.value;
+
+            console.log(newDate.substring(0, 4));
+            console.log(newDate.substring(5, 7));
+            console.log(newDate.substring(8, 10));
+
+            var formatedDate = "* " + newDate.substring(8, 10) + "/" + newDate.substring(5, 7) + "/" + newDate.substring(0, 4);
+
             var newUpdate = {
 
                 "index": index,
                 "id": this.state.parameter,
-                "fechaentrega": event.target.fechaentrega.value
-            };
+                "fechaentrega": formatedDate
 
-            fetch(API_URL + '/updatedelivery', {
+                // let newUpdate = {
+
+                //     "index":index,
+                //     "id":this.state.parameter,
+                //     "fechaentrega": event.target.fechaentrega.value
+                // }
+
+            };fetch(API_URL + '/updatedelivery', {
 
                 method: 'post',
                 headers: API_HEADERS,
@@ -7179,101 +7193,29 @@ var Home = function (_React$Component49) {
                         Col,
                         { md: 4 },
                         React.createElement(
-                            'h4',
-                            null,
-                            'Today Stats'
-                        ),
-                        React.createElement(
-                            Row,
-                            null,
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    null,
-                                    'Visit'
-                                )
-                            ),
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    { className: 'pull-right strong' },
-                                    '- 15%'
-                                )
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            { className: 'progress' },
+                            'div',
+                            { className: 'panel-group', id: 'accordion' },
                             React.createElement(
                                 'div',
-                                { className: 'progress-bar progress-bar-danger', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "15%" } },
-                                '15%'
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            null,
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
+                                { className: 'panel panel-default' },
                                 React.createElement(
-                                    'span',
-                                    null,
-                                    '20 New Users'
-                                )
-                            ),
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
+                                    'div',
+                                    { className: 'panel-heading' },
+                                    React.createElement(
+                                        'h4',
+                                        { className: 'panel-title' },
+                                        React.createElement(
+                                            'a',
+                                            { 'data-toggle': 'collapse', 'data-parent': '#accordion', href: '#collapse1' },
+                                            'Entregas para hoy'
+                                        )
+                                    )
+                                ),
                                 React.createElement(
-                                    'span',
-                                    { className: 'pull-right strong' },
-                                    '+ 8%'
+                                    'div',
+                                    { id: 'collapse1', className: 'panel-collapse collapse in' },
+                                    React.createElement(TodayReport, null)
                                 )
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            { className: 'progress' },
-                            React.createElement(
-                                'div',
-                                { className: 'progress-bar progress-bar-success', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "8%" } },
-                                '8%'
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            null,
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    null,
-                                    '359 Downloads'
-                                )
-                            ),
-                            React.createElement(
-                                Col,
-                                { xs: 6 },
-                                React.createElement(
-                                    'span',
-                                    { className: 'pull-right strong' },
-                                    '- 15%'
-                                )
-                            )
-                        ),
-                        React.createElement(
-                            Row,
-                            { className: 'progress' },
-                            React.createElement(
-                                'div',
-                                { className: 'progress-bar progress-bar-warning', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', style: { "width": "15%" } },
-                                '15%'
                             )
                         )
                     ),
@@ -8299,6 +8241,75 @@ var QuotationTableBodyDetail = function (_React$Component58) {
     }]);
 
     return QuotationTableBodyDetail;
+}(React.Component);
+
+var TodayReport = function (_React$Component59) {
+    _inherits(TodayReport, _React$Component59);
+
+    function TodayReport() {
+        _classCallCheck(this, TodayReport);
+
+        var _this91 = _possibleConstructorReturn(this, (TodayReport.__proto__ || Object.getPrototypeOf(TodayReport)).call(this));
+
+        _this91.state = {
+            master: []
+        };
+        return _this91;
+    }
+
+    _createClass(TodayReport, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this92 = this;
+
+            fetch(API_URL + '/master', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this92.setState({
+
+                    master: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var today = moment(new Date()).format('DD/MM/YYYY');
+
+            if (this.state.master[0]) {
+                var value = this.state.master[0].fechaentrega.split(' ');
+                console.log(value[1] == today);
+                //console.log(today)
+            }
+
+            var filteredTable = this.state.master.filter(function (master) {
+                return master.fechaentrega.split(' ')[1] == today;
+            });
+
+            return React.createElement(
+                'ul',
+                { className: 'list-group' },
+                filteredTable.map(function (master, index) {
+                    return React.createElement(
+                        'li',
+                        { className: 'list-group-item' },
+                        React.createElement(
+                            'span',
+                            { className: 'badge' },
+                            master.fechaentrega
+                        ),
+                        master.name
+                    );
+                })
+            );
+        }
+    }]);
+
+    return TodayReport;
 }(React.Component);
 
 ReactDOM.render(React.createElement(
