@@ -28,11 +28,15 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "chart.js": "^1.1.1",
     "express": "^4.14.0",
     "jwt-simple": "^0.5.5",
     "moment": "^2.18.1",
     "mongodb": "^2.2.33",
-    "mongoose": "^5.4.0"
+    "mongoose": "^5.4.0",
+    "react": "^16.7.0",
+    "react-chartjs": "^1.2.0",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",

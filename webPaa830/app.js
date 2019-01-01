@@ -56,6 +56,7 @@ app.post('/done', function(req,res){
 
 app.get('/mastercsv', masterController.getMasterCSV)
 app.get('/masteritemreport', masterController.getMasterItemReport)
+app.get('/dashboardmaster', masterController.getDashboardMaster)
 
 
 /*********

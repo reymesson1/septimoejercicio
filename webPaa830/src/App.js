@@ -4,6 +4,7 @@ const IndexRoute = ReactRouter.IndexRoute;
 const Link = ReactRouter.Link;
 const browserHistory = ReactRouter.browserHistory ;
 
+
 const Button = ReactBootstrap.Button;
 const SplitButton = ReactBootstrap.SplitButton;
 const Label = ReactBootstrap.Label;
@@ -36,8 +37,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -4533,19 +4534,7 @@ class Home extends React.Component{
                     </div>
                 </Col>
                 <Col md={3}>
-                    <div className="panel panel-success">
-                        <div className="panel-heading">
-                            <Row>
-                                <Col xs={6}>
-                                    <i className="fa fa-money fa-5x"></i>
-                                </Col>
-                                <Col xs={6} className="text-right">
-                                    <p className="announcement-heading">$ 250 k</p>
-                                    <p className="announcement-text">Recovered</p>
-                                </Col>
-                            </Row>
-                        </div>
-                    </div>
+                    <DashboardMaster/>
                 </Col>
             </Row>
             <br/>
@@ -5344,6 +5333,63 @@ class TodayItemReport extends React.Component{
                 )
             }
         </ul>
+      )
+    }
+}
+
+class DashboardMaster extends React.Component{
+
+    constructor() {
+
+        super();
+        this.state = {
+            master: []
+        }
+    }
+
+    componentDidMount(){
+        
+          fetch(API_URL+'/dashboardmaster',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              
+ 
+                  this.setState({
+
+                      master: responseData
+                  })
+                        
+
+          })
+          .catch((error)=>{
+              console.log('Error fetching and parsing data', error);
+          })
+            
+    }
+
+    render(){
+
+        this.state.master.map(
+            (master) => console.log(master.total)
+        )
+
+      return (
+
+        <div className="panel panel-success">
+                        <div className="panel-heading">
+                            <Row>
+                                <Col xs={6}>
+                                    <i className="fa fa-money fa-5x"></i>
+                                </Col>
+                                <Col xs={6} className="text-right">
+                                    <p className="announcement-heading">$ {this.state.master.map(
+                                        (master) => master.total +".00"
+                                    )}</p>
+                                    <p className="announcement-text">Ventas totales</p>
+                                </Col>
+                            </Row>
+                        </div>
+        </div>
       )
     }
 }

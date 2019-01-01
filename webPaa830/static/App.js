@@ -48,8 +48,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -6950,37 +6950,7 @@ var Home = function (_React$Component49) {
                     React.createElement(
                         Col,
                         { md: 3 },
-                        React.createElement(
-                            'div',
-                            { className: 'panel panel-success' },
-                            React.createElement(
-                                'div',
-                                { className: 'panel-heading' },
-                                React.createElement(
-                                    Row,
-                                    null,
-                                    React.createElement(
-                                        Col,
-                                        { xs: 6 },
-                                        React.createElement('i', { className: 'fa fa-money fa-5x' })
-                                    ),
-                                    React.createElement(
-                                        Col,
-                                        { xs: 6, className: 'text-right' },
-                                        React.createElement(
-                                            'p',
-                                            { className: 'announcement-heading' },
-                                            '$ 250 k'
-                                        ),
-                                        React.createElement(
-                                            'p',
-                                            { className: 'announcement-text' },
-                                            'Recovered'
-                                        )
-                                    )
-                                )
-                            )
-                        )
+                        React.createElement(DashboardMaster, null)
                     )
                 ),
                 React.createElement('br', null),
@@ -8314,6 +8284,85 @@ var TodayItemReport = function (_React$Component60) {
     }]);
 
     return TodayItemReport;
+}(React.Component);
+
+var DashboardMaster = function (_React$Component61) {
+    _inherits(DashboardMaster, _React$Component61);
+
+    function DashboardMaster() {
+        _classCallCheck(this, DashboardMaster);
+
+        var _this95 = _possibleConstructorReturn(this, (DashboardMaster.__proto__ || Object.getPrototypeOf(DashboardMaster)).call(this));
+
+        _this95.state = {
+            master: []
+        };
+        return _this95;
+    }
+
+    _createClass(DashboardMaster, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this96 = this;
+
+            fetch(API_URL + '/dashboardmaster', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this96.setState({
+
+                    master: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            this.state.master.map(function (master) {
+                return console.log(master.total);
+            });
+
+            return React.createElement(
+                'div',
+                { className: 'panel panel-success' },
+                React.createElement(
+                    'div',
+                    { className: 'panel-heading' },
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            Col,
+                            { xs: 6 },
+                            React.createElement('i', { className: 'fa fa-money fa-5x' })
+                        ),
+                        React.createElement(
+                            Col,
+                            { xs: 6, className: 'text-right' },
+                            React.createElement(
+                                'p',
+                                { className: 'announcement-heading' },
+                                '$ ',
+                                this.state.master.map(function (master) {
+                                    return master.total + ".00";
+                                })
+                            ),
+                            React.createElement(
+                                'p',
+                                { className: 'announcement-text' },
+                                'Ventas totales'
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return DashboardMaster;
 }(React.Component);
 
 ReactDOM.render(React.createElement(
