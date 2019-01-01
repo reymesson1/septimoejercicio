@@ -2403,7 +2403,7 @@ class Detail extends React.Component{
 
             <SplitButton
             bsStyle={'default'}
-            title={'Agregar Orden'}
+            title={'Agregar Articulo'}
             key={'1'}
             id={`split-button-basic-${'1'}`}
             onClick={this.open.bind(this)}>
