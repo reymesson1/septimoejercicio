@@ -3430,7 +3430,7 @@ class LoaderListGroup extends React.Component{
                     <ListGroup>
                     <ListGroupItem href="#link1">Date created: <Label bsStyle="success">{date}</Label></ListGroupItem>
                     <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Comment: <Label bsStyle="success">{status}</Label></ListGroupItem>
+                    <ListGroupItem href="#link2">Status: <Label bsStyle="success">{status}</Label></ListGroupItem>
                     <ListGroupItem href="#link2">Comments: <span>Coments</span></ListGroupItem>
                   </ListGroup>
                 </Panel>

@@ -5229,7 +5229,7 @@ var LoaderListGroup = function (_React$Component38) {
                     React.createElement(
                         ListGroupItem,
                         { href: '#link2' },
-                        'Comment: ',
+                        'Status: ',
                         React.createElement(
                             Label,
                             { bsStyle: 'success' },
