@@ -1765,8 +1765,6 @@ var Master = function (_React$Component11) {
         key: 'downloadCSV',
         value: function downloadCSV() {
 
-            console.log(this.state.masterAPICSV);
-
             //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
             var rows = this.state.masterAPICSV;
             var csvContent = "data:text/csv;charset=utf-8,";
@@ -5201,49 +5199,71 @@ var LoaderListGroup = function (_React$Component38) {
             var status = nextState.status;
 
             return React.createElement(
-                Panel,
-                { header: 'This Loader' },
+                'div',
+                null,
                 React.createElement(
-                    ListGroup,
-                    null,
+                    Panel,
+                    { header: 'This Loader' },
                     React.createElement(
-                        ListGroupItem,
-                        { href: '#link1' },
-                        'Date created: ',
+                        ListGroup,
+                        null,
                         React.createElement(
-                            Label,
-                            { bsStyle: 'success' },
-                            date
+                            ListGroupItem,
+                            { href: '#link1' },
+                            'Date created: ',
+                            React.createElement(
+                                Label,
+                                { bsStyle: 'success' },
+                                date
+                            )
+                        ),
+                        React.createElement(
+                            ListGroupItem,
+                            { href: '#link2' },
+                            'Last update: ',
+                            React.createElement(
+                                Label,
+                                { bsStyle: 'success' },
+                                datedel
+                            )
+                        ),
+                        React.createElement(
+                            ListGroupItem,
+                            { href: '#link2' },
+                            'Status: ',
+                            React.createElement(
+                                Label,
+                                { bsStyle: 'success' },
+                                status
+                            )
+                        ),
+                        React.createElement(
+                            ListGroupItem,
+                            { href: '#link2' },
+                            'Comments:'
                         )
-                    ),
+                    )
+                ),
+                React.createElement(
+                    Panel,
+                    { header: 'Comments' },
                     React.createElement(
-                        ListGroupItem,
-                        { href: '#link2' },
-                        'Last update: ',
+                        ListGroup,
+                        null,
                         React.createElement(
-                            Label,
-                            { bsStyle: 'success' },
-                            datedel
-                        )
-                    ),
-                    React.createElement(
-                        ListGroupItem,
-                        { href: '#link2' },
-                        'Status: ',
-                        React.createElement(
-                            Label,
-                            { bsStyle: 'success' },
-                            status
-                        )
-                    ),
-                    React.createElement(
-                        ListGroupItem,
-                        { href: '#link2' },
-                        'Comments: ',
-                        React.createElement(
-                            'span',
-                            null,
-                            'Coments'
+                            ListGroupItem,
+                            { href: '#link2' },
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formControlsTextarea' },
+                                React.createElement(FormControl, { componentClass: 'textarea', placeholder: 'Comments' }),
+                                React.createElement('br', null),
+                                React.createElement(
+                                    Button,
+                                    { className: 'pull-right', bsStyle: 'primary' },
+                                    'Comment'
+                                )
+                            )
                         )
                     )
                 )
@@ -6322,10 +6342,6 @@ var UpdateDelivery = function (_React$Component46) {
             });
 
             var newDate = event.target.fechaentrega.value;
-
-            console.log(newDate.substring(0, 4));
-            console.log(newDate.substring(5, 7));
-            console.log(newDate.substring(8, 10));
 
             var formatedDate = "* " + newDate.substring(8, 10) + "/" + newDate.substring(5, 7) + "/" + newDate.substring(0, 4);
 
@@ -8012,9 +8028,7 @@ var QuotationTable = function (_React$Component56) {
 
     _createClass(QuotationTable, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {
-            console.log(this.props.master);
-        }
+        value: function componentDidMount() {}
     }, {
         key: 'render',
         value: function render() {
@@ -8195,12 +8209,6 @@ var TodayReport = function (_React$Component59) {
 
             var today = moment(new Date()).format('DD/MM/YYYY');
 
-            if (this.state.master[0]) {
-                var value = this.state.master[0].fechaentrega.split(' ');
-                console.log(value[1] == today);
-                //console.log(today)
-            }
-
             var filteredTable = this.state.master.filter(function (master) {
                 return master.fechaentrega.split(' ')[1] == today;
             });
@@ -8320,10 +8328,6 @@ var DashboardMaster = function (_React$Component61) {
     }, {
         key: 'render',
         value: function render() {
-
-            this.state.master.map(function (master) {
-                return console.log(master.total);
-            });
 
             return React.createElement(
                 'div',

@@ -1202,8 +1202,6 @@ class Master extends React.Component{
 
     downloadCSV(){
 
-        console.log(this.state.masterAPICSV)
-    
         //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
         const rows = this.state.masterAPICSV
         let csvContent = "data:text/csv;charset=utf-8,";
@@ -3427,14 +3425,27 @@ class LoaderListGroup extends React.Component{
         let status = nextState.status;
 
             return(
+                <div>
                 <Panel header="This Loader">
                     <ListGroup>
-                    <ListGroupItem href="#link1">Date created: <Label bsStyle="success">{date}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Status: <Label bsStyle="success">{status}</Label></ListGroupItem>
-                    <ListGroupItem href="#link2">Comments: <span>Coments</span></ListGroupItem>
-                  </ListGroup>
+                        <ListGroupItem href="#link1">Date created: <Label bsStyle="success">{date}</Label></ListGroupItem>
+                        <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
+                        <ListGroupItem href="#link2">Status: <Label bsStyle="success">{status}</Label></ListGroupItem>
+                        <ListGroupItem href="#link2">Comments:</ListGroupItem>
+                    </ListGroup>
                 </Panel>
+                <Panel header="Comments">
+                    <ListGroup>
+                        <ListGroupItem href="#link2"> 
+                            <FormGroup controlId="formControlsTextarea">
+                                <FormControl componentClass="textarea" placeholder="Comments" />
+                                <br/>
+                                <Button className="pull-right" bsStyle="primary" >Comment</Button>
+                            </FormGroup>                        
+                        </ListGroupItem>
+                    </ListGroup>
+                </Panel>
+                </div>
             );
     }
 }
@@ -4131,9 +4142,6 @@ class UpdateDelivery extends React.Component{
 
         let newDate = event.target.fechaentrega.value;
 
-        console.log(newDate.substring(0,4))
-        console.log(newDate.substring(5,7))
-        console.log(newDate.substring(8,10))
 
         let formatedDate = "* "+ newDate.substring(8,10) + "/" + newDate.substring(5,7) + "/" + newDate.substring(0,4)
         
@@ -5149,7 +5157,6 @@ class Quotation extends React.Component{
 class QuotationTable extends React.Component{
 
     componentDidMount(){
-        console.log(this.props.master)
     }
 
     render(){
@@ -5257,13 +5264,6 @@ class TodayReport extends React.Component{
       var today = moment(new Date()).format('DD/MM/YYYY');      
 
       
-      if(this.state.master[0]){
-          var value = this.state.master[0].fechaentrega.split(' ')
-          console.log(value[1]==today)
-          //console.log(today)
-          
-      }
-
     let filteredTable = this.state.master.filter(
         (master) => master.fechaentrega.split(' ')[1] == today
     )
@@ -5368,10 +5368,6 @@ class DashboardMaster extends React.Component{
     }
 
     render(){
-
-        this.state.master.map(
-            (master) => console.log(master.total)
-        )
 
       return (
 
