@@ -2560,7 +2560,8 @@ class DetailTable extends React.Component{
                     <th>Name</th>
                     <th>Item</th>
                     <th>Environment</th>
-                    <th>Acciones</th>
+                    <th>Type</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -2571,6 +2572,7 @@ class DetailTable extends React.Component{
                                                         name={todo.name}
                                                         item={todo.item}
                                                         environment={todo.environment}
+                                                        tipo={todo.tipo}
                                                         detailCallback={this.props.detailCallback}
                                  />
             )}
@@ -2598,6 +2600,7 @@ class DetailTable extends React.Component{
                     <th>Descripcion</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
+                    <th>Tipo</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -2609,6 +2612,7 @@ class DetailTable extends React.Component{
                                                         name={todo.name}
                                                         item={todo.item}
                                                         environment={todo.environment}
+                                                        tipo={todo.tipo}
                                                         detailCallback={this.props.detailCallback}
                                  />
             )}
@@ -2829,6 +2833,7 @@ class DetailTableBody extends React.Component{
                 <td>{this.props.name}</td>
                 <td>{this.props.item}</td>
                 <td>{this.props.environment}</td>
+                <td>{this.props.tipo}</td>
                 <td>
                     <Link className="btn btn-default" to={'/updatedetail/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>
                     <Button onClick={this.props.detailCallback.onDeleted.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>

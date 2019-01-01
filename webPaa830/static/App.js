@@ -3782,7 +3782,12 @@ var DetailTable = function (_React$Component27) {
                             React.createElement(
                                 'th',
                                 null,
-                                'Acciones'
+                                'Type'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
+                                'Actions'
                             )
                         )
                     ),
@@ -3796,6 +3801,7 @@ var DetailTable = function (_React$Component27) {
                                 name: todo.name,
                                 item: todo.item,
                                 environment: todo.environment,
+                                tipo: todo.tipo,
                                 detailCallback: _this35.props.detailCallback
                             });
                         })
@@ -3883,6 +3889,11 @@ var DetailTable = function (_React$Component27) {
                             React.createElement(
                                 'th',
                                 null,
+                                'Tipo'
+                            ),
+                            React.createElement(
+                                'th',
+                                null,
                                 'Actions'
                             )
                         )
@@ -3897,6 +3908,7 @@ var DetailTable = function (_React$Component27) {
                                 name: todo.name,
                                 item: todo.item,
                                 environment: todo.environment,
+                                tipo: todo.tipo,
                                 detailCallback: _this35.props.detailCallback
                             });
                         })
@@ -4249,6 +4261,11 @@ var DetailTableBody = function (_React$Component29) {
                     'td',
                     null,
                     this.props.environment
+                ),
+                React.createElement(
+                    'td',
+                    null,
+                    this.props.tipo
                 ),
                 React.createElement(
                     'td',
