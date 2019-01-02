@@ -4,7 +4,6 @@ const IndexRoute = ReactRouter.IndexRoute;
 const Link = ReactRouter.Link;
 const browserHistory = ReactRouter.browserHistory ;
 
-
 const Button = ReactBootstrap.Button;
 const SplitButton = ReactBootstrap.SplitButton;
 const Label = ReactBootstrap.Label;
@@ -821,7 +820,8 @@ class Master extends React.Component{
             temp: '',
             list: [],
             customerAPI: [],
-            masterAPICSV:[]
+            masterAPICSV:[],
+            tempNumber: ''
         };
     }
 
@@ -1032,6 +1032,10 @@ class Master extends React.Component{
 
         event.preventDefault();
 
+        this.setState({
+            tempNumber: event.target.firstname.value
+        })
+
         let nextState = this.state.masterDetail;
 
         let detailTotal = this.state.detailData;
@@ -1126,16 +1130,50 @@ class Master extends React.Component{
                     }
                 }
 
-                newItem = {
+                if(event.target.firstname.value.length==3){
 
-                    "id": Date.now(),
-                    "firstname":fullname,
-                    "telefono":telefono,
-                    "item":event.target.suggest.value,
-                    "itemDetail": this.state.detailAdded,
-                    "development":event.target.development.value,
-                    "quantity":event.target.quantity.value,
-                    "project":project,
+                    for(var x=0;x<nextStateCust.length;x++){
+                        
+                        if(nextStateCust[x].telefono==this.state.tempNumber){
+                        fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                        telefono=this.state.tempNumber
+                        }
+                    }
+                    
+                    newItem = {
+                        
+                        "id": Date.now(),
+                        "firstname":fullname,
+                        "telefono":this.state.tempNumber,
+                        "item":event.target.suggest.value,
+                        "itemDetail": this.state.detailAdded,
+                        "development":event.target.development.value,
+                        "quantity":event.target.quantity.value,
+                        "project":project,
+                    } 
+                    
+                    console.log(newItem)
+                }else{
+
+                    for(var x=0;x<nextStateCust.length;x++){
+                        
+                        if(nextStateCust[x].telefono==event.target.firstname.value){
+                        fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                        telefono=event.target.firstname.value
+                        }
+                    }
+   
+                    newItem = {
+                        
+                        "id": Date.now(),
+                        "firstname":fullname,
+                        "telefono":event.target.firstname.value,
+                        "item":event.target.suggest.value,
+                        "itemDetail": this.state.detailAdded,
+                        "development":event.target.development.value,
+                        "quantity":event.target.quantity.value,
+                        "project":project,
+                    }
                 }
 
                 nextState.push(newItem);
@@ -3514,7 +3552,7 @@ class LoaderListGroup extends React.Component{
         let date;
         let datedel;
         let status;
-        let comments;
+        let comments = [];
         let obj = this.props.masterAPI.filter(
             (master) => master.id == this.props.inputText
         );
@@ -3533,7 +3571,16 @@ class LoaderListGroup extends React.Component{
                         <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
                         <ListGroupItem href="#link2">Status: <Label bsStyle="success">{status}</Label></ListGroupItem>
                         <ListGroupItem href="#link2">Comments:
-                        <Label bsStyle="success">{comments}</Label>                        
+                        {comments.map(
+                            (master) =>
+                            <div>
+                                <Label bsStyle="success">
+                                    {master}
+                                </Label>   
+                                <br/>                     
+                            </div>
+ 
+                        )}
                         </ListGroupItem>
                     </ListGroup>
                 </Panel>
@@ -3887,6 +3934,33 @@ class CustomerSearch extends React.Component{
 }
 
 class CustomerModal extends React.Component{
+
+    constructor(){
+
+        super();
+        this.state = {
+            
+            value: ""
+        }
+    }
+
+    handleChange(event){
+
+        this.setState({
+            value: event.target.value
+        })
+        if(event.target.value.length==3){            
+            this.setState({
+                value: event.target.value+"-"
+            })
+        }  
+        if(event.target.value.length==7){
+            this.setState({
+                value: event.target.value+"-"
+            })
+        }            
+        
+    }
     
     render(){
         
@@ -3934,7 +4008,7 @@ class CustomerModal extends React.Component{
                                 Telefono #1
                               </Col>
                               <Col sm={9}>
-                                <FormControl name="telefono" type="text" placeholder="Telefono #1" />
+                                <FormControl name="telefono" type="text" onChange={this.handleChange.bind(this)} value={this.state.value} placeholder="Telefono #1" />
                               </Col>
                             </FormGroup>
                         </Row>

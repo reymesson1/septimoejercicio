@@ -1385,7 +1385,8 @@ var Master = function (_React$Component11) {
             temp: '',
             list: [],
             customerAPI: [],
-            masterAPICSV: []
+            masterAPICSV: [],
+            tempNumber: ''
         };
         return _this13;
     }
@@ -1597,6 +1598,10 @@ var Master = function (_React$Component11) {
 
             event.preventDefault();
 
+            this.setState({
+                tempNumber: event.target.firstname.value
+            });
+
             var nextState = this.state.masterDetail;
 
             var detailTotal = this.state.detailData;
@@ -1688,17 +1693,51 @@ var Master = function (_React$Component11) {
                         }
                     }
 
-                    newItem = {
+                    if (event.target.firstname.value.length == 3) {
 
-                        "id": Date.now(),
-                        "firstname": fullname,
-                        "telefono": telefono,
-                        "item": event.target.suggest.value,
-                        "itemDetail": this.state.detailAdded,
-                        "development": event.target.development.value,
-                        "quantity": event.target.quantity.value,
-                        "project": project
-                    };
+                        for (var x = 0; x < nextStateCust.length; x++) {
+
+                            if (nextStateCust[x].telefono == this.state.tempNumber) {
+                                fullname = nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                                telefono = this.state.tempNumber;
+                            }
+                        }
+
+                        newItem = {
+
+                            "id": Date.now(),
+                            "firstname": fullname,
+                            "telefono": this.state.tempNumber,
+                            "item": event.target.suggest.value,
+                            "itemDetail": this.state.detailAdded,
+                            "development": event.target.development.value,
+                            "quantity": event.target.quantity.value,
+                            "project": project
+                        };
+
+                        console.log(newItem);
+                    } else {
+
+                        for (var x = 0; x < nextStateCust.length; x++) {
+
+                            if (nextStateCust[x].telefono == event.target.firstname.value) {
+                                fullname = nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                                telefono = event.target.firstname.value;
+                            }
+                        }
+
+                        newItem = {
+
+                            "id": Date.now(),
+                            "firstname": fullname,
+                            "telefono": event.target.firstname.value,
+                            "item": event.target.suggest.value,
+                            "itemDetail": this.state.detailAdded,
+                            "development": event.target.development.value,
+                            "quantity": event.target.quantity.value,
+                            "project": project
+                        };
+                    }
 
                     nextState.push(newItem);
 
@@ -5291,7 +5330,7 @@ var LoaderListGroup = function (_React$Component38) {
             var date = void 0;
             var datedel = void 0;
             var status = void 0;
-            var comments = void 0;
+            var comments = [];
             var obj = this.props.masterAPI.filter(function (master) {
                 return master.id == _this56.props.inputText;
             });
@@ -5345,11 +5384,18 @@ var LoaderListGroup = function (_React$Component38) {
                             ListGroupItem,
                             { href: '#link2' },
                             'Comments:',
-                            React.createElement(
-                                Label,
-                                { bsStyle: 'success' },
-                                comments
-                            )
+                            comments.map(function (master) {
+                                return React.createElement(
+                                    'div',
+                                    null,
+                                    React.createElement(
+                                        Label,
+                                        { bsStyle: 'success' },
+                                        master
+                                    ),
+                                    React.createElement('br', null)
+                                );
+                            })
                         )
                     )
                 ),
@@ -5891,10 +5937,34 @@ var CustomerModal = function (_React$Component44) {
     function CustomerModal() {
         _classCallCheck(this, CustomerModal);
 
-        return _possibleConstructorReturn(this, (CustomerModal.__proto__ || Object.getPrototypeOf(CustomerModal)).apply(this, arguments));
+        var _this64 = _possibleConstructorReturn(this, (CustomerModal.__proto__ || Object.getPrototypeOf(CustomerModal)).call(this));
+
+        _this64.state = {
+
+            value: ""
+        };
+        return _this64;
     }
 
     _createClass(CustomerModal, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+
+            this.setState({
+                value: event.target.value
+            });
+            if (event.target.value.length == 3) {
+                this.setState({
+                    value: event.target.value + "-"
+                });
+            }
+            if (event.target.value.length == 7) {
+                this.setState({
+                    value: event.target.value + "-"
+                });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -5984,7 +6054,7 @@ var CustomerModal = function (_React$Component44) {
                                 React.createElement(
                                     Col,
                                     { sm: 9 },
-                                    React.createElement(FormControl, { name: 'telefono', type: 'text', placeholder: 'Telefono #1' })
+                                    React.createElement(FormControl, { name: 'telefono', type: 'text', onChange: this.handleChange.bind(this), value: this.state.value, placeholder: 'Telefono #1' })
                                 )
                             )
                         ),
