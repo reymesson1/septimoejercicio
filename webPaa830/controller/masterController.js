@@ -150,8 +150,16 @@ exports.getMasterItemReport = async(req,res)=>{
   res.send(master);
 }
 exports.getDashboardMaster = async(req,res)=>{
-
+  
   var master = await Master.aggregate([{"$match":{"status":"Pagado"}},{"$group":{"_id":"$status","total":{"$sum":"$grandTotal"}}}])
-
+  
   res.send(master);
+}
+      
+exports.setMasterComment = async(req,res)=>{
+
+  var obj = req.body;
+
+  console.log(obj);
+  
 }

@@ -37,7 +37,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8082';
+//const API_URL = 'http://localhost:8082';
 const API_URL = 'http://159.203.156.208:8082'; 
 
 const API_HEADERS = {
@@ -3353,33 +3353,54 @@ class Loader extends React.Component{
         }
     }
 
-    close() {
-        this.setState({ showModal: false });
+    componentDidMount(){
 
-        window.clearTimeout(time)
+        fetch(API_URL+'/master',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                masterAPI: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+      
+        this.setState({
+            
+            parameter: this.props.params.paymentid
+        });
+
+    }
+
+    close() {
+        //this.setState({ showModal: false });
+
+        //window.clearTimeout(time)
     }
 
     open() {
-        this.setState({ showModal: true });
+        //this.setState({ showModal: true });
 
-        time = window.setTimeout(function(msg) {
+        // time = window.setTimeout(function(msg) {
 
-            fetch(API_URL+'/loader', {
+        //     fetch(API_URL+'/loader', {
 
-                  method: 'post',
-                  headers: API_HEADERS,
-                  body: JSON.stringify({"id":this.state.inputText})
-            })
-            .then((response)=>response.json())
-            .then((responseData)=>{
-                  this.setState({
+        //           method: 'post',
+        //           headers: API_HEADERS,
+        //           body: JSON.stringify({"id":this.state.inputText})
+        //     })
+        //     .then((response)=>response.json())
+        //     .then((responseData)=>{
+        //           this.setState({
 
-                      masterAPI: responseData
-                  })
-            })
+        //               masterAPI: responseData
+        //           })
+        //     })
 
-            this.close();
-        }.bind(this), 3000);
+        //     this.close();
+        // }.bind(this), 3000);
     }
 
     onSubmitSearch(event){
@@ -3391,7 +3412,26 @@ class Loader extends React.Component{
             inputText: event.target.loadersearch.value
         })
 
-        this.open();
+        //this.open();
+    }
+
+    onSubmitComment(event){
+        event.preventDefault();
+
+        fetch(API_URL+'/mastercomment', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({"id":this.state.inputText,"comment":event.target.comment.value})
+        })
+        .then((response)=>response.json())
+        .then((responseData)=>{
+                this.setState({
+
+                    masterAPI: responseData
+                })
+        })
+
     }
 
     render(){
@@ -3430,7 +3470,11 @@ class Loader extends React.Component{
                 </Row>
                 <Row>
                     <LoaderListGroup 
-                                        masterAPI={this.state.masterAPI}                            
+                                        inputText={this.state.inputText}
+                                        masterAPI={this.state.masterAPI} 
+                                        loaderCallback={{
+                                            onsubmitcomment: this.onSubmitComment.bind(this)
+                                        }}                           
                     />
                 </Row>
             </div>
@@ -3466,13 +3510,19 @@ class LoaderListGroup extends React.Component{
 
     render(){
 
-        let nextState = this.props.masterAPI;
-
-        let date = nextState.date;
-
-        let datedel = nextState.fechaentrega;
-
-        let status = nextState.status;
+        let date;
+        let datedel;
+        let status;
+        let comments;
+        let obj = this.props.masterAPI.filter(
+            (master) => master.id == this.props.inputText
+        );
+        if(obj[0]){
+            date = obj[0].date;            
+            datedel = obj[0].fechaentrega;            
+            status = obj[0].status;    
+            comments = obj[0].comments;    
+        }
 
             return(
                 <div>
@@ -3481,17 +3531,22 @@ class LoaderListGroup extends React.Component{
                         <ListGroupItem href="#link1">Date created: <Label bsStyle="success">{date}</Label></ListGroupItem>
                         <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
                         <ListGroupItem href="#link2">Status: <Label bsStyle="success">{status}</Label></ListGroupItem>
-                        <ListGroupItem href="#link2">Comments:</ListGroupItem>
+                        <ListGroupItem href="#link2">Comments:
+                                <Label bsStyle="success">{comments}</Label>
+                        
+                        </ListGroupItem>
                     </ListGroup>
                 </Panel>
                 <Panel header="Comments">
                     <ListGroup>
-                        <ListGroupItem href="#link2"> 
+                        <ListGroupItem>
+                            <Form onSubmit={this.props.loaderCallback.onsubmitcomment.bind(this)}> 
                             <FormGroup controlId="formControlsTextarea">
-                                <FormControl componentClass="textarea" placeholder="Comments" />
+                                <FormControl componentClass="textarea" placeholder="Comments" name="comment" />
                                 <br/>
-                                <Button className="pull-right" bsStyle="primary" >Comment</Button>
+                                <Button className="pull-right" bsStyle="primary"  type="submit" >Comment</Button>
                             </FormGroup>                        
+                            </Form> 
                         </ListGroupItem>
                     </ListGroup>
                 </Panel>
