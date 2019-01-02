@@ -48,7 +48,7 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-//const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://localhost:8082';
 var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
@@ -1566,7 +1566,8 @@ var Master = function (_React$Component11) {
                 "current": 0,
                 "tipopago": "",
                 "ncf": "A00000000000001",
-                "status": "pending"
+                "status": "pending",
+                "comments": []
             };
 
             var nextState = this.state.masterAPI;

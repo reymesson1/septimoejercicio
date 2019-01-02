@@ -160,6 +160,11 @@ exports.setMasterComment = async(req,res)=>{
 
   var obj = req.body;
 
-  console.log(obj);
+  var master = await Master.findOne({"id":obj.id},function(err,master){
+    master.comments.push(obj.comment)
+    master.save(function(err,m){
+      console.log("Master updated");
+    })
+  })
   
 }

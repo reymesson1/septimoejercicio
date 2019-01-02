@@ -37,7 +37,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-//const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://localhost:8082';
 const API_URL = 'http://159.203.156.208:8082'; 
 
 const API_HEADERS = {
@@ -1001,7 +1001,8 @@ class Master extends React.Component{
             "current": 0,
             "tipopago": "",
             "ncf": "A00000000000001",
-            "status":"pending"
+            "status":"pending",
+            "comments": []
         }
         
         let nextState = this.state.masterAPI;
@@ -3532,8 +3533,7 @@ class LoaderListGroup extends React.Component{
                         <ListGroupItem href="#link2">Last update: <Label bsStyle="success">{datedel}</Label></ListGroupItem>
                         <ListGroupItem href="#link2">Status: <Label bsStyle="success">{status}</Label></ListGroupItem>
                         <ListGroupItem href="#link2">Comments:
-                                <Label bsStyle="success">{comments}</Label>
-                        
+                        <Label bsStyle="success">{comments}</Label>                        
                         </ListGroupItem>
                     </ListGroup>
                 </Panel>
