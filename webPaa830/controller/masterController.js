@@ -136,7 +136,20 @@ exports.getMasterCSV = async(req,res)=>{
   second.push(master[x].date)
   second.push(master[x].name)
   second.push(master[x].project)
+  second.push(master[x].agregado)
+  second.push(master[x].desc)
+  second.push(master[x].itbis)
+  second.push(master[x].grandTotal)
+  second.push(master[x].fechaentrega)
+  second.push(master[x].horaentrega)
+  second.push(master[x].balance)
+  second.push(master[x].pending)
+  second.push(master[x].current)
+  second.push(master[x].tipopago)
+  second.push(master[x].ncf)
   second.push(master[x].status)
+  second.push(master[x].item)
+  second.push(master[x].comments)
   
   arr.push(second)
   }
@@ -145,7 +158,7 @@ exports.getMasterCSV = async(req,res)=>{
 }
 exports.getMasterItemReport = async(req,res)=>{
 
-  var master = await Master.aggregate([{"$match":{"date":{"$gte":today}}},{"$unwind":"$item"},{"$group":{"_id":"$item.item","total":{"$sum":1}}}])
+  var master = await Master.aggregate([{"$match":{"date":{"$gte":today}}},{"$unwind":"$item"},{"$group":{"_id":"$item.development","total":{"$sum":1}}}])
 
   res.send(master);
 }
@@ -162,6 +175,18 @@ exports.setMasterComment = async(req,res)=>{
 
   var master = await Master.findOne({"id":obj.id},function(err,master){
     master.comments.push(obj.comment)
+    master.save(function(err,m){
+      console.log("Master updated");
+    })
+  })
+  
+}
+exports.setMasterQuotation = async(req,res)=>{
+
+  var obj = req.body;
+  
+  var master = await Master.findOne({"id":obj.id},function(err,master){
+    master.status = "quoted"
     master.save(function(err,m){
       console.log("Master updated");
     })

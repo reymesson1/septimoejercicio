@@ -58,6 +58,7 @@ app.get('/mastercsv', masterController.getMasterCSV)
 app.get('/masteritemreport', masterController.getMasterItemReport)
 app.get('/dashboardmaster', masterController.getDashboardMaster)
 app.post('/mastercomment', masterController.setMasterComment)
+app.post('/quotationmark', masterController.setMasterQuotation)
 
 
 /*********

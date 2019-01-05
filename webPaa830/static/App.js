@@ -1161,7 +1161,11 @@ var Toolbar = function (_React$Component9) {
                         React.createElement(
                             MenuItem,
                             { eventKey: 3.4 },
-                            'Separated link'
+                            React.createElement(
+                                Link,
+                                { to: '/deliveryfortoday' },
+                                'Entregas para hoy'
+                            )
                         )
                     ),
                     React.createElement(
@@ -1256,7 +1260,11 @@ var Toolbar = function (_React$Component9) {
                         React.createElement(
                             MenuItem,
                             { eventKey: 3.4 },
-                            'Separated link'
+                            React.createElement(
+                                Link,
+                                { to: '/deliveryfortoday' },
+                                'Delivery For Today'
+                            )
                         )
                     ),
                     React.createElement(
@@ -2824,7 +2832,7 @@ var MasterModalField = function (_React$Component20) {
                             React.createElement(
                                 Col,
                                 { md: 4, sm: 6 },
-                                React.createElement(AwesompleteInput, { className: 'form-control', list: this.props.detail })
+                                React.createElement(Autocomplete, { className: 'form-control', detail: this.props.detail })
                             )
                         )
                     ),
@@ -2857,7 +2865,7 @@ var MasterModalField = function (_React$Component20) {
                                     ),
                                     React.createElement(
                                         'option',
-                                        { value: '...' },
+                                        { value: 'Lavar y Prensa' },
                                         '...'
                                     )
                                 )
@@ -5950,17 +5958,9 @@ var CustomerModal = function (_React$Component44) {
         key: 'handleChange',
         value: function handleChange(event) {
 
-            this.setState({
-                value: event.target.value
-            });
-            if (event.target.value.length == 3) {
+            if (event.target.value.length <= 10) {
                 this.setState({
-                    value: event.target.value + "-"
-                });
-            }
-            if (event.target.value.length == 7) {
-                this.setState({
-                    value: event.target.value + "-"
+                    value: event.target.value
                 });
             }
         }
@@ -6054,7 +6054,7 @@ var CustomerModal = function (_React$Component44) {
                                 React.createElement(
                                     Col,
                                     { sm: 9 },
-                                    React.createElement(FormControl, { name: 'telefono', type: 'text', onChange: this.handleChange.bind(this), value: this.state.value, placeholder: 'Telefono #1' })
+                                    React.createElement(FormControl, { name: 'telefono', type: 'number', placeholder: 'Telefono #1', onChange: this.handleChange.bind(this), value: this.state.value })
                                 )
                             )
                         ),
@@ -7928,6 +7928,17 @@ var Quotation = function (_React$Component55) {
             });
         }
     }, {
+        key: 'onMarkAsQuoted',
+        value: function onMarkAsQuoted() {
+            fetch(API_URL + '/quotationmark', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify({ "id": this.state.parameter })
+            });
+            console.log(this.state.parameter);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -8231,6 +8242,15 @@ var Quotation = function (_React$Component55) {
                                     )
                                 )
                             )
+                        )
+                    ),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            Button,
+                            { onClick: this.onMarkAsQuoted.bind(this) },
+                            ' Mark as Quoted '
                         )
                     )
                 )
@@ -8593,6 +8613,35 @@ var DashboardMaster = function (_React$Component61) {
     return DashboardMaster;
 }(React.Component);
 
+var DeliveryForToday = function (_React$Component62) {
+    _inherits(DeliveryForToday, _React$Component62);
+
+    function DeliveryForToday() {
+        _classCallCheck(this, DeliveryForToday);
+
+        return _possibleConstructorReturn(this, (DeliveryForToday.__proto__ || Object.getPrototypeOf(DeliveryForToday)).apply(this, arguments));
+    }
+
+    _createClass(DeliveryForToday, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'h1',
+                    null,
+                    'Entregas para hoy'
+                ),
+                React.createElement(TodayReport, null)
+            );
+        }
+    }]);
+
+    return DeliveryForToday;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -8600,6 +8649,7 @@ ReactDOM.render(React.createElement(
         Route,
         { path: '/', component: App },
         React.createElement(IndexRoute, { component: Home }),
+        React.createElement(Route, { path: 'deliveryfortoday', component: DeliveryForToday }),
         React.createElement(Route, { path: 'quotation/:quotationid', component: Quotation }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
         React.createElement(Route, { path: 'customer', component: Customer }),

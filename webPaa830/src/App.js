@@ -697,7 +697,7 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/partialstwo">Cuadre Articulos</Link></MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.4}>Separated link</MenuItem>
+                            <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Entregas para hoy</Link></MenuItem>
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
@@ -722,7 +722,7 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/partialstwo">Draw2</Link></MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.4}>Separated link</MenuItem>
+                            <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Delivery For Today</Link></MenuItem>
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
@@ -1947,7 +1947,7 @@ class MasterModalField extends React.Component{
                                 Item
                               </Col>
                               <Col md={4} sm={6}>
-                                <AwesompleteInput className="form-control" list={this.props.detail} />
+                                <Autocomplete className="form-control" detail={this.props.detail} />
                               </Col>
                             </FormGroup>
                         </Row>
@@ -1960,7 +1960,7 @@ class MasterModalField extends React.Component{
                                 <Col md={4} sm={6}>
                                   <FormControl componentClass="select" name="development" placeholder="List" required >
                                     <option value="select">Select</option>
-                                    <option value="...">...</option>
+                                    <option value="Lavar y Prensa">...</option>
 
                                   </FormControl>
                                 </Col>
@@ -3945,20 +3945,12 @@ class CustomerModal extends React.Component{
     }
 
     handleChange(event){
-
-        this.setState({
-            value: event.target.value
-        })
-        if(event.target.value.length==3){            
+    
+        if(event.target.value.length<=10){            
             this.setState({
-                value: event.target.value+"-"
+                value: event.target.value
             })
         }  
-        if(event.target.value.length==7){
-            this.setState({
-                value: event.target.value+"-"
-            })
-        }            
         
     }
     
@@ -4008,7 +4000,7 @@ class CustomerModal extends React.Component{
                                 Telefono #1
                               </Col>
                               <Col sm={9}>
-                                <FormControl name="telefono" type="text" onChange={this.handleChange.bind(this)} value={this.state.value} placeholder="Telefono #1" />
+                                <FormControl name="telefono" type="number" placeholder="Telefono #1" onChange={this.handleChange.bind(this)} value={this.state.value} />
                               </Col>
                             </FormGroup>
                         </Row>
@@ -5212,6 +5204,16 @@ class Quotation extends React.Component{
 
     }
 
+    onMarkAsQuoted(){
+        fetch(API_URL+'/quotationmark', {
+            
+            method: 'post',
+            headers: API_HEADERS,
+            body: JSON.stringify({"id":this.state.parameter})
+        })
+        console.log(this.state.parameter);
+    }
+
     render(){
 
         let nextState = this.state.masterAPI;
@@ -5366,6 +5368,9 @@ class Quotation extends React.Component{
                                 </Col>
                             </Panel>
                         </Col>
+                    </Row>                                                                                                             
+                    <Row>
+                        <Button onClick={this.onMarkAsQuoted.bind(this)}> Mark as Quoted </Button>                                                                                    
                     </Row>                                                                                                             
                 </Grid>
             </div>
@@ -5609,10 +5614,24 @@ class DashboardMaster extends React.Component{
     }
 }
 
+class DeliveryForToday extends React.Component{
+
+    render(){
+        
+        return (
+            <div>
+                <h1>Entregas para hoy</h1>
+                <TodayReport/>
+            </div>
+        )
+    }
+}
+    
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={Home}/>
+        <Route path="deliveryfortoday" component={DeliveryForToday}/>
         <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>
         <Route path="customer" component={Customer}/>

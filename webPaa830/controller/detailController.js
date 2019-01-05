@@ -24,8 +24,10 @@ exports.getDetailCSV = async(req,res)=>{
     second.push("'"+detail[x].id)
     second.push(detail[x].date)
     second.push(detail[x].name)
-    second.push(detail[x].project)
-    second.push(detail[x].status)
+    second.push(detail[x].item)
+    second.push(detail[x].environment)
+    second.push(detail[x].category)
+    second.push(detail[x].tipo)
     
     arr.push(second)
     }

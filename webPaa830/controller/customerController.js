@@ -79,10 +79,15 @@ exports.getCustomerCSV = async(req,res)=>{
     second = []
     
     second.push("'"+customer[x].id)
-    second.push(customer[x].date)
     second.push(customer[x].name)
-    second.push(customer[x].project)
-    second.push(customer[x].status)
+    second.push(customer[x].apellido)
+    second.push(customer[x].direccion)
+    second.push(customer[x].telefono)
+    second.push(customer[x].rnc)
+    second.push(customer[x].fechacumpleano)
+    second.push(customer[x].facebook)
+    second.push(customer[x].correoelectronico)
+    second.push(customer[x].descuento)
     
     arr.push(second)
     }
