@@ -405,7 +405,7 @@ var ActionsTable = function (_React$Component4) {
                                 'RNC: 131-473865'
                             ),
                             React.createElement(
-                                'h1',
+                                'h2',
                                 null,
                                 'Tel.: (809)-638-9999'
                             ),

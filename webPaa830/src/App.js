@@ -324,7 +324,7 @@ class ActionsTable extends React.Component{
                             <img src="/logoprint.png"/>
 
 <h5>RNC: 131-473865</h5>
-<h1>Tel.: (809)-638-9999</h1>
+<h2>Tel.: (809)-638-9999</h2>
 <h5>Nuestro horario</h5>
 <h5>Abiertos los sabados 8am a 1pm</h5>
 <h5>Lunes a Viernes 7:30am a 7:00pm</h5>
