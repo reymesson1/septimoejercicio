@@ -1441,7 +1441,7 @@ class MasterTable extends React.Component{
         this.state = {
 
           currentPage: 1,
-          todosPerPage: 30
+          todosPerPage: 200
         }
     }
 

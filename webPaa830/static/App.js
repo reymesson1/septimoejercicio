@@ -2060,7 +2060,7 @@ var MasterTable = function (_React$Component13) {
         _this16.state = {
 
             currentPage: 1,
-            todosPerPage: 30
+            todosPerPage: 200
         };
         return _this16;
     }
