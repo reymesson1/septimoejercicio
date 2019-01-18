@@ -3178,22 +3178,26 @@ class Partials extends React.Component{
 
     onRun(){
 
-                let nextState = this.state.masterAPI.filter((master)=> master.date == this.state.searchData)
+        let nextState;
 
-                let grand = 0;
+            if(this.state.searchData=="todos"){
+                nextState = this.state.masterAPI;
+            }else{
+                nextState = this.state.masterAPI.filter((master)=> master.tipopago == this.state.searchData);
+            }
 
-                for(var x=0;x<nextState.length;x++){
-                    grand+=parseInt(nextState[x].grandTotal);
-                }
+            let grand = 0;
 
-                this.setState({
+            for(var x=0;x<nextState.length;x++){
+                grand+=parseInt(nextState[x].grandTotal);
+            }
 
-                    total: grand
-                })
+            this.setState({
 
+                total: grand
+            })
 
-
-        window.print();
+            window.print();
     }
 
     render(){
@@ -3218,6 +3222,30 @@ class Partials extends React.Component{
             PartialsActive=PartialsES
         }
 
+        let filteredActiveAll = (
+
+            <PartialsTable  
+                        masterAPI={this.state.masterAPI}
+                        total={this.state.total}
+            />
+
+        );
+
+        let filteredActiveOne = (
+            <PartialsTable  
+                        masterAPI={this.state.masterAPI.filter((master)=> master.tipopago == this.state.searchData)}
+                        total={this.state.total}
+            />
+        );
+
+        let showFilteredActive;
+
+        if(this.state.searchData=="todos"){
+            showFilteredActive = filteredActiveAll;
+        }else{
+            showFilteredActive = filteredActiveOne;
+        }
+
         return(
 
              <Grid>
@@ -3230,13 +3258,7 @@ class Partials extends React.Component{
                         <PartialsSearch
                                         onChanged={this.onChanged.bind(this)}
                         />
-                        <PartialsTable
-
-
-masterAPI={this.state.masterAPI.filter((master)=> master.date ==
-this.state.searchData)}
-                            total={this.state.total}
-                        />
+                        {showFilteredActive}
                     </Row>
                     <Row>
                         <Button onClick={this.onRun.bind(this)}>i</Button>
@@ -3255,15 +3277,20 @@ class PartialsSearch extends React.Component{
 
 
                     <Col xs={6}>
-                        <Form horizontal
-onChange={this.props.onChanged.bind(this)}>
+                        <Form horizontal onChange={this.props.onChanged.bind(this)}>
                             <FormGroup controlId="formHorizontalEmail">
                               <Col componentClass={ControlLabel} xs={2}>
-
                               </Col>
                               <Col xs={6}>
-                                <FormControl type="date" placeholder="Email" />
-                              </Col>
+                                <FormGroup controlId="formControlsSelect">
+                                    <ControlLabel>Select</ControlLabel>
+                                    <FormControl componentClass="select" placeholder="select">
+                                        <option value="todos">Todos</option>
+                                        <option value="tarjeta">Tarjeta</option>
+                                        <option value="efectivo">Efectivo</option>
+                                    </FormControl>
+                                </FormGroup>  
+                                </Col>
                             </FormGroup>
                         </Form>
                     </Col>

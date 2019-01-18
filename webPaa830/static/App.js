@@ -4789,9 +4789,15 @@ var Partials = function (_React$Component32) {
         value: function onRun() {
             var _this45 = this;
 
-            var nextState = this.state.masterAPI.filter(function (master) {
-                return master.date == _this45.state.searchData;
-            });
+            var nextState = void 0;
+
+            if (this.state.searchData == "todos") {
+                nextState = this.state.masterAPI;
+            } else {
+                nextState = this.state.masterAPI.filter(function (master) {
+                    return master.tipopago == _this45.state.searchData;
+                });
+            }
 
             var grand = 0;
 
@@ -4833,6 +4839,26 @@ var Partials = function (_React$Component32) {
                 PartialsActive = PartialsES;
             }
 
+            var filteredActiveAll = React.createElement(PartialsTable, {
+                masterAPI: this.state.masterAPI,
+                total: this.state.total
+            });
+
+            var filteredActiveOne = React.createElement(PartialsTable, {
+                masterAPI: this.state.masterAPI.filter(function (master) {
+                    return master.tipopago == _this46.state.searchData;
+                }),
+                total: this.state.total
+            });
+
+            var showFilteredActive = void 0;
+
+            if (this.state.searchData == "todos") {
+                showFilteredActive = filteredActiveAll;
+            } else {
+                showFilteredActive = filteredActiveOne;
+            }
+
             return React.createElement(
                 Grid,
                 null,
@@ -4851,13 +4877,7 @@ var Partials = function (_React$Component32) {
                     React.createElement(PartialsSearch, {
                         onChanged: this.onChanged.bind(this)
                     }),
-                    React.createElement(PartialsTable, {
-
-                        masterAPI: this.state.masterAPI.filter(function (master) {
-                            return master.date == _this46.state.searchData;
-                        }),
-                        total: this.state.total
-                    })
+                    showFilteredActive
                 ),
                 React.createElement(
                     Row,
@@ -4893,8 +4913,7 @@ var PartialsSearch = function (_React$Component33) {
                 { xs: 6 },
                 React.createElement(
                     Form,
-                    { horizontal: true,
-                        onChange: this.props.onChanged.bind(this) },
+                    { horizontal: true, onChange: this.props.onChanged.bind(this) },
                     React.createElement(
                         FormGroup,
                         { controlId: 'formHorizontalEmail' },
@@ -4902,7 +4921,34 @@ var PartialsSearch = function (_React$Component33) {
                         React.createElement(
                             Col,
                             { xs: 6 },
-                            React.createElement(FormControl, { type: 'date', placeholder: 'Email' })
+                            React.createElement(
+                                FormGroup,
+                                { controlId: 'formControlsSelect' },
+                                React.createElement(
+                                    ControlLabel,
+                                    null,
+                                    'Select'
+                                ),
+                                React.createElement(
+                                    FormControl,
+                                    { componentClass: 'select', placeholder: 'select' },
+                                    React.createElement(
+                                        'option',
+                                        { value: 'todos' },
+                                        'Todos'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'tarjeta' },
+                                        'Tarjeta'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'efectivo' },
+                                        'Efectivo'
+                                    )
+                                )
+                            )
                         )
                     )
                 )
