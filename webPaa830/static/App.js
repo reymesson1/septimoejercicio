@@ -588,7 +588,7 @@ var ActionsTableBodyFooter = function (_React$Component5) {
 
             var grandTotal = void 0;
 
-            grandTotal = parseFloat(zoom) + parseFloat(itbis) * piezas;
+            grandTotal = parseFloat(zoom) - parseFloat(itbis) * piezas;
 
             //grandTotal= parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
 
@@ -634,7 +634,7 @@ var ActionsTableBodyFooter = function (_React$Component5) {
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
-                        zoom
+                        grandTotal.toFixed(2)
                     )
                 ),
                 React.createElement(
@@ -698,7 +698,7 @@ var ActionsTableBodyFooter = function (_React$Component5) {
                     React.createElement(
                         'td',
                         { style: { 'width': '15px', 'font-size': '20px' } },
-                        grandTotal.toFixed(2)
+                        zoom
                     )
                 ),
                 React.createElement(

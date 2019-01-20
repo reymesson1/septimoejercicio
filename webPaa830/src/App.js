@@ -435,7 +435,7 @@ class ActionsTableBodyFooter extends React.Component{
 
         let grandTotal;
 
-        grandTotal = parseFloat(zoom) + parseFloat(itbis) * piezas;
+        grandTotal = parseFloat(zoom) - parseFloat(itbis) * piezas;
 
         //grandTotal= parseFloat(zoom) + parseFloat(this.props.added) + parseFloat(itbis);
 
@@ -459,7 +459,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <td></td>
                 <td></td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>SubTotal:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{zoom}</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>
             </tr>
             <tr>
                 <td></td>
@@ -483,7 +483,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <td></td>
                 <td></td>
                 <td style={{'width':'15px', 'font-size':'20px'}}>Grand Total:</td>
-                <td style={{'width':'15px', 'font-size':'20px'}}>{grandTotal.toFixed(2)}</td>
+                <td style={{'width':'15px', 'font-size':'20px'}}>{zoom}</td>
             </tr>
             <tr>
                 <td>F/Entrega: </td>
