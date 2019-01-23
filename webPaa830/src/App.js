@@ -1541,6 +1541,9 @@ horaentrega={todo.horaentrega}
 
 status={todo.status}
 
+tipopago={todo.tipopago}
+
+
 masterCallback={this.props.masterCallback}
                                              />
 
@@ -1581,6 +1584,32 @@ class MasterTableBody extends React.Component{
 
     render(){
 
+        let checkItemHiddenE = (
+
+            <Link className="btn btn-default" to={'/master'}><i className="fa fa-money" aria-hidden="true"></i></Link>
+        );
+        let checkItemHiddenT = (
+
+            <Link className="btn btn-default" to={'/master'}><i className="fa fa-cc-visa" aria-hidden="true"></i></Link>
+        );
+        let checkItemVisible = (
+
+            <Link className="btn btn-default" to={'/payment/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>
+        );
+
+        let checkItem;
+
+        if(this.props.tipopago=='tarjeta'){            
+
+            checkItem = checkItemHiddenT
+        }else if(this.props.tipopago=='efectivo'){
+            
+            checkItem = checkItemHiddenE
+        }else{
+            checkItem = checkItemVisible
+        }
+
+
         return(
                 <tr>
                     <td>{this.props.id}</td>
@@ -1592,7 +1621,7 @@ class MasterTableBody extends React.Component{
                     <td>
                         <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>&nbsp;&nbsp;
                         <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
-                        <Link className="btn btn-default" to={'/payment/'+this.props.id}><i className="fa fa-dollar" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
+                        {checkItem}
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                         <Link className="btn btn-default" to={'/quotation/'+this.props.id}><i className="fa fa-file" aria-hidden="true"></i></Link>&nbsp;&nbsp;
                         <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;

@@ -2230,6 +2230,8 @@ var MasterTable = function (_React$Component13) {
 
                                 status: todo.status,
 
+                                tipopago: todo.tipopago,
+
                                 masterCallback: _this17.props.masterCallback
                             });
                         })
@@ -2315,6 +2317,34 @@ var MasterTableBody = function (_React$Component14) {
         key: 'render',
         value: function render() {
 
+            var checkItemHiddenE = React.createElement(
+                Link,
+                { className: 'btn btn-default', to: '/master' },
+                React.createElement('i', { className: 'fa fa-money', 'aria-hidden': 'true' })
+            );
+            var checkItemHiddenT = React.createElement(
+                Link,
+                { className: 'btn btn-default', to: '/master' },
+                React.createElement('i', { className: 'fa fa-cc-visa', 'aria-hidden': 'true' })
+            );
+            var checkItemVisible = React.createElement(
+                Link,
+                { className: 'btn btn-default', to: '/payment/' + this.props.id },
+                React.createElement('i', { className: 'fa fa-dollar', 'aria-hidden': 'true' })
+            );
+
+            var checkItem = void 0;
+
+            if (this.props.tipopago == 'tarjeta') {
+
+                checkItem = checkItemHiddenT;
+            } else if (this.props.tipopago == 'efectivo') {
+
+                checkItem = checkItemHiddenE;
+            } else {
+                checkItem = checkItemVisible;
+            }
+
             return React.createElement(
                 'tr',
                 null,
@@ -2364,12 +2394,7 @@ var MasterTableBody = function (_React$Component14) {
                         React.createElement('i', { className: 'fa fa-edit', 'aria-hidden': 'true' })
                     ),
                     '\xA0\xA0',
-                    React.createElement(
-                        Link,
-                        { className: 'btn btn-default', to: '/payment/' + this.props.id },
-                        React.createElement('i', { className: 'fa fa-dollar', 'aria-hidden': 'true' })
-                    ),
-                    '\xA0\xA0',
+                    checkItem,
                     React.createElement(
                         Button,
                         { onClick: this.onExchange.bind(this, this.props.id) },
