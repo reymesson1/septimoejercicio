@@ -330,6 +330,12 @@ var Actions = function (_React$Component3) {
                     Button,
                     { onClick: this.onPrinted.bind(this) },
                     'i\xA0'
+                ),
+                '\xA0\xA0\xA0',
+                React.createElement(
+                    Link,
+                    { className: 'btn btn-default', to: '/matching/' + this.state.parameter },
+                    'm\xA0'
                 )
             );
         }
@@ -1165,6 +1171,15 @@ var Toolbar = function (_React$Component9) {
                                 Link,
                                 { to: '/deliveryfortoday' },
                                 'Entregas para hoy'
+                            )
+                        ),
+                        React.createElement(
+                            MenuItem,
+                            { eventKey: 3.5 },
+                            React.createElement(
+                                Link,
+                                { to: '/matching' },
+                                'Matching'
                             )
                         )
                     ),
@@ -8713,6 +8728,165 @@ var DeliveryForToday = function (_React$Component62) {
     return DeliveryForToday;
 }(React.Component);
 
+var Matching = function (_React$Component63) {
+    _inherits(Matching, _React$Component63);
+
+    function Matching() {
+        _classCallCheck(this, Matching);
+
+        var _this100 = _possibleConstructorReturn(this, (Matching.__proto__ || Object.getPrototypeOf(Matching)).call(this));
+
+        _this100.state = {
+            master: [],
+            parameter: ""
+        };
+        return _this100;
+    }
+
+    _createClass(Matching, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this101 = this;
+
+            fetch(API_URL + '/master', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this101.setState({
+
+                    master: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+
+            this.setState({
+                parameter: this.props.params.masterid
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this102 = this;
+
+            var master = this.state.master.filter(function (master) {
+                return master.id == _this102.state.parameter;
+            });
+
+            return React.createElement(
+                Table,
+                { striped: true, bordered: true, condensed: true, hover: true },
+                React.createElement(
+                    'tbody',
+                    null,
+                    master.map(function (master) {
+                        return React.createElement(
+                            'tr',
+                            null,
+                            React.createElement(
+                                'td',
+                                null,
+                                master.item.map(function (master2) {
+                                    return React.createElement(
+                                        Table,
+                                        { striped: true, bordered: true, condensed: true, hover: true },
+                                        React.createElement(
+                                            'tbody',
+                                            null,
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Orden No:"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master.id
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Fecha:"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master.date
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Nombre:"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master.name
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Articulo:"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master2.item
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Usuario:"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "None"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Articulo:"
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master2.project.toFixed(2)
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    '\xA0'
+                                                )
+                                            )
+                                        )
+                                    );
+                                })
+                            )
+                        );
+                    })
+                )
+            );
+        }
+    }]);
+
+    return Matching;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -8720,6 +8894,7 @@ ReactDOM.render(React.createElement(
         Route,
         { path: '/', component: App },
         React.createElement(IndexRoute, { component: Home }),
+        React.createElement(Route, { path: 'matching/:masterid', component: Matching }),
         React.createElement(Route, { path: 'deliveryfortoday', component: DeliveryForToday }),
         React.createElement(Route, { path: 'quotation/:quotationid', component: Quotation }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),

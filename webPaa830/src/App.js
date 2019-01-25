@@ -266,7 +266,8 @@ class Actions extends React.Component{
                                 masterAPI={this.state.masterAPI.filter((master)=>master.id==this.state.parameter)}
                                 customerAPI={this.state.customerAPI}
                 />
-                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>
+                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>&nbsp;&nbsp;&nbsp;
+                <Link className="btn btn-default" to={'/matching/'+this.state.parameter}>m&nbsp;</Link>
             </div>
         );
     }
@@ -698,6 +699,7 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.3}><Link to="/partialstwo">Cuadre Articulos</Link></MenuItem>
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Entregas para hoy</Link></MenuItem>
+                            <MenuItem eventKey={3.5}><Link to="/matching">Matching</Link></MenuItem>
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
@@ -5682,11 +5684,92 @@ class DeliveryForToday extends React.Component{
         )
     }
 }
+
+
+class Matching extends React.Component{
+
+    constructor() {
+        
+        super();
+        this.state = {
+            master: [],
+            parameter: ""
+        }
+    }
+        
+    componentDidMount(){
+        
+        fetch(API_URL+'/master',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                master: responseData
+            })
+        })
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+        this.setState({
+            parameter: this.props.params.masterid
+        })
+                
+    }
+
+    render(){
+
+        let master = this.state.master.filter(
+
+            (master) => master.id == this.state.parameter
+
+        )
+
+        return(
+            <Table striped bordered condensed hover>            
+            <tbody>
+                {master.map(
+                    (master) => <tr><td>{master.item.map(
+                        (master2) =>       <Table striped bordered condensed hover> 
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{"Orden No:"}</td>
+                                                        <td>{master.id}</td>
+                                                        <td>{"Fecha:"}</td>
+                                                        <td>{master.date}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{"Nombre:"}</td>
+                                                        <td>{master.name}</td>
+                                                        <td>{"Articulo:"}</td>
+                                                        <td>{master2.item}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>{"Usuario:"}</td>
+                                                        <td>{"None"}</td>
+                                                        <td>{"Articulo:"}</td>
+                                                        <td>{master2.project.toFixed(2)}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </tbody>
+                                            </Table>
+                        
+                    )}</td></tr>
+                )}                
+            </tbody>
+          </Table>
+        );
+    }
+
+}
     
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={Home}/>
+        <Route path="matching/:masterid" component={Matching}/>
         <Route path="deliveryfortoday" component={DeliveryForToday}/>
         <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>
