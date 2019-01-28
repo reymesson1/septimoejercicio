@@ -8870,24 +8870,7 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    0x1D,
-                                                    'V',
-                                                    1
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    0x1D
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    'V'
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    1
+                                                    String.fromCharCode("0x1D")
                                                 )
                                             )
                                         )
