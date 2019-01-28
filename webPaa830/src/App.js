@@ -5751,7 +5751,7 @@ class Matching extends React.Component{
                                                         <td>{master2.project.toFixed(2)}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{'0x1d'}</td>
+                                                        <td>{'0x1d'}{'V'},{1}</td>
                                                     </tr>
                                                 </tbody>
                                             </Table>
