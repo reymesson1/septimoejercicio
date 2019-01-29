@@ -8869,7 +8869,7 @@ var Matching = function (_React$Component63) {
                                                 null,
                                                 React.createElement(
                                                     'td',
-                                                    null,
+                                                    { className: 'print-cut' },
                                                     String.fromCharCode("<1D>vb<00>")
                                                 )
                                             )
