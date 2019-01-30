@@ -8798,22 +8798,12 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "Orden No:"
+                                                    master.id + ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.id
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    "Fecha:"
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    master.date
+                                                    master.date + ' '
                                                 )
                                             ),
                                             React.createElement(
@@ -8822,22 +8812,12 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "Nombre:"
+                                                    master.name + ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.name
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    "Articulo:"
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    master2.item
+                                                    master2.item + ' '
                                                 )
                                             ),
                                             React.createElement(
@@ -8846,22 +8826,17 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "Usuario:"
+                                                    "Usuario:" + ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "None"
+                                                    "None" + ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "Articulo:"
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    master2.project.toFixed(2)
+                                                    master2.project.toFixed(2) + ' '
                                                 )
                                             ),
                                             React.createElement(

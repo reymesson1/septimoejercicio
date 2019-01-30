@@ -5733,22 +5733,17 @@ class Matching extends React.Component{
                         (master2) =>       <Table striped bordered condensed hover> 
                                                 <tbody>
                                                     <tr>
-                                                        <td>{"Orden No:"}</td>
-                                                        <td>{master.id}</td>
-                                                        <td>{"Fecha:"}</td>
-                                                        <td>{master.date}</td>
+                                                        <td>{master.id + ' '}</td>
+                                                        <td>{master.date + ' '}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{"Nombre:"}</td>
-                                                        <td>{master.name}</td>
-                                                        <td>{"Articulo:"}</td>
-                                                        <td>{master2.item}</td>
+                                                        <td>{master.name + ' '}</td>
+                                                        <td>{master2.item + ' '}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{"Usuario:"}</td>
-                                                        <td>{"None"}</td>
-                                                        <td>{"Articulo:"}</td>
-                                                        <td>{master2.project.toFixed(2)}</td>
+                                                        <td>{"Usuario:" + ' '}</td>
+                                                        <td>{"None" + ' '}</td>
+                                                        <td>{master2.project.toFixed(2) + ' '}</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
