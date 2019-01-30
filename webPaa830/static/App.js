@@ -8879,12 +8879,6 @@ var Matching = function (_React$Component63) {
                                             React.createElement('br', null),
                                             React.createElement('br', null),
                                             React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
                                             React.createElement('br', null)
                                         )
                                     );
