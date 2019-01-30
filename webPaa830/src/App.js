@@ -5753,18 +5753,19 @@ class Matching extends React.Component{
                                                     <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                    </tr>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
                                                 </tbody>
                                             </Table>
                         

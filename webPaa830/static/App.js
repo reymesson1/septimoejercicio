@@ -8873,42 +8873,19 @@ var Matching = function (_React$Component63) {
                                                     String.fromCharCode("<1D>vb<00>")
                                                 )
                                             ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    '\xA0\xA0\xA0\xA0'
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    '\xA0\xA0\xA0\xA0'
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    '\xA0\xA0\xA0\xA0'
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    '\xA0\xA0\xA0\xA0'
-                                                )
-                                            )
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null),
+                                            React.createElement('br', null)
                                         )
                                     );
                                 })
