@@ -36,8 +36,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8082'; 
-const API_URL = 'http://159.203.156.208:8082'; 
+const API_URL = 'http://localhost:8082'; 
+// const API_URL = 'http://159.203.156.208:8082'; 
 
 const API_HEADERS = {
 
@@ -5726,24 +5726,24 @@ class Matching extends React.Component{
         )
 
         return(
-            <Table striped bordered condensed hover>            
+            <Table>            
             <tbody>
                 {master.map(
                     (master) => <tr><td>{master.item.map(
-                        (master2) =>       <Table striped bordered condensed hover> 
+                        (master2) =>       <Table> 
                                                 <tbody>
                                                     <tr>
-                                                        <td>{master.id + ' '}</td>
-                                                        <td>{master.date + ' '}</td>
+                                                        <td>{master.id.toUpperCase()}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{master.date.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{master.name + ' '}</td>
-                                                        <td>{master2.item + ' '}</td>
+                                                        <td>{master.name.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{master2.item.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{"Usuario:" + ' '}</td>
-                                                        <td>{"None" + ' '}</td>
-                                                        <td>{master2.project.toFixed(2) + ' '}</td>
+                                                        <td>{"Usuario:"}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{"None"}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{master2.project.toFixed(2)}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>

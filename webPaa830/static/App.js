@@ -48,8 +48,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
-// const API_URL = 'http://localhost:8082'; 
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082'; 
 
 var API_HEADERS = {
 
@@ -8774,7 +8774,7 @@ var Matching = function (_React$Component63) {
 
             return React.createElement(
                 Table,
-                { striped: true, bordered: true, condensed: true, hover: true },
+                null,
                 React.createElement(
                     'tbody',
                     null,
@@ -8788,7 +8788,7 @@ var Matching = function (_React$Component63) {
                                 master.item.map(function (master2) {
                                     return React.createElement(
                                         Table,
-                                        { striped: true, bordered: true, condensed: true, hover: true },
+                                        null,
                                         React.createElement(
                                             'tbody',
                                             null,
@@ -8798,12 +8798,14 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.id + ' '
+                                                    master.id.toUpperCase(),
+                                                    '\xA0\xA0\xA0\xA0'
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.date + ' '
+                                                    master.date.toUpperCase(),
+                                                    '\xA0\xA0\xA0'
                                                 )
                                             ),
                                             React.createElement(
@@ -8812,12 +8814,14 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.name + ' '
+                                                    master.name.toUpperCase(),
+                                                    '\xA0\xA0\xA0'
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master2.item + ' '
+                                                    master2.item.toUpperCase(),
+                                                    '\xA0\xA0\xA0'
                                                 )
                                             ),
                                             React.createElement(
@@ -8826,17 +8830,20 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "Usuario:" + ' '
+                                                    "Usuario:",
+                                                    '\xA0\xA0\xA0\xA0'
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "None" + ' '
+                                                    "None",
+                                                    '\xA0\xA0\xA0'
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master2.project.toFixed(2) + ' '
+                                                    master2.project.toFixed(2),
+                                                    '\xA0\xA0\xA0'
                                                 )
                                             ),
                                             React.createElement(
