@@ -5734,6 +5734,9 @@ class Matching extends React.Component{
                         (master2) =>       <Table> 
                                                 <tbody>
                                                     <tr>
+                                                        <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>{master.id.toUpperCase()}&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                         <td>{master.date.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>

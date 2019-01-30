@@ -8797,6 +8797,15 @@ var Matching = function (_React$Component63) {
                                                 null,
                                                 React.createElement(
                                                     'td',
+                                                    { className: 'print-cut' },
+                                                    String.fromCharCode("<1D>vb<00>")
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
                                                     null,
                                                     master.id.toUpperCase(),
                                                     '\xA0\xA0\xA0\xA0'
