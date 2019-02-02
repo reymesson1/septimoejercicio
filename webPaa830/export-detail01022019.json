@@ -1,0 +1,99 @@
+{"id":"LAC-001","date":"2019-02-01","name":"LAVADO DE CAMISA","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAB-001","date":"2019-02-01","name":"LAVADO DE BLUSA","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-002","date":"2019-02-01","name":"LAVADO DE CHACABANA","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAP-001","date":"2019-02-01","name":"LAVADO DE POLO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAT-001","date":"2019-02-01","name":"LAVADO DE T-SHIRT","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-003","date":"2019-02-01","name":"LAVADO DE CHAQUETAS","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAF-001","date":"2019-02-01","name":"LAVADO DE FRANELA","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAA-001","date":"2019-02-01","name":"LAVADO DE ABRIGOS","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAP-002","date":"2019-02-01","name":"LAVADO DE PANTALON","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAF-002","date":"2019-02-01","name":"LAVADO DE FALDA LARGA","item":"1","environment":"50","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAF-003","date":"2019-02-01","name":"LAVADO DE FALDA CORTA","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAF-005","date":"2019-02-01","name":"LAVADO DE FALDA ANCHA","item":"1","environment":"50","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAV-001","date":"2019-02-01","name":"LAVADO DE VESTIDO LARGO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAV-002","date":"2019-02-01","name":"LAVADO DE VESTIDO CORTO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAE-001","date":"2019-02-01","name":"LAVADO DE ENTERIZO LARGO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAE-002","date":"2019-02-01","name":"LAVADO DE ENTERIZO CORTO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAO-001","date":"2019-02-01","name":"LAVADO DE OVERALL LARGO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAO-002","date":"2019-02-01","name":"LAVADO DE OVERALL CORTO","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-004","date":"2019-02-01","name":"LAVADO DE CORBATA","item":"1","environment":"20","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAP-003","date":"2019-02-01","name":"LAVADO DE PAÑUELO","item":"1","environment":"20","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAB-002","date":"2019-02-01","name":"LAVADO DE BUFANDA","item":"1","environment":"20","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAB-003","date":"2019-02-01","name":"LAVADO DE BATA","item":"1","environment":"20","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAS-001","date":"2019-02-01","name":"LAVADO DE SABANA TWIN","item":"1","environment":"150","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAS-002","date":"2019-02-01","name":"LAVADO DE SABANA QUEEN","item":"1","environment":"200","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAS-003","date":"2019-02-01","name":"LAVADO DE SABANA KING","item":"1","environment":"250","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-005","date":"2019-02-01","name":"LAVADO DE COLCHA TWIN","item":"1","environment":"200","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-006","date":"2019-02-01","name":"LAVADO DE COLCHA QUEEN","item":"1","environment":"250","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-007","date":"2019-02-01","name":"LAVADO DE COLCHA KING","item":"1","environment":"300","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAF-004","date":"2019-02-01","name":"LAVADO DE FUNDA DE ALMOHADA","item":"1","environment":"40","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-008","date":"2019-02-01","name":"LAVADO DE CORTINA TACHONES","item":"1","environment":"150","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-009","date":"2019-02-01","name":"LAVADO DE CORTINA LISA","item":"1","environment":"150","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-010","date":"2019-02-01","name":"LAVADO DE CORTINA PLISADA","item":"1","environment":"150","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"LAC-011","date":"2019-02-01","name":"LAVADO DE CORTINA VISILLO","item":"1","environment":"150","category":"servicio","tipo":"sololavar","__v":0}
+{"id":"PLC-001","date":"2019-02-01","name":"PLANCHADO CAMISA","item":"1","environment":"90","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLB-001","date":"2019-02-01","name":"PLANCHADO BLUSA","item":"1","environment":"90","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-002","date":"2019-02-01","name":"PLANCHADO CHACABANA","item":"1","environment":"110","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLP-001","date":"2019-02-01","name":"PLANCHADO POLO","item":"1","environment":"80","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLT-001","date":"2019-02-01","name":"PLANCHADO T-SHIRT","item":"1","environment":"80","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-003","date":"2019-02-01","name":"PLANCHADO CHAQUETA","item":"1","environment":"150","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLF-001","date":"2019-02-01","name":"PLANCHADO FRANELA","item":"1","environment":"80","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLA-001","date":"2019-02-01","name":"PLANCHADO ABRIGO","item":"1","environment":"200","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLP-002","date":"2019-02-01","name":"PLANCHADO PANTALON","item":"1","environment":"90","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLF-002","date":"2019-02-01","name":"PLANCHADO FALDA LARGA","item":"1","environment":"115","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLF-003","date":"2019-02-01","name":"PLANCHADO FALDA CORTA","item":"1","environment":"110","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLF-005","date":"2019-02-01","name":"PLANCHADO FALDA ANCHA","item":"1","environment":"125","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLV-001","date":"2019-02-01","name":"PLANCHADO VESTIDO LARGO","item":"1","environment":"225","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLV-002","date":"2019-02-01","name":"PLANCHADO VESTIDO CORTO","item":"1","environment":"140","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLE-001","date":"2019-02-01","name":"PLANCHADO ENTERIZO LARGO","item":"1","environment":"225","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLE-002","date":"2019-02-01","name":"PLANCHADO ENTERIZO CORTO","item":"1","environment":"130","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLO-001","date":"2019-02-01","name":"PLANCHADO OVERALL LARGO","item":"1","environment":"250","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLO-002","date":"2019-02-01","name":"PLANCHADO OVERALL CORTO","item":"1","environment":"130","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-004","date":"2019-02-01","name":"PLANCHADO CORBATA","item":"1","environment":"50","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLP-003","date":"2019-02-01","name":"PLANCHADO PAÑUELO","item":"1","environment":"50","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLB-002","date":"2019-02-01","name":"PLANCHADO BUFANDA","item":"1","environment":"90","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLB-003","date":"2019-02-01","name":"PLANCHADO BATA","item":"1","environment":"95","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLS-001","date":"2019-02-01","name":"PLANCHADO SABANA TWIN","item":"1","environment":"110","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLS-002","date":"2019-02-01","name":"PLANCHADO SABANA QUEEN","item":"1","environment":"150","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLS-003","date":"2019-02-01","name":"PLANCHADO SABANA KING","item":"1","environment":"200","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-005","date":"2019-02-01","name":"PLANCHADO COLCHA TWIN","item":"1","environment":"200","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-006","date":"2019-02-01","name":"PLANCHADO COLCHA QUEEN","item":"1","environment":"250","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-007","date":"2019-02-01","name":"PLANCHADO COLCHA KING","item":"1","environment":"300","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLF-004","date":"2019-02-01","name":"PLANCHADO FUNDA DE ALMOHADA","item":"1","environment":"50","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-006","date":"2019-02-01","name":"PLANCHADO CORTINA DE TACHONES","item":"1","environment":"40","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-007","date":"2019-02-01","name":"PLANCHADO CORTINA LISA","item":"1","environment":"150","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-008","date":"2019-02-01","name":"PLANCHADO CORTINA PLISADA","item":"1","environment":"40","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"PLC-009","date":"2019-02-01","name":"PLANCHADO CORTINA DE VISILLO","item":"1","environment":"150","category":"servicio","tipo":"soloplancha","__v":0}
+{"id":"LPC-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO CAMISA","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPB-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO BLUSA","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO CHACABANA","item":"1","environment":"130","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPP-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO POLO","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPT-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO T-SHIRT","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-003","date":"2019-02-01","name":"LAVADO Y PLANCHADO CHAQUETA","item":"1","environment":"170","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPF-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO FRANELA","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPA-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO ABRIGO","item":"1","environment":"220","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPP-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO PANTALON","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPF-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO FALDA LARGA","item":"1","environment":"135","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPF-003","date":"2019-02-01","name":"LAVADO Y PLANCHADO FALDA CORTA","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPF-005","date":"2019-02-01","name":"LAVADO Y PLANCHADO FALDA ANCHA","item":"1","environment":"145","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPV-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO VESTIDO LARGO","item":"1","environment":"245","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPV-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO VESTIDO CORTO","item":"1","environment":"160","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPE-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO ENTERIZO LARGO","item":"1","environment":"245","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPE-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO ENTERIZO CORTO","item":"1","environment":"150","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPO-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO OVERALL LARGO","item":"1","environment":"270","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPO-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO OVERALL CORTO","item":"1","environment":"150","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-004","date":"2019-02-01","name":"LAVADO Y PLANCHADO CORBATA","item":"1","environment":"70","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPP-003","date":"2019-02-01","name":"LAVADO Y PLANCHADO PAÑUELO","item":"1","environment":"70","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPB-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO BUFANDA","item":"1","environment":"110","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPB-003","date":"2019-02-01","name":"LAVADO Y PLANCHADO BATA","item":"1","environment":"150","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPS-001","date":"2019-02-01","name":"LAVADO Y PLANCHADO SABANA TWIN","item":"1","environment":"200","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPS-002","date":"2019-02-01","name":"LAVADO Y PLANCHADO SABANA QUEEN","item":"1","environment":"250","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPS-003","date":"2019-02-01","name":"LAVADO Y PLANCHADO SABANA KING","item":"1","environment":"300","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-005","date":"2019-02-01","name":"LAVADO Y PLANCHADO COLCHA TWIN","item":"1","environment":"300","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-006","date":"2019-02-01","name":"LAVADO Y PLANCHADO COLCHA QUEEN","item":"1","environment":"350","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-007","date":"2019-02-01","name":"LAVADO Y PLANCHADO COLCHA KING","item":"1","environment":"320","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPF-004","date":"2019-02-01","name":"LAVADO Y PLANCHADO FUNDA DE ALMOHADA","item":"1","environment":"60","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-006","date":"2019-02-01","name":"LAVADO Y PLANCHADO CORTINA DE TACHONES","item":"1","environment":"50","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-007","date":"2019-02-01","name":"LAVADO Y PLANCHADO CORTINA LISA","item":"1","environment":"170","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-008","date":"2019-02-01","name":"LAVADO Y PLANCHADO CORTINA PLISADA","item":"1","environment":"60","category":"servicio","tipo":"lavaryprensa","__v":0}
+{"id":"LPC-009","date":"2019-02-01","name":"LAVADO Y PLANCHADO CORTINA DE VISILLO","item":"1","environment":"170","category":"servicio","tipo":"lavaryprensa","__v":0}
