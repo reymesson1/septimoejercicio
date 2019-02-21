@@ -701,6 +701,7 @@ class Toolbar extends React.Component{
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Entregas para hoy</Link></MenuItem>
                             <MenuItem eventKey={3.5}><Link to="/matching">Matching</Link></MenuItem>
+                            {/* <MenuItem eventKey={3.6}><Link to="/printpayment">PrintPayment</Link></MenuItem> */}
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
@@ -1003,7 +1004,7 @@ class Master extends React.Component{
             "pending": 0,
             "current": 0,
             "tipopago": "",
-            "ncf": "A00000000000001",
+            "ncf": "B00000000000001",
             "status":"pending",
             "comments": []
         }
@@ -1122,6 +1123,8 @@ class Master extends React.Component{
                 let nextStateCust = this.state.customerAPI;
                 
                 let fullname;
+
+                let rnc;
                 
                 let telefono;
                 
@@ -1130,6 +1133,7 @@ class Master extends React.Component{
                     if(nextStateCust[x].telefono==event.target.firstname.value){
                        fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
                        telefono=event.target.firstname.value
+                       rnc=nextStateCust[x].rnc
                     }
                 }
 
@@ -1148,6 +1152,7 @@ class Master extends React.Component{
                         "id": Date.now(),
                         "firstname":fullname,
                         "telefono":this.state.tempNumber,
+                        "rnc":rnc,
                         "item":event.target.suggest.value,
                         "itemDetail": this.state.detailAdded,
                         "development":event.target.development.value,
@@ -1163,6 +1168,7 @@ class Master extends React.Component{
                         if(nextStateCust[x].telefono==event.target.firstname.value){
                         fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
                         telefono=event.target.firstname.value
+                        rnc=nextStateCust[x].rnc
                         }
                     }
    
@@ -1171,6 +1177,7 @@ class Master extends React.Component{
                         "id": Date.now(),
                         "firstname":fullname,
                         "telefono":event.target.firstname.value,
+                        "rnc":rnc,
                         "item":event.target.suggest.value,
                         "itemDetail": this.state.detailAdded,
                         "development":event.target.development.value,
@@ -4709,15 +4716,19 @@ class PrintPayment extends React.Component{
     render(){
             
         let filteredTable=this.state.masterAPI.filter((master)=>master.id==this.props.params.printid)
+        // let filteredTable=this.state.masterAPI.filter((master)=>master.id=="1550710651712")
 
         let name; 
         
         let ncf; 
+
+        let rnc; 
         
         if(filteredTable[0]){
                        
             name = filteredTable[0].name;
             ncf = filteredTable[0].ncf;
+            rnc = filteredTable[0].rnc;
         }
         
         return(
@@ -4727,11 +4738,15 @@ class PrintPayment extends React.Component{
                     <Col sm={4}>
                         <Table striped bordered condensed hover>
                             <tr>
-                                <th colspan="4">Factura</th>
+                                <th colspan="4">PLANCHAKI SRL.&nbsp;&nbsp;&nbsp;&nbsp;RNC: 131473865</th>
                               </tr>
                               <tr>
-                                <td>Nombre</td>                                
+                                <td>Nombre del cliente</td>                                
                                 <td>{name}</td>
+                              </tr>
+                              <tr>
+                                <td>RNC del cliente</td>                                
+                                <td>{rnc}</td>
                               </tr>
                               <tr>                                
                                 <td>NCF</td>
@@ -4746,7 +4761,8 @@ class PrintPayment extends React.Component{
                             <thead>
                               <tr>
                                 
-                                <th>Balance</th>
+                                <th>Balance Neto</th>
+                                <th>Balance + ITBIS</th>
                                 <th>Actual</th>
                                 <th>Pendiente</th>
                               </tr>
@@ -4756,6 +4772,7 @@ class PrintPayment extends React.Component{
                             (master,index) => 
                                           <tr>
                                             
+                                            <td>{master.balance}</td>
                                             <td>{master.balance}</td>
                                             <td>{master.current}</td>
                                             <td>{master.pending}</td>
@@ -5712,9 +5729,9 @@ class Matching extends React.Component{
             console.log('Error fetching and parsing data', error);
         })
 
-        this.setState({
-            parameter: this.props.params.masterid
-        })
+        // this.setState({
+        //     parameter: this.props.params.masterid
+        // })
                 
     }
 
@@ -5779,6 +5796,7 @@ ReactDOM.render((
         <Route path="deliveryfortoday" component={DeliveryForToday}/>
         <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>
+        {/* <Route path="printpayment" component={PrintPayment}/> */}
         <Route path="customer" component={Customer}/>
         <Route path="loader" component={Loader}/>
         <Route path="partialstwo" component={PartialsTwo}/>

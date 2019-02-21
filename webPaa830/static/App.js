@@ -1589,7 +1589,7 @@ var Master = function (_React$Component11) {
                 "pending": 0,
                 "current": 0,
                 "tipopago": "",
-                "ncf": "A00000000000001",
+                "ncf": "B00000000000001",
                 "status": "pending",
                 "comments": []
             };
@@ -1706,6 +1706,8 @@ var Master = function (_React$Component11) {
 
                     var fullname = void 0;
 
+                    var rnc = void 0;
+
                     var telefono = void 0;
 
                     for (var x = 0; x < nextStateCust.length; x++) {
@@ -1713,6 +1715,7 @@ var Master = function (_React$Component11) {
                         if (nextStateCust[x].telefono == event.target.firstname.value) {
                             fullname = nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
                             telefono = event.target.firstname.value;
+                            rnc = nextStateCust[x].rnc;
                         }
                     }
 
@@ -1731,6 +1734,7 @@ var Master = function (_React$Component11) {
                             "id": Date.now(),
                             "firstname": fullname,
                             "telefono": this.state.tempNumber,
+                            "rnc": rnc,
                             "item": event.target.suggest.value,
                             "itemDetail": this.state.detailAdded,
                             "development": event.target.development.value,
@@ -1746,6 +1750,7 @@ var Master = function (_React$Component11) {
                             if (nextStateCust[x].telefono == event.target.firstname.value) {
                                 fullname = nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
                                 telefono = event.target.firstname.value;
+                                rnc = nextStateCust[x].rnc;
                             }
                         }
 
@@ -1754,6 +1759,7 @@ var Master = function (_React$Component11) {
                             "id": Date.now(),
                             "firstname": fullname,
                             "telefono": event.target.firstname.value,
+                            "rnc": rnc,
                             "item": event.target.suggest.value,
                             "itemDetail": this.state.detailAdded,
                             "development": event.target.development.value,
@@ -7049,15 +7055,19 @@ var PrintPayment = function (_React$Component48) {
             var filteredTable = this.state.masterAPI.filter(function (master) {
                 return master.id == _this78.props.params.printid;
             });
+            // let filteredTable=this.state.masterAPI.filter((master)=>master.id=="1550710651712")
 
             var name = void 0;
 
             var ncf = void 0;
 
+            var rnc = void 0;
+
             if (filteredTable[0]) {
 
                 name = filteredTable[0].name;
                 ncf = filteredTable[0].ncf;
+                rnc = filteredTable[0].rnc;
             }
 
             return React.createElement(
@@ -7078,7 +7088,7 @@ var PrintPayment = function (_React$Component48) {
                                 React.createElement(
                                     'th',
                                     { colspan: '4' },
-                                    'Factura'
+                                    'PLANCHAKI SRL.\xA0\xA0\xA0\xA0RNC: 131473865'
                                 )
                             ),
                             React.createElement(
@@ -7087,12 +7097,26 @@ var PrintPayment = function (_React$Component48) {
                                 React.createElement(
                                     'td',
                                     null,
-                                    'Nombre'
+                                    'Nombre del cliente'
                                 ),
                                 React.createElement(
                                     'td',
                                     null,
                                     name
+                                )
+                            ),
+                            React.createElement(
+                                'tr',
+                                null,
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    'RNC del cliente'
+                                ),
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    rnc
                                 )
                             ),
                             React.createElement(
@@ -7130,7 +7154,12 @@ var PrintPayment = function (_React$Component48) {
                                     React.createElement(
                                         'th',
                                         null,
-                                        'Balance'
+                                        'Balance Neto'
+                                    ),
+                                    React.createElement(
+                                        'th',
+                                        null,
+                                        'Balance + ITBIS'
                                     ),
                                     React.createElement(
                                         'th',
@@ -7151,6 +7180,11 @@ var PrintPayment = function (_React$Component48) {
                                     return React.createElement(
                                         'tr',
                                         null,
+                                        React.createElement(
+                                            'td',
+                                            null,
+                                            master.balance
+                                        ),
                                         React.createElement(
                                             'td',
                                             null,
@@ -8759,9 +8793,9 @@ var Matching = function (_React$Component63) {
                 console.log('Error fetching and parsing data', error);
             });
 
-            this.setState({
-                parameter: this.props.params.masterid
-            });
+            // this.setState({
+            //     parameter: this.props.params.masterid
+            // })
         }
     }, {
         key: 'render',
