@@ -701,7 +701,7 @@ class Toolbar extends React.Component{
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Entregas para hoy</Link></MenuItem>
                             <MenuItem eventKey={3.5}><Link to="/matching">Matching</Link></MenuItem>
-                            <MenuItem eventKey={3.6}><Link to="/printpayment">PrintPayment</Link></MenuItem>
+                            {/* <MenuItem eventKey={3.6}><Link to="/printpayment">PrintPayment</Link></MenuItem> */}
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>

@@ -1181,15 +1181,6 @@ var Toolbar = function (_React$Component9) {
                                 { to: '/matching' },
                                 'Matching'
                             )
-                        ),
-                        React.createElement(
-                            MenuItem,
-                            { eventKey: 3.6 },
-                            React.createElement(
-                                Link,
-                                { to: '/printpayment' },
-                                'PrintPayment'
-                            )
                         )
                     ),
                     React.createElement(
