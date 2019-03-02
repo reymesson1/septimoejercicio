@@ -8793,9 +8793,9 @@ var Matching = function (_React$Component63) {
                 console.log('Error fetching and parsing data', error);
             });
 
-            // this.setState({
-            //     parameter: this.props.params.masterid
-            // })
+            this.setState({
+                parameter: this.props.params.masterid
+            });
         }
     }, {
         key: 'render',
