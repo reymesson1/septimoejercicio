@@ -5754,19 +5754,20 @@ class Matching extends React.Component{
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td colSpan={2}>{master.date}&nbsp;&nbsp;&nbsp;</td>
+                                                        {/* <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td> */}
+                                                        <td>{master.id}{' '}{' '}{' '}{' '}</td>
+                                                        <td colSpan={2}>{master.date}{' '}{' '}{' '}{' '}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colSpan={3}>{master.name.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>                                                        
+                                                        <td colSpan={3}>{master.name.toUpperCase()}{' '}{' '}{' '}{' '}</td>                                                        
                                                     </tr>
                                                     <tr>
-                                                        <td colSpan={3}>{master2.item}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td colSpan={3}>{master2.item}{' '}{' '}{' '}{' '}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{"Usuario:"}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>{"None"}&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>{master2.project.toFixed(2)}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{"Usuario:"}{' '}{' '}{' '}{' '}</td>
+                                                        <td>{"None"}{' '}{' '}{' '}</td>
+                                                        <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>

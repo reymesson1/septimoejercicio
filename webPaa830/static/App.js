@@ -8842,13 +8842,19 @@ var Matching = function (_React$Component63) {
                                                     'td',
                                                     null,
                                                     master.id,
-                                                    '\xA0\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     { colSpan: 2 },
                                                     master.date,
-                                                    '\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 )
                                             ),
                                             React.createElement(
@@ -8858,7 +8864,10 @@ var Matching = function (_React$Component63) {
                                                     'td',
                                                     { colSpan: 3 },
                                                     master.name.toUpperCase(),
-                                                    '\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 )
                                             ),
                                             React.createElement(
@@ -8868,7 +8877,10 @@ var Matching = function (_React$Component63) {
                                                     'td',
                                                     { colSpan: 3 },
                                                     master2.item,
-                                                    '\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 )
                                             ),
                                             React.createElement(
@@ -8878,19 +8890,26 @@ var Matching = function (_React$Component63) {
                                                     'td',
                                                     null,
                                                     "Usuario:",
-                                                    '\xA0\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
                                                     "None",
-                                                    '\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
                                                     master2.project.toFixed(2),
-                                                    '\xA0\xA0\xA0'
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
                                                 )
                                             ),
                                             React.createElement(
