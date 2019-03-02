@@ -8841,14 +8841,12 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.id.toUpperCase(),
-                                                    '\xA0\xA0\xA0\xA0'
+                                                    master.id
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.date.toUpperCase(),
-                                                    '\xA0\xA0\xA0'
+                                                    master.date
                                                 )
                                             ),
                                             React.createElement(
@@ -8857,14 +8855,12 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.name.toUpperCase(),
-                                                    '\xA0\xA0\xA0'
+                                                    master.name
                                                 ),
                                                 React.createElement(
                                                     'td',
-                                                    null,
-                                                    master2.item.toUpperCase(),
-                                                    '\xA0\xA0\xA0'
+                                                    { colSpan: 2 },
+                                                    master2.item.toLowerCase()
                                                 )
                                             ),
                                             React.createElement(
@@ -8873,20 +8869,17 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "Usuario:",
-                                                    '\xA0\xA0\xA0\xA0'
+                                                    "Usuario:"
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    "None",
-                                                    '\xA0\xA0\xA0'
+                                                    "None"
                                                 ),
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master2.project.toFixed(2),
-                                                    '\xA0\xA0\xA0'
+                                                    master2.project.toFixed(2)
                                                 )
                                             ),
                                             React.createElement(
