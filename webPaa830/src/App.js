@@ -5754,17 +5754,17 @@ class Matching extends React.Component{
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{master.id}</td>
-                                                        <td>{master.date}</td>
+                                                        <td>{master.id.toUpperCase()}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{master.date.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{master.name}</td>
-                                                        <td colSpan={2}>{master2.item.toLowerCase()}</td>
+                                                        <td>{master.name}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td colSpan={2}>{master2.item.toLowerCase()}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{"Usuario:"}</td>
-                                                        <td>{"None"}</td>
-                                                        <td>{master2.project.toFixed(2)}</td>
+                                                        <td>{"Usuario:"}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{"None"}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{master2.project.toFixed(2)}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
