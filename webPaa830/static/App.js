@@ -8841,13 +8841,13 @@ var Matching = function (_React$Component63) {
                                                 React.createElement(
                                                     'td',
                                                     null,
-                                                    master.id.toUpperCase(),
+                                                    master.id,
                                                     '\xA0\xA0\xA0\xA0'
                                                 ),
                                                 React.createElement(
                                                     'td',
-                                                    null,
-                                                    master.date.toUpperCase(),
+                                                    { colSpan: 2 },
+                                                    master.date,
                                                     '\xA0\xA0\xA0'
                                                 )
                                             ),
@@ -8856,14 +8856,18 @@ var Matching = function (_React$Component63) {
                                                 null,
                                                 React.createElement(
                                                     'td',
-                                                    null,
-                                                    master.name,
+                                                    { colSpan: 3 },
+                                                    master.name.toUpperCase(),
                                                     '\xA0\xA0\xA0'
-                                                ),
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
                                                 React.createElement(
                                                     'td',
-                                                    { colSpan: 2 },
-                                                    master2.item.toLowerCase(),
+                                                    { colSpan: 3 },
+                                                    master2.item,
                                                     '\xA0\xA0\xA0'
                                                 )
                                             ),

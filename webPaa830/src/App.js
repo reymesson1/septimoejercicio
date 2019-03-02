@@ -5754,12 +5754,14 @@ class Matching extends React.Component{
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{master.id.toUpperCase()}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                        <td>{master.date.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                        <td colSpan={2}>{master.date}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{master.name}&nbsp;&nbsp;&nbsp;</td>
-                                                        <td colSpan={2}>{master2.item.toLowerCase()}&nbsp;&nbsp;&nbsp;</td>
+                                                        <td colSpan={3}>{master.name.toUpperCase()}&nbsp;&nbsp;&nbsp;</td>                                                        
+                                                    </tr>
+                                                    <tr>
+                                                        <td colSpan={3}>{master2.item}&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                     <tr>
                                                         <td>{"Usuario:"}&nbsp;&nbsp;&nbsp;&nbsp;</td>
