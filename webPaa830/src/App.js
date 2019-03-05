@@ -39,7 +39,6 @@ const moment = moment;
 // const API_URL = 'http://localhost:8082';  
 const API_URL = 'http://159.203.156.208:8082';    
 
-
 const API_HEADERS = {
 
     'Content-Type':'application/json',
@@ -259,18 +258,33 @@ class Actions extends React.Component{
     }
 
     render(){
-                
-        return(
-            <div>
-                <ActionsTable
-                                parameter={this.state.parameter}
-                                masterAPI={this.state.masterAPI.filter((master)=>master.id==this.state.parameter)}
-                                customerAPI={this.state.customerAPI}
-                />
-                <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>&nbsp;&nbsp;&nbsp;
-                <Link className="btn btn-default" to={'/matching/'+this.state.parameter}>m&nbsp;</Link>
-            </div>
-        );
+
+
+        let marquilla = this.state.masterAPI.filter((master)=>master.id==this.state.parameter)
+            
+        if(marquilla[0]){            
+            return(
+                <div>
+                        <ActionsTable
+                        parameter={this.state.parameter}
+                        masterAPI={this.state.masterAPI.filter((master)=>master.id==this.state.parameter)}
+                        customerAPI={this.state.customerAPI}
+                        />
+                        <Button onClick={this.onPrinted.bind(this)} >i&nbsp;</Button>&nbsp;&nbsp;&nbsp;
+
+                        {marquilla[0].item.map(
+                            
+                            (masterMarquilla,index) =>  <Link className="btn btn-default" to={'/matching/'+this.state.parameter+'/'+masterMarquilla.id}>{index+1}</Link>
+                            
+                        )}
+                </div>
+            );
+        }else{
+            return(
+                <div>
+                </div>
+            )
+        }          
     }
 }
 
@@ -5711,7 +5725,8 @@ class Matching extends React.Component{
         super();
         this.state = {
             master: [],
-            parameter: ""
+            parameter: "",
+            parameter2: ""
         }
     }
         
@@ -5730,7 +5745,8 @@ class Matching extends React.Component{
         })
 
         this.setState({
-            parameter: this.props.params.masterid
+            parameter: this.props.params.masterid,
+            parameter2: this.props.params.itemid
         })
                 
     }
@@ -5747,7 +5763,7 @@ class Matching extends React.Component{
             <Table>            
             <tbody>
                 {master.map(
-                    (master) => <tr><td>{master.item.map(
+                    (master) => <tr><td>{master.item.filter( (m2) => m2.id == this.state.parameter2).map(
                         (master2) =>       <Table> 
                                                 <tbody>
                                                     <tr>
@@ -5795,7 +5811,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={Home}/>
-        <Route path="matching/:masterid" component={Matching}/>
+        <Route path="matching/:masterid/:itemid" component={Matching}/>
         <Route path="deliveryfortoday" component={DeliveryForToday}/>
         <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>

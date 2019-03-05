@@ -316,28 +316,38 @@ var Actions = function (_React$Component3) {
         value: function render() {
             var _this5 = this;
 
-            return React.createElement(
-                'div',
-                null,
-                React.createElement(ActionsTable, {
-                    parameter: this.state.parameter,
-                    masterAPI: this.state.masterAPI.filter(function (master) {
-                        return master.id == _this5.state.parameter;
+            var marquilla = this.state.masterAPI.filter(function (master) {
+                return master.id == _this5.state.parameter;
+            });
+
+            if (marquilla[0]) {
+                return React.createElement(
+                    'div',
+                    null,
+                    React.createElement(ActionsTable, {
+                        parameter: this.state.parameter,
+                        masterAPI: this.state.masterAPI.filter(function (master) {
+                            return master.id == _this5.state.parameter;
+                        }),
+                        customerAPI: this.state.customerAPI
                     }),
-                    customerAPI: this.state.customerAPI
-                }),
-                React.createElement(
-                    Button,
-                    { onClick: this.onPrinted.bind(this) },
-                    'i\xA0'
-                ),
-                '\xA0\xA0\xA0',
-                React.createElement(
-                    Link,
-                    { className: 'btn btn-default', to: '/matching/' + this.state.parameter },
-                    'm\xA0'
-                )
-            );
+                    React.createElement(
+                        Button,
+                        { onClick: this.onPrinted.bind(this) },
+                        'i\xA0'
+                    ),
+                    '\xA0\xA0\xA0',
+                    marquilla[0].item.map(function (masterMarquilla, index) {
+                        return React.createElement(
+                            Link,
+                            { className: 'btn btn-default', to: '/matching/' + _this5.state.parameter + '/' + masterMarquilla.id },
+                            index + 1
+                        );
+                    })
+                );
+            } else {
+                return React.createElement('div', null);
+            }
         }
     }]);
 
@@ -8772,7 +8782,8 @@ var Matching = function (_React$Component63) {
 
         _this100.state = {
             master: [],
-            parameter: ""
+            parameter: "",
+            parameter2: ""
         };
         return _this100;
     }
@@ -8794,7 +8805,8 @@ var Matching = function (_React$Component63) {
             });
 
             this.setState({
-                parameter: this.props.params.masterid
+                parameter: this.props.params.masterid,
+                parameter2: this.props.params.itemid
             });
         }
     }, {
@@ -8819,7 +8831,9 @@ var Matching = function (_React$Component63) {
                             React.createElement(
                                 'td',
                                 null,
-                                master.item.map(function (master2) {
+                                master.item.filter(function (m2) {
+                                    return m2.id == _this102.state.parameter2;
+                                }).map(function (master2) {
                                     return React.createElement(
                                         Table,
                                         null,
@@ -8949,7 +8963,7 @@ ReactDOM.render(React.createElement(
         Route,
         { path: '/', component: App },
         React.createElement(IndexRoute, { component: Home }),
-        React.createElement(Route, { path: 'matching/:masterid', component: Matching }),
+        React.createElement(Route, { path: 'matching/:masterid/:itemid', component: Matching }),
         React.createElement(Route, { path: 'deliveryfortoday', component: DeliveryForToday }),
         React.createElement(Route, { path: 'quotation/:quotationid', component: Quotation }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
