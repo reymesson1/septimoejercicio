@@ -36,7 +36,7 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
-// const API_URL = 'http://localhost:8082';  
+// const API_URL = 'http://localhost:8082';   
 const API_URL = 'http://159.203.156.208:8082';    
 
 const API_HEADERS = {
@@ -572,6 +572,7 @@ class ActionsTableBodyFooter extends React.Component{
 
 class ActionsTableBody extends React.Component{
 
+    
     render(){
 
         return(
@@ -598,6 +599,8 @@ class ActionsTableBody extends React.Component{
 class ActionsTableBodyDetail extends React.Component{
     
     render(){
+
+        var price = this.props.project
 
         if(this.props.itemDetail.length==0){
 
@@ -626,7 +629,7 @@ class ActionsTableBodyDetail extends React.Component{
                             </tr>
                         </table>
                     </td>
-                    <td style={{'font-size':'20px'}}> &#8202;&#8202; {this.props.itemDetail[0].project}.00</td>
+                    <td style={{'font-size':'20px'}}> &#8202;&#8202; {price}.00</td>
                 </tr>
             );
         }
