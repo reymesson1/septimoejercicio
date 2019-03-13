@@ -9,6 +9,7 @@ var User = require('./models/user.js');
 var Customer = require('./models/customer.js');
 var Detail = require('./models/detail.js');
 var Wallet = require('./models/wallet.js');
+var Ubication = require('./models/ubication.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
@@ -178,7 +179,15 @@ app.post('/editwalletandroid', async(req,res)=>{
 
  app.post('/ubication', async(req,res)=>{
 
-	console.log(req.body);
+	var ubication = new Ubication(req.body.nameValuePairs); 
+	ubication.save(function(err){ 
+
+		if(!err){ 
+			console.log('Ubication saved');
+		 }
+	 })
+	 console.log(req.body.nameValuePairs)
+	 res.send(req.body)
  })
 
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
