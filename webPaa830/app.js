@@ -8,6 +8,7 @@ var today = moment(new Date()).format('YYYY-MM-DD');
 var User = require('./models/user.js');
 var Customer = require('./models/customer.js');
 var Detail = require('./models/detail.js');
+var Wallet = require('./models/wallet.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
@@ -106,6 +107,74 @@ app.post('/register', userController.setRegister);
 app.post('/login', userController.setLogin);
 
 app.post('/resetpassword', userController.setResetPassword);
+
+app.get('/wallet', async(req,res)=>{
+
+	var wallet = await Wallet.find({})
+
+	res.send(wallet)
+
+})
+
+app.get('/income', async(req,res)=>{ 
+	
+	var wallet = await Wallet.find({"account":"Income"}) 
+	res.send(wallet)
+})
+
+app.get('/expense', async(req,res)=>{ 
+	
+	var wallet = await Wallet.find({"account":"Expense"}) 
+	console.log(wallet); res.send(wallet)
+})
+
+app.get('/mainwallet', async(req,res)=>{ 
+	
+	var wallet = await Wallet.aggregate([{"$group":{"_id":"$account","total":{"$sum":"$amount"}}}]) 
+	console.log(wallet) 
+	res.send(wallet)
+})
+
+app.post('/addwalletandroid', async(req,res)=>{ 
+
+	var wallet = new Wallet(req.body.nameValuePairs); 
+	wallet.save(function(err){ 
+
+		if(!err){ 
+			console.log('Wallet saved');
+		 }
+	 })
+	 console.log(req.body.nameValuePairs)
+	 res.send(req.body)
+})
+
+app.post('/removewalletandroid', async(req,res)=>{
+	
+	 var wallet = await Wallet.remove({"id":req.body.nameValuePairs.id},function(err,wallet){
+	
+	 	if(!err){
+			 console.log("Wallet removed ");
+		}	
+	})
+ 	res.send('removed');
+})
+
+app.post('/editwalletandroid', async(req,res)=>{ 
+
+	console.log(req.body.nameValuePairs); 
+	var wallet = await Wallet.findOne({"id":req.body.nameValuePairs.id},function(err,wallet){ 
+
+		if(!err){ 
+			wallet.name = req.body.nameValuePairs.name; 
+			wallet.amount = req.body.nameValuePairs.amount; 
+			wallet.save(function(err,d){ 
+				console.log('Wallet updated');
+			 })
+		 } 
+	}) 
+	
+	res.send("Wallet Updated");
+ })
 
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){
