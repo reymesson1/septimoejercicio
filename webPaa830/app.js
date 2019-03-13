@@ -176,6 +176,11 @@ app.post('/editwalletandroid', async(req,res)=>{
 	res.send("Wallet Updated");
  })
 
+ app.post('/ubication', async(req,res)=>{
+
+	console.log(req.body);
+ })
+
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');
