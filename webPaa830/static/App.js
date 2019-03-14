@@ -340,7 +340,7 @@ var Actions = function (_React$Component3) {
                     marquilla[0].item.map(function (masterMarquilla, index) {
                         return React.createElement(
                             Link,
-                            { className: 'btn btn-default', to: '/matching/' + _this5.state.parameter + '/' + masterMarquilla.id },
+                            { className: 'btn btn-default', to: '/matching/' + _this5.state.parameter + '/' + masterMarquilla.id + '/' + index },
                             index + 1
                         );
                     })
@@ -8785,7 +8785,8 @@ var Matching = function (_React$Component63) {
         _this100.state = {
             master: [],
             parameter: "",
-            parameter2: ""
+            parameter2: "",
+            index: ""
         };
         return _this100;
     }
@@ -8808,7 +8809,8 @@ var Matching = function (_React$Component63) {
 
             this.setState({
                 parameter: this.props.params.masterid,
-                parameter2: this.props.params.itemid
+                parameter2: this.props.params.itemid,
+                index: this.props.params.index
             });
         }
     }, {
@@ -8933,6 +8935,35 @@ var Matching = function (_React$Component63) {
                                                 null,
                                                 React.createElement(
                                                     'td',
+                                                    null,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    ' ',
+                                                    parseInt(_this102.state.index) + 1 + '-',
+                                                    master.item.length,
+                                                    ' '
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
                                                     { className: 'print-cut' },
                                                     String.fromCharCode("<1D>vb<00>")
                                                 )
@@ -8965,7 +8996,7 @@ ReactDOM.render(React.createElement(
         Route,
         { path: '/', component: App },
         React.createElement(IndexRoute, { component: Home }),
-        React.createElement(Route, { path: 'matching/:masterid/:itemid', component: Matching }),
+        React.createElement(Route, { path: 'matching/:masterid/:itemid/:index', component: Matching }),
         React.createElement(Route, { path: 'deliveryfortoday', component: DeliveryForToday }),
         React.createElement(Route, { path: 'quotation/:quotationid', component: Quotation }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),

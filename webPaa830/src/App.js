@@ -274,7 +274,7 @@ class Actions extends React.Component{
 
                         {marquilla[0].item.map(
                             
-                            (masterMarquilla,index) =>  <Link className="btn btn-default" to={'/matching/'+this.state.parameter+'/'+masterMarquilla.id}>{index+1}</Link>
+                            (masterMarquilla,index) =>  <Link className="btn btn-default" to={'/matching/'+this.state.parameter+'/'+masterMarquilla.id+'/'+index}>{index+1}</Link>
                             
                         )}
                 </div>
@@ -5729,7 +5729,8 @@ class Matching extends React.Component{
         this.state = {
             master: [],
             parameter: "",
-            parameter2: ""
+            parameter2: "",
+            index: ""
         }
     }
         
@@ -5749,7 +5750,8 @@ class Matching extends React.Component{
 
         this.setState({
             parameter: this.props.params.masterid,
-            parameter2: this.props.params.itemid
+            parameter2: this.props.params.itemid,
+            index: this.props.params.index
         })
                 
     }
@@ -5789,6 +5791,11 @@ class Matching extends React.Component{
                                                         <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
                                                     </tr>
                                                     <tr>
+                                                        <td>{' '}{' '}{' '}{' '}{' '}</td>
+                                                        <td>{' '}{' '}{' '}{' '}</td>
+                                                        <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
+                                                    </tr>
+                                                    <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                     </tr>
                                                     <br/>
@@ -5814,7 +5821,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={Home}/>
-        <Route path="matching/:masterid/:itemid" component={Matching}/>
+        <Route path="matching/:masterid/:itemid/:index" component={Matching}/>
         <Route path="deliveryfortoday" component={DeliveryForToday}/>
         <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>
