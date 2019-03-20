@@ -1,0 +1,79 @@
+{"id":"AEC-001","date":"19-03-2019","name":"ESTRECHAR CAMISA","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-002","date":"19-03-2019","name":"ESTRECHAR BLUSAS","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-003","date":"19-03-2019","name":"ESTRECHAR BLUSAS 2","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-004","date":"19-03-2019","name":"ESTRECHAR BLUSAS 3","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-005","date":"19-03-2019","name":"ESTRECHAR CHACABANA","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-006","date":"19-03-2019","name":"ESTRECHAR POLO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-007","date":"19-03-2019","name":"ESTRECHAR T-SHIRT","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-008","date":"19-03-2019","name":"ESTRECHAR CHAQUETAS","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-009","date":"19-03-2019","name":"ESTRECHAR FRANELA","item":"1","environment":"150","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-010","date":"19-03-2019","name":"ESTRECHAR ABRIGOS","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-011","date":"19-03-2019","name":"ESTRECHAR PATALON 1","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-012","date":"19-03-2019","name":"ESTRECHAR PATALON 2","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-013","date":"19-03-2019","name":"ESTRECHAR PATALON 3","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-014","date":"19-03-2019","name":"ESTRECHAR FALDA LARGA","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-015","date":"19-03-2019","name":"ESTRECHAR FALDA CORTA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-016","date":"19-03-2019","name":"ESTRECHAR VESTIDO LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-017","date":"19-03-2019","name":"ESTRECHAR VESTIDO CORTO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-018","date":"19-03-2019","name":"ESTRECHAR ENTERIZO LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-019","date":"19-03-2019","name":"ESTRECHAR ENTERIZO CORTO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-020","date":"19-03-2019","name":"ESTRECHAR OVERALL LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-021","date":"19-03-2019","name":"ESTRECHAR OVERALL","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-022","date":"19-03-2019","name":"RECORTAR PATALON","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-023","date":"19-03-2019","name":"RECORTAR PATALON 2","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-024","date":"19-03-2019","name":"RECORTAR FALDA LARGA","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-025","date":"19-03-2019","name":"RECORTAR FALDA CORTA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-026","date":"19-03-2019","name":"RECORTAR VESTIDO LARGO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-027","date":"19-03-2019","name":"RECORTAR VESTIDO CORTO","item":"1","environment":"225","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-028","date":"19-03-2019","name":"RECORTAR ENTERIZO LARGO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-029","date":"19-03-2019","name":"RECORTAR ENTERIZO CORTO","item":"1","environment":"225","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-030","date":"19-03-2019","name":"RECORTAR OVERALL LARGO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-031","date":"19-03-2019","name":"RECORTAR OVERALL","item":"1","environment":"225","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-032","date":"19-03-2019","name":"RUEDO PATALON","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-033","date":"19-03-2019","name":"RUEDO PATALON 2","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-034","date":"19-03-2019","name":"RUEDO FALDA LARGA","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-035","date":"19-03-2019","name":"RUEDO FALDA CORTA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-036","date":"19-03-2019","name":"RUEDO VESTIDO LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-037","date":"19-03-2019","name":"RUEDO VESTIDO CORTO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-038","date":"19-03-2019","name":"RUEDO ENTERIZO LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-039","date":"19-03-2019","name":"RUEDO ENTERIZO CORTO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-040","date":"19-03-2019","name":"RUEDO OVERALL LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-041","date":"19-03-2019","name":"RUEDO OVERALL","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-042","date":"19-03-2019","name":"RUEDO MANTEL","item":"1","environment":"150","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-043","date":"19-03-2019","name":"AJUSTE CINTURA PATALON","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-044","date":"19-03-2019","name":"AJUSTE CINTURA PATALON 2","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-045","date":"19-03-2019","name":"AJUSTE CINTURA FALDA LARGA","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-046","date":"19-03-2019","name":"AJUSTE CINTURA FALDA CORTA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-047","date":"19-03-2019","name":"AJUSTE CINTURA VESTIDO LARGO","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-048","date":"19-03-2019","name":"AJUSTE CINTURA VESTIDO CORTO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-049","date":"19-03-2019","name":"AJUSTE CINTURA ENTERIZO LARGO","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-050","date":"19-03-2019","name":"AJUSTE CINTURA ENTERIZO CORTO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-051","date":"19-03-2019","name":"AJUSTE CINTURA OVERALL LARGO","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-052","date":"19-03-2019","name":"AJUSTE CINTURA OVERALL","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-053","date":"19-03-2019","name":"ENTALLE CAMISA","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-054","date":"19-03-2019","name":"ENTALLE BLUSAS","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-055","date":"19-03-2019","name":"ENTALLE CHACABANA","item":"1","environment":"275","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-056","date":"19-03-2019","name":"ENTALLE POLO","item":"1","environment":"250","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-057","date":"19-03-2019","name":"ENTALLE T-SHIRT","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-058","date":"19-03-2019","name":"ENTALLE CHAQUETAS","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-059","date":"19-03-2019","name":"ENTALLE FRANELA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-060","date":"19-03-2019","name":"ENTALLE ABRIGOS","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-061","date":"19-03-2019","name":"ENTALLE VESTIDO LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-062","date":"19-03-2019","name":"ENTALLE VESTIDO CORTO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-063","date":"19-03-2019","name":"ENTALLE ENTERIZO LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-064","date":"19-03-2019","name":"ENTALLE ENTERIZO CORTO","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-065","date":"19-03-2019","name":"ENTALLE OVERALL LARGO","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-066","date":"19-03-2019","name":"ENTALLE OVERALL","item":"1","environment":"300","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-067","date":"19-03-2019","name":"ZIPPER PATALON","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-068","date":"19-03-2019","name":"ZIPPER METAL","item":"1","environment":"350","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-069","date":"19-03-2019","name":"ZIPPER FALDA LARGA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-070","date":"19-03-2019","name":"ZIPPER FALDA CORTA","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-071","date":"19-03-2019","name":"ZIPPER VESTIDO LARGO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-072","date":"19-03-2019","name":"ZIPPER VESTIDO CORTO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-073","date":"19-03-2019","name":"ZIPPER ENTERIZO LARGO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-074","date":"19-03-2019","name":"ZIPPER ENTERIZO CORTO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-075","date":"19-03-2019","name":"ZIPPER OVERALL LARGO","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-076","date":"19-03-2019","name":"ZIPPER OVERALL","item":"1","environment":"200","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-077","date":"19-03-2019","name":" AJUSTE BOTON CAMISA","item":"1","environment":"50","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-078","date":"19-03-2019","name":" AJUSTE BOTON PANTALON","item":"1","environment":"50","category":"servicio","tipo":"alteracion"}
+{"id":"AEC-079","date":"19-03-2019","name":" ALTERACION MENOR","item":"1","environment":"50","category":"servicio","tipo":"alteracion"}
