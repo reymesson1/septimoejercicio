@@ -48,6 +48,8 @@ var Autosuggest = Autosuggest;
 
 var moment = moment;
 
+var global = 0;
+
 // const API_URL = 'http://localhost:8082';   
 var API_URL = 'http://159.203.156.208:8082';
 
@@ -1633,6 +1635,10 @@ var Master = function (_React$Component11) {
 
             event.preventDefault();
 
+            if (global == 0) {
+                global = event.target.firstname.value;
+            }
+
             this.setState({
                 tempNumber: event.target.firstname.value
             });
@@ -1735,9 +1741,9 @@ var Master = function (_React$Component11) {
 
                         for (var x = 0; x < nextStateCust.length; x++) {
 
-                            if (nextStateCust[x].telefono == this.state.tempNumber) {
+                            if (nextStateCust[x].telefono == global) {
                                 fullname = nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
-                                telefono = this.state.tempNumber;
+                                telefono = global;
                             }
                         }
 
@@ -1745,7 +1751,7 @@ var Master = function (_React$Component11) {
 
                             "id": Date.now(),
                             "firstname": fullname,
-                            "telefono": this.state.tempNumber,
+                            "telefono": global,
                             "rnc": rnc,
                             "item": event.target.suggest.value,
                             "itemDetail": this.state.detailAdded,
@@ -1753,8 +1759,6 @@ var Master = function (_React$Component11) {
                             "quantity": event.target.quantity.value,
                             "project": project
                         };
-
-                        console.log(newItem);
                     } else {
 
                         for (var x = 0; x < nextStateCust.length; x++) {

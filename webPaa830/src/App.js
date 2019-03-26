@@ -36,6 +36,8 @@ const Autosuggest = Autosuggest;
 
 const moment = moment;
 
+var global = 0;
+
 // const API_URL = 'http://localhost:8082';   
 const API_URL = 'http://159.203.156.208:8082';    
 
@@ -1053,6 +1055,10 @@ class Master extends React.Component{
 
         event.preventDefault();
 
+        if(global==0){
+            global = event.target.firstname.value;
+        }
+
         this.setState({
             tempNumber: event.target.firstname.value
         })
@@ -1158,17 +1164,18 @@ class Master extends React.Component{
 
                     for(var x=0;x<nextStateCust.length;x++){
                         
-                        if(nextStateCust[x].telefono==this.state.tempNumber){
-                        fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
-                        telefono=this.state.tempNumber
+                        if(nextStateCust[x].telefono==global){
+                            fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                            telefono=global
                         }
+                        
                     }
                     
                     newItem = {
                         
                         "id": Date.now(),
                         "firstname":fullname,
-                        "telefono":this.state.tempNumber,
+                        "telefono":global,
                         "rnc":rnc,
                         "item":event.target.suggest.value,
                         "itemDetail": this.state.detailAdded,
@@ -1177,7 +1184,7 @@ class Master extends React.Component{
                         "project":project,
                     } 
                     
-                    console.log(newItem)
+                    
                 }else{
 
                     for(var x=0;x<nextStateCust.length;x++){
