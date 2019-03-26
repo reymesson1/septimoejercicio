@@ -9076,7 +9076,7 @@ var Delivery = function (_React$Component64) {
                             { xs: 2 },
                             React.createElement(
                                 'a',
-                                { className: 'btn btn-default', href: 'javascript:window.open(\'https://maps.google.com/maps?q=18.4992407,-69.7854832\',\'_blank\',\'height=600,width=800\');' },
+                                { className: 'btn btn-default', href: "javascript:window.open('https://maps.google.com/maps?q=" + master.latitute + "," + master.longitute + "','_blank','height=600,width=800');" },
                                 'View'
                             )
                         )

@@ -5867,12 +5867,13 @@ class Delivery extends React.Component{
                 </Row>
                 {this.state.master.map(
                     (master) =>                                             
+
                             <Row>
                                 <Col xs={2}>
                                     {master._id}                                
                                 </Col>                                
                                 <Col xs={2}>                                                                        
-                                    <a className="btn btn-default" href="javascript:window.open('https://maps.google.com/maps?q=18.4992407,-69.7854832','_blank','height=600,width=800');">View</a>
+                                    <a className="btn btn-default" href={"javascript:window.open('https://maps.google.com/maps?q="+master.latitute+","+master.longitute+"','_blank','height=600,width=800');"}>View</a>
                                 </Col>                                
                             </Row>                        
                 )}
