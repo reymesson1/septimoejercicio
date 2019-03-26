@@ -720,6 +720,7 @@ class Toolbar extends React.Component{
                             <MenuItem divider />
                             <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Entregas para hoy</Link></MenuItem>
                             <MenuItem eventKey={3.5}><Link to="/matching">Matching</Link></MenuItem>
+                            <MenuItem eventKey={3.6}><Link to="/delivery">Delivery</Link></MenuItem>
                             {/* <MenuItem eventKey={3.6}><Link to="/printpayment">PrintPayment</Link></MenuItem> */}
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
@@ -743,9 +744,10 @@ class Toolbar extends React.Component{
                             <MenuItem eventKey={3.1}><Link to="/partials">Draw</Link></MenuItem>
                             <MenuItem eventKey={3.2}><Link to="/loader">loaded</Link></MenuItem>
                             <MenuItem eventKey={3.3}><Link to="/customer">Clientes</Link></MenuItem>
-                            <MenuItem eventKey={3.3}><Link to="/partialstwo">Draw2</Link></MenuItem>
+                            <MenuItem eventKey={3.4}><Link to="/partialstwo">Draw2</Link></MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.4}><Link to="/deliveryfortoday">Delivery For Today</Link></MenuItem>
+                            <MenuItem eventKey={3.5}><Link to="/delivery">Delivery</Link></MenuItem>
+                            <MenuItem eventKey={3.6}><Link to="/deliveryfortoday">Delivery For Today</Link></MenuItem>
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
                     </Nav>
@@ -5823,12 +5825,68 @@ class Matching extends React.Component{
     }
 
 }
+
+class Delivery extends React.Component{
+
+    constructor() {
+        
+        super();
+        this.state = {
+            master: []
+        }
+    }
+
+    componentDidMount(){
+
+        fetch(API_URL+'/ubication',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                master: responseData
+            })
+        })  
+        .catch((error)=>{
+            console.log('Error fetching and parsing data', error);
+        })
+
+
+    }
+
+    render(){
+
+        return(
+            <Grid>
+                <Row>
+                    <Col xs={2}>
+                        ID
+                    </Col>
+                    <Col xs={2}>
+                        Actions
+                    </Col>
+                </Row>
+                {this.state.master.map(
+                    (master) =>                                             
+                            <Row>
+                                <Col xs={2}>
+                                    {master._id}                                
+                                </Col>                                
+                                <Col xs={2}>                                                                        
+                                    <a className="btn btn-default" href="javascript:window.open('https://maps.google.com/maps?q=18.4992407,-69.7854832','_blank','height=600,width=800');">View</a>
+                                </Col>                                
+                            </Row>                        
+                )}
+            </Grid>
+        );
+    }
+}    
     
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
         <IndexRoute component={Home}/>
         <Route path="matching/:masterid/:itemid/:index" component={Matching}/>
+        <Route path="delivery" component={Delivery}/>
         <Route path="deliveryfortoday" component={DeliveryForToday}/>
         <Route path="quotation/:quotationid" component={Quotation}/>
         <Route path="printpayment/:printid" component={PrintPayment}/>

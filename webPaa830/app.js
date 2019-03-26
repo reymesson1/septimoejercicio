@@ -190,6 +190,16 @@ app.post('/editwalletandroid', async(req,res)=>{
 	 res.send(req.body)
  })
 
+ app.get('/ubication', async(req,res)=>{
+
+	var ubication = await Ubication.find({})
+
+	console.log(ubication)
+
+	res.send(ubication);
+
+ });	
+
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){
         console.log('Connected to mongo Database');

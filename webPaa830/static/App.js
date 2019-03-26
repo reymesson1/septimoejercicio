@@ -1195,6 +1195,15 @@ var Toolbar = function (_React$Component9) {
                                 { to: '/matching' },
                                 'Matching'
                             )
+                        ),
+                        React.createElement(
+                            MenuItem,
+                            { eventKey: 3.6 },
+                            React.createElement(
+                                Link,
+                                { to: '/delivery' },
+                                'Delivery'
+                            )
                         )
                     ),
                     React.createElement(
@@ -1278,7 +1287,7 @@ var Toolbar = function (_React$Component9) {
                         ),
                         React.createElement(
                             MenuItem,
-                            { eventKey: 3.3 },
+                            { eventKey: 3.4 },
                             React.createElement(
                                 Link,
                                 { to: '/partialstwo' },
@@ -1288,7 +1297,16 @@ var Toolbar = function (_React$Component9) {
                         React.createElement(MenuItem, { divider: true }),
                         React.createElement(
                             MenuItem,
-                            { eventKey: 3.4 },
+                            { eventKey: 3.5 },
+                            React.createElement(
+                                Link,
+                                { to: '/delivery' },
+                                'Delivery'
+                            )
+                        ),
+                        React.createElement(
+                            MenuItem,
+                            { eventKey: 3.6 },
                             React.createElement(
                                 Link,
                                 { to: '/deliveryfortoday' },
@@ -8993,6 +9011,84 @@ var Matching = function (_React$Component63) {
     return Matching;
 }(React.Component);
 
+var Delivery = function (_React$Component64) {
+    _inherits(Delivery, _React$Component64);
+
+    function Delivery() {
+        _classCallCheck(this, Delivery);
+
+        var _this103 = _possibleConstructorReturn(this, (Delivery.__proto__ || Object.getPrototypeOf(Delivery)).call(this));
+
+        _this103.state = {
+            master: []
+        };
+        return _this103;
+    }
+
+    _createClass(Delivery, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this104 = this;
+
+            fetch(API_URL + '/ubication', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this104.setState({
+
+                    master: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                Grid,
+                null,
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        Col,
+                        { xs: 2 },
+                        'ID'
+                    ),
+                    React.createElement(
+                        Col,
+                        { xs: 2 },
+                        'Actions'
+                    )
+                ),
+                this.state.master.map(function (master) {
+                    return React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            Col,
+                            { xs: 2 },
+                            master._id
+                        ),
+                        React.createElement(
+                            Col,
+                            { xs: 2 },
+                            React.createElement(
+                                'a',
+                                { className: 'btn btn-default', href: 'javascript:window.open(\'https://maps.google.com/maps?q=18.4992407,-69.7854832\',\'_blank\',\'height=600,width=800\');' },
+                                'View'
+                            )
+                        )
+                    );
+                })
+            );
+        }
+    }]);
+
+    return Delivery;
+}(React.Component);
+
 ReactDOM.render(React.createElement(
     Router,
     { history: browserHistory },
@@ -9001,6 +9097,7 @@ ReactDOM.render(React.createElement(
         { path: '/', component: App },
         React.createElement(IndexRoute, { component: Home }),
         React.createElement(Route, { path: 'matching/:masterid/:itemid/:index', component: Matching }),
+        React.createElement(Route, { path: 'delivery', component: Delivery }),
         React.createElement(Route, { path: 'deliveryfortoday', component: DeliveryForToday }),
         React.createElement(Route, { path: 'quotation/:quotationid', component: Quotation }),
         React.createElement(Route, { path: 'printpayment/:printid', component: PrintPayment }),
