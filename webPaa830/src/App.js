@@ -1737,15 +1737,27 @@ class MasterModal extends React.Component{
             MasterModalActive=MasterModalES
         }
 
+        let MasterModalPhoneActive
+
+        let MasterModalPhone = (
+
+            <span><Label bsStyle="success">{global}</Label>&nbsp;</span>                        
+        )
+
+        if(global!=0){
+            MasterModalPhoneActive = MasterModalPhone            
+        }
 
         return(
 
+
             <div >
                 <Modal show={this.props.showModal} onHide={this.props.close}>
-                  <Modal.Header closeButton>
-                    {MasterModalActive}
+                  <Modal.Header closeButton>                    
                   </Modal.Header>
-                  <Modal.Body>
+                  
+                  <Modal.Body>              
+                        {MasterModalPhoneActive}             
                         <MasterModalField
                                             detail={this.props.detail}
                                             list={this.props.list}
@@ -1780,6 +1792,17 @@ class MasterModalLabel extends React.Component{
         return(
 
             <span><Label bsStyle="warning">{this.props.name}</Label>&nbsp;</span>
+        );
+    }
+}
+
+class MasterModalLabelPhone extends React.Component{
+    
+    render(){
+
+        return(
+
+            <span><Label bsStyle="summary">{global}</Label>&nbsp;</span>
         );
     }
 }
