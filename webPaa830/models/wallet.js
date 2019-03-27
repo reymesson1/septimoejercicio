@@ -8,6 +8,8 @@ var userSchema = new mongoose.Schema({
 	name: String, 
 	amount : Number, 
 	account: String, 
+	longitute: String,
+	latitute: String
 }) 
 
 module.exports = mongoose.model('Wallet', userSchema)
