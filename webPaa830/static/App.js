@@ -1545,6 +1545,7 @@ var Master = function (_React$Component11) {
             var newMaster = {
 
                 "id": Date.now(),
+                "idOrder": this.state.masterAPI.length,
                 "date": today,
                 "name": name,
                 "item": this.state.masterDetail,
@@ -2210,6 +2211,7 @@ var MasterTable = function (_React$Component13) {
 
                                 key: index,
                                 id: todo.id,
+                                idOrder: todo.idOrder,
 
                                 date: todo.date,
 
@@ -2344,7 +2346,7 @@ var MasterTableBody = function (_React$Component14) {
                 React.createElement(
                     'td',
                     null,
-                    this.props.id
+                    this.props.idOrder
                 ),
                 React.createElement(
                     'td',

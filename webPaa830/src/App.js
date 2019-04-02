@@ -1011,6 +1011,7 @@ class Master extends React.Component{
         let newMaster = {
 
             "id": Date.now(),
+            "idOrder": this.state.masterAPI.length,
             "date": today,
             "name": name,
             "item": this.state.masterDetail,
@@ -1029,7 +1030,7 @@ class Master extends React.Component{
             "status":"pending",
             "comments": []
         }
-        
+
         let nextState = this.state.masterAPI;
 
         nextState.push(newMaster);
@@ -1564,6 +1565,7 @@ todosPerPage); i++) {
 
                                                                     key={index}
                                                                     id={todo.id}
+                                                                    idOrder={todo.idOrder}
 
 date={todo.date}
 
@@ -1648,7 +1650,7 @@ class MasterTableBody extends React.Component{
 
         return(
                 <tr>
-                    <td>{this.props.id}</td>
+                    <td>{this.props.idOrder}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
                     <td>{this.props.items}</td>
