@@ -776,68 +776,6 @@ var ActionsTableBodyFooter = function (_React$Component5) {
                 React.createElement(
                     'tr',
                     null,
-                    React.createElement(
-                        'td',
-                        { colSpan: 4, style: { 'width': '15px' } },
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '16px' } },
-                            'Condiciones de lavado y/o Planchado:'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '1- NO SE ENTREGARA ROPA SIN ESTE RECIBO'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '2- Esta Orden vence en 30 dias pasados este tiempo su ropa sera declarada en en abandono y sera donada'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '3- Despues que entregamos no somos responsable de su ropa'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '4- No hay garantia de prendas elaboradas con telas de mala calidad que desti\xF1e, ropa recibida percudidas o con manchas rebeldes'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '5- No somos responsables por mancha tratas que no ha sido removidas y no hay devolucion de dinero. Ya que el servicio brindado requiere inversion en la aplicacion productos especiales para desmanchar y el tiempo del personal'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '6- En caso de perdidas o da\xF1os, muestra responsabilidad maxima es el 30% del costo de la prenda y se pagara en servicio consumidos'
-                        ),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-size': '14px' } },
-                            '7- La aceptacion a esta Orden o Factura es se\xF1al de conformidad a estas condiciones'
-                        ),
-                        React.createElement('br', null),
-                        React.createElement(
-                            'div',
-                            { style: { 'font-weight': 'bold', 'font-size': '14px' } },
-                            '** GRACIAS POR SU VISITA **'
-                        )
-                    ),
-                    React.createElement('td', { colSpan: 3 }),
-                    React.createElement('td', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null)
-                ),
-                React.createElement(
-                    'tr',
-                    null,
                     React.createElement('td', { colSpan: 2 }),
                     React.createElement('td', null),
                     React.createElement('td', null),

@@ -531,7 +531,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
                 <br/>
             </tr>
-            <tr>
+            {/* <tr>
                 <td colSpan={4} style={{'width':'15px'}}>
                     <div style={{'font-size':'16px'}}>Condiciones de lavado y/o Planchado:</div>
                     <div style={{'font-size':'14px'}}>1- NO SE ENTREGARA ROPA SIN ESTE RECIBO</div>
@@ -553,7 +553,7 @@ class ActionsTableBodyFooter extends React.Component{
                 <br/>
                 <br/>
                 <br/>
-            </tr>
+            </tr> */}
             <tr>
                 <td colSpan={2}></td>
                 <td></td>
