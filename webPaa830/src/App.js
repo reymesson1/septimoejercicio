@@ -357,8 +357,32 @@ class ActionsTable extends React.Component{
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={12}>
-                            <Table striped bordered condensed hover style={{'position':'relative','width':'55%', 'margin':'0'}}>
+                        <Col xs={6}>
+                        <Row style={{'border':'1px solid black'}}>
+                            <Col xs={2}>
+                                ID
+                            </Col>
+                            <Col xs={2}>
+                                Cant.
+                            </Col>
+                            <Col xs={2}>
+                                Descripcion
+                            </Col>
+                            <Col xs={2}>
+                                Precio
+                            </Col>
+                        </Row>
+                        <Row style={{'border':'1px solid black'}}>
+                            {this.props.masterAPI.map(
+                                (master, index) => 
+                                <Row>
+                                    <h1>{master.idOrder}</h1>
+                                </Row>
+                            )}
+                        </Row>
+                        </Col> 
+                        {/* <Col xs={12}>
+                            <Table   style={{'position':'relative','width':'55%', 'margin':'0', 'border-collapse':'collapse '}}>
                                 <thead>
                                   <tr>
                                     <th style={{'width':'15px','font-size':'25px', 'border-spacing':'030px'}}>#</th>
@@ -383,7 +407,7 @@ class ActionsTable extends React.Component{
                                     /> 
 
                               </Table>
-                        </Col>
+                        </Col> */}
                     </Row>
 
                 </Grid>

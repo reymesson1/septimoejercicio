@@ -480,50 +480,44 @@ var ActionsTable = function (_React$Component4) {
                         null,
                         React.createElement(
                             Col,
-                            { xs: 12 },
+                            { xs: 6 },
                             React.createElement(
-                                Table,
-                                { striped: true, bordered: true, condensed: true, hover: true, style: { 'position': 'relative', 'width': '55%', 'margin': '0' } },
+                                Row,
+                                { style: { 'border': '1px solid black' } },
                                 React.createElement(
-                                    'thead',
-                                    null,
-                                    React.createElement(
-                                        'tr',
+                                    Col,
+                                    { xs: 2 },
+                                    'ID'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    'Cant.'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    'Descripcion'
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    'Precio'
+                                )
+                            ),
+                            React.createElement(
+                                Row,
+                                { style: { 'border': '1px solid black' } },
+                                this.props.masterAPI.map(function (master, index) {
+                                    return React.createElement(
+                                        Row,
                                         null,
                                         React.createElement(
-                                            'th',
-                                            { style: { 'width': '15px', 'font-size': '25px', 'border-spacing': '030px' } },
-                                            '#'
-                                        ),
-                                        React.createElement(
-                                            'th',
-                                            { style: { 'width': '15px', 'font-size': '25px' } },
-                                            'Cant.'
-                                        ),
-                                        React.createElement(
-                                            'th',
-                                            { style: { 'width': '15px', 'font-size': '25px' } },
-                                            'Descripcion'
-                                        ),
-                                        React.createElement(
-                                            'th',
-                                            { style: { 'width': '15px', 'font-size': '25px' } },
-                                            'Precio'
+                                            'h1',
+                                            null,
+                                            master.idOrder
                                         )
-                                    )
-                                ),
-                                this.props.masterAPI.map(function (master, index) {
-                                    return React.createElement(ActionsTableBody, {
-                                        key: index,
-                                        index: index,
-                                        id: master.id,
-                                        item: master.item
-                                    });
-                                }),
-                                React.createElement(ActionsTableBodyFooter, {
-                                    parameter: this.props.parameter,
-                                    masterAPI: this.props.masterAPI,
-                                    added: added
+                                    );
                                 })
                             )
                         )
