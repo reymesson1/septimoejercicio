@@ -339,15 +339,15 @@ class ActionsTable extends React.Component{
                 <Grid>
                     <Row>
                         <Col xs={12}>
-                            <img src="/logoprint.png"/>
+                            {/* <img src="/logoprint.png"/> */}
 
-<h5>RNC: 131-473865</h5>
-<h2>Tel.: (809)-638-9999</h2>
+{/* <h5>RNC: 131-473865</h5>
+<h5>Tel.: (809)-638-9999</h5>
 <h5>Nuestro horario</h5>
 <h5>Abiertos los sabados 8am a 1pm</h5>
 <h5>Lunes a Viernes 7:30am a 7:00pm</h5>
 <h5>Domingos Cerrado</h5>
-<h1>Orden de Servicio</h1>
+<h1>Orden de Servicio</h1> */}
 <br/>
                             <br/>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
@@ -357,9 +357,9 @@ class ActionsTable extends React.Component{
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={6}>
+                        <Col xs={12}>
                         <Row style={{'border':'1px solid black'}}>
-                            <Col xs={2}>
+                            <Col xs={1}>
                                 ID
                             </Col>
                             <Col xs={2}>
@@ -373,13 +373,45 @@ class ActionsTable extends React.Component{
                             </Col>
                         </Row>
                         <Row style={{'border':'1px solid black'}}>
-                            {this.props.masterAPI.map(
-                                (master, index) => 
-                                <Row>
-                                    <h1>{master.idOrder}</h1>
-                                </Row>
-                            )}
-                        </Row>
+                            <Col xs={2}>
+                                {this.props.masterAPI.map(
+                                    (master, index) => 
+                                    <Row>
+                                        <h5>{master.idOrder}</h5>
+                                    </Row>
+                                )}
+                            </Col>
+                            <Col xs={2}>
+                                {this.props.masterAPI.map(
+                                    (master, index) => 
+                                    <Row>
+                                        <h5>{master.item.map(
+                                            (item) => <h5>{item.quantity}</h5>
+                                        )}</h5>
+                                    </Row>
+                                )}
+                            </Col>
+                            <Col xs={2}>
+                                {this.props.masterAPI.map(
+                                    (master, index) => 
+                                    <Row>
+                                        <h5>{master.item.map(
+                                            (item) => <h5>{item.development}</h5>
+                                        )}</h5>
+                                    </Row>
+                                )}
+                            </Col>
+                            <Col xs={2}>
+                                {this.props.masterAPI.map(
+                                    (master, index) => 
+                                    <Row>
+                                        <h5>{master.item.map(
+                                            (item) => <h5>{item.project}</h5>
+                                        )}</h5>
+                                    </Row>
+                                )}
+                            </Col>
+                        </Row>                        
                         </Col> 
                         {/* <Col xs={12}>
                             <Table   style={{'position':'relative','width':'55%', 'margin':'0', 'border-collapse':'collapse '}}>
@@ -419,7 +451,6 @@ class ActionsTable extends React.Component{
 class ActionsTableBodyFooter extends React.Component{
 
     render(){
-
         let days = moment(new Date()).add(3,'days').format('dddd');
         if(days=='Monday'){
            days='Lunes'

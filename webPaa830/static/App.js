@@ -416,42 +416,6 @@ var ActionsTable = function (_React$Component4) {
                         React.createElement(
                             Col,
                             { xs: 12 },
-                            React.createElement('img', { src: '/logoprint.png' }),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'RNC: 131-473865'
-                            ),
-                            React.createElement(
-                                'h2',
-                                null,
-                                'Tel.: (809)-638-9999'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Nuestro horario'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Abiertos los sabados 8am a 1pm'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Lunes a Viernes 7:30am a 7:00pm'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Domingos Cerrado'
-                            ),
-                            React.createElement(
-                                'h1',
-                                null,
-                                'Orden de Servicio'
-                            ),
                             React.createElement('br', null),
                             React.createElement('br', null),
                             React.createElement(
@@ -480,13 +444,13 @@ var ActionsTable = function (_React$Component4) {
                         null,
                         React.createElement(
                             Col,
-                            { xs: 6 },
+                            { xs: 12 },
                             React.createElement(
                                 Row,
                                 { style: { 'border': '1px solid black' } },
                                 React.createElement(
                                     Col,
-                                    { xs: 2 },
+                                    { xs: 1 },
                                     'ID'
                                 ),
                                 React.createElement(
@@ -508,17 +472,84 @@ var ActionsTable = function (_React$Component4) {
                             React.createElement(
                                 Row,
                                 { style: { 'border': '1px solid black' } },
-                                this.props.masterAPI.map(function (master, index) {
-                                    return React.createElement(
-                                        Row,
-                                        null,
-                                        React.createElement(
-                                            'h1',
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    this.props.masterAPI.map(function (master, index) {
+                                        return React.createElement(
+                                            Row,
                                             null,
-                                            master.idOrder
-                                        )
-                                    );
-                                })
+                                            React.createElement(
+                                                'h5',
+                                                null,
+                                                master.idOrder
+                                            )
+                                        );
+                                    })
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    this.props.masterAPI.map(function (master, index) {
+                                        return React.createElement(
+                                            Row,
+                                            null,
+                                            React.createElement(
+                                                'h5',
+                                                null,
+                                                master.item.map(function (item) {
+                                                    return React.createElement(
+                                                        'h5',
+                                                        null,
+                                                        item.quantity
+                                                    );
+                                                })
+                                            )
+                                        );
+                                    })
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    this.props.masterAPI.map(function (master, index) {
+                                        return React.createElement(
+                                            Row,
+                                            null,
+                                            React.createElement(
+                                                'h5',
+                                                null,
+                                                master.item.map(function (item) {
+                                                    return React.createElement(
+                                                        'h5',
+                                                        null,
+                                                        item.development
+                                                    );
+                                                })
+                                            )
+                                        );
+                                    })
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    this.props.masterAPI.map(function (master, index) {
+                                        return React.createElement(
+                                            Row,
+                                            null,
+                                            React.createElement(
+                                                'h5',
+                                                null,
+                                                master.item.map(function (item) {
+                                                    return React.createElement(
+                                                        'h5',
+                                                        null,
+                                                        item.project
+                                                    );
+                                                })
+                                            )
+                                        );
+                                    })
+                                )
                             )
                         )
                     )
@@ -542,7 +573,6 @@ var ActionsTableBodyFooter = function (_React$Component5) {
     _createClass(ActionsTableBodyFooter, [{
         key: 'render',
         value: function render() {
-
             var days = moment(new Date()).add(3, 'days').format('dddd');
             if (days == 'Monday') {
                 days = 'Lunes';
