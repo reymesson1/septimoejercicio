@@ -50,7 +50,7 @@ var moment = moment;
 
 var global = 0;
 
-// const API_URL = 'http://localhost:8082';   
+// const API_URL = 'http://localhost:8082';
 var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
@@ -416,6 +416,42 @@ var ActionsTable = function (_React$Component4) {
                         React.createElement(
                             Col,
                             { xs: 12 },
+                            React.createElement('img', { src: '/logoprint.png' }),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'RNC: 131-473865'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Tel.: (809)-638-9999'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Nuestro horario'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Abiertos los sabados 8am a 1pm'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Lunes a Viernes 7:30am a 7:00pm'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Domingos Cerrado'
+                            ),
+                            React.createElement(
+                                'h1',
+                                null,
+                                'Orden de Servicio'
+                            ),
                             React.createElement('br', null),
                             React.createElement('br', null),
                             React.createElement(
@@ -516,15 +552,34 @@ var ActionsTable = function (_React$Component4) {
                                             Row,
                                             null,
                                             React.createElement(
-                                                'h5',
+                                                Row,
                                                 null,
-                                                master.item.map(function (item) {
-                                                    return React.createElement(
-                                                        'h5',
-                                                        null,
-                                                        item.development
-                                                    );
-                                                })
+                                                React.createElement(
+                                                    'h5',
+                                                    null,
+                                                    master.item.map(function (item) {
+                                                        return React.createElement(
+                                                            'h5',
+                                                            null,
+                                                            item.development
+                                                        );
+                                                    })
+                                                )
+                                            ),
+                                            React.createElement(
+                                                Row,
+                                                null,
+                                                React.createElement(
+                                                    'h5',
+                                                    null,
+                                                    master.item.map(function (item) {
+                                                        return React.createElement(
+                                                            'h5',
+                                                            null,
+                                                            "   -" + item.item
+                                                        );
+                                                    })
+                                                )
                                             )
                                         );
                                     })
