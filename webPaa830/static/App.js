@@ -448,7 +448,7 @@ var ActionsTable = function (_React$Component4) {
                                 'Domingos Cerrado'
                             ),
                             React.createElement(
-                                'h1',
+                                'h5',
                                 null,
                                 'Orden de Servicio'
                             ),

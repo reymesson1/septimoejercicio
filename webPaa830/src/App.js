@@ -39,7 +39,7 @@ const moment = moment;
 var global = 0;
 
 // const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';    
+const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -347,7 +347,7 @@ class ActionsTable extends React.Component{
 <h5>Abiertos los sabados 8am a 1pm</h5>
 <h5>Lunes a Viernes 7:30am a 7:00pm</h5>
 <h5>Domingos Cerrado</h5>
-<h1>Orden de Servicio</h1>
+<h5>Orden de Servicio</h5>
 <br/>
                             <br/>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
