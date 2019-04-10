@@ -349,15 +349,14 @@ class ActionsTable extends React.Component{
 <h5>Domingos Cerrado</h5>
 <h5>Orden de Servicio</h5>
 <br/>
-                            <br/>
                             <h5 className="col-xs-offset-7">Fecha: {today}</h5>
                             <br/>
-                            <h5>IdCliente : {telefono}</h5>                            
+                            <h5>ID Cliente : {telefono}</h5>                            
                             <h5>Nombre : {name}</h5>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={12}>
+                        <Col xs={6}>
                         <Row style={{'border':'1px solid black'}}>
                             <Col xs={1}>
                                 ID
@@ -365,7 +364,7 @@ class ActionsTable extends React.Component{
                             <Col xs={2}>
                                 Cant.
                             </Col>
-                            <Col xs={2}>
+                            <Col xs={4}>
                                 Descripcion
                             </Col>
                             <Col xs={2}>
@@ -391,7 +390,7 @@ class ActionsTable extends React.Component{
                                     </Row>
                                 )}
                             </Col>
-                            <Col xs={2}>
+                            <Col xs={4}>
                                 {this.props.masterAPI.map(
                                     (master, index) => 
                                     <Row>

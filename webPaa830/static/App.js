@@ -453,7 +453,6 @@ var ActionsTable = function (_React$Component4) {
                                 'Orden de Servicio'
                             ),
                             React.createElement('br', null),
-                            React.createElement('br', null),
                             React.createElement(
                                 'h5',
                                 { className: 'col-xs-offset-7' },
@@ -464,7 +463,7 @@ var ActionsTable = function (_React$Component4) {
                             React.createElement(
                                 'h5',
                                 null,
-                                'IdCliente : ',
+                                'ID Cliente : ',
                                 telefono
                             ),
                             React.createElement(
@@ -480,7 +479,7 @@ var ActionsTable = function (_React$Component4) {
                         null,
                         React.createElement(
                             Col,
-                            { xs: 12 },
+                            { xs: 6 },
                             React.createElement(
                                 Row,
                                 { style: { 'border': '1px solid black' } },
@@ -496,7 +495,7 @@ var ActionsTable = function (_React$Component4) {
                                 ),
                                 React.createElement(
                                     Col,
-                                    { xs: 2 },
+                                    { xs: 4 },
                                     'Descripcion'
                                 ),
                                 React.createElement(
@@ -546,7 +545,7 @@ var ActionsTable = function (_React$Component4) {
                                 ),
                                 React.createElement(
                                     Col,
-                                    { xs: 2 },
+                                    { xs: 4 },
                                     this.props.masterAPI.map(function (master, index) {
                                         return React.createElement(
                                             Row,
