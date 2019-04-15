@@ -1446,6 +1446,7 @@ var Master = function (_React$Component11) {
 
         _this13.state = {
             showModal: false,
+            showModalDelete: false,
             filterText: '',
             activePage: 1,
             masterAPI: [],
@@ -1840,6 +1841,24 @@ var Master = function (_React$Component11) {
             console.log(document.getElementById('awesomplete-4vs0fr'));
         }
     }, {
+        key: 'onDeleteMasterModal',
+        value: function onDeleteMasterModal(value) {
+
+            this.setState({
+
+                showModalDelete: true
+            });
+        }
+    }, {
+        key: 'onDeleteMasterModalClose',
+        value: function onDeleteMasterModalClose(value) {
+
+            this.setState({
+
+                showModalDelete: false
+            });
+        }
+    }, {
         key: 'onDeleteMaster',
         value: function onDeleteMaster(value) {
 
@@ -1996,6 +2015,31 @@ var Master = function (_React$Component11) {
                         })
                     )
                 ),
+                React.createElement(
+                    Row,
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'pull-right' },
+                        React.createElement(MasterModalDelete, {
+
+                            detailAdded: this.state.detailAdded,
+                            masterDetail: this.state.masterDetail,
+                            detail: this.state.detail,
+                            showModal: this.state.showModal,
+                            showModalDelete: this.state.showModalDelete,
+                            list: this.state.list,
+                            open: this.open,
+                            close: this.close.bind(this),
+                            closeModal: this.onDeleteMasterModalClose.bind(this),
+                            masterCallback: {
+                                onsavedetail: this.onSaveDetail.bind(this),
+                                onsavedetailadded: this.onSaveDetailAdded.bind(this),
+                                onsavemaster: this.onSaveMaster.bind(this)
+                            }
+                        })
+                    )
+                ),
                 React.createElement('br', null),
                 React.createElement(
                     Row,
@@ -2009,7 +2053,8 @@ var Master = function (_React$Component11) {
                             masterCallback: {
                                 onsavedetail: this.onSaveDetail.bind(this),
                                 onsavemaster: this.onSaveMaster.bind(this),
-                                ondeletemaster: this.onDeleteMaster.bind(this)
+                                ondeletemaster: this.onDeleteMaster.bind(this),
+                                ondeletemastermodal: this.onDeleteMasterModal.bind(this)
                             }
                         })
                     )
@@ -2482,7 +2527,7 @@ var MasterTableBody = function (_React$Component14) {
                     '\xA0\xA0',
                     React.createElement(
                         Button,
-                        { onClick: this.props.masterCallback.ondeletemaster.bind(this, this.props.id) },
+                        { onClick: this.props.masterCallback.ondeletemastermodal.bind(this, this.props.id) },
                         React.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true' })
                     ),
                     '\xA0\xA0'
@@ -9148,6 +9193,72 @@ var Delivery = function (_React$Component65) {
     }]);
 
     return Delivery;
+}(React.Component);
+
+var MasterModalDelete = function (_React$Component66) {
+    _inherits(MasterModalDelete, _React$Component66);
+
+    function MasterModalDelete() {
+        _classCallCheck(this, MasterModalDelete);
+
+        return _possibleConstructorReturn(this, (MasterModalDelete.__proto__ || Object.getPrototypeOf(MasterModalDelete)).apply(this, arguments));
+    }
+
+    _createClass(MasterModalDelete, [{
+        key: 'render',
+        value: function render() {
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    Modal,
+                    { show: this.props.showModalDelete, onHide: this.props.closeModal },
+                    React.createElement(
+                        Modal.Header,
+                        { closeButton: true },
+                        React.createElement(
+                            'h1',
+                            null,
+                            'Delete Confirmation'
+                        )
+                    ),
+                    React.createElement(
+                        Modal.Body,
+                        null,
+                        React.createElement(
+                            Grid,
+                            null,
+                            React.createElement(
+                                Row,
+                                null,
+                                React.createElement(
+                                    Col,
+                                    { xs: 2 },
+                                    React.createElement(
+                                        Button,
+                                        null,
+                                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Yes\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0'
+                                    )
+                                ),
+                                React.createElement(
+                                    Col,
+                                    { smOffset: 4 },
+                                    React.createElement(
+                                        Button,
+                                        { onClick: this.props.closeModal.bind(this) },
+                                        '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0No\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0'
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return MasterModalDelete;
 }(React.Component);
 
 ReactDOM.render(React.createElement(

@@ -23,8 +23,16 @@ exports.setRegister = async(req,res)=>{
 }
 
 exports.setLogin = async(req,res)=>{
+
+    var log
     
-    var userData = req.body;
+    if(req.body.nameValuePairs){
+        log = req.body.nameValuePairs
+    }else{
+        log = req.body
+    }
+
+    var userData = log;
     var user = await User.findOne({username: userData.username});
     
     if(!user){
@@ -39,7 +47,7 @@ exports.setLogin = async(req,res)=>{
         var payload = { sub: user._id }
         
         var token = jwt.encode(payload, '123')
-        
+
         res.status(200).send({token})
     })
 }

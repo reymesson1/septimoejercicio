@@ -896,6 +896,7 @@ class Master extends React.Component{
         super();
         this.state = {
             showModal: false,
+            showModalDelete: false,
             filterText: '',
             activePage: 1,
             masterAPI: [],
@@ -1298,6 +1299,22 @@ class Master extends React.Component{
 
     }
 
+    onDeleteMasterModal(value){
+
+        this.setState({
+
+            showModalDelete: true
+        })
+
+    }
+    onDeleteMasterModalClose(value){
+        
+        this.setState({
+
+            showModalDelete: false
+        })
+        
+    }
     onDeleteMaster(value){
 
         let nextState = this.state.masterAPI;
@@ -1317,6 +1334,7 @@ class Master extends React.Component{
               headers: API_HEADERS,
               body: JSON.stringify({"id":value})
         })
+
     }
 
     onHandleUserInput(event){
@@ -1450,6 +1468,28 @@ class Master extends React.Component{
                             />
                         </div>
                 </Row>
+                <Row>
+                        <div className="pull-right">                            
+                            <MasterModalDelete
+
+
+                                            detailAdded={this.state.detailAdded}
+                                            masterDetail={this.state.masterDetail}
+                                            detail={this.state.detail}
+                                            showModal={this.state.showModal}
+                                            showModalDelete={this.state.showModalDelete}
+                                            list={this.state.list}
+                                            open={this.open}
+                                            close={this.close.bind(this)}
+                                            closeModal={this.onDeleteMasterModalClose.bind(this)}
+                                            masterCallback = {{
+                                                onsavedetail:this.onSaveDetail.bind(this),
+                                                onsavedetailadded:this.onSaveDetailAdded.bind(this),
+                                                onsavemaster:this.onSaveMaster.bind(this)
+                                            }}
+                            />
+                        </div>
+                </Row>
                 <br/>
                 <Row>
                     <Panel header={MasterTableActive}>
@@ -1459,7 +1499,8 @@ class Master extends React.Component{
                                         masterCallback = {{
                                             onsavedetail:this.onSaveDetail.bind(this),
                                             onsavemaster:this.onSaveMaster.bind(this),
-                                            ondeletemaster:this.onDeleteMaster.bind(this)
+                                            ondeletemaster:this.onDeleteMaster.bind(this),
+                                            ondeletemastermodal:this.onDeleteMasterModal.bind(this)
                                         }}
                         />
                     </Panel>
@@ -1723,7 +1764,8 @@ class MasterTableBody extends React.Component{
                         {checkItem}
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                         <Link className="btn btn-default" to={'/quotation/'+this.props.id}><i className="fa fa-file" aria-hidden="true"></i></Link>&nbsp;&nbsp;
-                        <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
+                        {/* <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp; */}
+                        <Button onClick={this.props.masterCallback.ondeletemastermodal.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                     </td>
                   </tr>
         );
@@ -5967,7 +6009,38 @@ class Delivery extends React.Component{
         );
     }
 }    
-    
+
+class MasterModalDelete extends React.Component{
+
+    render(){
+
+        return(
+
+            <div>
+                <Modal show={this.props.showModalDelete} onHide={this.props.closeModal}>
+                    <Modal.Header closeButton>                    
+                        <h1>Delete Confirmation</h1>
+                    </Modal.Header>
+                    
+                    <Modal.Body>              
+                        <Grid>
+                            <Row> 
+                                <Col xs={2}>
+                                    {/* <Button onClick={this.props.ondeletemaster.bind(this)} >Yes</Button> */}
+                                    <Button  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+                                </Col>
+                                <Col smOffset={4}>
+                                    <Button onClick={this.props.closeModal.bind(this)} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+                                </Col>
+                            </Row>
+                        </Grid>
+                    </Modal.Body>
+                </Modal>
+                </div>
+        );
+    }
+}
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
