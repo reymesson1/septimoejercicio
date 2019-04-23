@@ -9315,6 +9315,16 @@ var TodayCheckReport = function (_React$Component67) {
                         React.createElement(
                             'span',
                             { className: 'badge' },
+                            'Fecha recibido:',
+                            '\xA0',
+                            master.date
+                        ),
+                        React.createElement('br', null),
+                        React.createElement(
+                            'span',
+                            { className: 'badge' },
+                            'Fecha entrega:',
+                            '\xA0',
                             master.fechaentrega
                         ),
                         React.createElement(

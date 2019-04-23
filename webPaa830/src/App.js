@@ -6089,15 +6089,16 @@ class TodayCheckReport extends React.Component{
         (master) => master.fechaentrega.split(' ')[1] == today
     )
 
-    
-
     return (
 
         <ul className="list-group">
                 {filteredTable.map(
 
                 (master, index) => <li className="list-group-item">
-                                        <span className="badge">{master.fechaentrega}</span><h3>{master.name}</h3>
+                                        <span className="badge">{'Fecha recibido:'}&nbsp;{master.date}</span>
+                                        <br/>
+                                        <span className="badge">{'Fecha entrega:'}&nbsp;{master.fechaentrega}</span>
+                                        <h3>{master.name}</h3>
                                         <br/>
                                         <span className="btn btn-primary" >
                                         &nbsp;{'Total'}&nbsp;<span className="badge">{master.item.length}</span>
