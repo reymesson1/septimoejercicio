@@ -1860,27 +1860,28 @@ var Master = function (_React$Component11) {
         }
     }, {
         key: 'onDeleteMaster',
-        value: function onDeleteMaster(value) {
+        value: function onDeleteMaster(value, event) {
 
-            var nextState = this.state.masterAPI;
+            // console.log(value.target.value);
+            console.log(event.target.value);
 
-            var index = nextState.findIndex(function (x) {
-                return x.id == value;
-            });
+            // let nextState = this.state.masterAPI;
 
-            nextState.splice(index, 1);
+            // var index = nextState.findIndex(x=> x.id==value);
 
-            this.setState({
+            // nextState.splice(index,1);
 
-                masterAPI: nextState
-            });
+            // this.setState({
 
-            fetch(API_URL + '/deletemaster', {
+            //     masterAPI: nextState
+            // });
 
-                method: 'post',
-                headers: API_HEADERS,
-                body: JSON.stringify({ "id": value })
-            });
+            // fetch(API_URL+'/deletemaster', {
+
+            //       method: 'post',
+            //       headers: API_HEADERS,
+            //       body: JSON.stringify({"id":value})
+            // })
         }
     }, {
         key: 'onHandleUserInput',
@@ -2035,7 +2036,9 @@ var Master = function (_React$Component11) {
                             masterCallback: {
                                 onsavedetail: this.onSaveDetail.bind(this),
                                 onsavedetailadded: this.onSaveDetailAdded.bind(this),
-                                onsavemaster: this.onSaveMaster.bind(this)
+                                onsavemaster: this.onSaveMaster.bind(this),
+                                ondeletemastermodal: this.onDeleteMasterModal.bind(this),
+                                ondeletemaster: this.onDeleteMaster.bind(this)
                             }
                         })
                     )
@@ -8894,7 +8897,7 @@ var DeliveryForToday = function (_React$Component63) {
                     null,
                     'Entregas para hoy'
                 ),
-                React.createElement(TodayReport, null)
+                React.createElement(TodayCheckReport, null)
             );
         }
     }]);
@@ -9237,7 +9240,7 @@ var MasterModalDelete = function (_React$Component66) {
                                     { xs: 2 },
                                     React.createElement(
                                         Button,
-                                        null,
+                                        { onClick: this.props.masterCallback.ondeletemaster.bind(this, this.props.id) },
                                         '\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Yes\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0'
                                     )
                                 ),
@@ -9259,6 +9262,106 @@ var MasterModalDelete = function (_React$Component66) {
     }]);
 
     return MasterModalDelete;
+}(React.Component);
+
+var TodayCheckReport = function (_React$Component67) {
+    _inherits(TodayCheckReport, _React$Component67);
+
+    function TodayCheckReport() {
+        _classCallCheck(this, TodayCheckReport);
+
+        var _this107 = _possibleConstructorReturn(this, (TodayCheckReport.__proto__ || Object.getPrototypeOf(TodayCheckReport)).call(this));
+
+        _this107.state = {
+            master: []
+        };
+        return _this107;
+    }
+
+    _createClass(TodayCheckReport, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this108 = this;
+
+            fetch(API_URL + '/master', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+
+                _this108.setState({
+
+                    master: responseData
+                });
+            }).catch(function (error) {
+                console.log('Error fetching and parsing data', error);
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var today = moment(new Date()).format('DD/MM/YYYY');
+
+            var filteredTable = this.state.master.filter(function (master) {
+                return master.fechaentrega.split(' ')[1] == today;
+            });
+
+            return React.createElement(
+                'ul',
+                { className: 'list-group' },
+                filteredTable.map(function (master, index) {
+                    return React.createElement(
+                        'li',
+                        { className: 'list-group-item' },
+                        React.createElement(
+                            'span',
+                            { className: 'badge' },
+                            master.fechaentrega
+                        ),
+                        React.createElement(
+                            'h3',
+                            null,
+                            master.name
+                        ),
+                        React.createElement('br', null),
+                        React.createElement(
+                            'span',
+                            { className: 'btn btn-primary' },
+                            '\xA0',
+                            'Total',
+                            '\xA0',
+                            React.createElement(
+                                'span',
+                                { className: 'badge' },
+                                master.item.length
+                            )
+                        ),
+                        React.createElement('br', null),
+                        React.createElement(
+                            'span',
+                            { className: 'btn btn-primary' },
+                            master.item.map(function (itemMaster, indexItem) {
+                                return React.createElement(
+                                    'span',
+                                    null,
+                                    '\xA0',
+                                    itemMaster.item,
+                                    '\xA0',
+                                    React.createElement(
+                                        'span',
+                                        { className: 'badge' },
+                                        itemMaster.quantity
+                                    ),
+                                    React.createElement('br', null)
+                                );
+                            })
+                        )
+                    );
+                })
+            );
+        }
+    }]);
+
+    return TodayCheckReport;
 }(React.Component);
 
 ReactDOM.render(React.createElement(

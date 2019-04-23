@@ -1315,25 +1315,28 @@ class Master extends React.Component{
         })
         
     }
-    onDeleteMaster(value){
+    onDeleteMaster(value,event){
 
-        let nextState = this.state.masterAPI;
+        // console.log(value.target.value);
+        console.log(event.target.value);
 
-        var index = nextState.findIndex(x=> x.id==value);
+        // let nextState = this.state.masterAPI;
 
-        nextState.splice(index,1);
+        // var index = nextState.findIndex(x=> x.id==value);
 
-        this.setState({
+        // nextState.splice(index,1);
 
-            masterAPI: nextState
-        });
+        // this.setState({
 
-        fetch(API_URL+'/deletemaster', {
+        //     masterAPI: nextState
+        // });
 
-              method: 'post',
-              headers: API_HEADERS,
-              body: JSON.stringify({"id":value})
-        })
+        // fetch(API_URL+'/deletemaster', {
+
+        //       method: 'post',
+        //       headers: API_HEADERS,
+        //       body: JSON.stringify({"id":value})
+        // })
 
     }
 
@@ -1485,7 +1488,9 @@ class Master extends React.Component{
                                             masterCallback = {{
                                                 onsavedetail:this.onSaveDetail.bind(this),
                                                 onsavedetailadded:this.onSaveDetailAdded.bind(this),
-                                                onsavemaster:this.onSaveMaster.bind(this)
+                                                onsavemaster:this.onSaveMaster.bind(this),
+                                                ondeletemastermodal:this.onDeleteMasterModal.bind(this),
+                                                ondeletemaster:this.onDeleteMaster.bind(this)
                                             }}
                             />
                         </div>
@@ -5850,8 +5855,9 @@ class DeliveryForToday extends React.Component{
         
         return (
             <div>
+                {/* <h1>Check for today</h1> */}
                 <h1>Entregas para hoy</h1>
-                <TodayReport/>
+                <TodayCheckReport/>
             </div>
         )
     }
@@ -6027,7 +6033,7 @@ class MasterModalDelete extends React.Component{
                             <Row> 
                                 <Col xs={2}>
                                     {/* <Button onClick={this.props.ondeletemaster.bind(this)} >Yes</Button> */}
-                                    <Button  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+                                    <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
                                 </Col>
                                 <Col smOffset={4}>
                                     <Button onClick={this.props.closeModal.bind(this)} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
@@ -6038,6 +6044,74 @@ class MasterModalDelete extends React.Component{
                 </Modal>
                 </div>
         );
+    }
+}
+
+class TodayCheckReport extends React.Component{
+
+    constructor() {
+
+        super();
+        this.state = {
+            master: []
+        }
+    }
+
+    componentDidMount(){
+        
+            fetch(API_URL+'/master',{headers: API_HEADERS})
+            .then((response)=>response.json())
+            .then((responseData)=>{
+                
+    
+                    this.setState({
+
+                        master: responseData
+                    })
+                        
+
+            })
+            .catch((error)=>{
+                console.log('Error fetching and parsing data', error);
+            })
+            
+    }
+
+
+
+
+    render(){
+
+    var today = moment(new Date()).format('DD/MM/YYYY');      
+
+        
+    let filteredTable = this.state.master.filter(
+        (master) => master.fechaentrega.split(' ')[1] == today
+    )
+
+    
+
+    return (
+
+        <ul className="list-group">
+                {filteredTable.map(
+
+                (master, index) => <li className="list-group-item">
+                                        <span className="badge">{master.fechaentrega}</span><h3>{master.name}</h3>
+                                        <br/>
+                                        <span className="btn btn-primary" >
+                                        &nbsp;{'Total'}&nbsp;<span className="badge">{master.item.length}</span>
+                                        </span>
+                                        <br/>
+                                        <span className="btn btn-primary">
+                                        {master.item.map(
+                                            (itemMaster,indexItem) => <span>&nbsp;{itemMaster.item}&nbsp;<span className="badge">{itemMaster.quantity}</span><br/></span>
+                                        )}
+                                        </span>                                        
+                                    </li>
+            )} 
+        </ul>
+    )
     }
 }
 
