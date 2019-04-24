@@ -1381,6 +1381,15 @@ class Master extends React.Component{
     
     }
 
+    onRemoveMasterDetail(){
+
+        this.setState({
+
+            masterDetail: []
+        })
+
+    }
+
 
     render(){
         
@@ -1466,7 +1475,8 @@ class Master extends React.Component{
                                             masterCallback = {{
                                                 onsavedetail:this.onSaveDetail.bind(this),
                                                 onsavedetailadded:this.onSaveDetailAdded.bind(this),
-                                                onsavemaster:this.onSaveMaster.bind(this)
+                                                onsavemaster:this.onSaveMaster.bind(this),
+                                                onremovemasterdetail:this.onRemoveMasterDetail.bind(this)
                                             }}
                             />
                         </div>
@@ -2305,6 +2315,7 @@ class MasterModalTable extends React.Component{
                 <th>Item</th>
                 <th>Development</th>
                 <th>Project</th>
+                <th>Actions</th>
               </tr>
         );
 
@@ -2343,18 +2354,13 @@ class MasterModalTable extends React.Component{
                                                          index={index+1}
                                                          key={index}
                                                          id={masterdetail.id}
-
-firstname={masterdetail.firstname}
-
-item={masterdetail.item}
-
-itemDetail={masterdetail.itemDetail}
-
-development={masterdetail.development}
-
-project={masterdetail.project}
-
-quantity={masterdetail.quantity}
+                                                         firstname={masterdetail.firstname}
+                                                         item={masterdetail.item}
+                                                         itemDetail={masterdetail.itemDetail}
+                                                         development={masterdetail.development}
+                                                         project={masterdetail.project}
+                                                         quantity={masterdetail.quantity}
+                                                         masterCallback={this.props.masterCallback}
                                               />
                         )}
                     </tbody>
@@ -2432,6 +2438,9 @@ name={detail.name}
 
                         </table>
                     </td>
+                    <td>
+                    <Button onClick={this.props.masterCallback.onremovemasterdetail.bind(this)} ><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
+                    </td>                    
                 </tr>
 
             );
@@ -2445,7 +2454,8 @@ name={detail.name}
                     <td>{this.props.firstname}</td>
                     <td>{this.props.development}</td>
                     <td>{this.props.item}</td>
-                    <td>{this.props.project}</td>
+                    <td>{this.props.project}</td>                    
+                    <td><Button onClick={this.props.masterCallback.onremovemasterdetail.bind(this)} ><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;</td>                    
                 </tr>
 
             );
