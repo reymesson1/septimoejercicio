@@ -908,7 +908,8 @@ class Master extends React.Component{
             list: [],
             customerAPI: [],
             masterAPICSV:[],
-            tempNumber: ''
+            tempNumber: '',
+            idDelete: ''
         };
     }
 
@@ -1299,16 +1300,18 @@ class Master extends React.Component{
 
     }
 
-    onDeleteMasterModal(value){
+    onDeleteMasterModal(value,event){
 
         this.setState({
 
-            showModalDelete: true
+            showModalDelete: true,
+            idDelete: value.props.id
+
         })
 
     }
     onDeleteMasterModalClose(value){
-        
+
         this.setState({
 
             showModalDelete: false
@@ -1317,26 +1320,28 @@ class Master extends React.Component{
     }
     onDeleteMaster(value,event){
 
-        // console.log(value.target.value);
-        console.log(event.target.value);
+        let nextState = this.state.masterAPI;
+        
+        var index = nextState.findIndex(x=> x.id==this.state.idDelete);
 
-        // let nextState = this.state.masterAPI;
+        nextState.splice(index,1);
 
-        // var index = nextState.findIndex(x=> x.id==value);
+        this.setState({
 
-        // nextState.splice(index,1);
+            masterAPI: nextState
+        });
 
-        // this.setState({
+        fetch(API_URL+'/deletemaster', {
 
-        //     masterAPI: nextState
-        // });
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify({"id":this.state.idDelete})
+        })
 
-        // fetch(API_URL+'/deletemaster', {
+        this.setState({
 
-        //       method: 'post',
-        //       headers: API_HEADERS,
-        //       body: JSON.stringify({"id":value})
-        // })
+            showModalDelete: false
+        })
 
     }
 
@@ -1500,7 +1505,7 @@ class Master extends React.Component{
                                                 onsavedetailadded:this.onSaveDetailAdded.bind(this),
                                                 onsavemaster:this.onSaveMaster.bind(this),
                                                 ondeletemastermodal:this.onDeleteMasterModal.bind(this),
-                                                ondeletemaster:this.onDeleteMaster.bind(this)
+                                                ondeletemaster:this.onDeleteMaster.bind(this)                                                
                                             }}
                             />
                         </div>
@@ -1780,7 +1785,7 @@ class MasterTableBody extends React.Component{
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                         <Link className="btn btn-default" to={'/quotation/'+this.props.id}><i className="fa fa-file" aria-hidden="true"></i></Link>&nbsp;&nbsp;
                         {/* <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp; */}
-                        <Button onClick={this.props.masterCallback.ondeletemastermodal.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
+                        <Button onClick={this.props.masterCallback.ondeletemastermodal.bind(this.props.id,this)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                     </td>
                   </tr>
         );
@@ -6043,7 +6048,7 @@ class MasterModalDelete extends React.Component{
                             <Row> 
                                 <Col xs={2}>
                                     {/* <Button onClick={this.props.ondeletemaster.bind(this)} >Yes</Button> */}
-                                    <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+                                    <Button onClick={this.props.masterCallback.ondeletemaster.bind(this.props.id,this)} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
                                 </Col>
                                 <Col smOffset={4}>
                                     <Button onClick={this.props.closeModal.bind(this)} >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
