@@ -1253,11 +1253,26 @@ class Master extends React.Component{
                     
                 }else{
 
+            
+                    var start = event.target.firstname.value.indexOf('-' )
+                    var end = event.target.firstname.value.length
+
+                    // console.log(start+1)
+                    // console.log(end-1)
+
+                    // console.log(event.target.firstname.value.substring(start+1,end))
+
+                    var subStr = event.target.firstname.value.substring(start+1,end)
+
+                    //var index = nextState.findIndex(x=> x.id==this.state.idDelete);
+
                     for(var x=0;x<nextStateCust.length;x++){
                         
-                        if(nextStateCust[x].telefono==event.target.firstname.value){
+                        // if(nextStateCust[x].telefono==event.target.firstname.value){
+                        if(nextStateCust[x].telefono==subStr){
                         fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
-                        telefono=event.target.firstname.value
+                        // telefono=event.target.firstname.value
+                        telefono=subStr
                         rnc=nextStateCust[x].rnc
                         }
                     }
@@ -1266,7 +1281,8 @@ class Master extends React.Component{
                         
                         "id": Date.now(),
                         "firstname":fullname,
-                        "telefono":event.target.firstname.value,
+                        // "telefono":event.target.firstname.value,
+                        "telefono":subStr,
                         "rnc":rnc,
                         "item":event.target.suggest.value,
                         "itemDetail": this.state.detailAdded,
@@ -1277,6 +1293,8 @@ class Master extends React.Component{
                 }
 
                 nextState.push(newItem);
+
+                
 
 
                 this.setState({
