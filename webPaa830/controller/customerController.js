@@ -19,7 +19,7 @@ exports.getCustomerList = async(req,res)=>{
     
     for(var x=0;x<customer.length;x++){
         
-        list.push(customer[x].name+"-"+customer[x].telefono.trim().replace(/-(?=\d)|\s/g,''));
+        list.push(customer[x].name+" "+customer[x].apellido+"-"+customer[x].telefono.trim().replace(/-(?=\d)|\s/g,''));
     
     }
 
