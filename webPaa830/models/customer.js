@@ -7,6 +7,7 @@ var userSchema = new mongoose.Schema({
     apellido: String,
     direccion: String,
     telefono: {type:String, unique:true},
+    nombreempresa: String,
     rnc: String,
     fechacumpleano: String,
     facebook: String,

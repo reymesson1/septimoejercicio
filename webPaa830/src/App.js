@@ -3431,6 +3431,18 @@ class Partials extends React.Component{
             window.print();
     }
 
+    onRemove(){
+
+        fetch(API_URL+'/removeLastMaster',{headers: API_HEADERS})
+            .then((response)=>response.json())
+            .then((responseData)=>{
+                this.setState({
+
+                    customerAPI: responseData
+                })
+        })
+    }
+
     render(){
 
         let PartialsEN = (
@@ -3480,6 +3492,9 @@ class Partials extends React.Component{
         return(
 
              <Grid>
+                    <Row>
+                        <Button className="pull-right" onClick={this.onRemove.bind(this)}><i className="fa fa-ban" aria-hidden="true"></i></Button>
+                    </Row>
                     <Row>
                         <Col xs={6}>
                             {PartialsActive}
@@ -3956,6 +3971,7 @@ class Customer extends React.Component{
             "direccion": event.target.direccion.value,
             "telefono": event.target.telefono.value,
             "telefono2": event.target.telefono2.value,
+            "nombreempresa": event.target.nombreempresa.value,
             "rnc": event.target.rnc.value,
             "fechacumpleano":event.target.fechacumpleano.value,
             "facebook":event.target.facebook.value,
@@ -4225,7 +4241,7 @@ class CustomerModal extends React.Component{
                         <Row>
                             <FormGroup controlId="formHorizontalEmail">
                               <Col componentClass={ControlLabel} sm={2}>
-                                Nombre
+                                    Nombre
                               </Col>
                               <Col sm={9}>
                                 <FormControl name="nombre" type="text" placeholder="Nombre" />
@@ -4269,6 +4285,16 @@ class CustomerModal extends React.Component{
                               </Col>
                               <Col sm={9}>
                                 <FormControl name="telefono2" type="text" placeholder="Telefono #2" />
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <Row>
+                            <FormGroup controlId="formHorizontalEmail">
+                              <Col componentClass={ControlLabel} sm={2}>
+                                Nombre Empresa
+                              </Col>
+                              <Col sm={9}>
+                                <FormControl name="nombreempresa" type="text" placeholder="Nombre Empresa" />
                               </Col>
                             </FormGroup>
                         </Row>

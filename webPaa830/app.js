@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 var today = moment(new Date()).format('YYYY-MM-DD');
 var User = require('./models/user.js');
 var Customer = require('./models/customer.js');
+var Master = require('./models/master.js');
 var Detail = require('./models/detail.js');
 var Wallet = require('./models/wallet.js');
 var Ubication = require('./models/ubication.js');
@@ -199,6 +200,17 @@ app.post('/editwalletandroid', async(req,res)=>{
 	res.send(ubication);
 
  });	
+
+ app.get('/removeLastMaster', async(req,res)=>{
+
+		var master = await Master.findOneAndRemove({"grandTotal":null}, function(err,master){
+
+			console.log('Master removed from emergency btn')
+		});
+		
+		res.send(master);
+	
+	 });	
 
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){
