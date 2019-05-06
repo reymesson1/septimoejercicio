@@ -3568,8 +3568,8 @@ class PartialsTable extends React.Component{
             <tr>
                 <th style={{'width':'15px', 'font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Fecha</th>
-                <th style={{'width':'15px', 'font-size':'25px'}}>NCF</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Cliente</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>NCF</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Precio</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>TP</th>
               </tr>

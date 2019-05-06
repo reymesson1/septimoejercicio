@@ -5285,12 +5285,12 @@ var PartialsTable = function (_React$Component35) {
                 React.createElement(
                     'th',
                     { style: { 'width': '15px', 'font-size': '25px' } },
-                    'NCF'
+                    'Cliente'
                 ),
                 React.createElement(
                     'th',
                     { style: { 'width': '15px', 'font-size': '25px' } },
-                    'Cliente'
+                    'NCF'
                 ),
                 React.createElement(
                     'th',
