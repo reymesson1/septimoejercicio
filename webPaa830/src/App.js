@@ -49,7 +49,7 @@ const API_HEADERS = {
 
 const TOKEN_KEY = "token";
 
-const languageActive = false;
+const languageActive = false; 
 
 function token(){
     
@@ -757,7 +757,6 @@ class Toolbar extends React.Component{
     }
 
     onRefreshed(){
-        this.props.history.push("/detail")
         window.location.reload();
     }
 
@@ -3556,21 +3555,20 @@ class PartialsTable extends React.Component{
         let partialsTableEN = (
 
             <tr>
-                <th style={{'width':'15px', 'font-size':'25px',
-'border-spacing':'0 30px'}}>#</th>
+                <th style={{'width':'15px', 'font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Date</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Name</th>
-                <th style={{'width':'15px',
-'font-size':'25px'}}>Project</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>NCF</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>Project</th>
               </tr>
         );
 
         let partialsTableES = (
 
             <tr>
-                <th style={{'width':'15px', 'font-size':'25px',
-'border-spacing':'0 30px'}}>#</th>
+                <th style={{'width':'15px', 'font-size':'25px', 'border-spacing':'0 30px'}}>#</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Fecha</th>
+                <th style={{'width':'15px', 'font-size':'25px'}}>NCF</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Cliente</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>Precio</th>
                 <th style={{'width':'15px', 'font-size':'25px'}}>TP</th>
@@ -3592,8 +3590,7 @@ class PartialsTable extends React.Component{
 
                     <Row>
                         <Col xs={12}>
-                            <Table striped bordered condensed hover
-style={{'width':'55%'}}>
+                            <Table striped bordered condensed hover style={{'width':'55%'}}>
                                 <thead>
                                   {partialsTableActive}
                                 </thead>
@@ -3605,6 +3602,7 @@ style={{'width':'55%'}}>
                                                 index={index+1}
                                                 id={master.id}
                                                 date={master.date}
+                                                ncf={master.ncf}
                                                 name={master.name}
                                                 project={master.project}
                                                 grandTotal={master.grandTotal}
@@ -3617,10 +3615,8 @@ style={{'width':'55%'}}>
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td style={{'width':'10px',
-'font-size':'20px'}}>Total</td>
-                                        <td style={{'width':'10px',
-'font-size':'20px'}}>RD${this.props.total.toFixed(2)}</td>
+                                        <td style={{'width':'10px', 'font-size':'20px'}}>Total</td>
+                                        <td style={{'width':'10px', 'font-size':'20px'}}>RD${this.props.total.toFixed(2)}</td>
                                         <br/>
                                         <br/>
                                     </tr>
@@ -3646,6 +3642,7 @@ class PartialsTableBody extends React.Component{
                 <td></td>
                 <td style={{'font-size':'20px'}}>{this.props.date}</td>
                 <td style={{'font-size':'20px'}}>{this.props.name}</td>
+                <td style={{'font-size':'20px'}}>{this.props.ncf}</td>
                 <td style={{'font-size':'20px'}}>{this.props.grandTotal.toFixed(2)}</td>
                 <td style={{'font-size':'20px'}}>{this.props.tipopago.toUpperCase().substring(0,1)}</td>
               </tr>

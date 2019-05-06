@@ -1111,7 +1111,6 @@ var Toolbar = function (_React$Component9) {
     }, {
         key: 'onRefreshed',
         value: function onRefreshed() {
-            this.props.history.push("/detail");
             window.location.reload();
         }
     }, {
@@ -5245,8 +5244,7 @@ var PartialsTable = function (_React$Component35) {
                 null,
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px',
-                            'border-spacing': '0 30px' } },
+                    { style: { 'width': '15px', 'font-size': '25px', 'border-spacing': '0 30px' } },
                     '#'
                 ),
                 React.createElement(
@@ -5261,8 +5259,12 @@ var PartialsTable = function (_React$Component35) {
                 ),
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px',
-                            'font-size': '25px' } },
+                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    'NCF'
+                ),
+                React.createElement(
+                    'th',
+                    { style: { 'width': '15px', 'font-size': '25px' } },
                     'Project'
                 )
             );
@@ -5272,14 +5274,18 @@ var PartialsTable = function (_React$Component35) {
                 null,
                 React.createElement(
                     'th',
-                    { style: { 'width': '15px', 'font-size': '25px',
-                            'border-spacing': '0 30px' } },
+                    { style: { 'width': '15px', 'font-size': '25px', 'border-spacing': '0 30px' } },
                     '#'
                 ),
                 React.createElement(
                     'th',
                     { style: { 'width': '15px', 'font-size': '25px' } },
                     'Fecha'
+                ),
+                React.createElement(
+                    'th',
+                    { style: { 'width': '15px', 'font-size': '25px' } },
+                    'NCF'
                 ),
                 React.createElement(
                     'th',
@@ -5316,8 +5322,7 @@ var PartialsTable = function (_React$Component35) {
                     { xs: 12 },
                     React.createElement(
                         Table,
-                        { striped: true, bordered: true, condensed: true, hover: true,
-                            style: { 'width': '55%' } },
+                        { striped: true, bordered: true, condensed: true, hover: true, style: { 'width': '55%' } },
                         React.createElement(
                             'thead',
                             null,
@@ -5332,6 +5337,7 @@ var PartialsTable = function (_React$Component35) {
                                     index: index + 1,
                                     id: master.id,
                                     date: master.date,
+                                    ncf: master.ncf,
                                     name: master.name,
                                     project: master.project,
                                     grandTotal: master.grandTotal,
@@ -5358,14 +5364,12 @@ var PartialsTable = function (_React$Component35) {
                                 ),
                                 React.createElement(
                                     'td',
-                                    { style: { 'width': '10px',
-                                            'font-size': '20px' } },
+                                    { style: { 'width': '10px', 'font-size': '20px' } },
                                     'Total'
                                 ),
                                 React.createElement(
                                     'td',
-                                    { style: { 'width': '10px',
-                                            'font-size': '20px' } },
+                                    { style: { 'width': '10px', 'font-size': '20px' } },
                                     'RD$',
                                     this.props.total.toFixed(2)
                                 ),
@@ -5408,6 +5412,11 @@ var PartialsTableBody = function (_React$Component36) {
                     'td',
                     { style: { 'font-size': '20px' } },
                     this.props.name
+                ),
+                React.createElement(
+                    'td',
+                    { style: { 'font-size': '20px' } },
+                    this.props.ncf
                 ),
                 React.createElement(
                     'td',
