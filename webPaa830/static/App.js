@@ -2537,11 +2537,11 @@ var MasterTableBody = function (_React$Component14) {
                     'td',
                     null,
                     React.createElement(
-                        Link,
-                        { className: 'btn btn-default', to: '/actions/' + this.props.id },
+                        'a',
+                        { target: '_blank', onClick: this.onClick, className: 'btn btn-default', href: "http://159.203.156.208:3001/" + this.props.id },
                         React.createElement('i', { className: 'fa fa-eye', 'aria-hidden': 'true' })
                     ),
-                    '\xA0\xA0',
+                    ' ',
                     React.createElement(
                         Link,
                         { className: 'btn btn-default', to: '/updatedelivery/' + this.props.id },

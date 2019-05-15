@@ -1797,7 +1797,8 @@ class MasterTableBody extends React.Component{
                     <td>{this.props.fechaentrega}{this.props.horaentrega}</td>
                     <td>{this.props.status}</td>
                     <td>
-                        <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>&nbsp;&nbsp;
+                        {/* <Link className="btn btn-default" to={'/actions/'+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></Link>&nbsp;&nbsp; */}
+                        <a target="_blank" onClick={this.onClick} className="btn btn-default" href={"http://159.203.156.208:3001/"+this.props.id}><i className="fa fa-eye" aria-hidden="true"></i></a>{' '}
                         <Link className="btn btn-default" to={'/updatedelivery/'+this.props.id}><i className="fa fa-edit" aria-hidden="true"></i></Link>&nbsp;&nbsp;                        
                         {checkItem}
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
