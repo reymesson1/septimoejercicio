@@ -757,6 +757,7 @@ class Toolbar extends React.Component{
     }
 
     onRefreshed(){
+        this.props.history.push("/detail");
         window.location.reload();
     }
 

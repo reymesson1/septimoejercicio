@@ -1111,6 +1111,7 @@ var Toolbar = function (_React$Component9) {
     }, {
         key: 'onRefreshed',
         value: function onRefreshed() {
+            this.props.history.push("/detail");
             window.location.reload();
         }
     }, {
