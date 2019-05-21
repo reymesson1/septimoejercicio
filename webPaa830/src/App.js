@@ -1240,7 +1240,7 @@ class Master extends React.Component{
                     
                     newItem = {
                         
-                        "id": Date.now(),
+                        "id": this.state.masterAPI.length,
                         "firstname":fullname,
                         "telefono":global,
                         "rnc":rnc,
@@ -1280,7 +1280,7 @@ class Master extends React.Component{
    
                     newItem = {
                         
-                        "id": Date.now(),
+                        "id": this.state.masterAPI.length,
                         "firstname":fullname,
                         // "telefono":event.target.firstname.value,
                         "telefono":subStr,
