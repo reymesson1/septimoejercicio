@@ -12,8 +12,12 @@ exports.getMaster = async(req,res)=>{
 }
 
 exports.setMaster = async(req,res)=>{
+
+  var newMaster = req.body;
+
+  newMaster["telefono"] = req.body.item[0].telefono;
   
-  var master = new Master(req.body);
+  var master = new Master(newMaster);
   
   master.save(function(err){
     if(!err){

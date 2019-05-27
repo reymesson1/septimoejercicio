@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
     tipopago: String,
     ncf: String,
     status: String,
+    telefono: String,
     item: Array,
     comments: Array
 })
