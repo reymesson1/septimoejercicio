@@ -1553,6 +1553,8 @@ var Master = function (_React$Component11) {
 
             var today = moment(new Date()).format('YYYY-MM-DD');
 
+            var now = moment(new Date()).format('hh:mm:ss a');
+
             var details = this.state.masterDetail;
 
             var name = details[0].firstname;
@@ -1628,6 +1630,7 @@ var Master = function (_React$Component11) {
                 "id": Date.now(),
                 "idOrder": this.state.masterAPI.length,
                 "date": today,
+                "time": now,
                 "name": name,
                 "item": this.state.masterDetail,
                 "project": zoom,

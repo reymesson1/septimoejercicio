@@ -1001,6 +1001,8 @@ class Master extends React.Component{
 
         let today = moment(new Date()).format('YYYY-MM-DD');
 
+        let now = moment(new Date()).format('hh:mm:ss a');
+
         let details = this.state.masterDetail;
         
 
@@ -1077,6 +1079,7 @@ class Master extends React.Component{
             "id": Date.now(),
             "idOrder": this.state.masterAPI.length,
             "date": today,
+            "time": now,
             "name": name,
             "item": this.state.masterDetail,
             "project": zoom,            
