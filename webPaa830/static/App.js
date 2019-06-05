@@ -334,11 +334,11 @@ var Actions = function (_React$Component3) {
                         customerAPI: this.state.customerAPI
                     }),
                     React.createElement(
-                        Button,
-                        { onClick: this.onPrinted.bind(this) },
-                        'i\xA0'
+                        'a',
+                        { target: '_blank', onClick: this.onClick, className: 'btn btn-default', href: "http://159.203.156.208:3001/" + this.state.parameter },
+                        React.createElement('i', { className: 'fa fa-eye', 'aria-hidden': 'true' })
                     ),
-                    '\xA0\xA0\xA0',
+                    ' ',
                     marquilla[0].item.map(function (masterMarquilla, index) {
                         return React.createElement(
                             Link,
@@ -2541,11 +2541,11 @@ var MasterTableBody = function (_React$Component14) {
                     'td',
                     null,
                     React.createElement(
-                        'a',
-                        { target: '_blank', onClick: this.onClick, className: 'btn btn-default', href: "http://159.203.156.208:3001/" + this.props.id },
+                        Link,
+                        { className: 'btn btn-default', to: '/actions/' + this.props.id },
                         React.createElement('i', { className: 'fa fa-eye', 'aria-hidden': 'true' })
                     ),
-                    ' ',
+                    '\xA0\xA0',
                     React.createElement(
                         Link,
                         { className: 'btn btn-default', to: '/updatedelivery/' + this.props.id },
