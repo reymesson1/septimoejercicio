@@ -5994,19 +5994,6 @@ class Matching extends React.Component{
                                                          <td>{' '}{' '}{' '}{' '}</td>
                                                          <td>{' '}&nbsp;</td>
                                                      </tr>
-                                                     <tr>
-                                                         <td>{' '}{' '}{' '}{' '}{' '}</td>
-                                                         <td>{' '}{' '}{' '}{' '}</td>
-                                                         <td>{' '}&nbsp;</td>
-                                                     </tr>                                                     <tr>
-                                                         <td>{' '}{' '}{' '}{' '}{' '}</td>
-                                                         <td>{' '}{' '}{' '}{' '}</td>
-                                                         <td>{' '}&nbsp;</td>
-                                                     </tr>                                                     <tr>
-                                                         <td>{' '}{' '}{' '}{' '}{' '}</td>
-                                                         <td>{' '}{' '}{' '}{' '}</td>
-                                                         <td>{' '}&nbsp;</td>
-                                                     </tr>
                                                      {/* <tr>
                                                          <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                      </tr> */}
