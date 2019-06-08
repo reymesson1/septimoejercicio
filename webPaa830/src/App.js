@@ -38,8 +38,8 @@ const moment = moment;
 
 var global = 0;
 
-// const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -6000,6 +6000,17 @@ class Matching extends React.Component{
                                                         <td>{' '}{' '}{' '}{' '}</td>
                                                         <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
                                                     </tr>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <tr></tr>
+                                                    <tr></tr>
+                                                    <tr></tr>
+                                                    <tr></tr>
+                                                    <tr></tr>
                                                     <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
                                                     </tr>
