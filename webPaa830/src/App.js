@@ -5976,9 +5976,9 @@ class Matching extends React.Component{
                     (master) => <tr><td>{master.item.filter( (m2) => m2.id == this.state.parameter2).map(
                         (master2) =>       <Table> 
                                                 <tbody>
-                                                    <tr>
+                                                    {/* <tr>
                                                         <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
-                                                    </tr>
+                                                    </tr> */}
                                                     <tr>
                                                         {/* <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td> */}
                                                         <td>{master.id}{' '}{' '}{' '}{' '}</td>
