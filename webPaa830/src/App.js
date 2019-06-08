@@ -5943,6 +5943,7 @@ class Matching extends React.Component{
         )
 
         return(
+            <div  id="printcss" style={{'margin':'0'}}>
              <Table>            
              <tbody>
                  {master.map(
@@ -5983,6 +5984,7 @@ class Matching extends React.Component{
                  )}                
              </tbody>
            </Table>
+           </div>
         );
     }
 

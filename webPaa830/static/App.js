@@ -9064,139 +9064,143 @@ var Matching = function (_React$Component64) {
             });
 
             return React.createElement(
-                Table,
-                null,
+                'div',
+                { id: 'printcss', style: { 'margin': '0' } },
                 React.createElement(
-                    'tbody',
+                    Table,
                     null,
-                    master.map(function (master) {
-                        return React.createElement(
-                            'tr',
-                            null,
-                            React.createElement(
-                                'td',
+                    React.createElement(
+                        'tbody',
+                        null,
+                        master.map(function (master) {
+                            return React.createElement(
+                                'tr',
                                 null,
-                                master.item.filter(function (m2) {
-                                    return m2.id == _this106.state.parameter2;
-                                }).map(function (master2) {
-                                    return React.createElement(
-                                        Table,
-                                        null,
-                                        React.createElement(
-                                            'tbody',
+                                React.createElement(
+                                    'td',
+                                    null,
+                                    master.item.filter(function (m2) {
+                                        return m2.id == _this106.state.parameter2;
+                                    }).map(function (master2) {
+                                        return React.createElement(
+                                            Table,
                                             null,
                                             React.createElement(
-                                                'tr',
+                                                'tbody',
                                                 null,
                                                 React.createElement(
-                                                    'td',
+                                                    'tr',
                                                     null,
-                                                    master.id,
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        master.id,
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        { colSpan: 2 },
+                                                        master.date,
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    )
                                                 ),
                                                 React.createElement(
-                                                    'td',
-                                                    { colSpan: 2 },
-                                                    master.date,
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    { colSpan: 3 },
-                                                    master.name.toUpperCase(),
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    { colSpan: 3 },
-                                                    master2.item,
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
+                                                    'tr',
                                                     null,
-                                                    "Usuario:",
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
+                                                    React.createElement(
+                                                        'td',
+                                                        { colSpan: 3 },
+                                                        master.name.toUpperCase(),
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    )
                                                 ),
                                                 React.createElement(
-                                                    'td',
+                                                    'tr',
                                                     null,
-                                                    "None",
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
+                                                    React.createElement(
+                                                        'td',
+                                                        { colSpan: 3 },
+                                                        master2.item,
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    )
                                                 ),
                                                 React.createElement(
-                                                    'td',
+                                                    'tr',
                                                     null,
-                                                    master2.project.toFixed(2),
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
-                                                )
-                                            ),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        "Usuario:",
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        "None",
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        master2.project.toFixed(2),
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    )
                                                 ),
                                                 React.createElement(
-                                                    'td',
+                                                    'tr',
                                                     null,
-                                                    ' ',
-                                                    ' ',
-                                                    ' ',
-                                                    ' '
-                                                ),
-                                                React.createElement(
-                                                    'td',
-                                                    null,
-                                                    ' ',
-                                                    parseInt(_this106.state.index) + 1 + '-',
-                                                    master.item.length,
-                                                    ' '
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        ' ',
+                                                        ' ',
+                                                        ' ',
+                                                        ' '
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        ' ',
+                                                        parseInt(_this106.state.index) + 1 + '-',
+                                                        master.item.length,
+                                                        ' '
+                                                    )
                                                 )
                                             )
-                                        )
-                                    );
-                                })
-                            )
-                        );
-                    })
+                                        );
+                                    })
+                                )
+                            );
+                        })
+                    )
                 )
             );
         }
