@@ -9064,98 +9064,141 @@ var Matching = function (_React$Component64) {
             });
 
             return React.createElement(
-                'div',
-                { id: 'printcss', style: { 'margin': '0' } },
+                Table,
+                null,
                 React.createElement(
-                    Grid,
+                    'tbody',
                     null,
-                    React.createElement(
-                        Row,
-                        null,
-                        React.createElement(
-                            Col,
-                            { xs: 12 },
+                    master.map(function (master) {
+                        return React.createElement(
+                            'tr',
+                            null,
                             React.createElement(
-                                'h5',
+                                'td',
                                 null,
-                                'RNC: 131-473865'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Tel.: (809)-638-9999'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Nuestro horario'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Abiertos los sabados 8am a 1pm'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Lunes a Viernes 7:30am a 7:00pm'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Domingos Cerrado'
-                            ),
-                            React.createElement(
-                                'h5',
-                                null,
-                                'Orden de Servicio'
-                            ),
-                            React.createElement('br', null)
-                        )
-                    )
+                                master.item.filter(function (m2) {
+                                    return m2.id == _this106.state.parameter2;
+                                }).map(function (master2) {
+                                    return React.createElement(
+                                        Table,
+                                        null,
+                                        React.createElement(
+                                            'tbody',
+                                            null,
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master.id,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    { colSpan: 2 },
+                                                    master.date,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    { colSpan: 3 },
+                                                    master.name.toUpperCase(),
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    { colSpan: 3 },
+                                                    master2.item,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "Usuario:",
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    "None",
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    master2.project.toFixed(2),
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                )
+                                            ),
+                                            React.createElement(
+                                                'tr',
+                                                null,
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    ' ',
+                                                    ' ',
+                                                    ' ',
+                                                    ' '
+                                                ),
+                                                React.createElement(
+                                                    'td',
+                                                    null,
+                                                    ' ',
+                                                    parseInt(_this106.state.index) + 1 + '-',
+                                                    master.item.length,
+                                                    ' '
+                                                )
+                                            )
+                                        )
+                                    );
+                                })
+                            )
+                        );
+                    })
                 )
-            )
-            //     <Table>            
-            //     <tbody>
-            //         {master.map(
-            //             (master) => <tr><td>{master.item.filter( (m2) => m2.id == this.state.parameter2).map(
-            //                 (master2) =>       <Table> 
-            //                                         <tbody>
-            //                                             {/* <tr>
-            //                                                 <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
-            //                                             </tr> */}
-            //                                             <tr>
-            //                                                 {/* <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td> */}
-            //                                                 <td>{master.id}{' '}{' '}{' '}{' '}</td>
-            //                                                 <td colSpan={2}>{master.date}{' '}{' '}{' '}{' '}</td>
-            //                                             </tr>
-            //                                             <tr>
-            //                                                 <td colSpan={3}>{master.name.toUpperCase()}{' '}{' '}{' '}{' '}</td>                                                        
-            //                                             </tr>
-            //                                             <tr>
-            //                                                 <td colSpan={3}>{master2.item}{' '}{' '}{' '}{' '}</td>
-            //                                             </tr>
-            //                                             <tr>
-            //                                                 <td>{"Usuario:"}{' '}{' '}{' '}{' '}</td>
-            //                                                 <td>{"None"}{' '}{' '}{' '}</td>
-            //                                                 <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
-            //                                             </tr>
-            //                                             <tr>
-            //                                                 <td>{' '}{' '}{' '}{' '}{' '}</td>
-            //                                                 <td>{' '}{' '}{' '}{' '}</td>
-            //                                                 <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
-            //                                             </tr>
-            //                                             {/* <tr>
-            //                                                 <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
-            //                                             </tr> */}
-            //                                         </tbody>
-            //                                     </Table>
-
-            //             )}</td></tr>
-            //         )}                
-            //     </tbody>
-            //   </Table>
-            ;
+            );
         }
     }]);
 
