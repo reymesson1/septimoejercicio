@@ -5970,20 +5970,23 @@ class Matching extends React.Component{
         )
 
         return(
+            <div  id="printcss" style={{'margin':'0'}}>
             <Grid>
-            <Row>
-                <Col xs={12}>
-                    <h5>RNC: 131-473865</h5>
-                    <h5>Tel.: (809)-638-9999</h5>
-                    <h5>Nuestro horario</h5>
-                    <h5>Abiertos los sabados 8am a 1pm</h5>
-                    <h5>Lunes a Viernes 7:30am a 7:00pm</h5>
-                    <h5>Domingos Cerrado</h5>
-                    <h5>Orden de Servicio</h5>
-                    <br/>
-                </Col>
+                <Row>
+                    <Col xs={12}>
+
+                        <h5>RNC: 131-473865</h5>
+                        <h5>Tel.: (809)-638-9999</h5>
+                        <h5>Nuestro horario</h5>
+                        <h5>Abiertos los sabados 8am a 1pm</h5>
+                        <h5>Lunes a Viernes 7:30am a 7:00pm</h5>
+                        <h5>Domingos Cerrado</h5>
+                        <h5>Orden de Servicio</h5>
+                        <br/>
+                    </Col>
             </Row>
             </Grid>
+            </div>
         //     <Table>            
         //     <tbody>
         //         {master.map(

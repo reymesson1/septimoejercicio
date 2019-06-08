@@ -9064,50 +9064,54 @@ var Matching = function (_React$Component64) {
             });
 
             return React.createElement(
-                Grid,
-                null,
+                'div',
+                { id: 'printcss', style: { 'margin': '0' } },
                 React.createElement(
-                    Row,
+                    Grid,
                     null,
                     React.createElement(
-                        Col,
-                        { xs: 12 },
+                        Row,
+                        null,
                         React.createElement(
-                            'h5',
-                            null,
-                            'RNC: 131-473865'
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Tel.: (809)-638-9999'
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Nuestro horario'
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Abiertos los sabados 8am a 1pm'
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Lunes a Viernes 7:30am a 7:00pm'
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Domingos Cerrado'
-                        ),
-                        React.createElement(
-                            'h5',
-                            null,
-                            'Orden de Servicio'
-                        ),
-                        React.createElement('br', null)
+                            Col,
+                            { xs: 12 },
+                            React.createElement(
+                                'h5',
+                                null,
+                                'RNC: 131-473865'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Tel.: (809)-638-9999'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Nuestro horario'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Abiertos los sabados 8am a 1pm'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Lunes a Viernes 7:30am a 7:00pm'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Domingos Cerrado'
+                            ),
+                            React.createElement(
+                                'h5',
+                                null,
+                                'Orden de Servicio'
+                            ),
+                            React.createElement('br', null)
+                        )
                     )
                 )
             )
