@@ -9189,9 +9189,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 React.createElement(
@@ -9218,9 +9216,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 React.createElement(
@@ -9247,9 +9243,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 React.createElement(
@@ -9276,9 +9270,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 React.createElement(
@@ -9305,9 +9297,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 React.createElement(
@@ -9334,9 +9324,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 '                                                     ',
@@ -9364,9 +9352,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 ),
                                                 '                                                     ',
@@ -9394,9 +9380,7 @@ var Matching = function (_React$Component64) {
                                                         'td',
                                                         null,
                                                         ' ',
-                                                        parseInt(_this106.state.index) + 1 + '-',
-                                                        master.item.length,
-                                                        ' '
+                                                        '\xA0'
                                                     )
                                                 )
                                             )
