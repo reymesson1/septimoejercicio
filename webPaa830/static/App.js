@@ -9093,6 +9093,15 @@ var Matching = function (_React$Component64) {
                                                     null,
                                                     React.createElement(
                                                         'td',
+                                                        { className: 'print-cut' },
+                                                        String.fromCharCode("<1D>vb<00>")
+                                                    )
+                                                ),
+                                                React.createElement(
+                                                    'tr',
+                                                    null,
+                                                    React.createElement(
+                                                        'td',
                                                         null,
                                                         master.id,
                                                         ' ',
@@ -9298,6 +9307,15 @@ var Matching = function (_React$Component64) {
                                                         null,
                                                         ' ',
                                                         '\xA0'
+                                                    )
+                                                ),
+                                                React.createElement(
+                                                    'tr',
+                                                    null,
+                                                    React.createElement(
+                                                        'td',
+                                                        { className: 'print-cut' },
+                                                        String.fromCharCode("<1D>vb<00>")
                                                     )
                                                 )
                                             )
