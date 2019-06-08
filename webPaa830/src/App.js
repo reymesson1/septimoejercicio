@@ -6000,9 +6000,9 @@ class Matching extends React.Component{
                                                         <td>{' '}{' '}{' '}{' '}</td>
                                                         <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
                                                     </tr>
-                                                    {/* <tr> */}
-                                                        {/* <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td> */}
-                                                    {/* </tr>*/}
+                                                    {/* <tr>
+                                                        <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
+                                                    </tr> */}
                                                 </tbody>
                                             </Table>
                         
