@@ -5977,7 +5977,7 @@ class Matching extends React.Component{
                         (master2) =>       <Table> 
                                                 <tbody>
                                                     <tr>
-                                                        <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
+                                                        {/* <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td> */}
                                                     </tr>
                                                     <tr>
                                                         {/* <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td> */}
@@ -6000,19 +6000,8 @@ class Matching extends React.Component{
                                                         <td>{' '}{' '}{' '}{' '}</td>
                                                         <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
                                                     </tr>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
-                                                    <br/>
-                                                    <tr></tr>
-                                                    <tr></tr>
-                                                    <tr></tr>
-                                                    <tr></tr>
-                                                    <tr></tr>
                                                     <tr>
-                                                        <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
+                                                        {/* <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td> */}
                                                     </tr>
                                                     <br/>
                                                     <br/>

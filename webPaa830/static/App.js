@@ -9085,15 +9085,7 @@ var Matching = function (_React$Component64) {
                                         React.createElement(
                                             'tbody',
                                             null,
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    { className: 'print-cut' },
-                                                    String.fromCharCode("<1D>vb<00>")
-                                                )
-                                            ),
+                                            React.createElement('tr', null),
                                             React.createElement(
                                                 'tr',
                                                 null,
@@ -9200,26 +9192,7 @@ var Matching = function (_React$Component64) {
                                                     ' '
                                                 )
                                             ),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
                                             React.createElement('tr', null),
-                                            React.createElement('tr', null),
-                                            React.createElement('tr', null),
-                                            React.createElement('tr', null),
-                                            React.createElement('tr', null),
-                                            React.createElement(
-                                                'tr',
-                                                null,
-                                                React.createElement(
-                                                    'td',
-                                                    { className: 'print-cut' },
-                                                    String.fromCharCode("<1D>vb<00>")
-                                                )
-                                            ),
                                             React.createElement('br', null),
                                             React.createElement('br', null),
                                             React.createElement('br', null),
