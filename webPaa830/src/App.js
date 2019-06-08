@@ -5970,46 +5970,60 @@ class Matching extends React.Component{
         )
 
         return(
-            <Table>            
-            <tbody>
-                {master.map(
-                    (master) => <tr><td>{master.item.filter( (m2) => m2.id == this.state.parameter2).map(
-                        (master2) =>       <Table> 
-                                                <tbody>
-                                                    {/* <tr>
-                                                        <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
-                                                    </tr> */}
-                                                    <tr>
-                                                        {/* <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td> */}
-                                                        <td>{master.id}{' '}{' '}{' '}{' '}</td>
-                                                        <td colSpan={2}>{master.date}{' '}{' '}{' '}{' '}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colSpan={3}>{master.name.toUpperCase()}{' '}{' '}{' '}{' '}</td>                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td colSpan={3}>{master2.item}{' '}{' '}{' '}{' '}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{"Usuario:"}{' '}{' '}{' '}{' '}</td>
-                                                        <td>{"None"}{' '}{' '}{' '}</td>
-                                                        <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{' '}{' '}{' '}{' '}{' '}</td>
-                                                        <td>{' '}{' '}{' '}{' '}</td>
-                                                        <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
-                                                    </tr>
-                                                    {/* <tr>
-                                                        <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
-                                                    </tr> */}
-                                                </tbody>
-                                            </Table>
+            <Grid>
+            <Row>
+                <Col xs={12}>
+                    <h5>RNC: 131-473865</h5>
+                    <h5>Tel.: (809)-638-9999</h5>
+                    <h5>Nuestro horario</h5>
+                    <h5>Abiertos los sabados 8am a 1pm</h5>
+                    <h5>Lunes a Viernes 7:30am a 7:00pm</h5>
+                    <h5>Domingos Cerrado</h5>
+                    <h5>Orden de Servicio</h5>
+                    <br/>
+                </Col>
+            </Row>
+            </Grid>
+        //     <Table>            
+        //     <tbody>
+        //         {master.map(
+        //             (master) => <tr><td>{master.item.filter( (m2) => m2.id == this.state.parameter2).map(
+        //                 (master2) =>       <Table> 
+        //                                         <tbody>
+        //                                             {/* <tr>
+        //                                                 <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
+        //                                             </tr> */}
+        //                                             <tr>
+        //                                                 {/* <td>{master.id}&nbsp;&nbsp;&nbsp;&nbsp;</td> */}
+        //                                                 <td>{master.id}{' '}{' '}{' '}{' '}</td>
+        //                                                 <td colSpan={2}>{master.date}{' '}{' '}{' '}{' '}</td>
+        //                                             </tr>
+        //                                             <tr>
+        //                                                 <td colSpan={3}>{master.name.toUpperCase()}{' '}{' '}{' '}{' '}</td>                                                        
+        //                                             </tr>
+        //                                             <tr>
+        //                                                 <td colSpan={3}>{master2.item}{' '}{' '}{' '}{' '}</td>
+        //                                             </tr>
+        //                                             <tr>
+        //                                                 <td>{"Usuario:"}{' '}{' '}{' '}{' '}</td>
+        //                                                 <td>{"None"}{' '}{' '}{' '}</td>
+        //                                                 <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
+        //                                             </tr>
+        //                                             <tr>
+        //                                                 <td>{' '}{' '}{' '}{' '}{' '}</td>
+        //                                                 <td>{' '}{' '}{' '}{' '}</td>
+        //                                                 <td>{' '}{parseInt(this.state.index)+1 +'-'}{master.item.length}{' '}</td>
+        //                                             </tr>
+        //                                             {/* <tr>
+        //                                                 <td className="print-cut" >{String.fromCharCode("<1D>vb<00>")}</td>
+        //                                             </tr> */}
+        //                                         </tbody>
+        //                                     </Table>
                         
-                    )}</td></tr>
-                )}                
-            </tbody>
-          </Table>
+        //             )}</td></tr>
+        //         )}                
+        //     </tbody>
+        //   </Table>
         );
     }
 
