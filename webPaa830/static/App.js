@@ -9199,15 +9199,7 @@ var Matching = function (_React$Component64) {
                                                     master.item.length,
                                                     ' '
                                                 )
-                                            ),
-                                            React.createElement('tr', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null),
-                                            React.createElement('br', null)
+                                            )
                                         )
                                     );
                                 })
