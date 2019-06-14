@@ -9059,9 +9059,12 @@ var Matching = function (_React$Component64) {
         value: function render() {
             var _this106 = this;
 
-            var master = this.state.master.filter(function (master) {
-                return master.id == _this106.state.parameter;
-            });
+            var master = this.state.master;
+            // let master = this.state.master.filter(
+
+            //     (master) => master.id == this.state.parameter
+
+            // )
 
             return React.createElement(
                 'div',

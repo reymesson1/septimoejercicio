@@ -5936,11 +5936,12 @@ class Matching extends React.Component{
 
     render(){
 
-        let master = this.state.master.filter(
+        let master = this.state.master
+        // let master = this.state.master.filter(
 
-            (master) => master.id == this.state.parameter
+        //     (master) => master.id == this.state.parameter
 
-        )
+        // )
 
         return(
             <div  id="printcss" style={{'margin':'0'}}>
