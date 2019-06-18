@@ -38,7 +38,7 @@ const moment = moment;
 
 var global = 0;
 
-// const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://localhost:8082';  
 const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
@@ -339,7 +339,7 @@ class ActionsTable extends React.Component{
                 <Grid>
                     <Row>
                         <Col xs={12}>
-                            <img src="/logoprint.png"/>
+                            {/* <img src="/logoprint.png"/> */}
 
  <h5>RNC: 131-473865</h5>
 <h5>Tel.: (809)-638-9999</h5>

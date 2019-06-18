@@ -50,7 +50,7 @@ var moment = moment;
 
 var global = 0;
 
-// const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://localhost:8082';  
 var API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
@@ -416,7 +416,6 @@ var ActionsTable = function (_React$Component4) {
                         React.createElement(
                             Col,
                             { xs: 12 },
-                            React.createElement('img', { src: '/logoprint.png' }),
                             React.createElement(
                                 'h5',
                                 null,
