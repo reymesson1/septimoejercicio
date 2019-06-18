@@ -9173,10 +9173,26 @@ var Matching = function (_React$Component64) {
                                                     React.createElement(
                                                         'td',
                                                         null,
-                                                        ' ',
-                                                        ' ',
-                                                        ' ',
-                                                        ' '
+                                                        '\xA0'
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        '\xA0'
+                                                    )
+                                                ),
+                                                React.createElement(
+                                                    'tr',
+                                                    null,
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        '\xA0'
+                                                    ),
+                                                    React.createElement(
+                                                        'td',
+                                                        null,
+                                                        '\xA0'
                                                     )
                                                 )
                                             )

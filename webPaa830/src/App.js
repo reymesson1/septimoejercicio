@@ -5967,9 +5967,14 @@ class Matching extends React.Component{
                                                          <td>{"None"}{' '}{' '}{' '}</td>
                                                          <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
                                                      </tr>  
-                                                     <tr>                                                         
-                                                         <td>{' '}{' '}{' '}{' '}</td>                                                         
-                                                     </tr>                                                                                                         
+                                                     <tr>
+                                                         <td>&nbsp;</td>
+                                                         <td>&nbsp;</td>                                                         
+                                                     </tr>                                                                                                                                                              
+                                                     <tr>
+                                                         <td>&nbsp;</td>
+                                                         <td>&nbsp;</td>                                                         
+                                                     </tr>                                                                                                                                                              
                                                  </tbody>
                                              </Table>
         
