@@ -38,8 +38,8 @@ const moment = moment;
 
 var global = 0;
 
-// const API_URL = 'http://localhost:8082';  
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';  
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -5968,12 +5968,12 @@ class Matching extends React.Component{
                                                          <td>{master2.project.toFixed(2)}{' '}{' '}{' '}</td>
                                                      </tr>  
                                                      <tr>
-                                                         <td>&nbsp;</td>
-                                                         <td>&nbsp;</td>                                                         
+                                                         <td>{' '}</td>
+                                                         <td>{' '}</td>                                                        
                                                      </tr>                                                                                                                                                              
                                                      <tr>
-                                                         <td>&nbsp;</td>
-                                                         <td>&nbsp;</td>                                                         
+                                                        <td>{' '}</td>
+                                                        <td>{' '}</td>                                                        
                                                      </tr>                                                                                                                                                              
                                                  </tbody>
                                              </Table>
