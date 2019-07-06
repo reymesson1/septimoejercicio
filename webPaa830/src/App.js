@@ -1004,7 +1004,7 @@ class Master extends React.Component{
         itbis = ( 18 / 100) * zoom;
         itbis += ( 18 / 100) * agregado;
 
-        let grandTotal = zoom + agregado + itbis;
+        let grandTotal = zoom + agregado;
         
         let nextStateCustomer = this.state.customerAPI;
         

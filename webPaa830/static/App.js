@@ -1581,7 +1581,7 @@ var Master = function (_React$Component11) {
             itbis = 18 / 100 * zoom;
             itbis += 18 / 100 * agregado;
 
-            var grandTotal = zoom + agregado + itbis;
+            var grandTotal = zoom + agregado;
 
             var nextStateCustomer = this.state.customerAPI;
 
