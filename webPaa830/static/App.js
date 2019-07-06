@@ -1796,7 +1796,7 @@ var Master = function (_React$Component11) {
                             "item": event.target.suggest.value,
                             "itemDetail": this.state.detailAdded,
                             "development": event.target.development.value,
-                            "quantity": event.target.quantity.value,
+                            "quantity": parseInt(event.target.quantity.value),
                             "project": project
                         };
                     } else {

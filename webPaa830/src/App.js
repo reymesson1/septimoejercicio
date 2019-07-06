@@ -1223,7 +1223,7 @@ class Master extends React.Component{
                         "item":event.target.suggest.value,
                         "itemDetail": this.state.detailAdded,
                         "development":event.target.development.value,
-                        "quantity":event.target.quantity.value,
+                        "quantity": parseInt(event.target.quantity.value),
                         "project":project,
                     } 
                     
