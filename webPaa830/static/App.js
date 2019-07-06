@@ -50,8 +50,8 @@ var moment = moment;
 
 var global = 0;
 
-// const API_URL = 'http://localhost:8082';  
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -1834,7 +1834,7 @@ var Master = function (_React$Component11) {
                             "item": event.target.suggest.value,
                             "itemDetail": this.state.detailAdded,
                             "development": event.target.development.value,
-                            "quantity": event.target.quantity.value,
+                            "quantity": parseInt(event.target.quantity.value),
                             "project": project
                         };
                     }
