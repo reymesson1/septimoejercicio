@@ -1840,7 +1840,7 @@ class MasterModal extends React.Component{
 
         let MasterModalEN = (
 
-            <Modal.Title>Modal Header </Modal.Title>
+            <Modal.Title>Modal Headers</Modal.Title>
         );
 
         let MasterModalES = (
