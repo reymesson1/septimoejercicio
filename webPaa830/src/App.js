@@ -37,9 +37,10 @@ const Autosuggest = Autosuggest;
 const moment = moment;
 
 var global = 0;
+var global2 = 0;
 
-// const API_URL = 'http://localhost:8082';  
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';  
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -1595,8 +1596,21 @@ class MasterTable extends React.Component{
         this.state = {
 
           currentPage: 1,
-          todosPerPage: 200
+          todosPerPage: 200,
+          customerAPI: []
         }
+    }
+
+    componentDidMount(){
+
+        fetch(API_URL+'/customer',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                customerAPI: responseData
+            })
+        })
     }
 
     handleClick(event) {
@@ -1698,6 +1712,10 @@ status={todo.status}
 
 tipopago={todo.tipopago}
 
+telefono={todo.telefono}
+
+customerAPI={this.state.customerAPI}
+
 
 masterCallback={this.props.masterCallback}
                                              />
@@ -1737,7 +1755,26 @@ class MasterTableBody extends React.Component{
 
     }
 
+    onClicked(event){
+
+        event.preventDefault();
+
+        global2 = event.target.value
+    }
+
     render(){
+        // console.log(this.props.customerAPI)
+
+        let filteredData = this.props.customerAPI.filter(
+
+            (master) => master.telefono == global2
+        )
+
+        //console.log(filteredData)
+        if(filteredData[0]){
+        
+            global = filteredData[0].name + " " + filteredData[0].apellido + "-" + filteredData[0].telefono        
+        }
 
         let checkItemHiddenE = (
 
@@ -1767,6 +1804,7 @@ class MasterTableBody extends React.Component{
 
         return(
                 <tr>
+                    <td><input type="radio" name="radioCust" value={this.props.telefono} onClick={this.onClicked} /></td>
                     <td>{this.props.idOrder}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
@@ -2232,7 +2270,8 @@ class MasterModalField extends React.Component{
                                 Name
                               </Col>
                               <Col md={4} sm={6}>
-                                <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />
+                                <input name="firstname" className="form-control" value={global} />
+                                {/* <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} /> */}
                               </Col>
                             </FormGroup>
                         </Row>
