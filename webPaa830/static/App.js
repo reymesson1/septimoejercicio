@@ -2652,7 +2652,7 @@ var MasterModal = function (_React$Component16) {
             var MasterModalEN = React.createElement(
                 Modal.Title,
                 null,
-                'Modal Header '
+                'Modal Headers'
             );
 
             var MasterModalES = React.createElement(
