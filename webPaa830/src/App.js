@@ -951,8 +951,6 @@ class Master extends React.Component{
         global = 0;
 
         global2 = 0;
-
-        console.log('closed')
     }
 
     open() {
@@ -2265,7 +2263,7 @@ class MasterModalField extends React.Component{
             
         }
 
-        let MasterModalFieldES = (
+        let MasterModalFieldESList = (
 
                 <Row>
                     <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
@@ -2329,13 +2327,82 @@ class MasterModalField extends React.Component{
                   </Row>
         );
 
+        let MasterModalFieldESNoList = (
+            
+                            <Row>
+                                <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
+                                    <Row>
+                                        <FormGroup controlId="formHorizontalName">
+                                          <Col componentClass={ControlLabel} md={1} sm={2}>
+                                            Name
+                                          </Col>
+                                          <Col md={4} sm={6}>
+                                            <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />
+                                            {/* <input name="firstname" className="form-control" value={global} /> */}
+                                          </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formControlsSelect">
+                                            <Col md={1} sm={2}>
+                                              <ControlLabel>Tipo de Servicio</ControlLabel>
+                                            </Col>
+                                            <Col md={4} sm={6}>
+                                              <FormControl onChange={this.onChangeAlter.bind(this)} componentClass="select" name="development" placeholder="Tipo de Servicio" required >
+                                                <option value="Lavar y Prensa">Lavar y Prensa</option>
+                                                <option value="Solo Lavar">Solo Lavar</option>
+                                                <option value="Solo Plancha">Solo Plancha</option>
+                                                <option value="Alteracion">Alteracion</option>
+                                                <option value="Agregados">Agregados</option>
+                                              </FormControl>
+                                            </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formControlsSelect">
+                                            <Col md={1} sm={2}>
+                                              <ControlLabel>List</ControlLabel>
+                                            </Col>
+                                            <Col md={4} sm={6}>
+                                            <Autocomplete
+                                                detail={this.props.detail}
+                                            />
+                                            </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                    <Row>
+                                        <FormGroup controlId="formHorizontalQuantity">
+                                          <Col componentClass={ControlLabel} md={1} sm={2}>
+                                            Cantidad
+                                          </Col>
+                                          <Col md={4} sm={6}>
+                                            <FormControl type="number" name="quantity" placeholder="Cantidad" required />
+                                          </Col>
+                                          <Col md={2}>
+                                                <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                                          </Col>
+                                        </FormGroup>
+                                    </Row>
+                                    <br/>
+                                 </Form>
+                              </Row>
+                    );
+
         let MasterModalFieldActive;
 
         if(languageActive){
 
             MasterModalFieldActive=MasterModalFieldEN
         }else{
-            MasterModalFieldActive=MasterModalFieldES
+            if(global2==0){
+
+                MasterModalFieldActive=MasterModalFieldESNoList
+            }else{
+                MasterModalFieldActive=MasterModalFieldESList
+            }
         }
 
         return(

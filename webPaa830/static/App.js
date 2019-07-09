@@ -1528,8 +1528,6 @@ var Master = function (_React$Component11) {
             global = 0;
 
             global2 = 0;
-
-            console.log('closed');
         }
     }, {
         key: 'open',
@@ -3209,7 +3207,7 @@ var MasterModalField = function (_React$Component21) {
                 MasterModalFieldAlteration = React.createElement('div', null);
             }
 
-            var MasterModalFieldES = React.createElement(
+            var MasterModalFieldESList = React.createElement(
                 Row,
                 null,
                 React.createElement(
@@ -3341,13 +3339,150 @@ var MasterModalField = function (_React$Component21) {
                 )
             );
 
+            var MasterModalFieldESNoList = React.createElement(
+                Row,
+                null,
+                React.createElement(
+                    Form,
+                    { onSubmit: this.props.masterCallback.onsavedetail.bind(this) },
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalName' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Name'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(AwesompleteInputList, { name: 'firstname', className: 'form-control', list: this.props.list })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formControlsSelect' },
+                            React.createElement(
+                                Col,
+                                { md: 1, sm: 2 },
+                                React.createElement(
+                                    ControlLabel,
+                                    null,
+                                    'Tipo de Servicio'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(
+                                    FormControl,
+                                    { onChange: this.onChangeAlter.bind(this), componentClass: 'select', name: 'development', placeholder: 'Tipo de Servicio', required: true },
+                                    React.createElement(
+                                        'option',
+                                        { value: 'Lavar y Prensa' },
+                                        'Lavar y Prensa'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'Solo Lavar' },
+                                        'Solo Lavar'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'Solo Plancha' },
+                                        'Solo Plancha'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'Alteracion' },
+                                        'Alteracion'
+                                    ),
+                                    React.createElement(
+                                        'option',
+                                        { value: 'Agregados' },
+                                        'Agregados'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formControlsSelect' },
+                            React.createElement(
+                                Col,
+                                { md: 1, sm: 2 },
+                                React.createElement(
+                                    ControlLabel,
+                                    null,
+                                    'List'
+                                )
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(Autocomplete, {
+                                    detail: this.props.detail
+                                })
+                            )
+                        )
+                    ),
+                    React.createElement('br', null),
+                    React.createElement(
+                        Row,
+                        null,
+                        React.createElement(
+                            FormGroup,
+                            { controlId: 'formHorizontalQuantity' },
+                            React.createElement(
+                                Col,
+                                { componentClass: ControlLabel, md: 1, sm: 2 },
+                                'Cantidad'
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 4, sm: 6 },
+                                React.createElement(FormControl, { type: 'number', name: 'quantity', placeholder: 'Cantidad', required: true })
+                            ),
+                            React.createElement(
+                                Col,
+                                { md: 2 },
+                                React.createElement(
+                                    Button,
+                                    { type: 'submit' },
+                                    React.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' })
+                                )
+                            )
+                        )
+                    ),
+                    React.createElement('br', null)
+                )
+            );
+
             var MasterModalFieldActive = void 0;
 
             if (languageActive) {
 
                 MasterModalFieldActive = MasterModalFieldEN;
             } else {
-                MasterModalFieldActive = MasterModalFieldES;
+                if (global2 == 0) {
+
+                    MasterModalFieldActive = MasterModalFieldESNoList;
+                } else {
+                    MasterModalFieldActive = MasterModalFieldESList;
+                }
             }
 
             return React.createElement(
