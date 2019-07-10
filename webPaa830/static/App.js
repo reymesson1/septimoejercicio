@@ -49,6 +49,7 @@ var Autosuggest = Autosuggest;
 var moment = moment;
 
 var global = 0;
+var global3 = 0;
 
 // const API_URL = 'http://localhost:8082';
 var API_URL = 'http://159.203.156.208:8082';
@@ -2567,7 +2568,7 @@ var MasterTableBody = function (_React$Component14) {
                     '\xA0\xA0',
                     React.createElement(
                         Button,
-                        { onClick: this.props.masterCallback.ondeletemastermodal.bind(this.props.id, this) },
+                        null,
                         React.createElement('i', { className: 'fa fa-trash', 'aria-hidden': 'true' })
                     ),
                     '\xA0\xA0'
