@@ -37,10 +37,10 @@ const Autosuggest = Autosuggest;
 const moment = moment;
 
 var global = 0;
-var global3 = 0;
+var global2 = 0;
 
-// const API_URL = 'http://localhost:8082';
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -1596,8 +1596,21 @@ class MasterTable extends React.Component{
         this.state = {
 
           currentPage: 1,
-          todosPerPage: 200
+          todosPerPage: 200,
+          customerAPI: []
         }
+    }
+
+    componentDidMount(){
+
+        fetch(API_URL+'/customer',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                customerAPI: responseData
+            })
+        })
     }
 
     handleClick(event) {
@@ -1623,6 +1636,7 @@ class MasterTable extends React.Component{
         let MasterTableES = (
 
             <tr>
+                <th>&nbsp;</th>
                 <th>#</th>
                 <th>Fecha</th>
                 <th>Nombre</th>
@@ -1699,6 +1713,9 @@ status={todo.status}
 
 tipopago={todo.tipopago}
 
+customerAPI={this.state.customerAPI}
+
+telefono={todo.telefono}
 
 masterCallback={this.props.masterCallback}
                                              />
@@ -1737,6 +1754,11 @@ class MasterTableBody extends React.Component{
         browserHistory.push("/main")
 
     }
+    
+    onClicked(event){
+
+        global2 = event.target.value;
+    }
 
     render(){
 
@@ -1768,6 +1790,7 @@ class MasterTableBody extends React.Component{
 
         return(
                 <tr>
+                    <td><input type="radio" onClicked={this.onClicked.bind(this)} value={this.props.telefono} /></td>
                     <td>{this.props.idOrder}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
