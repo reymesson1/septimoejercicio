@@ -1790,7 +1790,7 @@ class MasterTableBody extends React.Component{
 
         return(
                 <tr>
-                    <td><input type="radio" onClicked={this.onClicked.bind(this)} value={this.props.telefono} /></td>
+                    <td><input type="radio" name="radioCust" onClick={this.onClicked.bind(this)} value={this.props.telefono} /></td>
                     <td>{this.props.idOrder}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
@@ -2257,7 +2257,8 @@ class MasterModalField extends React.Component{
                                 Name
                               </Col>
                               <Col md={4} sm={6}>
-                                <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />
+                                {/* <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} /> */}
+                                <input name="firstname" className="form-control" value={global} />
                               </Col>
                             </FormGroup>
                         </Row>

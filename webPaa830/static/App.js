@@ -2540,7 +2540,7 @@ var MasterTableBody = function (_React$Component14) {
                 React.createElement(
                     'td',
                     null,
-                    React.createElement('input', { type: 'radio', onClicked: this.onClicked.bind(this), value: this.props.telefono })
+                    React.createElement('input', { type: 'radio', name: 'radioCust', onClick: this.onClicked.bind(this), value: this.props.telefono })
                 ),
                 React.createElement(
                     'td',
@@ -3212,7 +3212,7 @@ var MasterModalField = function (_React$Component21) {
                             React.createElement(
                                 Col,
                                 { md: 4, sm: 6 },
-                                React.createElement(AwesompleteInputList, { name: 'firstname', className: 'form-control', list: this.props.list })
+                                React.createElement('input', { name: 'firstname', className: 'form-control', value: global })
                             )
                         )
                     ),
