@@ -1058,7 +1058,7 @@ class Master extends React.Component{
             "project": zoom,            
             "agregado": agregado,            
             "desc": grandDescuento,            
-            "itbis": itbis,            
+            "itbis": itbis.toFixed(2),            
             "grandTotal": grandTotal,            
             "fechaentrega": days+' '+fechaentrega,            
             "horaentrega": horaentrega,
