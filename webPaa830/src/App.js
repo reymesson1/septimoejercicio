@@ -1781,7 +1781,8 @@ class MasterTableBody extends React.Component{
                         <Button onClick={this.onExchange.bind(this,this.props.id)}><i className="fa fa-exchange" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                         <Link className="btn btn-default" to={'/quotation/'+this.props.id}><i className="fa fa-file" aria-hidden="true"></i></Link>&nbsp;&nbsp;
                         {/* <Button onClick={this.props.masterCallback.ondeletemaster.bind(this,this.props.id)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp; */}
-                        <Button onClick={this.props.masterCallback.ondeletemastermodal.bind(this.props.id,this)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
+                        {/* <Button onClick={this.props.masterCallback.ondeletemastermodal.bind(this.props.id,this)}><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp; */}
+                        <Button ><i className="fa fa-trash" aria-hidden="true"></i></Button>&nbsp;&nbsp;
                     </td>
                   </tr>
         );
