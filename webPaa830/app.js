@@ -11,6 +11,7 @@ var Master = require('./models/master.js');
 var Detail = require('./models/detail.js');
 var Wallet = require('./models/wallet.js');
 var Ubication = require('./models/ubication.js');
+var Counter = require('./models/counter.js');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
@@ -211,6 +212,29 @@ app.post('/editwalletandroid', async(req,res)=>{
 		res.send(master);
 	
 	 });	
+
+app.post('/addcounter', async(req,res)=>{
+
+	console.log(req.body);
+
+	// var counter = await Counter.findOne(req.body.nameValuePairs); 
+	// ubication.save(function(err){ 
+
+	// 	if(!err){ 
+	// 		console.log('Ubication saved');
+	// 		}
+	// 	})
+	// 	console.log(req.body.nameValuePairs)
+	// 	res.send(req.body)
+})
+
+app.get('/counter', async(req,res)=>{
+	
+		var counter = await Counter.find(); 
+	
+		res.send(counter);
+	
+});
 
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){

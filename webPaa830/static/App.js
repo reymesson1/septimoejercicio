@@ -51,8 +51,8 @@ var moment = moment;
 var global = 0;
 var global2 = 0;
 
-// const API_URL = 'http://localhost:8082';  
-var API_URL = 'http://159.203.156.208:8082';
+var API_URL = 'http://localhost:8082';
+// const API_URL = 'http://159.203.156.208:8082';
 
 var API_HEADERS = {
 
@@ -1461,7 +1461,8 @@ var Master = function (_React$Component11) {
             customerAPI: [],
             masterAPICSV: [],
             tempNumber: '',
-            idDelete: ''
+            idDelete: '',
+            counter: []
         };
         return _this13;
     }
@@ -1509,6 +1510,14 @@ var Master = function (_React$Component11) {
                 _this14.setState({
 
                     masterAPICSV: responseData
+                });
+            });
+            fetch(API_URL + '/counter', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this14.setState({
+
+                    counter: responseData
                 });
             }).catch(function (error) {
                 console.log('Error fetching and parsing data', error);
@@ -1643,7 +1652,8 @@ var Master = function (_React$Component11) {
             var newMaster = {
 
                 "id": Date.now(),
-                "idOrder": this.state.masterAPI.length,
+                "idOrder": this.state.counter[0].counter + 1,
+                // "idOrder": this.state.masterAPI.length,
                 "date": today,
                 "time": now,
                 "name": name,

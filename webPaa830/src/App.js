@@ -39,8 +39,8 @@ const moment = moment;
 var global = 0;
 var global2 = 0;
 
-// const API_URL = 'http://localhost:8082';  
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';  
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -885,7 +885,8 @@ class Master extends React.Component{
             customerAPI: [],
             masterAPICSV:[],
             tempNumber: '',
-            idDelete: ''
+            idDelete: '',
+            counter: []
         };
     }
 
@@ -931,6 +932,14 @@ class Master extends React.Component{
               this.setState({
                   
                   masterAPICSV: responseData
+              })
+          })
+          fetch(API_URL+'/counter',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  counter: responseData
               })
           })
           .catch((error)=>{
@@ -1064,7 +1073,8 @@ class Master extends React.Component{
         let newMaster = {
 
             "id": Date.now(),
-            "idOrder": this.state.masterAPI.length,
+            "idOrder": this.state.counter[0].counter+1,
+            // "idOrder": this.state.masterAPI.length,
             "date": today,
             "time": now,
             "name": name,
