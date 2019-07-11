@@ -162,7 +162,7 @@ exports.getMasterCSV = async(req,res)=>{
 }
 exports.getMasterItemReport = async(req,res)=>{
 
-  var master = await Master.aggregate([{"$match":{"date":{"$gte":today}}},{"$unwind":"$item"},{"$group":{"_id":"$item.development","total":{"$sum":1}}}])
+  var master = await Master.aggregate([{"$match":{"date":{"$gte":today}}},{"$unwind":"$item"},{"$group":{"_id":"$item.development","total":{"$sum":"$item.quantity"}}}])
 
   res.send(master);
 }
