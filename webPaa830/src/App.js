@@ -718,9 +718,28 @@ class Login extends React.Component{
 
 class Toolbar extends React.Component{
 
+    constructor() {
+        
+                super();
+                this.state = {
+                    list: []
+                }
+    }
+
     componentDidMount(){
 
+        fetch(API_URL+'/list',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                list: responseData
+            })
+        })
+
         document.body.style.backgroundImage = "none";
+
+        console.log(this.state.list)
 
     }
 
@@ -734,6 +753,7 @@ class Toolbar extends React.Component{
         this.props.history.push("/detail");
         window.location.reload();
     }
+
 
     render(){
 
@@ -760,6 +780,8 @@ class Toolbar extends React.Component{
                             {/* <MenuItem eventKey={3.6}><Link to="/printpayment">PrintPayment</Link></MenuItem> */}
                       </NavDropdown>
                       <li style={{'float':'right','position':'absolute','left':'80%'}}><Link onClick={this.onClicked} to={'/logout'}>Logout</Link></li>
+                      {/* <li style={{'float':'right','position':'absolute','left':'60%','padding':'8px'}}><AwesompleteInput name="firstname" className="form-control" list={this.state.list} /></li> */}
+                      <li style={{'float':'right','position':'absolute','left':'60%','padding':'8px'}}><FormControl type="text" name="quantity" placeholder="Search" /></li>
                     </Nav>
                 </Navbar>
         );
@@ -1989,6 +2011,8 @@ class AwesompleteInput extends React.Component {
   }
 
   componentDidMount() {
+
+    
     var list = this.props.list;
     if (!list)
       list = [ 'one', 'two', 'three'];
@@ -2217,7 +2241,7 @@ class MasterModalField extends React.Component{
                                 Project
                               </Col>
                               <Col md={4} sm={6}>
-                                <FormControl type="number" name="quantity" placeholder="Project" required />
+                                <FormControl type="number" name="quantity" placeholder="Project" />
                               </Col>
                               <Col md={2} sm={2} >
                                     <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
