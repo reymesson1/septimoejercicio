@@ -215,17 +215,22 @@ app.post('/editwalletandroid', async(req,res)=>{
 
 app.post('/addcounter', async(req,res)=>{
 
-	console.log(req.body);
+	var counter = await Counter.findOne(
+			{"counter":req.body.counter},
+			function(err, user){
+				if(!err){
+					user.counter = req.body.counter
+					user.save(function(err,user){
+						console.log('Counter Saved', user);
+					})
+				}
 
-	// var counter = await Counter.findOne(req.body.nameValuePairs); 
-	// ubication.save(function(err){ 
+			}
+	); 
 
-	// 	if(!err){ 
-	// 		console.log('Ubication saved');
-	// 		}
-	// 	})
-	// 	console.log(req.body.nameValuePairs)
-	// 	res.send(req.body)
+	console.log(req.body)
+	
+	res.send(req.body)
 })
 
 app.get('/counter', async(req,res)=>{

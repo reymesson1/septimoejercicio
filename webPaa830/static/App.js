@@ -1694,6 +1694,18 @@ var Master = function (_React$Component11) {
                 headers: API_HEADERS,
                 body: JSON.stringify(newMaster)
             });
+
+            var newCounter = {
+
+                "counter": this.state.counter[0].counter + 1
+            };
+
+            fetch(API_URL + '/addcounter', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newCounter)
+            });
         }
     }, {
         key: 'onSaveDetail',

@@ -1116,6 +1116,18 @@ class Master extends React.Component{
               body: JSON.stringify(newMaster)
         })
 
+        let newCounter = {
+
+            "counter": this.state.counter[0].counter+1
+        }
+
+        fetch(API_URL+'/addcounter', {
+            
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newCounter)
+        })
+
     }
 
     onSaveDetail(event){
