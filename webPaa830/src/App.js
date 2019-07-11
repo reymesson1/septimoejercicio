@@ -37,9 +37,10 @@ const Autosuggest = Autosuggest;
 const moment = moment;
 
 var global = 0;
+var global2 = 0;
 
-const API_URL = 'http://localhost:8082';  
-// const API_URL = 'http://159.203.156.208:8082';
+// const API_URL = 'http://localhost:8082';  
+const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -1096,10 +1097,10 @@ class Master extends React.Component{
 
     onSaveDetail(event){
 
-        event.preventDefault();
+        event.preventDefault();        
 
         if(global==0){
-            global = event.target.firstname.value;
+            global = event.target.firstname.value;            
         }
 
         this.setState({
@@ -1272,6 +1273,7 @@ class Master extends React.Component{
                 nextState.push(newItem);
 
                 
+                
 
 
                 this.setState({
@@ -1284,6 +1286,8 @@ class Master extends React.Component{
 
             alert('Por favor, introducir articulo valido!')
         }
+
+        
 
     }
 
@@ -1595,8 +1599,21 @@ class MasterTable extends React.Component{
         this.state = {
 
           currentPage: 1,
-          todosPerPage: 200
+          todosPerPage: 200,
+          customerAPI: []
         }
+    }
+
+    componentDidMount(){
+
+        fetch(API_URL+'/customer',{headers: API_HEADERS})
+        .then((response)=>response.json())
+        .then((responseData)=>{
+            this.setState({
+
+                customerAPI: responseData
+            })
+        })
     }
 
     handleClick(event) {
@@ -1621,7 +1638,8 @@ class MasterTable extends React.Component{
 
         let MasterTableES = (
 
-            <tr>
+            <tr>                
+                <th>&nbsp;</th>
                 <th>#</th>
                 <th>Fecha</th>
                 <th>Nombre</th>
@@ -1698,6 +1716,9 @@ status={todo.status}
 
 tipopago={todo.tipopago}
 
+telefono={todo.telefono}
+
+customerAPI={this.state.customerAPI}
 
 masterCallback={this.props.masterCallback}
                                              />
@@ -1737,6 +1758,19 @@ class MasterTableBody extends React.Component{
 
     }
 
+    onClicked(event){
+        
+        global2 = event.target.value;
+
+        let filteredData = this.props.customerAPI.filter(
+
+            (master) => master.telefono == event.target.value
+        )
+
+        // console.log(filteredData[0].name+" "+filteredData[0].apellido+" -"+event.target.value);
+        global = filteredData[0].name+" "+filteredData[0].apellido+" -"+event.target.value;
+    }
+
     render(){
 
         let checkItemHiddenE = (
@@ -1767,6 +1801,7 @@ class MasterTableBody extends React.Component{
 
         return(
                 <tr>
+                    <td><input type="radio" name="radioCust" onClick={this.onClicked.bind(this)} value={this.props.telefono} /></td>
                     <td>{this.props.idOrder}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>
@@ -2222,7 +2257,7 @@ class MasterModalField extends React.Component{
             
         }
 
-        let MasterModalFieldES = (
+        let MasterModalFieldListES = (
 
                 <Row>
                     <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
@@ -2233,6 +2268,70 @@ class MasterModalField extends React.Component{
                               </Col>
                               <Col md={4} sm={6}>
                                 <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />
+                                {/* <input name="firstname" className="form-control" value={global}/> */}
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <FormGroup controlId="formControlsSelect">
+                                <Col md={1} sm={2}>
+                                  <ControlLabel>Tipo de Servicio</ControlLabel>
+                                </Col>
+                                <Col md={4} sm={6}>
+                                  <FormControl onChange={this.onChangeAlter.bind(this)} componentClass="select" name="development" placeholder="Tipo de Servicio" required >
+                                    <option value="Lavar y Prensa">Lavar y Prensa</option>
+                                    <option value="Solo Lavar">Solo Lavar</option>
+                                    <option value="Solo Plancha">Solo Plancha</option>
+                                    <option value="Alteracion">Alteracion</option>
+                                    <option value="Agregados">Agregados</option>
+                                  </FormControl>
+                                </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <FormGroup controlId="formControlsSelect">
+                                <Col md={1} sm={2}>
+                                  <ControlLabel>List</ControlLabel>
+                                </Col>
+                                <Col md={4} sm={6}>
+                                <Autocomplete
+                                    detail={this.props.detail}
+                                />
+                                </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                        <Row>
+                            <FormGroup controlId="formHorizontalQuantity">
+                              <Col componentClass={ControlLabel} md={1} sm={2}>
+                                Cantidad
+                              </Col>
+                              <Col md={4} sm={6}>
+                                <FormControl type="number" name="quantity" placeholder="Cantidad" required />
+                              </Col>
+                              <Col md={2}>
+                                    <Button type="submit"><i className="fa fa-plus" aria-hidden="true"></i></Button>
+                              </Col>
+                            </FormGroup>
+                        </Row>
+                        <br/>
+                     </Form>
+                  </Row>
+        );
+        let MasterModalFieldNoListES = (
+
+                <Row>
+                    <Form onSubmit={this.props.masterCallback.onsavedetail.bind(this)}>
+                        <Row>
+                            <FormGroup controlId="formHorizontalName">
+                              <Col componentClass={ControlLabel} md={1} sm={2}>
+                                Name
+                              </Col>
+                              <Col md={4} sm={6}>
+                                {/* <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} /> */}
+                                <input name="firstname" className="form-control" value={global}/>
                               </Col>
                             </FormGroup>
                         </Row>
@@ -2291,7 +2390,13 @@ class MasterModalField extends React.Component{
 
             MasterModalFieldActive=MasterModalFieldEN
         }else{
-            MasterModalFieldActive=MasterModalFieldES
+            if(global2==0){
+
+                MasterModalFieldActive=MasterModalFieldListES
+            }else{
+
+                MasterModalFieldActive=MasterModalFieldNoListES
+            }            
         }
 
         return(
