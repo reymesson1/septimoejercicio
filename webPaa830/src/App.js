@@ -39,8 +39,8 @@ const moment = moment;
 var global = 0;
 var global2 = 0;
 
-// const API_URL = 'http://localhost:8082';  
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';  
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -746,7 +746,10 @@ class Toolbar extends React.Component{
                         </div>
                     </div>
                     <Nav>                      
-                      <li><Link to={'/master'}>Ordenes</Link></li>
+                       <NavDropdown eventKey={3} title="Ordenes" id="basic-nav-dropdown">
+                            <MenuItem eventKey={3.1}><Link to={'/masterorder'}>Crear Ordenes</Link></MenuItem>
+                            <MenuItem eventKey={3.1}><Link to={'/master'}>Ver Listado Ordenes</Link></MenuItem>                            
+                      </NavDropdown>                      
                       <li><Link to={'/detail'}>Inventario</Link></li>
                       <NavDropdown eventKey={3} title="Reportes" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}><Link to="/partials">Cuadre</Link></MenuItem>
@@ -1462,7 +1465,7 @@ class Master extends React.Component{
                                     }}
 
                     />
-                </Row>
+                </Row>                
                 <Row>
                         <div className="pull-right">
                             {ModalButtonActive}
@@ -1589,6 +1592,66 @@ id="first_name" name="first_name"/>
             );
         }
     }
+}
+
+class MasterCustomerSearch extends React.Component{
+    
+        render(){
+    
+            let MasterSearchEN = (
+    
+                <div>
+                    <Panel header="Search Master">
+                      <form>
+                        <div className="form-group">
+                            <div className="col-md-2 col-sm-2">
+                              <label>Search:</label>
+                            </div>
+                            <div className="col-md-10 col-sm-10">
+                              <input onChange={this.props.masterCallback.onhandleuserinput.bind(this)}
+                                     type="text"
+                                     className="form-control" id="first_name" name="first_name"/>
+                            </div>
+                        </div>
+                      </form>
+                    </Panel>
+                </div>
+            );
+    
+            let MasterSearchES = (
+    
+                <div>
+                    <Panel header="Busqueda de Clientes">
+                      <form>
+                        <div className="form-group">
+                            <div className="col-md-2 col-sm-2">
+                              <label>Buscar:</label>
+                            </div>
+                            <div className="col-md-10 col-sm-10">
+                              <input onChange={this.props.masterCallback.onhandleuserinput.bind(this)}
+                                     type="text"
+                                     className="form-control" id="first_name" name="first_name"/>
+                            </div>
+                        </div>
+                      </form>
+                    </Panel>
+                </div>
+            );
+    
+            if(languageActive){
+                return(
+                    <div>
+                        {MasterSearchEN}
+                    </div>
+                );
+            }else{
+                return(
+                    <div>
+                        {MasterSearchES}
+                    </div>
+                );
+            }
+        }
 }
 
 class MasterTable extends React.Component{
@@ -6249,6 +6312,601 @@ class TodayCheckReport extends React.Component{
     }
 }
 
+class MasterOrder extends React.Component{
+
+    constructor() {
+        
+                super();
+                this.state = {
+                    showModal: false,
+                    showModalDelete: false,
+                    filterText: '',
+                    activePage: 1,
+                    masterAPI: [],
+                    masterDetail: [],
+                    detail:[],
+                    detailData:[],
+                    detailAdded: [],
+                    temp: '',
+                    list: [],
+                    customerAPI: [],
+                    masterAPICSV:[],
+                    tempNumber: '',
+                    idDelete: ''
+                };
+            }
+        
+            componentDidMount(){
+        
+        
+        
+                  fetch(API_URL+'/master',{headers: API_HEADERS})
+                  .then((response)=>response.json())
+                  .then((responseData)=>{
+                      this.setState({
+        
+                          masterAPI: responseData
+                      })
+                  })
+                  fetch(API_URL+'/customer',{headers: API_HEADERS})
+                  .then((response)=>response.json())
+                  .then((responseData)=>{
+                      this.setState({
+        
+                          customerAPI: responseData
+                      })
+                  })
+                  fetch(API_URL+'/detail',{headers: API_HEADERS})
+                  .then((response)=>response.json())
+                  .then((responseData)=>{
+                      this.setState({
+        
+                          detailData: responseData
+                      })
+                  })
+                  fetch(API_URL+'/list',{headers: API_HEADERS})
+                  .then((response)=>response.json())
+                  .then((responseData)=>{
+                      this.setState({
+        
+                          list: responseData
+                      })
+                  })
+                  fetch(API_URL+'/mastercsv',{headers: API_HEADERS})
+                  .then((response)=>response.json())
+                  .then((responseData)=>{
+                      this.setState({
+                          
+                          masterAPICSV: responseData
+                      })
+                  })
+                  .catch((error)=>{
+                      console.log('Error fetching and parsing data', error);
+                  })
+        
+                  this.setState({
+        
+                     parameter: this.props.params.actionid
+                  });
+        
+            }
+        
+            close() {
+                this.setState({
+                    showModal: false
+                });
+            }
+        
+            open() {
+                this.setState({
+                    showModal: true
+                });
+        
+                let nextState = this.state.detailData;
+        
+                let detailItem = [];
+        
+                for(var x=0;x<nextState.length;x++){
+                    detailItem.push(nextState[x]);
+                }
+        
+                this.setState({
+        
+                    detail: detailItem
+                });
+        
+            }
+        
+            onSaveMaster(event){
+        
+                event.preventDefault();
+        
+                let today = moment(new Date()).format('YYYY-MM-DD');
+        
+                let now = moment(new Date()).format('hh:mm:ss a');
+        
+                let details = this.state.masterDetail;
+                
+        
+                let name = details[0].firstname;
+        
+                let zoom = 0;
+                
+                let agregado = 0;
+                
+                let itbis = 0;
+                
+                for(var x=0;x<details.length;x++){
+                    if(details[x].itemDetail.length>0){
+                        for(var y=0;y<details[x].itemDetail.length;y++){                                        
+                            zoom+=parseInt(details[x].itemDetail[y].project);
+                            agregado+=parseInt(details[x].itemDetail[y].project);
+                        }
+                    }
+                }
+                
+                //items sumado sin agregado
+                for(var x=0;x<details.length;x++){
+                    zoom+=parseInt(details[x].project);
+                }
+                
+                itbis = ( 18 / 100) * zoom;
+                itbis += ( 18 / 100) * agregado;
+        
+                let grandTotal = zoom + agregado;
+                
+                let nextStateCustomer = this.state.customerAPI;
+                
+                let descuento;
+                
+                for(var x=0;x<nextStateCustomer.length;x++){
+                    
+                    let completename= nextStateCustomer[x].name+' '+nextStateCustomer[x].apellido;
+                    
+                    if(completename==name){
+                        descuento = nextStateCustomer[x].descuento         
+                    }            
+                }
+                
+                //console.log((parseInt(descuento)/100)*grandTotal);
+                
+                let grandDescuento = (parseInt(descuento)/100)*grandTotal;
+                
+                grandTotal -= grandDescuento;
+                
+                let days = moment(new Date()).add(3,'days').format('dddd');
+                
+                if(days=='Monday'){
+                   days='Lunes'
+                }else if(days=='Tuesday'){
+                   days='Martes'
+                }else if(days=='Wednesday'){
+                   days='Miercoles'
+                }else if(days=='Thursday'){
+                   days='Jueves'
+                }else if(days=='Friday'){
+                   days='Viernes'
+                }else if(days=='Saturday'){
+                   days='Sabado'
+                }else{
+                   days='Domingo'
+                }
+        
+                let fechaentrega = moment(new Date()).add(3,'days').format('DD/MM/YYYY');
+                
+                let horaentrega = '06:00 PM';
+                
+                let newMaster = {
+        
+                    "id": Date.now(),
+                    "idOrder": this.state.masterAPI.length,
+                    "date": today,
+                    "time": now,
+                    "name": name,
+                    "item": this.state.masterDetail,
+                    "project": zoom,            
+                    "agregado": agregado,            
+                    "desc": grandDescuento.toFixed(2),            
+                    "itbis": itbis,            
+                    "grandTotal": grandTotal.toFixed(2),            
+                    "fechaentrega": days+' '+fechaentrega,            
+                    "horaentrega": horaentrega,
+                    "balance": 0,
+                    "pending": 0,
+                    "current": 0,
+                    "tipopago": "",
+                    "ncf": "B00000000000001",
+                    "status":"pending",
+                    "comments": []
+                }
+        
+                let nextState = this.state.masterAPI;
+        
+                nextState.push(newMaster);
+                
+                this.setState({
+        
+                    masterAPI: nextState
+                });
+        
+                this.setState({
+                    showModal: false,
+                    masterDetail: []
+                });
+        
+                fetch(API_URL+'/master', {
+        
+                      method: 'post',
+                      headers: API_HEADERS,
+                      body: JSON.stringify(newMaster)
+                })
+        
+            }
+        
+            onSaveDetail(event){
+        
+                event.preventDefault();        
+        
+                if(global==0){
+                    global = event.target.firstname.value;            
+                }
+        
+                this.setState({
+                    tempNumber: event.target.firstname.value
+                })
+        
+                let nextState = this.state.masterDetail;
+        
+                let detailTotal = this.state.detailData;
+        
+                let develop = event.target.development.value.toLowerCase().replace(" ","").replace(" ","");
+        
+                let itemFirst = event.target.suggest.value;
+        
+                let project;
+        
+                let category;
+        
+                for(var x=0;x<detailTotal.length;x++){
+        
+                    if(detailTotal[x].tipo==develop){
+        
+                        if(detailTotal[x].name==itemFirst){
+                            if(event.target.environment){
+                                
+                                if(event.target.environment.value.length>0){
+                                    
+                                    project = event.target.environment.value;
+                                }
+                            }else{
+                                
+                                project = detailTotal[x].environment;
+                            }
+                            category = detailTotal[x].category;
+                            
+                        }
+                    }
+                }
+        
+                let newItem;
+        
+                let newStateDetailAdded = [];
+        
+                let temp;
+        
+                if(project){
+        
+                    newStateDetailAdded = this.state.detailAdded;
+        
+                    //if(category=='shine'||category=='properties'){
+                    if(category=='colores'||category=='propiedades'){
+        
+                        let newItemAdded = {
+        
+                                "name":itemFirst,
+                                "project":project
+        
+                        }
+        
+                        newStateDetailAdded.push(newItemAdded);
+        
+                            this.setState({
+        
+                                detailAdded: newStateDetailAdded
+                            });
+                    }else if(category=='servicio'){
+                    //}else if(category=='service'){
+        
+                        this.setState({
+        
+                            temp: event.target.suggest.value
+                        });
+        
+                        temp = event.target.suggest.value;
+        
+                        if(this.state.temp!=event.target.suggest.value){
+                            newStateDetailAdded = [];
+                            this.setState({
+                               detailAdded: []
+                           });
+                        }
+        
+        
+                        project=project*parseInt(event.target.quantity.value)
+                        
+                                        
+                        let nextStateCust = this.state.customerAPI;
+                        
+                        let fullname;
+        
+                        let rnc;
+                        
+                        let telefono;
+                        
+                        for(var x=0;x<nextStateCust.length;x++){
+                                                
+                            if(nextStateCust[x].telefono==event.target.firstname.value){
+                               fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                               telefono=event.target.firstname.value
+                               rnc=nextStateCust[x].rnc
+                            }
+                        }
+        
+                        if(event.target.firstname.value.length==3){
+        
+                            for(var x=0;x<nextStateCust.length;x++){
+                                
+                                if(nextStateCust[x].telefono==global){
+                                    fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                                    telefono=global
+                                }
+                                
+                            }
+                            
+                            newItem = {
+                                
+                                "id": this.state.masterAPI.length,
+                                "firstname":fullname,
+                                "telefono":global,
+                                "rnc":rnc,
+                                "item":event.target.suggest.value,
+                                "itemDetail": this.state.detailAdded,
+                                "development":event.target.development.value,
+                                "quantity": parseInt(event.target.quantity.value),
+                                "project":project,
+                            } 
+                            
+                            
+                        }else{
+        
+                    
+                            var start = event.target.firstname.value.indexOf('-' )
+                            var end = event.target.firstname.value.length
+        
+                            // console.log(start+1)
+                            // console.log(end-1)
+        
+                            // console.log(event.target.firstname.value.substring(start+1,end))
+        
+                            var subStr = event.target.firstname.value.substring(start+1,end)
+        
+                            //var index = nextState.findIndex(x=> x.id==this.state.idDelete);
+        
+                            for(var x=0;x<nextStateCust.length;x++){
+                                
+                                // if(nextStateCust[x].telefono==event.target.firstname.value){
+                                if(nextStateCust[x].telefono==subStr){
+                                fullname=nextStateCust[x].name + ' ' + nextStateCust[x].apellido;
+                                // telefono=event.target.firstname.value
+                                telefono=subStr
+                                rnc=nextStateCust[x].rnc
+                                }
+                            }
+           
+                            newItem = {
+                                
+                                "id": this.state.masterAPI.length,
+                                "firstname":fullname,
+                                // "telefono":event.target.firstname.value,
+                                "telefono":subStr,
+                                "rnc":rnc,
+                                "item":event.target.suggest.value,
+                                "itemDetail": this.state.detailAdded,
+                                "development":event.target.development.value,
+                                "quantity": parseInt(event.target.quantity.value),
+                                "project":project,
+                            }
+                        }
+        
+                        nextState.push(newItem);
+        
+                        
+                        
+        
+        
+                        this.setState({
+        
+                            masterDetail: nextState
+                        });
+        
+                    }
+                }else{
+        
+                    alert('Por favor, introducir articulo valido!')
+                }
+        
+                
+        
+            }
+        
+            onSaveDetailAdded(data){
+        
+                var item = document.getElementById('awesomplete-4vs0fr');
+        
+                console.log(document.getElementById('awesomplete-4vs0fr'));
+        
+            }
+        
+            onDeleteMasterModal(value,event){
+        
+                this.setState({
+        
+                    showModalDelete: true,
+                    idDelete: value.props.id
+        
+                })
+        
+            }
+            onDeleteMasterModalClose(value){
+        
+                this.setState({
+        
+                    showModalDelete: false
+                })
+                
+            }
+            onDeleteMaster(value,event){
+        
+                let nextState = this.state.masterAPI;
+                
+                var index = nextState.findIndex(x=> x.id==this.state.idDelete);
+        
+                nextState.splice(index,1);
+        
+                this.setState({
+        
+                    masterAPI: nextState
+                });
+        
+                fetch(API_URL+'/deletemaster', {
+        
+                      method: 'post',
+                      headers: API_HEADERS,
+                      body: JSON.stringify({"id":this.state.idDelete})
+                })
+        
+                this.setState({
+        
+                    showModalDelete: false
+                })
+        
+            }
+        
+            onHandleUserInput(event){
+        
+        
+                this.setState({
+        
+                    filterText: event.target.value
+                });
+            }
+        
+            handleSelect(eventKey){
+        
+                this.setState({
+        
+                    activePage: eventKey
+                });
+        
+            }
+        
+            downloadCSV(){
+        
+                //const rows = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];        
+                const rows = this.state.masterAPICSV
+                let csvContent = "data:text/csv;charset=utf-8,";
+                rows.forEach(function(rowArray){
+                   let row = rowArray.join(",");
+                   csvContent += row + "\r\n";
+                }); 
+            
+                var encodedUri = encodeURI(csvContent);
+                window.open(encodedUri);
+            
+                var encodedUri = encodeURI(csvContent);
+                var link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "my_data.csv");
+                document.body.appendChild(link); // Required for FF
+                
+                link.click(); // This will download the data file named "my_data.csv".
+            
+            }
+        
+            onRemoveMasterDetail(){
+        
+                this.setState({
+        
+                    masterDetail: []
+                })
+        
+            }
+
+    render(){
+        return (
+        <div>     
+            <Row>     
+                <MasterCustomerSearch
+                    filterText={this.state.filterText}
+                    masterCallback = {{
+                        onsavedetail:this.onSaveDetail.bind(this),
+                        onsavemaster:this.onSaveMaster.bind(this),
+                        onhandleuserinput:this.onHandleUserInput.bind(this)
+                    }}
+                />
+            </Row>     
+            <Row>
+            <div className="pull-right">
+            <SplitButton
+            bsStyle={'default'}
+            title={'Agregar Orden'}
+            key={'1'}
+            id={`split-button-basic-${'1'}`}
+            onClick={this.open.bind(this)}>
+                  <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
+            </SplitButton>
+            
+                <MasterModal
+
+
+                                detailAdded={this.state.detailAdded}
+                                masterDetail={this.state.masterDetail}
+                                detail={this.state.detail}
+                                showModal={this.state.showModal}
+                                list={this.state.list}
+                                open={this.open}
+                                close={this.close.bind(this)}
+                                masterCallback = {{
+                                    onsavedetail:this.onSaveDetail.bind(this),
+                                    onsavedetailadded:this.onSaveDetailAdded.bind(this),
+                                    onsavemaster:this.onSaveMaster.bind(this),
+                                    onremovemasterdetail:this.onRemoveMasterDetail.bind(this)
+                                }}
+                />
+            </div>
+            </Row>
+            <Row>
+            <Panel header={"Listado de Clientes"}>
+                <MasterTable
+                                filterText={this.state.filterText}
+                                masterData={this.state.masterAPI}
+                                masterCallback = {{
+                                    onsavedetail:this.onSaveDetail.bind(this),
+                                    onsavemaster:this.onSaveMaster.bind(this),
+                                    ondeletemaster:this.onDeleteMaster.bind(this),
+                                    ondeletemastermodal:this.onDeleteMasterModal.bind(this)
+                                }}
+                />
+            </Panel>
+            </Row>
+            
+            
+        </div>
+        );
+    }    
+}
+
+
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
@@ -6269,6 +6927,7 @@ ReactDOM.render((
         <Route path="payment/:paymentid" component={Payment}/>
         <Route path="actions/:actionid" component={Actions}/>
         <Route path="detail" component={Detail}/>
+        <Route path="masterorder" component={MasterOrder}/>
         <Route path="master" component={Master}/>
     </Route>
   </Router>
