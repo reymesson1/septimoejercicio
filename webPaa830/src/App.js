@@ -1683,7 +1683,7 @@ class MasterTable extends React.Component{
         let MasterTableES = (
 
             <tr>                
-                <th>&nbsp;</th>
+                {/* <th>&nbsp;</th> */}
                 <th>#</th>
                 <th>Fecha</th>
                 <th>Nombre</th>
@@ -1845,7 +1845,7 @@ class MasterTableBody extends React.Component{
 
         return(
                 <tr>
-                    <td><input type="radio" name="radioCust" onClick={this.onClicked.bind(this)} value={this.props.telefono} /></td>
+                    {/* <td><input type="radio" name="radioCust" onClick={this.onClicked.bind(this)} value={this.props.telefono} /></td> */}
                     <td>{this.props.idOrder}</td>
                     <td>{this.props.date}</td>
                     <td>{this.props.name}</td>

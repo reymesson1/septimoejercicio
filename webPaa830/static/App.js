@@ -2335,11 +2335,6 @@ var MasterTable = function (_React$Component13) {
                 React.createElement(
                     'th',
                     null,
-                    '\xA0'
-                ),
-                React.createElement(
-                    'th',
-                    null,
                     '#'
                 ),
                 React.createElement(
@@ -2588,11 +2583,6 @@ var MasterTableBody = function (_React$Component14) {
             return React.createElement(
                 'tr',
                 null,
-                React.createElement(
-                    'td',
-                    null,
-                    React.createElement('input', { type: 'radio', name: 'radioCust', onClick: this.onClicked.bind(this), value: this.props.telefono })
-                ),
                 React.createElement(
                     'td',
                     null,
