@@ -872,6 +872,7 @@ class Master extends React.Component{
         this.state = {
             showModal: false,
             showModalDelete: false,
+            showModalCustomer: false,
             filterText: '',
             activePage: 1,
             masterAPI: [],
@@ -967,6 +968,18 @@ class Master extends React.Component{
             detail: detailItem
         });
 
+    }
+
+    openCustomer() {
+        this.setState({
+            showModalCustomer: true
+        });
+    }
+
+    closeCustomer() {
+        this.setState({
+            showModalCustomer: false
+        });
     }
 
     onSaveMaster(event){
@@ -1394,6 +1407,19 @@ class Master extends React.Component{
 
     }
 
+    onSaveCustomerModal(event){
+
+        event.preventDefault();
+
+        global2=event.target.firstname.value;
+        global=event.target.firstname.value;
+
+        this.setState({
+
+            showModalCustomer: false
+        })
+    }
+
 
     render(){
         
@@ -1418,6 +1444,7 @@ class Master extends React.Component{
             key={'1'}
             id={`split-button-basic-${'1'}`}
             onClick={this.open.bind(this)}>
+                  <MenuItem onClick={this.openCustomer.bind(this)}>Seleccionar cliente</MenuItem>
                   <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
             </SplitButton>
 
@@ -1483,6 +1510,21 @@ class Master extends React.Component{
                                                 onremovemasterdetail:this.onRemoveMasterDetail.bind(this)
                                             }}
                             />
+                            <MasterCustomerModal
+                                            showModal={this.state.showModalCustomer}
+                                            open={this.openCustomer.bind(this)}
+                                            close={this.closeCustomer.bind(this)}
+                                            list={this.state.list}
+                                            masterCallback = {{
+                                                onsavedetail:this.onSaveDetail.bind(this),
+                                                onsavedetailadded:this.onSaveDetailAdded.bind(this),
+                                                onsavemaster:this.onSaveMaster.bind(this),
+                                                onremovemasterdetail:this.onRemoveMasterDetail.bind(this),
+                                                onsavecustomermodal:this.onSaveCustomerModal.bind(this)
+                                            }}
+                            
+                            />
+                            
                         </div>
                 </Row>
                 <Row>
@@ -1869,6 +1911,41 @@ onClick={this.props.masterCallback.onsavemaster.bind(this)}>Guardar</Button>
     }
 }
 
+class MasterCustomerModal extends React.Component{
+
+    render(){
+
+        return(
+            
+                <Row>
+                    <Modal show={this.props.showModal}>
+                    <Modal.Header closeButton>                    
+                        <Modal.Title>Agregar Clientes</Modal.Title>
+                    </Modal.Header>
+                        <Modal.Body>                                                
+                            <Form onSubmit={this.props.masterCallback.onsavecustomermodal.bind(this)}>
+                                <Row>
+                                    <FormGroup controlId="formHorizontalName">
+                                    <Col componentClass={ControlLabel} md={1} sm={2}>
+                                        Name
+                                    </Col>
+                                    <Col md={4} sm={6}>
+                                        <AwesompleteInputList name="firstname" className="form-control" list={this.props.list} />                                        
+                                    </Col>
+                                    <Col md={4} sm={6}>
+                                        <Button className="pull-right" type="submit">Agregar</Button>
+                                    </Col>
+                                    </FormGroup>
+                                </Row>                                
+                            </Form>                    
+                        </Modal.Body>                                      
+                    </Modal>
+                </Row>
+            
+        );
+    }
+
+}
 class MasterModal extends React.Component{
 
     render(){
