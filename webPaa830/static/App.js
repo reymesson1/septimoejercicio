@@ -1988,6 +1988,8 @@ var Master = function (_React$Component11) {
 
                 showModalCustomer: false
             });
+
+            this.open();
         }
     }, {
         key: 'render',
@@ -2015,12 +2017,7 @@ var Master = function (_React$Component11) {
                     title: 'Agregar Orden',
                     key: '1',
                     id: 'split-button-basic-' + '1',
-                    onClick: this.open.bind(this) },
-                React.createElement(
-                    MenuItem,
-                    { onClick: this.openCustomer.bind(this) },
-                    'Seleccionar cliente'
-                ),
+                    onClick: this.openCustomer.bind(this) },
                 React.createElement(
                     MenuItem,
                     { onClick: this.downloadCSV.bind(this) },

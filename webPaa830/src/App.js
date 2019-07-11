@@ -1416,8 +1416,11 @@ class Master extends React.Component{
 
         this.setState({
 
-            showModalCustomer: false
+            showModalCustomer: false            
         })
+
+        this.open()
+        
     }
 
 
@@ -1432,7 +1435,7 @@ class Master extends React.Component{
             id={`split-button-basic-${'1'}`}
             onClick={this.open.bind(this)}>
                   <MenuItem onClick={this.downloadCSV.bind(this)}>Download   CSV</MenuItem>
-            </SplitButton>
+            </SplitButton>  
 
         );
 
@@ -1442,9 +1445,8 @@ class Master extends React.Component{
             bsStyle={'default'}
             title={'Agregar Orden'}
             key={'1'}
-            id={`split-button-basic-${'1'}`}
-            onClick={this.open.bind(this)}>
-                  <MenuItem onClick={this.openCustomer.bind(this)}>Seleccionar cliente</MenuItem>
+            id={`split-button-basic-${'1'}`}            
+            onClick={this.openCustomer.bind(this)}>            
                   <MenuItem onClick={this.downloadCSV.bind(this)}>Exportar a CSV</MenuItem>
             </SplitButton>
 
