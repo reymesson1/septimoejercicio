@@ -39,8 +39,8 @@ const moment = moment;
 var global = 0;
 var global2 = 0;
 
-// const API_URL = 'http://localhost:8082';  
-const API_URL = 'http://159.203.156.208:8082';
+const API_URL = 'http://localhost:8082';  
+// const API_URL = 'http://159.203.156.208:8082';
 
 const API_HEADERS = {
 
@@ -1072,7 +1072,7 @@ class Master extends React.Component{
             "project": zoom,            
             "agregado": agregado,            
             "desc": grandDescuento.toFixed(2),            
-            "itbis": itbis,            
+            "itbis": itbis.toFixed(2),
             "grandTotal": grandTotal.toFixed(2),            
             "fechaentrega": days+' '+fechaentrega,            
             "horaentrega": horaentrega,
