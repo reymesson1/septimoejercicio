@@ -885,7 +885,8 @@ class Master extends React.Component{
             customerAPI: [],
             masterAPICSV:[],
             tempNumber: '',
-            idDelete: ''
+            idDelete: '',
+            counter: []
         };
     }
 
@@ -935,6 +936,14 @@ class Master extends React.Component{
           })
           .catch((error)=>{
               console.log('Error fetching and parsing data', error);
+          })
+          fetch(API_URL+'/counter',{headers: API_HEADERS})
+          .then((response)=>response.json())
+          .then((responseData)=>{
+              this.setState({
+
+                  counter: responseData
+              })
           })
 
           this.setState({
@@ -1064,7 +1073,8 @@ class Master extends React.Component{
         let newMaster = {
 
             "id": Date.now(),
-            "idOrder": this.state.masterAPI.length,
+            "idOrder": this.state.counter[0].quantity,
+            // "idOrder": this.state.masterAPI.length,
             "date": today,
             "time": now,
             "name": name,
@@ -1100,6 +1110,13 @@ class Master extends React.Component{
         });
 
         fetch(API_URL+'/master', {
+
+              method: 'post',
+              headers: API_HEADERS,
+              body: JSON.stringify(newMaster)
+        })
+
+        fetch(API_URL+'/addcounter', {
 
               method: 'post',
               headers: API_HEADERS,
@@ -1230,7 +1247,7 @@ class Master extends React.Component{
                     
                     newItem = {
                         
-                        "id": this.state.masterAPI.length,
+                        "id": this.state.counter[0].quantity,
                         "firstname":fullname,
                         "telefono":global,
                         "rnc":rnc,
@@ -1270,7 +1287,8 @@ class Master extends React.Component{
    
                     newItem = {
                         
-                        "id": this.state.masterAPI.length,
+                        "id": this.state.counter[0].quantity,
+                        // "id": this.state.masterAPI.length,
                         "firstname":fullname,
                         // "telefono":event.target.firstname.value,
                         "telefono":subStr,

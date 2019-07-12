@@ -203,14 +203,17 @@ app.post('/editwalletandroid', async(req,res)=>{
 
  app.get('/removeLastMaster', async(req,res)=>{
 
-		var master = await Master.findOneAndRemove({"grandTotal":null}, function(err,master){
+	var master = await Master.findOneAndRemove({"grandTotal":null}, function(err,master){
 
-			console.log('Master removed from emergency btn')
-		});
-		
-		res.send(master);
+		console.log('Master removed from emergency btn')
+	});
 	
-	 });	
+	res.send(master);
+
+	});	
+
+app.get('/counter', masterController.getMasterCounter);
+app.post('/addcounter', masterController.setMasterCounter);
 
 mongoose.connect('mongodb://localhost:27017/eltendedero',(err)=>{
     if(!err){

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Master = require('../models/master.js');
+var Counter = require('../models/counter.js');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var today = moment(new Date()).format('YYYY-MM-DD');
@@ -195,5 +196,27 @@ exports.setMasterQuotation = async(req,res)=>{
       console.log("Master updated");
     })
   })
+  
+}
+exports.setMasterCounter = async(req,res)=>{
+
+  var id = mongoose.Types.ObjectId('5d287f5f6e795adb18ec651c');  
+
+  var counter = await Counter.findOneAndUpdate(
+    { "_id" : id},
+    {
+      $inc: {
+        quantity:1
+      }
+    }
+  ); 
+
+  res.send(req.body)
+}
+exports.getMasterCounter = async(req,res)=>{
+
+  var counter = await Counter.find(); 
+	
+	res.send(counter);
   
 }

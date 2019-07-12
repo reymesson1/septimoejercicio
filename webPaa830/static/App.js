@@ -1461,7 +1461,8 @@ var Master = function (_React$Component11) {
             customerAPI: [],
             masterAPICSV: [],
             tempNumber: '',
-            idDelete: ''
+            idDelete: '',
+            counter: []
         };
         return _this13;
     }
@@ -1512,6 +1513,14 @@ var Master = function (_React$Component11) {
                 });
             }).catch(function (error) {
                 console.log('Error fetching and parsing data', error);
+            });
+            fetch(API_URL + '/counter', { headers: API_HEADERS }).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                _this14.setState({
+
+                    counter: responseData
+                });
             });
 
             this.setState({
@@ -1643,7 +1652,8 @@ var Master = function (_React$Component11) {
             var newMaster = {
 
                 "id": Date.now(),
-                "idOrder": this.state.masterAPI.length,
+                "idOrder": this.state.counter[0].quantity,
+                // "idOrder": this.state.masterAPI.length,
                 "date": today,
                 "time": now,
                 "name": name,
@@ -1679,6 +1689,13 @@ var Master = function (_React$Component11) {
             });
 
             fetch(API_URL + '/master', {
+
+                method: 'post',
+                headers: API_HEADERS,
+                body: JSON.stringify(newMaster)
+            });
+
+            fetch(API_URL + '/addcounter', {
 
                 method: 'post',
                 headers: API_HEADERS,
@@ -1805,7 +1822,7 @@ var Master = function (_React$Component11) {
 
                         newItem = {
 
-                            "id": this.state.masterAPI.length,
+                            "id": this.state.counter[0].quantity,
                             "firstname": fullname,
                             "telefono": global,
                             "rnc": rnc,
@@ -1842,7 +1859,8 @@ var Master = function (_React$Component11) {
 
                         newItem = {
 
-                            "id": this.state.masterAPI.length,
+                            "id": this.state.counter[0].quantity,
+                            // "id": this.state.masterAPI.length,
                             "firstname": fullname,
                             // "telefono":event.target.firstname.value,
                             "telefono": subStr,
