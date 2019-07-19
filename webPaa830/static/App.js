@@ -9460,14 +9460,6 @@ var Matching = function (_React$Component65) {
                                                         ' ',
                                                         ' ',
                                                         ' '
-                                                    ),
-                                                    React.createElement(
-                                                        'td',
-                                                        null,
-                                                        master2.project.toFixed(2),
-                                                        ' ',
-                                                        ' ',
-                                                        ' '
                                                     )
                                                 ),
                                                 React.createElement(
