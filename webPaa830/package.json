@@ -33,7 +33,7 @@
     "jwt-simple": "^0.5.5",
     "moment": "^2.18.1",
     "mongodb": "^2.2.33",
-    "mongoose": "^5.4.0",
+    "mongoose": "^5.7.5",
     "react": "^16.7.0",
     "react-chartjs": "^1.2.0",
     "react-dom": "^16.7.0"
