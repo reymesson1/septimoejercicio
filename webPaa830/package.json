@@ -31,7 +31,7 @@
     "chart.js": "^1.1.1",
     "express": "^4.14.0",
     "jwt-simple": "^0.5.5",
-    "moment": "^2.18.1",
+    "moment": "^2.29.2",
     "mongodb": "^2.2.33",
     "mongoose": "^5.4.0",
     "react": "^16.7.0",
